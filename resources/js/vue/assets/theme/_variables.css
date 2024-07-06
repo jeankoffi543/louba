@@ -1,0 +1,75 @@
+:root {
+    --primaryColor: #080808;
+    --primary200Color: #e1f2c9;
+    --primary300Color: #aaccb6;
+    --primary400Color: #1131ce;
+    --primaryTextColor: #99B592;
+    --secondaryColor: #1131ce;
+    --secondary200Color: #1131ce;
+    --secondary300Color: #1131ce;
+
+    --errorColor: #ff0000;
+    --error500Color: #C00101;
+
+    --grayColor: #f8f8f8;
+    --gray400Color: #acbad63b;
+    --gray500Color: #c1c4c8;
+    --bgMainColor: #94a9bf21;
+    --height-menu: 60px;
+    --nav-height: 55px;
+    --height-content: calc(var(--height-menu) + var(--nav-height));
+    --font-size-title: 1.9rem;
+    --font-size-sub-title: 1.3rem;
+    --radius-btn: 4px;
+    --radius-base: 4px;
+
+    --box-shadow1: rgb(17 17 26 / 5%) 0 1px 0, rgb(17 17 26 / 10%) 0 0 8px;
+
+    /* color palette from <https://github.com/vuejs/theme> */
+    --vt-c-white: #ffffff;
+    --vt-c-white-soft: #f8f8f8;
+    --vt-c-white-mute: #f2f2f2;
+
+    --vt-c-black: #181818;
+    --vt-c-black-soft: #222222;
+    --vt-c-black-mute: #282828;
+
+    --vt-c-indigo: #2c3e50;
+
+    --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+    --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+    --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+    --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+    --vt-c-text-light-1: var(--vt-c-indigo);
+    --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+    --vt-c-text-dark-1: var(--vt-c-white);
+    --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+    /* semantic color variables for this project */
+    --color-background: var(--vt-c-white);
+    --color-background-soft: var(--vt-c-white-soft);
+    --color-background-mute: var(--vt-c-white-mute);
+
+    --color-border: var(--vt-c-divider-light-2);
+    --color-border-hover: var(--vt-c-divider-light-1);
+
+    --color-heading: var(--vt-c-text-light-1);
+    --color-text: var(--vt-c-text-light-1);
+    --section-gap: 160px;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: var(--vt-c-black);
+        --color-background-soft: var(--vt-c-black-soft);
+        --color-background-mute: var(--vt-c-black-mute);
+
+        --color-border: var(--vt-c-divider-dark-2);
+        --color-border-hover: var(--vt-c-divider-dark-1);
+
+        --color-heading: var(--vt-c-text-dark-1);
+        --color-text: var(--vt-c-text-dark-2);
+    }
+}

@@ -1,0 +1,213 @@
+.start-request {
+    min-height: 100vh;
+}
+.colors{
+    color: #030b3c;
+}
+.trait{
+    display:flex;
+    justify-content:center;
+    width:25px;
+    height:3px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:15px;
+    border-radius:5px;
+    background:#00ccc2;
+}
+.cartes{
+    border: 1px solid gray ;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+
+    &:disabled, &.disabled{
+        filter: opacity(0.5);
+        box-shadow: none !important;
+        cursor: not-allowed;
+
+    }
+}
+
+::v-deep {
+    .el-collapse-item__header {
+        padding: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1rem;
+        border-bottom: 1px solid #dddddd5c;
+    }
+
+    .el-collapse-item__content {
+        padding: 1rem;
+    }
+}
+
+
+.object-appointment {
+
+    .item-request-type {
+
+        .fileInput {
+            height: 0px;
+            width: 0px;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .item-request-type-head {
+            //flex: 1 1 auto;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto !important;
+            max-width: 40%;
+            padding: 1rem 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                object-fit: contain;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        p {
+        }
+    }
+
+    .selected {
+
+        border: 3px solid green !important;
+    }
+
+    .object-appointment {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+    .container-appointment-form {
+
+        .container-appointment-form-row {
+            height: inherit;
+            margin: 0;
+            flex: 1;
+        }
+    }
+
+    .appointment-title {
+        h3 {
+            color: var(--primaryColor);
+            font-size: 25px;
+            margin: 0 0 1rem;
+        }
+    }
+
+}
+
+.service-appointment {
+
+    .item-request-type {
+        .fileInput {
+            height: 0px;
+            width: 0px;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .item-request-type-head {
+            //flex: 1 1 auto;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto !important;
+            max-width: 40%;
+            padding: 1rem 0;
+
+            img {
+                width: 110px;
+                height: 110px;
+                margin: auto;
+                object-fit: cover;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        p {
+        }
+    }
+
+    .selected {
+
+        border: 3px solid green !important;
+    }
+
+    .object-appointment {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+    .container-appointment-form {
+
+        .container-appointment-form-row {
+            height: inherit;
+            margin: 0;
+            flex: 1;
+        }
+    }
+
+    .appointment-title {
+        h3 {
+            color: var(--primaryColor);
+            font-size: 25px;
+            margin: 0 0 1rem;
+        }
+    }
+
+}
+
+.type-demande {}
+.information-personne {
+
+    .group {
+        margin-bottom: 1.6rem;
+
+        .item-title {
+            font-size: 15px !important;
+        }
+    }
+
+    .el-form-item {
+        margin-bottom: 0 !important;
+    }
+
+}

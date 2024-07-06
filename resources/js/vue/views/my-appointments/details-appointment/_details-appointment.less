@@ -1,0 +1,171 @@
+.details-appointment {
+    margin: 1rem;
+    min-height: 10vh;
+    background: transparent;
+
+    .text-center {
+        text-align: center;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .info-user {
+        display: flex;
+    }
+
+    .content-qr-code {
+
+    img{}
+  }
+
+  @media (max-width: 500px) {
+    .container-row {
+      display: block;
+      justify-content: center;
+    }
+
+    .container-card-other-info {
+      margin-top: 10px;
+      width: 94vw;
+      margin-left: -10px;
+    }
+    .info-user{
+      visibility: visible;
+      display: block;
+    }
+  }
+
+
+
+  .container-row {
+    //display: block;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+
+    .info-user {
+      box-shadow: var(--box-shadow1);
+      background: #FFF;
+      padding: 0 !important;
+
+
+
+      .head-card-user {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 0.4;
+        border-right: 3px solid var(--bgMainColor);
+        padding: 1rem;
+
+        .name-user {
+          margin-bottom: 5px;
+        }
+
+        span {
+          margin-bottom: 5px;
+          font-size: 12px;
+        }
+      }
+
+      .content-card-other-info-user {
+        flex: 1;
+        padding: 1rem;
+
+        .container-item {
+
+          .content-item {
+            margin-bottom: 12px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-bottom: 1px solid var(--gray400Color);
+            padding-bottom: 12px;
+
+            .label-item {
+              margin: 0 0 12px;
+              font-size: 13px;
+              opacity: .5;
+            }
+
+            .value-item {
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+    }
+
+
+
+
+
+    .container-card-other-info {
+      display: flex;
+
+      .content-card-other-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--box-shadow1);
+        background: #FFF;
+        border-radius: 0;
+        padding: 1rem;
+
+        .appointment {
+            .date-appointment {
+                font-weight: 800;
+                font-size: 15px;
+            }
+
+
+
+            .amount-appointment,
+            .type-appointment {
+                font-weight: 800;
+                color: var(--error500Color);
+                text-transform: uppercase;
+                font-size: 1.4rem;
+                margin-top: 0.3rem;
+                margin-bottom: 1rem;
+            }
+            .amount-appointment {
+                //color: var(--secondaryColor);
+                font-size: 1rem;
+            }
+        }
+
+        .title-info {
+          color: #606266;
+        }
+
+        .description-info {
+          color: #909090;
+          font-size: 13px;
+        }
+      }
+
+    }
+
+
+  }
+
+  .container-timeline {
+    margin-top: 2rem;
+
+    .el-timeline {
+      padding: 0;
+    }
+
+    .el-card {
+      padding: .5rem;
+      border: 1px solid #ededed;
+      box-shadow: none;
+    }
+  }
+}
