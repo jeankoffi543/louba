@@ -15,7 +15,7 @@ class AttachmentTicketAppointmentMail extends Mailable
     public $data;
     public $attachment;
 
-    public function __construct($data, $attachment)
+    public function __construct($data, $attachment = null)
     {
         $this->data = $data;
         $this->attachment = $attachment;
@@ -23,9 +23,13 @@ class AttachmentTicketAppointmentMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Votre reçu de prise de rendez-vous LOUBA')->view('emails.ticket_appointment')
+        if(is_array($this->attachment) && isset($this->attachment['data']) && isset($this->attachment['name'])) {
+            return $this->subject('Votre reçu de prise de rendez-vous LOUBA')->view('emails.ticket_appointment')
             ->attachData($this->attachment['data'], $this->attachment['name'], [
                 'mime' => 'application/pdf'
             ]);
+        }
+
+        return $this->subject('Votre reçu de prise de rendez-vous LOUBA')->view('emails.ticket_appointment');
     }
 }

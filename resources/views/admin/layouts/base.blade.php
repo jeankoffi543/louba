@@ -382,15 +382,6 @@ echo $nextday;
                         </a>
                     </li> --}}
 
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('produit') ? 'text-danger' : '' }}" href="/produit">
-                            <i class="bi bi-plug-fill"></i>
-                            <span>Produits</span>
-                        </a>
-                    </li>
-
-
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('client') ? 'text-danger' : '' }}"
                             href="{{ route('client') }}">
@@ -404,7 +395,7 @@ echo $nextday;
                         <a class="nav-link {{ request()->is('demande') ? 'text-danger' : '' }}"
                             href="{{ route('demande') }}">
                             <i class="bi bi-menu-button-wide"></i>
-                            <span>Traitements demandes</span>
+                            <span>Toutes les demandes</span>
                         </a>
                     </li>
 
@@ -444,7 +435,7 @@ echo $nextday;
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle {{ request()->is('circuit') || request()->is('services') || request()->is('groupes') || request()->is('permissions/*')  ? 'text-danger' : '' }}"
+                        <a class="nav-link dropdown-toggle {{ request()->is('circuit') || request()->is('services') || request()->is('groupes') || request()->is('permissions/*') || request()->is('circuit/add/*')  ? 'text-danger' : '' }}"
                             data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                             aria-controls="collapseExample">
                             <i class="bi bi-gear"></i>
@@ -455,7 +446,7 @@ echo $nextday;
 
                     <div class="collapse ps-2" id="collapseExample">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('circuits') ? 'text-danger' : '' }}" href="{{ route('circuit') }}">
+                            <a class="nav-link {{ request()->is('circuits')  || request()->is('circuit/add/*') ? 'text-danger' : '' }}" href="{{ route('circuit') }}">
                                 <i class="bi bi-door-open-fill"></i>
                                 <span>Circuit de traitement</span>
                             </a>
@@ -467,6 +458,14 @@ echo $nextday;
                                 <span>Services</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('produit') ? 'text-danger' : '' }}" href="/produit">
+                                <i class="bi bi-plug-fill"></i>
+                                <span>Produits</span>
+                            </a>
+                        </li>
+    
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('groupes') || request()->is('permissions/*') ? 'text-danger' : '' }}" href="{{ route('groupes') }}">

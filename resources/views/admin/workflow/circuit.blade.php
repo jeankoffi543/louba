@@ -28,7 +28,8 @@
                      <li class="breadcrumb-item active">Circuit</li>
                  </ol>
              </nav>
-         </div><!-- End Page Title -->
+         </div>
+         <!-- End Page Title -->
 
          <section class="section dashboard">
              <div class="row">
@@ -99,8 +100,7 @@
                                              </td>
 
                                              <td>
-                                                 <a href="{{ route('circuit.update', $circuit['id']) }}"
-                                                     data-bs-toggle="modal" data-bs-target="#modifier{{ $index }}"
+                                                 <a href="{{ route('circuit.add', $circuit['id']) }}"
                                                      class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
 
                                                  <a href="{{ route('circuit.delete', $circuit['id']) }}"
@@ -109,80 +109,6 @@
                                          </tr>
 
 
-
-                                         <!-- Modal Dialog Scrollable -->
-                                         <div class="modal modal-lg fade" id="modifier{{ $index }}" tabindex="-1">
-                                             <div class="modal-dialog modal-dialog-scrollable">
-                                                 <div class="modal-content" style="height: 90%; overflow-y: scroll">
-                                                     <div class="modal-header">
-                                                         <h5 class="modal-title">Gestion du circuit</h5>
-                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                             aria-label="Close"></button>
-                                                     </div>
-
-                                                     <form method="POST"
-                                                         action="{{ route('circuit.update', $circuit['id']) }}">
-                                                         <input name="id" type="hidden" value="{{ $circuit['id'] }}">
-                                                         @method('PUT')
-                                                         @csrf
-
-
-                                                         <div class="modal-body p-2">
-                                                             <div class="w-100" id="circuitModal{{ $index }}">
-
-
-                                                                 @foreach ($circuit['habiletes'] as $i => $habilete)
-                                                                     <div class="d-flex flex-row gap-2 align-items-center">
-                                                                         <select id="circuitSelect{{ $index }}{{ $i }}"
-                                                                             name="circuit_select_{{ $index }}{{ $i }}[]"
-                                                                             required class="form-control" multiple>
-                                                                             @foreach ($habilete as $hab)
-                                                                                 <option value="{{ $hab->id }}"
-                                                                                     selected>
-                                                                                     {{ $hab->libelle }}
-                                                                                 </option>
-                                                                             @endforeach
-
-
-                                                                             @foreach ($allHabiletes as $hab)
-                                                                                 @if (!in_array($hab['id'], array_column($habilete->toArray(), 'id')))
-                                                                                     <option value="{{ $hab['id'] }}">
-                                                                                         {{ $hab['libelle'] }} </option>
-                                                                                 @endif
-                                                                             @endforeach
-                                                                         </select>
-
-                                                                         <a href="#"
-                                                                             id="removeCircuit{{ $index }}{{ $i }}">
-                                                                             <i class="bi bi-trash fs-3"></i>
-                                                                         </a>
-                                                                     </div>
-                                                                 @endforeach
-
-                                                             </div>
-
-                                                             <div
-                                                                 class="d-flex flex-row align-items-center justify-content-end my-2">
-                                                                 <a href="#" id="addCircuit{{ $index }}">
-                                                                     <i class="bi bi-plus-circle fs-3"></i>
-                                                                 </a>
-                                                             </div>
-
-                                                         </div>
-                                                         <div class="modal-footer">
-                                                             <button type="button" class="btn btn-secondary"
-                                                                 data-bs-dismiss="modal">Annuler</button>
-                                                             <button type="submit" class="btn btn-primary">Valider</button>
-                                                         </div>
-
-
-                                                     </form>
-
-
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <!-- End Modal Dialog Scrollable-->
                                      @endforeach
 
                                  </tbody>
@@ -196,7 +122,8 @@
              </div>
          </section>
 
-     </main><!-- End #main -->
+     </main>
+     <!-- End #main -->
 
 
  @stop

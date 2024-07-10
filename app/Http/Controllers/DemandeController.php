@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Demande;
+use App\Models\Habilete;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,34 @@ class DemandeController extends Controller
         return view('visiteur.wellcome');
     }
 
+    public function show($id)
+    {
+        $circuit = [];
+
+        $demande = Demande::find($id)->with(['client', 'product', 'service', 'point_enrolement'])->first();
+        if($demande){
+            $habiletes = $demande->service->habiletes;
+            $habiletes = is_array($habiletes) ? $habiletes : (is_null($habiletes) ? [] : json_decode($habiletes, true));
+            $outputArray = [];
+
+            foreach ($habiletes as $item) {
+                $outputArray[] = json_decode($item);
+            }
+
+            $habiletes = $outputArray;
+
+            $habiletes_array = [];
+            
+            if (count($habiletes) > 0) {
+                foreach ($habiletes as $id) {
+                    $habilete = Habilete::whereIn('id', $id)->get();
+                    $habiletes_array[] = $habilete;
+                }
+            }
+
+        }
+        return view('admin.demande-show', ['demande' => $demande, 'circuit' => $habiletes_array]);
+    }
 
     public static function getFichierProduction()
     {

@@ -351,17 +351,10 @@ $(document).ready(function () {
     var allHabiletes = $("#allhab").data("allhab");
     var circuitCount = Number($("#circuit_count").data("circuit_count"));
 
-    function generateCircuitSlectTemplate(index, i, allHabiletes) {
-
-        $(`#removeCircuit${i + index}`).on("click", function (e) {
-            alert(i + index)
-            e.preventDefault();
-            $(this).parent().remove();
-        });
-
+    function generateCircuitSlectTemplate(index, allHabiletes) {
         return `
     <div class="d-flex flex-row gap-2 align-items-center my-1">
-        <select id="circuitSelect${i + index}" name="circuit_select_${i + index}[]" required class="form-control" multiple>
+        <select id="circuitSelect${index}" name="circuit_select_${index}[]" required class="form-control" multiple>
             ${
                 Array.isArray(allHabiletes) &&
                 allHabiletes.length > 0 &&
@@ -372,31 +365,42 @@ $(document).ready(function () {
                     .join("")
             }
         </select>
-        <a href="#" id="removeCircuit${i + index}">
+        <a href="#" id="removeCircuit${index}">
             <i class="bi bi-trash fs-3"></i>
         </a>
     </div>
   `;
     }
 
-    for (let i = 0; i < circuitCount; i++) {
-        if ($(`#circuitModal${i}`).length && $(`#addCircuit${i}`).length) {
-            var habiletes = $("#habiletes")?.data("habiletes") ?? [];
-            var circuitModal = $(`#circuitModal${i}`);
-            var addCircuit = $(`#addCircuit${i}`);
+    if ($(`#circuitModal`).length && $(`#addCircuit`).length) {
+        var habiletes = $("#habiletes")?.data("habiletes") ?? [];
+        var circuitModal = $(`#circuitModal`);
+        var addCircuit = $(`#addCircuit`);
+        var habCount = Number($(`#hab`).data("hab") ?? 0);
 
-            $(`#addCircuit${i}`).on("click", function (e) {
-                e.preventDefault();
-                var habCount = Number($(`#hab${i}`).data("hab") ?? 0) + 1;
+        $(`#addCircuit`).on("click", function (e) {
+            e.preventDefault();
+            habCount = habCount + 1;
+            $(`#circuitModal`).append(
+                generateCircuitSlectTemplate(habCount, allHabiletes)
+            );
+          
+                $(`#removeCircuit${habCount}`).on("click", function (e) {
+                    e.preventDefault();
+                    $(this).parent().remove();
+                });
+          
+        });
+        
 
-                $(`#circuitModal${i}`).append(
-                    generateCircuitSlectTemplate(
-                        habCount,
-                        i,
-                        allHabiletes
-                    )
-                );
-            });
+        if ($(`#hab`).data("hab") && Number($(`#hab`).data("hab")) > 0) {
+            $habCount = Number($(`#hab`).data("hab"));
+            for (let i = 0; i < $habCount; i++) {
+                $(`#removeCircuit${i}`).on("click", function (e) {
+                    e.preventDefault();
+                    $(this).parent().remove();
+                });
+            }
         }
     }
 });

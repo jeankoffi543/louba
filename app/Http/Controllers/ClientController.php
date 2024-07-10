@@ -25,6 +25,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PDF;
 use App\Exceptions\ErrorException;
+use App\Models\AdminAction;
+use App\Models\IndexTraitement;
+use App\Models\Service;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use const Grpc\STATUS_CANCELLED;
@@ -77,9 +80,16 @@ class ClientController extends Controller
             // $client->password = bcrypt(request()->telephone);
             $client->password = Hash::make(request()->telephone);
 
+            $username = request()->email;
+            $numero = request()->telephone;
+
             if ($client->save()) {
                 $message_sms = "Votre access LOUBA est \n identifiant:" . request()->email . "\n Mot de passe: " . request()->telephone;
                 try {
+                    // $mailMsg = "Cher Utilisateur, Votre inscription à la plateforme de prise de rendez-vous est désormais effective.Votre nom d'utilisateur est : $username Votre mot de passe est : $numero de téléphone";
+
+                    // Mail::to(request()->email)->send(new AttachmentTicketAppointmentMail($mailMsg));
+
                     $newSms = new SendSmS();
                     $newSms->send(request()->telephone, $message_sms);
                 } catch (GuzzleException $e) {
@@ -227,7 +237,6 @@ class ClientController extends Controller
             }
 
             //$demande->id_client = $client->id;
-
             $client = Client::all()
                 ->where('telephone_client', '=', $request->telephone)
                 ->where('email_client', '=', $request->email)->first();
@@ -240,7 +249,7 @@ class ClientController extends Controller
                 $newClient->genre_client = $request->gender == "H" ? "Homme" : "Femme";
                 $newClient->telephone_client = $request->telephone;
                 $newClient->adresse_client = $request->lieu_de_residence;
-                $newClient->date_naissance_client = Carbon::createFromFormat('d/m/Y', $request->date_naissance)->toDateTime();
+                $newClient->date_naissance_client = Carbon::createFromFormat('Y-m-d', $request->date_naissance)->toDateTime();
                 $newClient->password = bcrypt($request->telephone);
                 $newClient->created_at = now();
                 $newClient->save();
@@ -254,7 +263,6 @@ class ClientController extends Controller
 
                 $client = $newClient;
             }
-
 
             $code_oni = "GN" . $client->id . substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10 / strlen($x)))), 1, 10);
             $demande->id_sender = $userConnected->id;
@@ -271,14 +279,14 @@ class ClientController extends Controller
             $demande->mother_last_name = $request->mother_last_name;
             $demande->numero_recu = $request->numero_recu;
             $demande->id_client = $client->id;
-            $demande->date_rdv_demande = Carbon::createFromFormat('d/m/Y', $request->date_rdv_demande)->toDateTime();
+            $demande->date_rdv_demande = Carbon::createFromFormat('Y-m-d', $request->date_rdv_demande)->toDateTime();
             $demande->id_product = $request->id_type_document;
             $demande->id_service = $request->id_type_service;
             $demande->id_point_enrolement = $request->id_point_enrolement;
             $demande->code_demande = $code_oni;
             $demande->type_request = $type_demande;
+            $demande->habilete_position = 0;
             $demande->created_at = now();
-
 
             if ($request->hasFile("document1")) {
 
@@ -307,6 +315,51 @@ class ClientController extends Controller
 
 
             $demande->save();
+
+            // Index traitement
+            $service = Service::where('id', $demande->id_service)->first();
+            $habilete_position = $demande->habilete_position;
+            $habiletes = json_decode(json_encode($service->habiletes), true);
+            $habiletes = array_map(function ($item) {
+                return json_decode($item, true);
+            }, $habiletes);
+
+            if (is_array($habiletes) && count($habiletes) > 0 && $habilete_position < count($habiletes)) {
+                $currentHabiletes = $habiletes[$habilete_position];
+                if (is_array($currentHabiletes) && count($currentHabiletes) > 0) {
+                    foreach ($currentHabiletes as $habilete) {
+                        $data1 = [
+                            'habilete_id' => intval($habilete),
+                            'id_demande' => $demande->id,
+                        ];
+
+                        $data2 = [
+                            'habilete_id' => intval($habilete),
+                            'id_demande' => $demande->id,
+                            'action' => 'create',
+                        ];
+
+                        IndexTraitement::create($data1);
+                        AdminAction::create($data2);
+                    }
+                } else {
+                    $data1 = [
+                        'habilete_id' => intval($currentHabiletes),
+                        'id_demande' => $demande->id,
+                    ];
+
+                    $data2 = [
+                        'habilete_id' => intval($currentHabiletes),
+                        'id_demande' => $demande->id,
+                        'action' => 'create',
+                    ];
+
+                    IndexTraitement::create($data1);
+                    AdminAction::create($data2);
+                }
+            }
+
+
             $URL_DOWNLOAD = $_SERVER["APP_URL"] . "/recuPdf/$code_oni";
             $SATUS_DEMANDE = $_SERVER["APP_URL"] . "/site#/personal-space/appointment/documents";
             $message_sms = "Votre code document LOUBA est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
@@ -318,7 +371,7 @@ class ClientController extends Controller
                 throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
             }
             // send mail in client
-            $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('y-m-d'), 'maDemande' => $demande, 'code_demande' => $demande->code_demande,]);
+            $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('d-m-Y'), 'maDemande' => $demande, 'code_demande' => $demande->code_demande,]);
 
             $demandeSave = Demande::with(['client', 'sender', 'product', 'point_enrolement'])->where("id", "=", $demande->id)->first();
 
@@ -345,6 +398,8 @@ class ClientController extends Controller
             $data["status"] = 200;
             $data["message"] = "Demande enregistré";
             $data["demande"] = $demande;
+
+
             return response()->json($data);
         } catch (Exception $ex) {
             DB::rollBack();

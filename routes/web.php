@@ -85,6 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('demande')->group(function () {
         Route::get('/', [demandeController::class, 'get4admin'])->name('demande');
         Route::post('/', [demandeController::class, 'search4admin'])->name('demandeSearch');
+        Route::get('/{id}', [demandeController::class, 'show'])->name('demande.show');
     });
 
     Route::prefix('productionDocument')->group(function () {
@@ -181,6 +182,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [CircuitController::class, 'store'])->name('circuit.store');
         Route::put('/{id}', [CircuitController::class, 'update'])->name('circuit.update');
         Route::get('/{id}', [CircuitController::class, 'destroy'])->name('circuit.delete');
+        Route::get('/add/{id}', [CircuitController::class, 'add'])->name('circuit.add');
     });
 
     Route::prefix('groupes')->group(function () {

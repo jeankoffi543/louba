@@ -6,6 +6,7 @@ import {mapActions, mapGetters} from "vuex";
 import ButtonApp from "../../../components/shared/ButtonApp.vue";
 import {KEY_FORM_JSON} from "../../../core/constants";
 import utils from "../../../core/utils";
+import {format} from "date-fns";
 
 export default {
     name: 'EndRequest',
@@ -106,34 +107,91 @@ export default {
             };
             this.$store.dispatch('FORM_DATA_REQUEST', payload);
             const formData = new FormData();
-            formData.append("document1", this.formDataRequest.user?.fileListPicture[0]);
-            formData.append("document2", this.formDataRequest.user?.fileListBirthCertificate[0]);
-            formData.append("date_rdv_demande", new Date(this.dateAppointment).toLocaleDateString());
-            formData.append("id_type_document", this.formDataRequest?.product?.id);
+            formData.append(
+                "document1",
+                this.formDataRequest.user?.fileListPicture[0]
+            );
+            formData.append(
+                "document2",
+                this.formDataRequest.user?.fileListBirthCertificate[0]
+            );
+
+            formData.append(
+                "date_rdv_demande",
+                format(new Date(this.dateAppointment), "yyyy-MM-dd")
+            );
+
+            formData.append(
+                "id_type_document",
+                this.formDataRequest?.product?.id
+            );
             formData.append("type_service_passport", null);
-            formData.append("id_type_service", this.formDataRequest?.service?.id ?? null);
+            formData.append(
+                "id_type_service",
+                this.formDataRequest?.service?.id ?? null
+            );
             formData.append("id_point_enrolement", this.siteAppointmentId);
             formData.append("gender", this.formDataRequest?.user?.gender);
             formData.append("nom", this.formDataRequest?.user?.lastname);
             formData.append("prenom", this.formDataRequest?.user?.firstname);
             formData.append("email", this.formDataRequest?.user?.email);
             formData.append("telephone", this.formDataRequest?.user?.phone);
-            formData.append("nationality", this.formDataRequest?.user?.nationality);
-            formData.append("nationality_state", this.formDataRequest?.user?.nationality_state);
-            formData.append("profession", this.formDataRequest?.user?.profession);
+            formData.append(
+                "nationality",
+                this.formDataRequest?.user?.nationality
+            );
+            formData.append(
+                "nationality_state",
+                this.formDataRequest?.user?.nationality_state
+            );
+            formData.append(
+                "profession",
+                this.formDataRequest?.user?.profession
+            );
             formData.append("height", this.formDataRequest?.user?.height);
-            formData.append("complexion", this.formDataRequest?.user?.complexion);
-            formData.append("hair_color", this.formDataRequest?.user?.hair_color);
+            formData.append(
+                "complexion",
+                this.formDataRequest?.user?.complexion
+            );
+            formData.append(
+                "hair_color",
+                this.formDataRequest?.user?.hair_color
+            );
             formData.append("eye_color", this.formDataRequest?.user?.eye_color);
-            formData.append("date_naissance", new Date(this.formDataRequest?.user?.dateOfBirth).toLocaleDateString());
-            formData.append("lieu_de_residence", this.formDataRequest?.user?.placeOfResidence);
+            formData.append(
+                "date_naissance",
+                format(
+                    new Date(this.formDataRequest?.user?.dateOfBirth),
+                    "yyyy-MM-dd"
+                )
+            );
+
+            formData.append(
+                "lieu_de_residence",
+                this.formDataRequest?.user?.placeOfResidence
+            );
             formData.append("type_request", this.formDataRequest?.typeRequest);
             formData.append("type_request", this.formDataRequest?.typeRequest);
-            formData.append("father_first_name", this.formDataRequest?.user?.father_firstname);
-            formData.append("father_last_name", this.formDataRequest?.user?.father_lastname);
-            formData.append("mother_first_name", this.formDataRequest?.user?.mother_firstname);
-            formData.append("mother_last_name", this.formDataRequest?.user?.mother_lastname);
-            formData.append("numero_recu", this.formDataRequest?.user?.numero_recu);
+            formData.append(
+                "father_first_name",
+                this.formDataRequest?.user?.father_firstname
+            );
+            formData.append(
+                "father_last_name",
+                this.formDataRequest?.user?.father_lastname
+            );
+            formData.append(
+                "mother_first_name",
+                this.formDataRequest?.user?.mother_firstname
+            );
+            formData.append(
+                "mother_last_name",
+                this.formDataRequest?.user?.mother_lastname
+            );
+            formData.append(
+                "numero_recu",
+                this.formDataRequest?.user?.numero_recu
+            );
 
             // await this.$store.dispatch("SAVE_APPOINTMENT", formData)
             axios.post(`/api/save-appointment`, formData).then(responseAxios => {

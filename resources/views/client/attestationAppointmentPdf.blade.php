@@ -135,7 +135,8 @@
 
         <p>
             Né(e) le : <span style="text-transform: uppercase; margin-right: 40px">
-                {{ \Carbon\Carbon::parse($maDemande->client->date_naissance_client)->format('d-m-Y') }}</span>
+                {{ \Carbon\Carbon::parse($maDemande->client->date_naissance_client)->format('d-m-Y') }}
+            </span>
 
             A: {{ $maDemande->client->adresse_client }}
         </p>
@@ -163,7 +164,8 @@
                 {{ $maDemande->mother_first_name }}</span></p>
 
         <p>Date du rendez-vous : <span style="text-transform: uppercase; margin-right: 40px">
-                {{ $maDemande->date_rdv_demande }}</span></p>
+                {{ \Carbon\Carbon::parse($maDemande->date_rdv_demande)->format('d-m-Y') }}
+            </span></p>
 
         <p>Point de l'enrolement : <span style="text-transform: uppercase; margin-right: 40px">
                 {{ $maDemande->point_enrolement->nom_pe }}</span></p>
@@ -177,7 +179,7 @@
         <table style="width: 100%; border-collapse: collapse;">
             <tr>
                 <td style="text-align: left">
-                    Date: {{ \Carbon\Carbon::parse($maDemande->created_at)->format('d-m-Y') }}
+                    Date: {{ $date }}
                     <p><strong> Signature du demandeur en âge de signer</strong></p>
                     <p style="font-size: 0.6rem;"><strong> (signature à effectuer en mairie </strong></p>
                     <p style="font-size: 0.6rem;"><strong> à l'encre noire et sans déborder du cadre) </strong></p>
