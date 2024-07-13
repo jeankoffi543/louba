@@ -18,18 +18,47 @@
              '#2980b9',
          ];
      @endphp
-
+    
      <main id="main" class="main">
-         {{ $demande }}
-         <div class="pagetitle">
-             <h1>Demande</h1>
-             <nav>
-                 <ol class="breadcrumb">
-                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                     <li class="breadcrumb-item active">Demande</li>
-                 </ol>
-             </nav>
-         </div><!-- End Page Title -->
+         {{-- {{ $demande }} --}}
+         <div class="container">
+             <div class="row">
+                <div class="p-2">
+                    @if ($isTransmitted)
+                        <div class="alert alert-danger">TRANSFEREE </div>
+                    @endif
+                </div>
+
+                 <div class="col-12 col-md-3">
+                     <div class="pagetitle">
+                         <h1>Demande</h1>
+                         <nav>
+                             <ol class="breadcrumb">
+                                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                 <li class="breadcrumb-item active">Demande</li>
+                             </ol>
+                         </nav>
+                     </div><!-- End Page Title -->
+                 </div>
+                 <div class="col-12 col-md-9">
+
+                     <div class="d-flex flex-row align-items-center gap-1">
+                        @if($isOwner) 
+                        @kcan('gestion-demandes') <a class="btn btn-primary" href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'TRANSMITTED']) }}"> Transmettre</a>@endkcan
+                        @endif
+                         @kcan('possibilite-rejeter-dossier') <a class="btn btn-danger" href="{{ route('demande.show', $demande->id) }}"> Rejéter</a>@endkcan
+                         @kcan('possibilite-suspendre-dossier') <a class="btn btn-warning" href="{{ route('demande.show', $demande->id) }}"> Suspendre</a>@endkcan
+                        @kcan('possibilite-ajouter-document') <a class="btn btn-secondary" href="{{ route('demande.show', $demande->id) }}"> Ajouter doc</a>@endkcan
+                         @kcan('possibilite-changer-date-rendez-vous') <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Modifier date RDV</a>@endkcan
+
+                         @kcan('ajouter-numero-recepisse') <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Ajouter Recepisse</a>@endkcan
+
+                         @kcan('Ajouter numéro document') <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Ajouter Num. Document</a>@endkcan
+
+                     </div>
+                 </div>
+             </div>
+         </div>
 
          <section class="section dashboard">
              <div class="row">
@@ -264,8 +293,7 @@
                                      Document 1
                                  </div>
                                  <div class="col-9">
-                                     <img src="{{ $demande->avatar_url }}"
-                                         alt="{{ $demande->code_demande ?? '' }}">
+                                     <img src="{{ $demande->avatar_url }}" alt="{{ $demande->code_demande ?? '' }}">
                                  </div>
                              </div>
 

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Habilete;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton(WorkFlowManger::class, function (Application $app) {
+            return new WorkFlowManger();
+        });
     }
 
     /**
@@ -26,15 +30,26 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::if('kcan', function ($permission) {
-            $user = auth()->user();
             $checker = false;
-            if ($user) {
-                // $habilete = Habilete::where('id', $user->habilete_id)->with('permissions')->first()->permissions->pluck('libelle');
-                $habilete = Habilete::where('id', 3)->with('permissions')->first()->permissions->pluck('libelle')->toArray();
-                if (in_array($permission, $habilete)) {
-                    $checker = true;
+            $user = auth()->user();
+            if ($user->id_role === 1) return true;
+            if ($user->id_role && $user->id_role === 4) {
+                $permission = explode(',', trim($permission));
+                if ($user) {
+                    $habilete = Habilete::where('id', $user->habilete_id)->with('permissions')->first()->permissions->pluck('libelle');
+                    // $habilete = Habilete::where('id', 3)->with('permissions')->first()->permissions->pluck('libelle')->toArray();
+                    if (count(array_intersect($permission, $habilete->toArray())) > 0) {
+                        $checker = true;
+                    }
                 }
             }
+            return $checker;
+        });
+
+        Blade::if('kis_superadmin', function () {
+            $checker = false;
+            $user = auth()->user();
+            if ($user->id_role === 1) return true;
             return $checker;
         });
 
@@ -67,9 +82,8 @@ class AppServiceProvider extends ServiceProvider
                     $color = "#f39c12";
                     break;
             }
-        
+
             return "<a href='#' class='btn' style='background-color: $color;'>$demande</a>";
         });
-
     }
 }

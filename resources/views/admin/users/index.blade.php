@@ -21,7 +21,6 @@
 
 
 
-
                 <div class="p-2">
                     @if (Session::get('success_message'))
                         <div class="alert alert-success">{{ Session::get('success_message') }}</div>
@@ -88,13 +87,13 @@
 
 
                                                 <div class="row mb-3">
-                                                    <label class="col-sm-2 col-form-label">Roles</label>
+                                                    <label class="col-sm-2 col-form-label">Profile</label>
                                                     <div class="col-sm-10">
                                                         <select name="id_role" class="form-select"
                                                             aria-label="Default select example">
 
                                                             @foreach ($roles as $role)
-                                                                <option value="{{ $role->id_role }}">{{ $role->nom_role }}
+                                                                <option value="{{ $role->id }}">{{ $role->libelle }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -151,7 +150,6 @@
                                 </thead>
                                 <tbody>
 
-
                                     @foreach ($users as $user)
                                         <tr <?php if ($user->actif == 0) {
                                             echo "style='background:#fb9898'";
@@ -160,7 +158,7 @@
                                             <td>{{ $user->nom }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->telephone }}</td>
-                                            <td>{{ $user->role->nom_role }}</td>
+                                            <td>{{ $user->id_role === 1 ? 'Supperadmin' :  $user->habilete->libelle}}</td>
                                             <td>{{ $user->enrollPoint->nom_pe }}</td>
 
                                             <td>
@@ -282,7 +280,7 @@
                                                     <div class="modal-dialog modal-dialog-scrollable">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Creer utilisateur</h5>
+                                                                <h5 class="modal-title">Modifier utilisateur</h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -331,24 +329,15 @@
 
                                                                     <div class="row mb-3">
                                                                         <label
-                                                                            class="col-sm-2 col-form-label">Roles</label>
+                                                                            class="col-sm-2 col-form-label">Profile</label>
                                                                         <div class="col-sm-10">
                                                                             <select name="id_role" class="form-select"
                                                                                 aria-label="Default select example">
 
                                                                                 @foreach ($roles as $role)
-                                                                                    @if ($user->id_role == $role->id_role)
-                                                                                        @php
-                                                                                            $selected1 = 'selected';
-                                                                                        @endphp
-                                                                                    @else
-                                                                                        @php
-                                                                                            $selected1 = '';
-                                                                                        @endphp
-                                                                                    @endif
-                                                                                    <option selected="{{ $selected1 }}"
-                                                                                        value="{{ $role->id_role }}">
-                                                                                        {{ $role->nom_role }}</option>
+                                                                                    <option {{$user->habilete_id == $role->id ? 'selected' : ''}} 
+                                                                                        value="{{ $role->id }}">
+                                                                                        {{ $role->libelle }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>

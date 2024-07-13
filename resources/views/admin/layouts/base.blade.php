@@ -340,142 +340,175 @@ echo $nextday;
 */
             ?>
 
+            @kcan('consulter-tableau-de-bord')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('dashboard') ? 'text-danger' : '' }}"
+                        href="{{ route('dashboard') }}">
+                        <i class="bi bi-eye"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </li>
+            @endkcan
 
             @if (auth()->user()->id_role)
 
                 @if (auth()->user()->id_role == 4)
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('demande') ? 'text-danger' : '' }}"
-                            href="{{ route('demande') }}">
-                            <i class="bi bi-menu-button-wide"></i>
-                            <span>Traitements demandes</span>
-                        </a>
-                    </li>
+                    @kcan('gestion-demandes')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('demande') && empty(request()->query()) ? 'text-danger' : '' }}"
+                                href="{{ route('demande') }}">
+                                <i class="bi bi-menu-button-wide"></i>
+                                <span>Nouvelles demandes</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('demande') && request()->query('status') === 'REJECTED' ? 'text-danger' : '' }}"
+                                href="{{ route('demande', ['status' => 'REJECTED']) }}">
+                                <i class="bi bi-menu-button-wide"></i>
+                                <span>demandes rejétées</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('demande') && request()->query('status') === 'TRANSMITTED' ? 'text-danger' : '' }}"
+                                href="{{ route('demande', ['status' => 'TRANSMITTED']) }}">
+                                <i class="bi bi-menu-button-wide"></i>
+                                <span>demandes transmises</span>
+                            </a>
+                        </li>
+                    @endkcan
                 @endif
             @endif
 
 
 
-            @if (auth()->user()->id_role)
-                @if (auth()->user()->id_role == 1)
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('dashboard') ? 'text-danger' : '' }}"
-                            href="{{ route('dashboard') }}">
-                            <i class="bi bi-eye"></i>
-                            <span>Tableau de bord</span>
-                        </a>
-                    </li>
+            {{-- @if (auth()->user()->id_role) --}}
+            {{-- @if (auth()->user()->id_role == 1) --}}
 
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('users') ? 'text-danger' : '' }}" href="/users">
-                            <i class="bi bi-grid"></i>
-                            <span>Gestion Utilsateurs</span>
-                        </a>
-                    </li>
+            @kcan('gestion-utilisateurs')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('users') ? 'text-danger' : '' }}" href="/users">
+                        <i class="bi bi-grid"></i>
+                        <span>Gestion Utilsateurs</span>
+                    </a>
+                </li>
 
 
-                    {{-- <li class="nav-item">
+                {{-- <li class="nav-item">
                         <a class="nav-link " href="{{ route('roles') }}">
                             <i class="bi bi-diagram-3-fill"></i>
                             <span>Roles</span>
                         </a>
                     </li> --}}
 
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('client') ? 'text-danger' : '' }}" href="{{ route('client') }}">
+                        <i class="bi bi-person"></i>
+                        <span>Clients</span>
+                    </a>
+                </li>
+            @endkcan
+
+            @kis_superadmin()
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('demande') ? 'text-danger' : '' }}"
+                        href="{{ route('demande') }}">
+                        <i class="bi bi-menu-button-wide"></i>
+                        <span>Toutes les demandes</span>
+                    </a>
+                </li>
+            @endkis_superadmin
+
+            @kcan('production-de-document')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('productionDocument') ? 'text-danger' : '' }}"
+                        href="/productionDocument">
+                        <i class="bi bi-book-half"></i>
+                        <span>Production Documents</span>
+                    </a>
+                </li>
+            @endkcan
+
+            @kcan('gestion-moyen-paiement')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('paiement') ? 'text-danger' : '' }}"
+                        href="{{ route('paiement') }}">
+                        <i class="bi bi-currency-dollar"></i>
+                        <span>Paiements</span>
+                    </a>
+                </li>
+            @endkcan
+
+            @kcan('gestion-point-enrolements')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('pointenrollement') ? 'text-danger' : '' }}"
+                        href="{{ route('pointenrollement') }}">
+                        <i class="bi bi-door-open-fill"></i>
+                        <span>Gestion Points Enrolements</span>
+                    </a>
+                </li>
+            @endkcan
+
+            @kcan('gestion-calendrier-point-enrolement')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('holidays') ? 'text-danger' : '' }}"
+                        href="{{ route('holidays') }}">
+                        <i class="bi bi-door-open-fill"></i>
+                        <span>Calandrier point enrolement</span>
+                    </a>
+                </li>
+            @endkcan
+
+            @kis_superadmin()
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle {{ request()->is('circuit') || request()->is('services') || request()->is('groupes') || request()->is('permissions/*') || request()->is('circuit/add/*') ? 'text-danger' : '' }}"
+                        data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                        aria-controls="collapseExample">
+                        <i class="bi bi-gear"></i>
+                        <span>Paramétrage</span>
+                        {{-- <i class="bi bi-chevron-down ms-1"></i> --}}
+                    </a>
+                </li>
+
+                <div class="collapse ps-2" id="collapseExample">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('client') ? 'text-danger' : '' }}"
-                            href="{{ route('client') }}">
-                            <i class="bi bi-person"></i>
-                            <span>Clients</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('demande') ? 'text-danger' : '' }}"
-                            href="{{ route('demande') }}">
-                            <i class="bi bi-menu-button-wide"></i>
-                            <span>Toutes les demandes</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('productionDocument') ? 'text-danger' : '' }}"
-                            href="/productionDocument">
-                            <i class="bi bi-book-half"></i>
-                            <span>Production Documents</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('paiement') ? 'text-danger' : '' }}"
-                            href="{{ route('paiement') }}">
-                            <i class="bi bi-currency-dollar"></i>
-                            <span>Paiements</span>
-                        </a>
-                    </li>
-
-
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('pointenrollement') ? 'text-danger' : '' }}"
-                            href="{{ route('pointenrollement') }}">
+                        <a class="nav-link {{ request()->is('circuit') || request()->is('circuit/add/*') ? 'text-danger' : '' }}"
+                            href="{{ route('circuit') }}">
                             <i class="bi bi-door-open-fill"></i>
-                            <span>Gestion Points Enrolements</span>
+                            <span>Circuit de traitement</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('holidays') ? 'text-danger' : '' }}"
-                            href="{{ route('holidays') }}">
+                        <a class="nav-link {{ request()->is('services') ? 'text-danger' : '' }}"
+                            href="{{ route('services') }}">
                             <i class="bi bi-door-open-fill"></i>
-                            <span>Gestion jour fériés</span>
+                            <span>Services</span>
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link dropdown-toggle {{ request()->is('circuit') || request()->is('services') || request()->is('groupes') || request()->is('permissions/*') || request()->is('circuit/add/*')  ? 'text-danger' : '' }}"
-                            data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                            aria-controls="collapseExample">
-                            <i class="bi bi-gear"></i>
-                            <span>Paramétrage</span>
-                            {{-- <i class="bi bi-chevron-down ms-1"></i> --}}
-                        </a>
-                    </li>
-
-                    <div class="collapse ps-2" id="collapseExample">
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('circuits')  || request()->is('circuit/add/*') ? 'text-danger' : '' }}" href="{{ route('circuit') }}">
-                                <i class="bi bi-door-open-fill"></i>
-                                <span>Circuit de traitement</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('services') ? 'text-danger' : '' }}" href="{{ route('services') }}">
-                                <i class="bi bi-door-open-fill"></i>
-                                <span>Services</span>
-                            </a>
-                        </li>
-
+                    @kcan('gestion-produits')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('produit') ? 'text-danger' : '' }}" href="/produit">
                                 <i class="bi bi-plug-fill"></i>
                                 <span>Produits</span>
                             </a>
                         </li>
-    
+                    @endkcan
 
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('groupes') || request()->is('permissions/*') ? 'text-danger' : '' }}" href="{{ route('groupes') }}">
-                                <i class="bi bi-door-open-fill"></i>
-                                <span>Groupes</span>
-                            </a>
-                        </li>
-                    </div>
 
-                    {{-- 
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('groupes') || request()->is('permissions/*') ? 'text-danger' : '' }}"
+                            href="{{ route('groupes') }}">
+                            <i class="bi bi-door-open-fill"></i>
+                            <span>Groupes</span>
+                        </a>
+                    </li>
+                </div>
+            @endkis_superadmin
+            {{-- 
                     <li class="nav-heading" style="color:#fff">Site web</li>
 
                     <li class="nav-item">
@@ -499,14 +532,14 @@ echo $nextday;
                         </a>
                     </li> --}}
 
-                    {{-- <li class="nav-item">
+            {{-- <li class="nav-item">
                         <a class="nav-link " href="{{ route('services') }}">
                             <i class="bi bi-plug-fill"></i>
                             <span>Services</span>
                         </a>
                     </li> --}}
 
-                    {{-- 
+            {{-- 
                     <li class="nav-item">
                         <a class="nav-link " href="/reclammation">
                             <i class="bi bi-justify-left"></i>
@@ -532,8 +565,6 @@ echo $nextday;
                             <span>Page a propos</span>
                         </a>
                     </li> --}}
-                @endif
-            @endif
 
 
 

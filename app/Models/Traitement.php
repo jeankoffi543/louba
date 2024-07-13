@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminAction extends Model
+class Traitement extends Model
 {
     use HasFactory;
 
@@ -12,6 +12,7 @@ class AdminAction extends Model
         'habilete_id',
         'id_demande',
         'action',
+        'user_id',
     ];
 
     public function habilete()

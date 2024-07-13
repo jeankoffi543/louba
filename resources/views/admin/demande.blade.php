@@ -76,13 +76,18 @@ url_piece_fournie_demande,
                                          <th scope="col">Date de rendez-vous</th>
                                          <th scope="col">Point d'enrolement</th>
                                          <th scope="col">Status</th>
-                                         <th scope="col">Action</th>
+                                         @kcan('consulter-demande,gestion-demandes')
+                                             <th scope="col">Action</th>
+                                         @endkcan
                                      </tr>
                                  </thead>
                                  <tbody>
 
 
                                      @foreach ($demandes as $demande)
+                                         @php
+                                             $demande = isset($demande->demandes) ? $demande->demandes : $demande;
+                                         @endphp
                                          @php
                                              /* if( $demande->status_demande == -2 )continue; */
                                          @endphp
@@ -181,9 +186,13 @@ url_piece_fournie_demande,
                                              </td>
                                              <td>{{ $demande->date_rdv_demande }}</td>
                                              <td>{{ $demande->point_enrolement->nom_pe }}</td>
-                                             <td> @dstatus( Nouveau )</td>
-                                             <td> <a class="btn btn-primary" href="{{ route('demande.show', $demande->id) }}"> Détails</a> </td>
+                                             <td> @dstatus(Nouveau)</td>
+                                             @kcan('consulter-demande,gestion-demandes')
+                                                 <td> <a class="btn btn-primary"
+                                                         href="{{ route('demande.show', $demande->id) }}"> Détails</a> </td>
+                                             @endkcan
                                              <?php
+                                             
                                              /*
                         <td>
                         @if ($demande->status_demande == 0)
@@ -202,98 +211,94 @@ url_piece_fournie_demande,
                         */
                                              ?>
 
-                                             <td>
 
-                                                 @if ($demande->status_demande == 0)
-                                                     <!-- Modal Dialog Scrollable -->
-                                                     <a class="badge bg-success" data-bs-toggle="modal"
-                                                         data-bs-target="#modalDialogScrollable2{{ $demande->id_type_document }}">Traiter
-                                                         Demande</a>
-                                                     <div class="modal fade"
-                                                         id="modalDialogScrollable2{{ $demande->id_type_document }}"
-                                                         tabindex="-1">
-                                                         <div class="modal-dialog modal-dialog-scrollable">
-                                                             <div class="modal-content">
-                                                                 <div class="modal-header">
-                                                                     <h5 class="modal-title">Traiter demande</h5>
-                                                                     <button type="button" class="btn-close"
-                                                                         data-bs-dismiss="modal"
-                                                                         aria-label="Close"></button>
+                                             @if ($demande->status_demande == 0)
+                                                 <!-- Modal Dialog Scrollable -->
+                                                 <a class="badge bg-success" data-bs-toggle="modal"
+                                                     data-bs-target="#modalDialogScrollable2{{ $demande->id_type_document }}">Traiter
+                                                     Demande</a>
+                                                 <div class="modal fade"
+                                                     id="modalDialogScrollable2{{ $demande->id_type_document }}"
+                                                     tabindex="-1">
+                                                     <div class="modal-dialog modal-dialog-scrollable">
+                                                         <div class="modal-content">
+                                                             <div class="modal-header">
+                                                                 <h5 class="modal-title">Traiter demande</h5>
+                                                                 <button type="button" class="btn-close"
+                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
+                                                             </div>
+
+                                                             <form method="POST" action="/demandeTraiter">
+                                                                 <input name="id_demande" type="hidden"
+                                                                     value="{{ $demande->id }}">
+                                                                 @method('PUT')
+                                                                 @csrf
+
+
+
+                                                                 <div class="modal-body">
+
+
+                                                                     <div class="row mb-3" style="text-align:center">
+                                                                         <label class="">Status
+                                                                             Demander</label><br>
+                                                                         <div class="col-sm-10">
+                                                                             <select name="status_demande"
+                                                                                 class="form-select"
+                                                                                 aria-label="Default select example">
+
+
+                                                                                 <option value="1">Success</option>
+                                                                                 <option value="-1">Echec</option>
+
+                                                                             </select>
+                                                                         </div>
+                                                                     </div>
+
+                                                                     <br>
+
+
+                                                                     <div class="row mb-3" style="text-align:center">
+                                                                         <label for="inputText" class="">Description
+                                                                             Raison</label><br>
+                                                                         <div class="col-sm-10">
+                                                                             <input name="raison_demande" type="text"
+                                                                                 class="form-control" required>
+                                                                         </div>
+                                                                     </div>
+
+
+
+                                                                 </div>
+                                                                 <div class="modal-footer">
+                                                                     <button type="button" class="btn btn-secondary"
+                                                                         data-bs-dismiss="modal">Annuler</button>
+                                                                     <button type="submit"
+                                                                         class="btn btn-primary">Valider</button>
                                                                  </div>
 
-                                                                 <form method="POST" action="/demandeTraiter">
-                                                                     <input name="id_demande" type="hidden"
-                                                                         value="{{ $demande->id }}">
-                                                                     @method('PUT')
-                                                                     @csrf
+                                                             </form>
 
 
-
-                                                                     <div class="modal-body">
-
-
-                                                                         <div class="row mb-3" style="text-align:center">
-                                                                             <label class="">Status
-                                                                                 Demander</label><br>
-                                                                             <div class="col-sm-10">
-                                                                                 <select name="status_demande"
-                                                                                     class="form-select"
-                                                                                     aria-label="Default select example">
-
-
-                                                                                     <option value="1">Success</option>
-                                                                                     <option value="-1">Echec</option>
-
-                                                                                 </select>
-                                                                             </div>
-                                                                         </div>
-
-                                                                         <br>
-
-
-                                                                         <div class="row mb-3" style="text-align:center">
-                                                                             <label for="inputText"
-                                                                                 class="">Description
-                                                                                 Raison</label><br>
-                                                                             <div class="col-sm-10">
-                                                                                 <input name="raison_demande" type="text"
-                                                                                     class="form-control" required>
-                                                                             </div>
-                                                                         </div>
-
-
-
-                                                                     </div>
-                                                                     <div class="modal-footer">
-                                                                         <button type="button" class="btn btn-secondary"
-                                                                             data-bs-dismiss="modal">Annuler</button>
-                                                                         <button type="submit"
-                                                                             class="btn btn-primary">Valider</button>
-                                                                     </div>
-
-                                                                 </form>
-
-
-                                                             </div>
                                                          </div>
-                                                     </div><!-- End Modal Dialog Scrollable-->
-                                                 @elseif($demande->status_demande == -2)
-                                                     En attente de paiement
-                                                 @elseif($demande->status_demande == -1)
-                                                     <span style='color:red'>Echec: {{ $demande->raison_status_demande }}
-                                                     </span>
-                                                 @elseif($demande->status_demande == 1)
-                                                     @if ($demande->production_disponible == 1)
-                                                         @if ($demande->recuperation == 1)
-                                                             <span style='color:green'>Document recuperer</span>
-                                                         @else
-                                                             <span style='color:green'>En attente de recuperation</span>
-                                                         @endif
+                                                     </div>
+                                                 </div><!-- End Modal Dialog Scrollable-->
+                                             @elseif($demande->status_demande == -2)
+                                                 En attente de paiement
+                                             @elseif($demande->status_demande == -1)
+                                                 <span style='color:red'>Echec: {{ $demande->raison_status_demande }}
+                                                 </span>
+                                             @elseif($demande->status_demande == 1)
+                                                 @if ($demande->production_disponible == 1)
+                                                     @if ($demande->recuperation == 1)
+                                                         <span style='color:green'>Document recuperer</span>
                                                      @else
-                                                         <span style='color:green'>En attente de production </span>
+                                                         <span style='color:green'>En attente de recuperation</span>
                                                      @endif
+                                                 @else
+                                                     <span style='color:green'>En attente de production </span>
                                                  @endif
-                                             </td>
+                                             @endif
                                          </tr>
                                      @endforeach
 
