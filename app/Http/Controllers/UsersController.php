@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Habilete;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -91,9 +92,9 @@ $results = DB::table('users')
     {
         // if (session('infoUser') == Null) return redirect('admin_oni');
 
-        $users = User::with('enrollPoint', 'role')->latest()->get();
+        $users = User::with('enrollPoint', 'role', 'habilete')->latest()->get();
 
-        $roles = Role::all();
+        $roles = Habilete::all();
 
         $pointsEnrolements = DB::table('point_enrolement')->get();
 
@@ -115,7 +116,8 @@ $results = DB::table('users')
             'email' => $request->email,
             'telephone' => $request->telephone,
             'password' => 123456,
-            'id_role' => $request->id_role,
+            'id_role' => 4,
+            'habilete_id' => $request->id_role,
             'id_point_enrolement' => $request->id_point_enrolement,
             'actif' => 1,
         ]);
@@ -151,7 +153,8 @@ $results = DB::table('users')
                 'email' => $request->email,
                 'telephone' => $request->telephone,
                 'password' => 123456,
-                'id_role' => $request->id_role,
+                'id_role' => 4,
+                'habilete_id' => $request->id_role,
                 'id_point_enrolement' => $request->id_point_enrolement,
             ]);
 

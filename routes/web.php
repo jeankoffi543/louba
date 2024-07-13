@@ -57,7 +57,7 @@ Route::get('/recuPdf/{code_demande}', [ClientController::class, 'generatePDF']);
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('users')->group(function () {
+    Route::prefix('users')->middleware('CheckHabiletesPermissions:gestion-utilisateurs')->group(function () {
         Route::get('/', [UsersController::class, 'get'])->name('user');
         Route::post('/add', [UsersController::class, 'insert'])->name('user.add');
         Route::put('/edit/{user}', [UsersController::class, 'update'])->name('user.edit');
@@ -71,8 +71,8 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::prefix('produit')->group(function () {
-        Route::get('/', [ProduitController::class, 'index'])->name('products');
+    Route::prefix('produit')->middleware('CheckHabiletesPermissions:gestion-produits')->group(function () {
+        Route::get('/', [ProduitController::class, 'index'])->name('products')->withoutMiddleware('CheckHabiletesPermissions:gestion-produits');
         Route::post('/store', [ProduitController::class, 'insert'])->name('products.store');
         Route::put('/edit/{product}', [ProduitController::class, 'update'])->name('products.update');
     });
@@ -80,12 +80,12 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::get('client', [ClientController::class, 'index'])->name('client');
+    Route::get('client', [ClientController::class, 'index'])->name('client')->middleware('CheckHabiletesPermissions:gestion-utilisateurs');
 
     Route::prefix('demande')->group(function () {
-        Route::get('/', [demandeController::class, 'get4admin'])->name('demande');
-        Route::post('/', [demandeController::class, 'search4admin'])->name('demandeSearch');
-        Route::get('/{id}', [demandeController::class, 'show'])->name('demande.show');
+        Route::get('/', [demandeController::class, 'get4admin'])->name('demande')->middleware('CheckHabiletesPermissions:gestion-demandes');
+        Route::post('/', [demandeController::class, 'search4admin'])->name('demandeSearch')->middleware('CheckHabiletesPermissions:gestion-demandes');
+        Route::get('/{id}', [demandeController::class, 'show'])->name('demande.show')->middleware('CheckHabiletesPermissions:consulter-demande,gestion-demandes');
     });
 
     Route::prefix('productionDocument')->group(function () {
@@ -93,9 +93,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DemandeController::class, 'getFichierProduction']);
     });
 
-    Route::get('paiement', [PaiementController::class, 'index'])->name('paiement');
+    Route::get('paiement', [PaiementController::class, 'index'])->name('paiement')->middleware('CheckHabiletesPermissions:gestion-moyen-paiement');
 
-    Route::prefix('pointenrollement')->group(function () {
+    Route::prefix('pointenrollement')->middleware('CheckHabiletesPermissions:gestion-point-enrolements')->group(function () {
         Route::get('/', [PointenrollementController::class, 'index'])->name('pointenrollement');
         Route::get('/{id}', [PointenrollementController::class, 'details'])->name('pointenrollement.details');
         Route::post('/add', [PointenrollementController::class, 'insert'])->name('pointenrollement.store');
@@ -151,7 +151,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [SocialController::class, 'store'])->name('socials.store');
         Route::put('/edit/{partner}', [SocialController::class, 'update'])->name('socials.update');
     });
-    Route::prefix('holidays')->group(function () {
+    Route::prefix('holidays')->middleware('CheckHabiletesPermissions:gestion-calendrier-point-enrolement')->group(function () {
         Route::get('/', [HolyDayController::class, 'index'])->name('holidays');
         Route::get('/create', [HolyDayController::class, 'create'])->name('holiday.create');
         Route::get('/edit/{holiday}', [HolyDayController::class, 'edit'])->name('holiday.edit');
@@ -161,8 +161,8 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::prefix('services')->group(function () {
-        Route::get('/', [ServiceController::class, 'index'])->name('services');
+    Route::prefix('services')->middleware('CheckHabiletesPermissions:gestion-portail-web')->group(function () {
+        Route::get('/', [ServiceController::class, 'index'])->name('services')->withoutMiddleware('CheckHabiletesPermissions:gestion-produits');
         Route::put('/edit/{service}', [ServiceController::class, 'edit'])->name('services.edit');
 
         Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
@@ -177,7 +177,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [ContenuSiteWebController::class,'aboutUs_store'])->name('about-us.store');
     });
 
-    Route::prefix('circuit')->group(function () {
+    Route::prefix('circuit')->middleware('CheckHabiletesPermissions')->group(function () {
         Route::get('/', [CircuitController::class, 'index'])->name('circuit');
         Route::post('/', [CircuitController::class, 'store'])->name('circuit.store');
         Route::put('/{id}', [CircuitController::class, 'update'])->name('circuit.update');
@@ -185,14 +185,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/add/{id}', [CircuitController::class, 'add'])->name('circuit.add');
     });
 
-    Route::prefix('groupes')->group(function () {
+    Route::prefix('groupes')->middleware('CheckHabiletesPermissions')->group(function () {
         Route::get('/', [HabileteController::class, 'index'])->name('groupes');
         Route::post('/', [HabileteController::class, 'store'])->name('groupes.store');
         Route::put('/{id}', [HabileteController::class, 'update'])->name('groupes.update');
         Route::get('/{id}', [HabileteController::class, 'destroy'])->name('groupes.destroy');
     });
 
-    Route::prefix('permissions')->group(function () {
+    Route::prefix('permissions')->middleware('CheckHabiletesPermissions')->group(function () {
         Route::get('/{id}', [PermissionController::class, 'index'])->name('permissions');
         Route::post('/', [PermissionController::class, 'habiletePermissions'])->name('permissions.habiletes.permissions');
     });
