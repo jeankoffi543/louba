@@ -97,6 +97,7 @@ class WorkFlowManger
             }
 
             $demande->habilete_position = intval($demande->habilete_position) + 1;
+            $demande->status_demande = 'PENDDING';
             $demande->save();
 
             $traitement = new Traitement();
@@ -135,10 +136,11 @@ class WorkFlowManger
             }
 
             $demande->habilete_position = intval($demande->habilete_position) - 1;
+            $demande->status_demande = 'REJECTED';
             $demande->save();
          }
       }
-
+      
       return [
          'demande' => $demande,
          'circuit' => $habiletes_array,

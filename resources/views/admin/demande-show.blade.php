@@ -18,16 +18,17 @@
              '#2980b9',
          ];
      @endphp
-    
+
+
      <main id="main" class="main">
          {{-- {{ $demande }} --}}
          <div class="container">
              <div class="row">
-                <div class="p-2">
-                    @if ($isTransmitted)
-                        <div class="alert alert-danger">TRANSFEREE </div>
-                    @endif
-                </div>
+                 <div class="p-2">
+                     @if ($isTransmitted)
+                         <div class="alert alert-danger">TRANSFEREE </div>
+                     @endif
+                 </div>
 
                  <div class="col-12 col-md-3">
                      <div class="pagetitle">
@@ -43,17 +44,36 @@
                  <div class="col-12 col-md-9">
 
                      <div class="d-flex flex-row align-items-center gap-1">
-                        @if($isOwner) 
-                        @kcan('gestion-demandes') <a class="btn btn-primary" href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'TRANSMITTED']) }}"> Transmettre</a>@endkcan
-                        @endif
-                         @kcan('possibilite-rejeter-dossier') <a class="btn btn-danger" href="{{ route('demande.show', $demande->id) }}"> Rejéter</a>@endkcan
-                         @kcan('possibilite-suspendre-dossier') <a class="btn btn-warning" href="{{ route('demande.show', $demande->id) }}"> Suspendre</a>@endkcan
-                        @kcan('possibilite-ajouter-document') <a class="btn btn-secondary" href="{{ route('demande.show', $demande->id) }}"> Ajouter doc</a>@endkcan
-                         @kcan('possibilite-changer-date-rendez-vous') <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Modifier date RDV</a>@endkcan
+                         @if ($isOwner)
+                             @kcan('gestion-demandes')
+                                 <a class="btn btn-primary"
+                                     href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'TRANSMITTED']) }}">
+                                     Transmettre</a>
+                             @endkcan
+                             @kcan('possibilite-rejeter-dossier')
+                                 <a class="btn btn-danger"
+                                     href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'REJECTED']) }}">
+                                     Rejéter</a>
+                             @endkcan
+                             @kcan('possibilite-suspendre-dossier')
+                                 <a class="btn btn-warning" href="{{ route('demande.show', $demande->id) }}"> Suspendre</a>
+                             @endkcan
+                             @kcan('possibilite-ajouter-document')
+                                 <a class="btn btn-secondary" href="{{ route('demande.show', $demande->id) }}"> Ajouter doc</a>
+                             @endkcan
+                             @kcan('possibilite-changer-date-rendez-vous')
+                                 <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Modifier date RDV</a>
+                             @endkcan
 
-                         @kcan('ajouter-numero-recepisse') <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Ajouter Recepisse</a>@endkcan
+                             @kcan('ajouter-numero-recepisse')
+                                 <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Ajouter Recepisse</a>
+                             @endkcan
 
-                         @kcan('Ajouter numéro document') <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Ajouter Num. Document</a>@endkcan
+                             @kcan('Ajouter numéro document')
+                                 <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Ajouter Num.
+                                     Document</a>
+                             @endkcan
+                         @endif
 
                      </div>
                  </div>
@@ -92,7 +112,8 @@
                                      Nom & Prénom
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->client->nom_client ?? '-' }} {{ $demande->client->prenom_client ?? '-' }}
+                                     {{ $demande->client->nom_client ?? '-' }}
+                                     {{ $demande->client->prenom_client ?? '-' }}
                                  </div>
                              </div>
 
