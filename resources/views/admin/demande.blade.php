@@ -178,17 +178,17 @@ url_piece_fournie_demande,
 
                                              </th> --}}
 
-                                             <td>{{ $demande->id }}</td>
-                                             <td>{{ $demande->code_demande }}</td>
-                                             <td>{{ $demande->service->name }}</td>
-                                             <td>{{ $demande->product->nom }}</td>
-                                             <td>{{ $demande->client->nom_client }} {{ $demande->client->prenom_client }}
+                                             <td class="align-middle"> {{ $demande->id }}</td>
+                                             <td class="align-middle"> {{ $demande->code_demande }}</td>
+                                             <td class="align-middle"> {{ $demande->service->name }}</td>
+                                             <td class="align-middle"> {{ $demande->product->nom }}</td>
+                                             <td class="align-middle"> {{ $demande->client->nom_client }} {{ $demande->client->prenom_client }}
                                              </td>
-                                             <td>{{ $demande->date_rdv_demande }}</td>
-                                             <td>{{ $demande->point_enrolement->nom_pe }}</td>
-                                             <td> @dstatus(Nouveau)</td>
+                                             <td class="align-middle"> {{ $demande->date_rdv_demande }}</td>
+                                             <td class="align-middle"> {{ $demande->point_enrolement->nom_pe }}</td>
+                                             <td class="align-middle"><span class="rounded-pill px-3 py-1" style="background-color: {{formatStatus($demande->status_demande)['color']}}">{{formatStatus($demande->status_demande)['label']}}</span> </td>
                                              @kcan('consulter-demande,gestion-demandes')
-                                                 <td> <a class="btn btn-primary"
+                                                 <td><a class="btn btn-primary"
                                                          href="{{ route('demande.show', $demande->id) }}"> Détails</a> </td>
                                              @endkcan
                                              <?php
