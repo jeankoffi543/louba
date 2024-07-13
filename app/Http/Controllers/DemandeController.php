@@ -18,7 +18,12 @@ class DemandeController extends Controller
 
     public function show($id)
     {
-        return view('admin.demande-show', WorkFlow::tranmettreDemande($id, request('type')));
+        $workFlow = WorkFlow::tranmettreDemande($id, request('type'));
+
+        if($workFlow['demande']->status_demande === "REJECTED" && !$workFlow['isOwner']) 
+        return redirect()->action([DemandeController::class, 'get4admin']);
+
+        return view('admin.demande-show', $workFlow);
     }
 
     public static function getFichierProduction()
