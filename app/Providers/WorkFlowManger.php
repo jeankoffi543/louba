@@ -22,7 +22,10 @@ class WorkFlowManger
          else if ($status && $status === "TRANSMITTED") {
             $demandes = Traitement::where('habilete_id', $user->habilete_id)
                ->join('demande', 'demande.id', '=', 'traitements.id_demande')
-               ->where('id_point_enrolement', $user->id_point_enrolement);
+               ->where('id_point_enrolement', $user->id_point_enrolement)
+               ->whereIn('status_demande', ['PENDING', 'OPEN', 'SUSPENDED']);
+         }else{
+            $demandes = $demandes->whereIn('status_demande', ['PENDING', 'OPEN', 'SUSPENDED']);
          }
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement');
       }
