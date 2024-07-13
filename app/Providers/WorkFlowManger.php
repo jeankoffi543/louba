@@ -8,6 +8,7 @@ use App\Models\Habilete;
 use App\Models\IndexTraitement;
 use App\Models\Traitement;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class WorkFlowManger
 {
@@ -20,11 +21,13 @@ class WorkFlowManger
             ->where('id_point_enrolement', $user->id_point_enrolement);
          if ($status && $status === "REJECTED") $demandes = $demandes->where('status_demande', $status);
          else if ($status && $status === "TRANSMITTED") {
-            $demandes = Traitement::where('habilete_id', $user->habilete_id)
-               ->join('demande', 'demande.id', '=', 'traitements.id_demande')
+            $demandes = Traitement::select('id_demande')->where('habilete_id', $user->habilete_id)->groupBy('id_demande')->get()->pluck('id_demande')->toArray();
+
+            return  Demande::whereIn('id', $demandes)
                ->where('id_point_enrolement', $user->id_point_enrolement)
-               ->whereIn('status_demande', ['PENDING', 'OPEN', 'SUSPENDED']);
-         }else{
+               ->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED'])
+               ->with('product', 'service', 'client', 'point_enrolement')->get();
+         } else {
             $demandes = $demandes->whereIn('status_demande', ['PENDING', 'OPEN', 'SUSPENDED']);
          }
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement');
@@ -48,7 +51,7 @@ class WorkFlowManger
 
       if ((count($habiletes) - 1) === $habilete_position) $workflowStatus = 'END_OF_WORKFLOW';
 
-      
+
       $outputArray = [];
 
       foreach ($habiletes as $item) {
@@ -68,10 +71,11 @@ class WorkFlowManger
             $habiletes_array[] = $habilete;
          }
       }
-      
+
       if ($type && $isOwner) {
          if ($type === 'TRANSMITTED' && $workflowStatus !== 'END_OF_WORKFLOW') {
             $habiletes = $habiletes_array[$habilete_position]->pluck('id')->toArray();
+    
             foreach ($habiletes as $item) {
                $IndexTraitement = IndexTraitement::where('habilete_id', $item);
                if ($IndexTraitement) $IndexTraitement->delete();
