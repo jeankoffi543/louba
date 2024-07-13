@@ -18,7 +18,6 @@ class WorkFlowManger
          $demandes = IndexTraitement::where('habilete_id', $user->habilete_id)
             ->join('demande', 'demande.id', '=', 'index_traitement.id_demande')
             ->where('id_point_enrolement', $user->id_point_enrolement);
-
          if ($status && $status === "REJECTED") $demandes = $demandes->where('status_demande', $status);
          else if ($status && $status === "TRANSMITTED") {
             $demandes = Traitement::where('habilete_id', $user->habilete_id)
@@ -32,13 +31,11 @@ class WorkFlowManger
 
    public function tranmettreDemande($id, $type)
    {
+      $demandeId = $id;
       // Check if not end
       $demande = Demande::find($id);
       $workflowStatus = "PENDING";
       $user = auth()->user();
-      $currentUserIndexTraitement = IndexTraitement::where('id_demande', $id)->where('habilete_id', $user->habilete_id)->first();
-      $currentUserAdminAction = AdminAction::where('id_demande', $id)->where('habilete_id', $user->habilete_id)->first();
-      $isTransmitted = (!$currentUserIndexTraitement && $currentUserAdminAction) ? true : false;
 
       if (!$demande) return;
 
@@ -48,6 +45,7 @@ class WorkFlowManger
 
       if ((count($habiletes) - 1) === $habilete_position) $workflowStatus = 'END_OF_WORKFLOW';
 
+      
       $outputArray = [];
 
       foreach ($habiletes as $item) {
@@ -67,7 +65,7 @@ class WorkFlowManger
             $habiletes_array[] = $habilete;
          }
       }
-
+      
       if ($type && $isOwner) {
          if ($type === 'TRANSMITTED' && $workflowStatus !== 'END_OF_WORKFLOW') {
             $habiletes = $habiletes_array[$habilete_position]->pluck('id')->toArray();
@@ -140,7 +138,13 @@ class WorkFlowManger
             $demande->save();
          }
       }
-      
+
+
+      $currentUserIndexTraitement = IndexTraitement::where('id_demande', $demandeId)->where('habilete_id', $user->habilete_id)->first();
+      $currentUserAdminAction = AdminAction::where('id_demande', $demandeId)->where('habilete_id', $user->habilete_id)->first();
+      $isTransmitted = (!$currentUserIndexTraitement && $currentUserAdminAction) ? true : false;
+      $isOwner = in_array($user->habilete_id, $outputArray[$demande->habilete_position]);
+
       return [
          'demande' => $demande,
          'circuit' => $habiletes_array,
