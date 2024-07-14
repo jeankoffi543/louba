@@ -13,6 +13,7 @@ use App\Http\Controllers\HolyDayController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PieceJointeController;
 use App\Http\Controllers\PointenrollementController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ReclammationController;
@@ -275,3 +276,11 @@ Route::post('suivreMesDocuments', [demandeController::class, 'suivreMesDocuments
 
 
 Route::get('tableau-chart', [TableauController::class, 'get4adminChart'])->name('tableau_chart');
+
+Route::prefix('piece_jointes')->middleware('CheckHabiletesPermissions:possibilite-ajouter-document')->group(function () {
+    Route::get('/', [PieceJointeController::class, 'index'])->name('piece_jointes');
+    Route::post('/', [PieceJointeController::class, 'store'])->name('piece_jointes.store');
+    Route::put('/{id}', [PieceJointeController::class, 'update'])->name('piece_jointes.update');
+    Route::get('/{id}', [PieceJointeController::class, 'destroy'])->name('piece_jointes.delete');
+    Route::get('/add/{id}', [PieceJointeController::class, 'add'])->name('piece_jointes.add');
+});

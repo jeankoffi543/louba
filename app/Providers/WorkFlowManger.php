@@ -45,11 +45,11 @@ class WorkFlowManger
             return  Demande::whereIn('id', $demandes)
                ->where('id_point_enrolement', $user->id_point_enrolement)
                ->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED'])
-               ->with('product', 'service', 'client', 'point_enrolement')->get();
+               ->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
          } else {
             $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED']);
          }
-         $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement');
+         $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
       }
       return $demandes->get();
    }
