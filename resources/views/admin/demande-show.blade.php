@@ -45,10 +45,13 @@
 
                      <div class="d-flex flex-row align-items-center gap-1">
                          @if ($isOwner)
-                             @kcan('gestion-demandes')
-                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTransmettre">
-                                     Transmettre</button>
-                             @endkcan
+                             @if ($workflowStatus !== 'END_OF_WORKFLOW')
+
+                                 @kcan('gestion-demandes')
+                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTransmettre">
+                                         Transmettre</button>
+                                 @endkcan
+                             @endif
                              @kcan('possibilite-rejeter-dossier')
                                  <a class="btn btn-danger"
                                      href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'REJECTED']) }}">
@@ -342,11 +345,14 @@
                                  La demande sera transféré au groupe:
                              </div>
                              <div class="col-12 text-wrap gap-2">
-                                 @foreach ($circuit[intval($demande->habilete_position) + 1] as $hab)
-                                     <div class="badge p-1" style="background-color: {{ $colors[array_rand($colors)] }}">
-                                         {{ $hab->libelle }}
-                                     </div>
-                                 @endforeach
+                                 @if ($workflowStatus !== 'END_OF_WORKFLOW')
+                                     @foreach ($circuit[intval($demande->habilete_position) + 1] as $hab)
+                                         <div class="badge p-1"
+                                             style="background-color: {{ $colors[array_rand($colors)] }}">
+                                             {{ $hab->libelle }}
+                                         </div>
+                                     @endforeach
+                                 @endif
                              </div>
                          </div>
 
