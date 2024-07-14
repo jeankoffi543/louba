@@ -45,8 +45,7 @@
 
                      <div class="d-flex flex-row align-items-center gap-1">
                          @if ($isOwner)
-                             @if ($workflowStatus !== 'END_OF_WORKFLOW')
-
+                             @if ($workflowStatus !== 'END_OF_WORKFLOW' && $demande->status_demande !== 'SUSPENDED')
                                  @kcan('gestion-demandes')
                                      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTransmettre">
                                          Transmettre</button>
@@ -58,8 +57,22 @@
                                      Rejéter</a>
                              @endkcan
                              @kcan('possibilite-suspendre-dossier')
-                                 <a class="btn btn-warning" href="{{ route('demande.show', $demande->id) }}"> Suspendre</a>
+                                 @if ($demande->status_demande !== 'SUSPENDED')
+                                     <a class="btn btn-warning"
+                                         href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'SUSPENDED']) }}">
+                                         Suspendre</a>
+                                 @endif
                              @endkcan
+
+                             @kcan('possibilite-de-rapeller-dossier-suspendu')
+                                 @if ($demande->status_demande === 'SUSPENDED')
+                                     <a class="btn btn-success"
+                                         href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'RECALLED_SUSPENDED']) }}">
+                                         Rappeller</a>
+                                 @endif
+                             @endkcan
+
+
                              @kcan('possibilite-ajouter-document')
                                  <a class="btn btn-secondary" href="{{ route('demande.show', $demande->id) }}"> Ajouter doc</a>
                              @endkcan

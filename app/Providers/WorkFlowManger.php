@@ -12,6 +12,25 @@ use Illuminate\Support\Facades\DB;
 
 class WorkFlowManger
 {
+   public function userCan($permission)
+    {
+      $permission = explode(',', $permission);
+        $checker = false;
+        $user = auth()->user();
+        if ($user->id_role === 1) return true;
+        if ($user->id_role && $user->id_role === 4) {
+            if ($user) {
+                $habilete = Habilete::where('id', $user->habilete_id)->with('permissions')->first()->permissions->pluck('libelle');
+                // $habilete = Habilete::where('id', 3)->with('permissions')->first()->permissions->pluck('libelle')->toArray();
+            if (count(array_intersect($permission, $habilete->toArray())) > 0) {
+                    $checker = true;
+                }
+            }
+        }
+        if( !$checker ) abort(404, 'Forbidden');
+        return $checker;
+    }
+
    public function getDemandeByHabilete(?User $user, ?string $status = null): ?\Illuminate\Database\Eloquent\Collection
    {
       $demandes = Demande::query();
@@ -37,6 +56,7 @@ class WorkFlowManger
 
    public function tranmettreDemande($id, $type)
    {
+      $this->userCan('gestion-demandes,consulter-demande');
       $demandeId = $id;
       // Check if not end
       $demande = Demande::find($id);
@@ -73,7 +93,7 @@ class WorkFlowManger
       }
 
       if ($type && $isOwner) {
-         if ($type === 'TRANSMITTED' && $workflowStatus !== 'END_OF_WORKFLOW') {
+         if ($type === 'TRANSMITTED' && $workflowStatus !== 'END_OF_WORKFLOW' && $this->userCan('gestion-demandes')) {
             $habiletes = $habiletes_array[$habilete_position]->pluck('id')->toArray();
     
             foreach ($habiletes as $item) {
@@ -111,7 +131,7 @@ class WorkFlowManger
             $traitement->user_id = $user->id;
             $traitement->action = 'TRANSMITTED';
             $traitement->save();
-         } else if ($type === 'REJECTED' && $habilete_position > 0) {
+         } else if ($type === 'REJECTED' && $habilete_position > 0 && $this->userCan('possibilite-rejeter-dossier')) {
             $habiletes = $habiletes_array[$habilete_position]->pluck('id')->toArray();
             foreach ($habiletes as $item) {
                $IndexTraitement = IndexTraitement::where('habilete_id', $item);
@@ -142,6 +162,12 @@ class WorkFlowManger
 
             $demande->habilete_position = intval($demande->habilete_position) - 1;
             $demande->status_demande = 'REJECTED';
+            $demande->save();
+         }else if($type === "SUSPENDED" && $this->userCan('possibilite-suspendre-dossier')){
+            $demande->status_demande = 'SUSPENDED';
+            $demande->save();
+         }else if($type === "RECALLED_SUSPENDED" && $this->userCan('possibilite-de-rapeller-dossier-suspendu')){
+            $demande->status_demande = 'PENDDING';
             $demande->save();
          }
       }
