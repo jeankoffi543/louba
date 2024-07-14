@@ -28,7 +28,7 @@ class WorkFlowManger
                ->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED'])
                ->with('product', 'service', 'client', 'point_enrolement')->get();
          } else {
-            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED']);
+            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED']);
          }
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement');
       }
