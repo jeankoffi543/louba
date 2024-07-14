@@ -46,9 +46,8 @@
                      <div class="d-flex flex-row align-items-center gap-1">
                          @if ($isOwner)
                              @kcan('gestion-demandes')
-                                 <a class="btn btn-primary"
-                                     href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'TRANSMITTED']) }}">
-                                     Transmettre</a>
+                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTransmettre">
+                                     Transmettre</button>
                              @endkcan
                              @kcan('possibilite-rejeter-dossier')
                                  <a class="btn btn-danger"
@@ -327,6 +326,46 @@
                      </div>
                  </div>
          </section>
+
+         {{-- Modal start --}}
+         <div class="modal fade" id="modalTransmettre" tabindex="-1">
+             <div class="modal-dialog modal-dialog-scrollable">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title">Tranfert de demande</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+
+                         <div class="row mb-3">
+                             <div class="col-12">
+                                 La demande sera transféré au groupe:
+                             </div>
+                             <div class="col-12 text-wrap gap-2">
+                                 @foreach ($circuit[intval($demande->habilete_position) + 1] as $hab)
+                                     <div class="badge p-1" style="background-color: {{ $colors[array_rand($colors)] }}">
+                                         {{ $hab->libelle }}
+                                     </div>
+                                 @endforeach
+                             </div>
+                         </div>
+
+
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                         <a type="submit"
+                             href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'TRANSMITTED']) }}"
+                             class="btn btn-primary">Valider</a>
+                     </div>
+
+
+
+
+                 </div>
+             </div>
+         </div>
+         <!-- End Modal Dialog Scrollable-->
 
      </main><!-- End #main -->
 
