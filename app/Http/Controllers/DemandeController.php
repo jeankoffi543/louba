@@ -20,7 +20,7 @@ class DemandeController extends Controller
     {
         $workFlow = WorkFlow::tranmettreDemande($id, request('type'));
 
-        if($workFlow['demande']->status_demande === "REJECTED" && !$workFlow['isOwner']) 
+        if(/* $workFlow['demande']->status_demande === "REJECTED" && !$workFlow['isOwner'] */ request('type') === 'REJECTED' || request('type') === 'TRANSMITTED') 
         return redirect()->action([DemandeController::class, 'get4admin']);
 
         return view('admin.demande-show', $workFlow);
