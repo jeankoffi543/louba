@@ -46,4 +46,8 @@ class Demande extends Model
         return $this->belongsTo(Service::class, 'id_service');
     }
 
+    public function piece_jointes()
+    {
+        return $this->hasMany(PieceJointe::class, 'demande_id', 'id');
+    }
 }

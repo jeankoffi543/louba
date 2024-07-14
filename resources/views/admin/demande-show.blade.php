@@ -74,7 +74,8 @@
 
 
                              @kcan('possibilite-ajouter-document')
-                                 <a class="btn btn-secondary" href="{{ route('demande.show', $demande->id) }}"> Ajouter doc</a>
+                                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalAjouterDoc">
+                                     Ajouter doc</button>
                              @endkcan
                              @kcan('possibilite-changer-date-rendez-vous')
                                  <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Modifier date RDV</a>
@@ -322,7 +323,6 @@
                              <h1>Documents</h1>
                              <hr class="line bottom-3">
                          </div>
-
                          <div class="container">
                              <div class="row">
                                  <div class="col-3 fw-bold">
@@ -334,7 +334,30 @@
                              </div>
 
                              <div class="row">
+                                 @if (count($demande->piece_jointes) > 0)
+                                     @foreach ($demande->piece_jointes as $piece_jointe)
+                                         <div class="col-3 fw-bold">
+                                             {{ $piece_jointe->libelle }} :
+                                         </div>
+                                         <div class="col-9">
+                                             <div class="d-flex flex-row gap-2 align-items-center">
 
+                                                 <div class="d-flex flex-column">
+                                                     @if ($piece_jointe->url !== null && count(explode(',', $piece_jointe->url)) > 0)
+                                                         @foreach (explode(',', $piece_jointe->url) as $i => $url)
+                                                             <a href="{{ asset($url) }}"
+                                                                 target="_blank">{{ $piece_jointe->libelle }}
+                                                                 {{ $i + 1 }}</a>
+                                                         @endforeach
+                                                     @endif
+                                                 </div>
+                                                 <a
+                                                     href="{{ route('piece_jointes.delete', ['id' => $piece_jointe->id]) }}"><i
+                                                         class="bi bi-trash"></i></a>
+                                             </div>
+                                         </div>
+                                     @endforeach
+                                 @endif
 
                              </div>
                          </div>
@@ -384,6 +407,55 @@
                  </div>
              </div>
          </div>
+
+         <form method="POST" action="{{ route('piece_jointes.store') }}" enctype="multipart/form-data">
+             @csrf
+
+             <div class="modal fade" id="modalAjouterDoc" tabindex="-1">
+                 <div class="modal-dialog modal-dialog-scrollable">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title">Ajouter une pièce jointe</h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                 aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+
+                             <input name="demande_id" type="hidden" value="{{ $demande->id }}">
+
+                             <div class="row mb-3 g-2">
+                                 <div class="col-12 col-lg-6 text-wrap gap-2">
+                                     <label for="url">Selectioner des pèces jointes </label>
+                                 </div>
+                                 <div class="col-12 col-lg-6 text-wrap gap-2">
+                                     <input id="url" type="file" name="url[]" accept=".jpg, .png, .pdf"
+                                         multiple required>
+                                 </div>
+
+                                 <div class="col-12 col-lg-6 text-wrap gap-2">
+                                     <label for="libelle">Libellé </label>
+                                 </div>
+                                 <div class="col-12 col-lg-6 text-wrap gap-2">
+                                     <input id="libelle" type="text" name="libelle" required>
+                                 </div>
+
+                             </div>
+
+
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                             <button type="submit" class="btn btn-primary">Valider</button>
+                         </div>
+
+
+
+
+                     </div>
+                 </div>
+             </div>
+         </form>
+
          <!-- End Modal Dialog Scrollable-->
 
      </main><!-- End #main -->
