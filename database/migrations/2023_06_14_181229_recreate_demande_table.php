@@ -26,7 +26,7 @@ class RecreateDemandeTable extends Migration
             $table->unsignedBigInteger('id_client');
             $table->dateTime('date_rdv_demande');
             $table->dateTime('date_traitement_demande')->nullable()->default(null);
-            $table->enum('status_demande', ['NEW','REJECTED','PENDING_PAY','CLOSED','PENDDING','OPEN','SUSPENDED'])->default("NEW");
+            $table->enum('status_demande', ['NEW','REJECTED','PENDING_PAY','CLOSED','PENDDING','OPEN','SUSPENDED', 'RESETTED'])->default("NEW");
             $table->string('raison_status')->nullable()->default(null);
             $table->string('type_request')->nullable()->default(null);
             $table->unsignedBigInteger('id_product');

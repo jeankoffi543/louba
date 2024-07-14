@@ -13,6 +13,10 @@ if (!function_exists('formatStatus')) {
             $demande = "Rejeté";
             $color = "#e55039";
             break;
+            case "RESETTED":
+               $demande = "Réinitialisé";
+               $color = "#e55009";
+               break;
          case "CANCELED":
             $demande = "Annulé";
             $color = "#3498db";
