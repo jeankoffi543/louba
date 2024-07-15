@@ -38,16 +38,17 @@ class WorkFlowManger
          $demandes = IndexTraitement::where('habilete_id', $user->habilete_id)
             ->join('demande', 'demande.id', '=', 'index_traitement.id_demande')
             ->where('id_point_enrolement', $user->id_point_enrolement);
+
          if ($status && $status === "REJECTED") $demandes = $demandes->where('status_demande', $status);
          else if ($status && $status === "TRANSMITTED") {
             $demandes = Traitement::select('id_demande')->where('habilete_id', $user->habilete_id)->groupBy('id_demande')->get()->pluck('id_demande')->toArray();
 
             return  Demande::whereIn('id', $demandes)
                ->where('id_point_enrolement', $user->id_point_enrolement)
-               ->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED'])
+               ->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED'])
                ->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
          } else {
-            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED']);
+            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW']);
          }
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
       }

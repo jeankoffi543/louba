@@ -325,15 +325,16 @@
                          </div>
                          <div class="container">
                              <div class="row">
-                                 <div class="col-3 fw-bold">
-                                     Document 1
+                                 <div class="col-12">
+                                     <a href="{{ asset($demande->avatar_url) }}" target="_blank">Document 1</a>
                                  </div>
-                                 <div class="col-9">
-                                     <img src="{{ $demande->avatar_url }}" alt="{{ $demande->code_demande ?? '' }}">
-                                 </div>
+
+                                 <div class="col-12">
+                                    <a href="{{ asset($demande->document_url) }}" target="_blank">Document 2</a>
+                                </div>
                              </div>
 
-                             <div class="row">
+                             <div class="row my-1">
                                  @if (count($demande->piece_jointes) > 0)
                                      @foreach ($demande->piece_jointes as $piece_jointe)
                                          <div class="col-3 fw-bold">
