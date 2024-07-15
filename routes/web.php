@@ -87,6 +87,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [demandeController::class, 'get4admin'])->name('demande')->middleware('CheckHabiletesPermissions:gestion-demandes');
         Route::post('/', [demandeController::class, 'search4admin'])->name('demandeSearch')->middleware('CheckHabiletesPermissions:gestion-demandes');
         Route::get('/{id}', [demandeController::class, 'show'])->name('demande.show')->middleware('CheckHabiletesPermissions:consulter-demande,gestion-demandes');
+
+        Route::post('/manage', [demandeController::class, 'manage'])->name('demande.manage')->middleware('CheckHabiletesPermissions:gestion-demandes');
+
     });
 
     Route::prefix('productionDocument')->group(function () {

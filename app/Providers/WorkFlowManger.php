@@ -8,6 +8,7 @@ use App\Models\Habilete;
 use App\Models\IndexTraitement;
 use App\Models\Traitement;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class WorkFlowManger
@@ -186,5 +187,16 @@ class WorkFlowManger
          'isTransmitted' => $isTransmitted,
          'isOwner' => $isOwner,
       ];
+   }
+
+   public function manage(Request $request)
+   {
+      if($request->request_type === "ajouter-numero-recepisse" && $this->userCan("ajouter-numero-recepisse")){
+         $demande = Demande::where('id', $request->demande_id)->first();
+         $demande->recepice_number = $request->recepice_number;
+         $demande->save();
+      }else{
+         abort(404, 'Forbidden');
+      }
    }
 }
