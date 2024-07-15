@@ -290,29 +290,41 @@ class ClientController extends Controller
 
             if ($request->hasFile("document1")) {
 
-                $uploadedFiles = $request->allFiles();
+                $document1 = $request->file('document1');
                 $validFiles = true; // Indicateur pour vérifier si tous les fichiers sont valides
-
-                foreach ($uploadedFiles as $key => $file) {
-                    $extension = $file->getClientOriginalExtension();
+                if (is_array($document1) && count($document1) > 0) {
+                    foreach ($document1 as $key => $file) {
+                        $extension = $file->getClientOriginalExtension();
+                        $uuid = (string)Str::uuid() . '.' . $extension;
+                        $file->storeAs('public/documents/', $uuid);
+                        $demande->document_url = Storage::url('documents/' . $uuid);
+                    }
+                } else {
+                    $extension = $document1->getClientOriginalExtension();
                     $uuid = (string)Str::uuid() . '.' . $extension;
-                    $file->storeAs('public/documents/', $uuid);
+                    $document1->storeAs('public/documents/', $uuid);
                     $demande->document_url = Storage::url('documents/' . $uuid);
                 }
             }
             if ($request->hasFile("document2")) {
 
-                $uploadedFiles = $request->allFiles();
-
-                foreach ($uploadedFiles as $key => $file) {
-                    $extension = $file->getClientOriginalExtension();
+                $document2 = $request->file('document2');
+                if (is_array($document2) && count($document2) > 0) {
+                    foreach ($document2 as $key => $file) {
+                        $extension = $file->getClientOriginalExtension();
+                        $uuid = (string)Str::uuid() . '.' . $extension;
+                        /** @var UploadedFile $file */
+                        $file->storeAs('public/clients/', $uuid);
+                        $demande->avatar_url = Storage::url('clients/' . $uuid);
+                    }
+                }else{
+                    $extension = $document2->getClientOriginalExtension();
                     $uuid = (string)Str::uuid() . '.' . $extension;
                     /** @var UploadedFile $file */
-                    $file->storeAs('public/clients/', $uuid);
+                    $document2->storeAs('public/clients/', $uuid);
                     $demande->avatar_url = Storage::url('clients/' . $uuid);
                 }
             }
-
 
             $demande->save();
 
