@@ -421,4 +421,10 @@ class DemandeController extends Controller
 
         return redirect('/demande');
     }
+
+    public function manage(Request $request)
+    {
+        WorkFlow::manage($request);
+        return redirect()->route('demande.show', ['id' => $request->demande_id])->with('success_message', 'Enregistrée avec succès.');
+    }
 }
