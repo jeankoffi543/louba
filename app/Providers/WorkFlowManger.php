@@ -14,23 +14,23 @@ use Illuminate\Support\Facades\DB;
 class WorkFlowManger
 {
    public function userCan($permission)
-    {
+   {
       $permission = explode(',', $permission);
-        $checker = false;
-        $user = auth()->user();
-        if ($user->id_role === 1) return true;
-        if ($user->id_role && $user->id_role === 4) {
-            if ($user) {
-                $habilete = Habilete::where('id', $user->habilete_id)->with('permissions')->first()->permissions->pluck('libelle');
-                // $habilete = Habilete::where('id', 3)->with('permissions')->first()->permissions->pluck('libelle')->toArray();
+      $checker = false;
+      $user = auth()->user();
+      if ($user->id_role === 1) return true;
+      if ($user->id_role && $user->id_role === 4) {
+         if ($user) {
+            $habilete = Habilete::where('id', $user->habilete_id)->with('permissions')->first()->permissions->pluck('libelle');
+            // $habilete = Habilete::where('id', 3)->with('permissions')->first()->permissions->pluck('libelle')->toArray();
             if (count(array_intersect($permission, $habilete->toArray())) > 0) {
-                    $checker = true;
-                }
+               $checker = true;
             }
-        }
-        if( !$checker ) abort(404, 'Forbidden');
-        return $checker;
-    }
+         }
+      }
+      if (!$checker) abort(404, 'Forbidden');
+      return $checker;
+   }
 
    public function getDemandeByHabilete(?User $user, ?string $status = null): ?\Illuminate\Database\Eloquent\Collection
    {
@@ -46,10 +46,17 @@ class WorkFlowManger
 
             return  Demande::whereIn('id', $demandes)
                ->where('id_point_enrolement', $user->id_point_enrolement)
-               ->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED'])
+               ->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'CLOSED'])
+               ->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
+         } else if ($status && $status === "CLOSED") {
+            $demandes = Traitement::select('id_demande')->where('habilete_id', $user->habilete_id)->groupBy('id_demande')->get()->pluck('id_demande')->toArray();
+
+            return  Demande::whereIn('id', $demandes)
+               ->where('id_point_enrolement', $user->id_point_enrolement)
+               ->whereIn('status_demande', ['CLOSED'])
                ->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
          } else {
-            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW']);
+            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW', 'CLOSED']);
          }
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
       }
@@ -97,7 +104,7 @@ class WorkFlowManger
       if ($type && $isOwner) {
          if ($type === 'TRANSMITTED' && $workflowStatus !== 'END_OF_WORKFLOW' && $this->userCan('gestion-demandes')) {
             $habiletes = $habiletes_array[$habilete_position]->pluck('id')->toArray();
-    
+
             foreach ($habiletes as $item) {
                $IndexTraitement = IndexTraitement::where('habilete_id', $item);
                if ($IndexTraitement) $IndexTraitement->delete();
@@ -165,10 +172,10 @@ class WorkFlowManger
             $demande->habilete_position = intval($demande->habilete_position) - 1;
             $demande->status_demande = 'REJECTED';
             $demande->save();
-         }else if($type === "SUSPENDED" && $this->userCan('possibilite-suspendre-dossier')){
+         } else if ($type === "SUSPENDED" && $this->userCan('possibilite-suspendre-dossier')) {
             $demande->status_demande = 'SUSPENDED';
             $demande->save();
-         }else if($type === "RECALLED_SUSPENDED" && $this->userCan('possibilite-de-rapeller-dossier-suspendu')){
+         } else if ($type === "RECALLED_SUSPENDED" && $this->userCan('possibilite-de-rapeller-dossier-suspendu')) {
             $demande->status_demande = 'PENDDING';
             $demande->save();
          }
@@ -193,14 +200,16 @@ class WorkFlowManger
    {
       $demande = Demande::where('id', $request->demande_id)->first();
 
-      if($request->request_type === "ajouter-numero-recepisse" && $this->userCan("ajouter-numero-recepisse")){
+      if ($request->request_type === "ajouter-numero-recepisse" && $this->userCan("ajouter-numero-recepisse")) {
          $demande->recepice_number = $request->recepice_number;
          $demande->save();
-      }else if($request->request_type === "ajouter-numero-document" && $this->userCan("ajouter-numero-document")){
+      } else if ($request->request_type === "ajouter-numero-document" && $this->userCan("ajouter-numero-document")) {
          $demande->numero_document = $request->numero_document;
-         $demande->save();         
-      }
-      else{
+         $demande->save();
+      } else if ($request->request_type === "acquittement-delivrance-document" && $this->userCan("acquittement-delivrance-document")) {
+         $demande->status_demande = "CLOSED";
+         $demande->save();
+      } else {
          abort(404, 'Forbidden');
       }
    }

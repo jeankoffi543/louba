@@ -377,6 +377,14 @@ echo $nextday;
                                 <span>demandes transmises</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('demande') && request()->query('status') === 'CLOSED' ? 'text-danger' : '' }}"
+                                href="{{ route('demande', ['status' => 'CLOSED']) }}">
+                                <i class="bi bi-menu-button-wide"></i>
+                                <span>demandes traitées</span>
+                            </a>
+                        </li>
                     @endkcan
                 @endif
             @endif
