@@ -88,9 +88,11 @@
                                  </button>
                              @endkcan
 
-                             @kcan('Ajouter numéro document')
-                                 <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Ajouter Num.
-                                     Document</a>
+                             @kcan('ajouter-numero-document')
+                                 <button class="btn btn-secondary" data-bs-toggle="modal"
+                                     data-bs-target="#ajouterNumeroDocument">
+                                     Ajouter numéro document
+                                 </button>
                              @endkcan
                          @endif
 
@@ -215,7 +217,16 @@
                                      {{ $demande->code_demande ?? '-' }}
                                  </div>
                              </div>
-                             
+
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Numéro document
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->numero_document ?? '-' }}
+                                 </div>
+                             </div>
+
                              <div class="row">
                                  <div class="col-3 fw-bold">
                                      Recepisse
@@ -226,13 +237,13 @@
                              </div>
 
                              <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Numéro du reçu
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->numero_recu ?? '-' }}
-                                </div>
-                            </div>
+                                 <div class="col-3 fw-bold">
+                                     Numéro du reçu
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->numero_recu ?? '-' }}
+                                 </div>
+                             </div>
 
                              <div class="row">
                                  <div class="col-3 fw-bold">
@@ -527,6 +538,46 @@
                  </div>
              </div>
          </form>
+
+         <form method="POST" action="{{ route('demande.manage') }}">
+            @csrf
+
+            <div class="modal fade" id="ajouterNumeroDocument" tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ajouter numéro document</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <input name="demande_id" type="hidden" value="{{ $demande->id }}">
+                            <input name="request_type" type="hidden" value="ajouter-numero-document">
+
+                            <div class="row mb-3 g-2">
+                                <div class="col-12 col-lg-6 text-wrap gap-2">
+                                    <label for="numero_document">Numéro du document </label>
+                                </div>
+                                <div class="col-12 col-lg-6 text-wrap gap-2">
+                                    <input id="numero_document" type="text" name="numero_document">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
          <!-- End Modal Dialog Scrollable-->
 
      </main><!-- End #main -->
