@@ -55,9 +55,15 @@ class WorkFlowManger
                ->where('id_point_enrolement', $user->id_point_enrolement)
                ->whereIn('status_demande', ['CLOSED'])
                ->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
+         } else if ($status && $status === "PRODUCED") {
+
+            $demandes = $demandes->where('production_disponible', 1)->where('id_point_enrolement', $user->id_point_enrolement);
          } else {
-            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW', 'CLOSED']);
+            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW', 'CLOSED'])->where('id_point_enrolement', $user->id_point_enrolement);
          }
+         $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
+      } else {
+         $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW', 'CLOSED']);
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
       }
       return $demandes->get();
