@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Demande;
 use App\Models\Habilete;
 use App\Facades\Manager as WorkFlow;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DemandeController extends Controller
 {
@@ -20,8 +22,8 @@ class DemandeController extends Controller
     {
         $workFlow = WorkFlow::tranmettreDemande($id, request('type'));
 
-        if(/* $workFlow['demande']->status_demande === "REJECTED" && !$workFlow['isOwner'] */ request('type') === 'REJECTED' || request('type') === 'TRANSMITTED') 
-        return redirect()->action([DemandeController::class, 'get4admin']);
+        if (/* $workFlow['demande']->status_demande === "REJECTED" && !$workFlow['isOwner'] */request('type') === 'REJECTED' || request('type') === 'TRANSMITTED')
+            return redirect()->action([DemandeController::class, 'get4admin']);
 
         return view('admin.demande-show', $workFlow);
     }
@@ -35,52 +37,94 @@ class DemandeController extends Controller
     // ------------------------------------------------------------
     public static function postFichierproduction(Request $request)
     {
+        $data = $request->all();
+        $rules = [
+            'document1' => 'required|mimes:csv',
+        ];
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->fails()) return redirect('/404');
+
         $file1 = $request->file('document1');
 
-        if (in_array($file1->getClientOriginalExtension(), ['php']))
-            return redirect('/404');
+        // if (in_array($file1->getClientOriginalExtension(), ['php']))
+        $now = new DateTime();
+        $now = $now->format('YmdHis');
 
-        $namefile1 = time() . '-' . $file1->getClientOriginalName();
+        $namefile1 = $now . '-' . $file1->getClientOriginalName();
         $destinationPath = 'uploads';
         $file1->move($destinationPath, $namefile1);
 
         $nbredoc_importer = 0;
-        $nbredoc_total = -1;
+        $nbredoc_total = 0;
+        $file = "uploads/" . $namefile1;
+        $rows = [];
+        if (($open = fopen($file, "r")) !== FALSE) {
+            $i = 0;
+            // while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+            //     $rows[] = $data;
+            //     $row = implode(', ', $data) . "<br>";
+            //     if($i == 2) dd($rows);
+            //     $i++;
+            //     $importations = DB::table('importation_document')->get();
+            //     $ligne_email = 0;
+            //     $ligne_code_document = 2;
+            //     //echo $data[$ligne_email]."<br>";
 
-        if (($open = fopen("uploads/" . $namefile1, "r")) !== FALSE) {
-            while (($data = fgetcsv($open, 1000, ";")) !== FALSE) {
-                $importations = DB::table('importation_document')->get();
-                $ligne_email = 0;
-                $ligne_code_document = 2;
-                //echo $data[$ligne_email]."<br>";
+            //     $demandes = DB::table('demande')
+            //         ->where('code_demande', $data[$ligne_code_document])
+            //         ->join('point_enrolement', 'point_enrolement.id_pe', '=', 'demande.id_point_enrolement')
+            //         ->join('client', 'client.id', '=', 'demande.id_client')
+            //         ->get();
 
+            //     $demandei = DB::table('demande')
+            //         ->where('code_demande', $data[$ligne_code_document])
+            //         ->join('point_enrolement', 'point_enrolement.id_pe', '=', 'demande.id_point_enrolement')
+            //         ->join('client', 'client.id', '=', 'demande.id_client')
+            //         ->first();
 
-                $demandes = DB::table('demande')
-                    ->where('code_demande', $data[$ligne_code_document])
-                    ->join('point_enrolement', 'point_enrolement.id_pe', '=', 'demande.id_point_enrolement')
-                    ->join('client', 'client.id', '=', 'demande.id_client')
-                    ->get();
+            //     $nbredoc_total++;
 
-                $demandei = DB::table('demande')
-                    ->where('code_demande', $data[$ligne_code_document])
-                    ->join('point_enrolement', 'point_enrolement.id_pe', '=', 'demande.id_point_enrolement')
-                    ->join('client', 'client.id', '=', 'demande.id_client')
-                    ->first();
+            //     if ($demandes->count() > 0) {
+            //         $nbredoc_importer++;
 
-                $nbredoc_total++;
+            //         DB::table('demande')
+            //             ->where('code_demande', $data[$ligne_code_document])
+            //             ->update([
+            //                 'production_disponible' => 1,
+            //                 'date_production' => date('Y-m-d'),
+            //                 'fichier' => $namefile1,
+            //             ]);
 
-                if ($demandes->count() > 0) {
-                    $nbredoc_importer++;
+            //         $message_sms = "Votre document No [" . $data[$ligne_code_document] . "] est disponible, passez le recuperer au point d enrollement " . $demandei->nom_pe;
 
-                    DB::table('demande')
-                        ->where('code_demande', $data[$ligne_code_document])
-                        ->update([
-                            'production_disponible' => 1,
-                            'date_production' => date('Y-m-d'),
-                            'fichier' => $namefile1,
-                        ]);
+            //         $curl = new \GuzzleHttp\Client();
+            //         $url = "https://smswanwaran.com/index.php";
+            //         $response = $curl->request('GET', $url, ['query' => [
+            //             'app' => "ws",
+            //             'u' => "theonemonk",
+            //             "from" => "LOUBA",
+            //             'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d",
+            //             'op' => "pv",
+            //             'to' => "224" . $demandei->telephone_client,
+            //             'msg' => $message_sms,
+            //         ]]);
+            //     }
+            // }
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+                if ($nbredoc_total > 0) $rows[] = $data;
 
-                    $message_sms = "Votre document No [" . $data[$ligne_code_document] . "] est disponible, passez le recuperer au point d enrollement " . $demandei->nom_pe;
+                $demande = Demande::where('numero_document', $data[0])
+                    ->update([
+                        'production_disponible' => 1,
+                        'date_production' => new DateTime(),
+                        'fichier' => $namefile1,
+                    ]);
+                    
+                    $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
+                if ($demande) {
+                    $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
+                    $message_sms = "Votre document du n° [" . $data[0] . "] est disponible, passez le recuperer au point d enrollement " . $demande->point_enrolement->nom_pe;
 
                     $curl = new \GuzzleHttp\Client();
                     $url = "https://smswanwaran.com/index.php";
@@ -90,10 +134,13 @@ class DemandeController extends Controller
                         "from" => "LOUBA",
                         'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d",
                         'op' => "pv",
-                        'to' => "224" . $demandei->telephone_client,
+                        'to' => "224" . $demande->client->telephone_client,
                         'msg' => $message_sms,
                     ]]);
+
+                    $nbredoc_importer++;
                 }
+                $nbredoc_total++;
             }
             fclose($open);
         }
@@ -104,6 +151,7 @@ class DemandeController extends Controller
                 'date' => date('Y-m-d'),
                 'message' => $nbredoc_importer . " Importé(s) sur " . $nbredoc_total,
                 'fichier' => $namefile1,
+                'date_register' => new DateTime(),
             ]);
 
         flash('Importation reussi avec succes');

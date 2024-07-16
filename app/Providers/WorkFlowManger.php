@@ -191,11 +191,16 @@ class WorkFlowManger
 
    public function manage(Request $request)
    {
+      $demande = Demande::where('id', $request->demande_id)->first();
+
       if($request->request_type === "ajouter-numero-recepisse" && $this->userCan("ajouter-numero-recepisse")){
-         $demande = Demande::where('id', $request->demande_id)->first();
          $demande->recepice_number = $request->recepice_number;
          $demande->save();
-      }else{
+      }else if($request->request_type === "ajouter-numero-document" && $this->userCan("ajouter-numero-document")){
+         $demande->numero_document = $request->numero_document;
+         $demande->save();         
+      }
+      else{
          abort(404, 'Forbidden');
       }
    }
