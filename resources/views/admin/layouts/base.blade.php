@@ -439,6 +439,16 @@ echo $nextday;
                 </li>
             @endkcan
 
+            @kcan('consulter-liste-de-production')
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('demande') && request()->query('status') === 'PRODUCED' ? 'text-danger' : '' }}"
+                    href="{{ route('demande', ['status' => 'PRODUCED']) }}">
+                    <i class="bi bi-menu-button-wide"></i>
+                    <span>document produits</span>
+                </a>
+            </li>
+        @endkcan
+
             @kcan('gestion-moyen-paiement')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('paiement') ? 'text-danger' : '' }}"

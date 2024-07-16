@@ -120,8 +120,8 @@ class DemandeController extends Controller
                         'date_production' => new DateTime(),
                         'fichier' => $namefile1,
                     ]);
-                    
-                    $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
+
+                $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
                 if ($demande) {
                     $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
                     $message_sms = "Votre document du n° [" . $data[0] . "] est disponible, passez le recuperer au point d enrollement " . $demande->point_enrolement->nom_pe;
@@ -474,5 +474,13 @@ class DemandeController extends Controller
     {
         WorkFlow::manage($request);
         return redirect()->route('demande.show', ['id' => $request->demande_id])->with('success_message', 'Enregistrée avec succès.');
+    }
+
+    public function getFichierProductionListe(Request $request)
+    {
+        $authUser = auth()->user();
+        return view('admin.demande', [
+            'demandes' => WorkFlow::getDemandeByHabilete($authUser, request('status')),
+        ]);
     }
 }

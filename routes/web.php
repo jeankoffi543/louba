@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('productionDocument')->group(function () {
         Route::post('/', [DemandeController::class, 'postFichierProduction'])->name('productionDocument_postFichierProduction');
         Route::get('/', [DemandeController::class, 'getFichierProduction']);
+        Route::get('/liste', [DemandeController::class, 'getFichierProductionListe'])->middleware('CheckHabiletesPermissions:consulter-liste-de-production');
     });
 
     Route::get('paiement', [PaiementController::class, 'index'])->name('paiement')->middleware('CheckHabiletesPermissions:gestion-moyen-paiement');

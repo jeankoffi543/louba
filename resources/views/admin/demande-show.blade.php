@@ -44,66 +44,75 @@
                  <div class="col-12 col-md-9">
 
                      <div class="d-flex flex-row align-items-center gap-1">
-                         @if ($isOwner)
-                             @if ($workflowStatus !== 'END_OF_WORKFLOW' && $demande->status_demande !== 'SUSPENDED')
-                                 @kcan('gestion-demandes')
-                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTransmettre">
-                                         Transmettre</button>
+                         @if (
+                             $demande->status_demande !== 'CLOSED' &&
+                                 $demande->production_disponible !== 1 &&
+                                 $demande->production_disponible !== true &&
+                                 $demande->production_disponible !== '1' &&
+                                 $demande->production_disponible !== 'true')
+                             @if ($isOwner)
+                                 @if ($workflowStatus !== 'END_OF_WORKFLOW' && $demande->status_demande !== 'SUSPENDED')
+                                     @kcan('gestion-demandes')
+                                         <button class="btn btn-primary" data-bs-toggle="modal"
+                                             data-bs-target="#modalTransmettre">
+                                             Transmettre</button>
+                                     @endkcan
+                                 @endif
+                                 @kcan('possibilite-rejeter-dossier')
+                                     <a class="btn btn-danger"
+                                         href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'REJECTED']) }}">
+                                         Rejéter</a>
                                  @endkcan
-                             @endif
-                             @kcan('possibilite-rejeter-dossier')
-                                 <a class="btn btn-danger"
-                                     href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'REJECTED']) }}">
-                                     Rejéter</a>
-                             @endkcan
-                             @kcan('possibilite-suspendre-dossier')
-                                 @if ($demande->status_demande !== 'SUSPENDED')
-                                     <a class="btn btn-warning"
-                                         href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'SUSPENDED']) }}">
-                                         Suspendre</a>
-                                 @endif
-                             @endkcan
+                                 @kcan('possibilite-suspendre-dossier')
+                                     @if ($demande->status_demande !== 'SUSPENDED')
+                                         <a class="btn btn-warning"
+                                             href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'SUSPENDED']) }}">
+                                             Suspendre</a>
+                                     @endif
+                                 @endkcan
 
-                             @kcan('possibilite-de-rapeller-dossier-suspendu')
-                                 @if ($demande->status_demande === 'SUSPENDED')
-                                     <a class="btn btn-success"
-                                         href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'RECALLED_SUSPENDED']) }}">
-                                         Rappeller</a>
-                                 @endif
-                             @endkcan
+                                 @kcan('possibilite-de-rapeller-dossier-suspendu')
+                                     @if ($demande->status_demande === 'SUSPENDED')
+                                         <a class="btn btn-success"
+                                             href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'RECALLED_SUSPENDED']) }}">
+                                             Rappeller</a>
+                                     @endif
+                                 @endkcan
 
 
-                             @kcan('possibilite-ajouter-document')
-                                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalAjouterDoc">
-                                     Ajouter doc</button>
-                             @endkcan
-                             @kcan('possibilite-changer-date-rendez-vous')
-                                 <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Modifier date RDV</a>
-                             @endkcan
+                                 @kcan('possibilite-ajouter-document')
+                                     <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalAjouterDoc">
+                                         Ajouter doc</button>
+                                 @endkcan
+                                 @kcan('possibilite-changer-date-rendez-vous')
+                                     <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Modifier date
+                                         RDV</a>
+                                 @endkcan
 
-                             @kcan('ajouter-numero-recepisse')
-                                 <button class="btn btn-secondary" data-bs-toggle="modal"
-                                     data-bs-target="#ajouterNumeroRecepisse">
-                                     Ajouter Recepisse
-                                 </button>
-                             @endkcan
-
-                             @kcan('ajouter-numero-document')
-                                 <button class="btn btn-secondary" data-bs-toggle="modal"
-                                     data-bs-target="#ajouterNumeroDocument">
-                                     Ajouter numéro document
-                                 </button>
-                             @endkcan
-
-                             @if ($workflowStatus === 'END_OF_WORKFLOW')
-                                 @kcan('acquittement-delivrance-document')
-                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#livrerDocument">
-                                         Livrer
+                                 @kcan('ajouter-numero-recepisse')
+                                     <button class="btn btn-secondary" data-bs-toggle="modal"
+                                         data-bs-target="#ajouterNumeroRecepisse">
+                                         Ajouter Recepisse
                                      </button>
                                  @endkcan
+
+                                 @kcan('ajouter-numero-document')
+                                     <button class="btn btn-secondary" data-bs-toggle="modal"
+                                         data-bs-target="#ajouterNumeroDocument">
+                                         Ajouter numéro document
+                                     </button>
+                                 @endkcan
+
+                                 @if ($workflowStatus === 'END_OF_WORKFLOW')
+                                     @kcan('acquittement-delivrance-document')
+                                         <button class="btn btn-success" data-bs-toggle="modal"
+                                             data-bs-target="#livrerDocument">
+                                             Livrer
+                                         </button>
+                                     @endkcan
+                                 @endif
                              @endif
                          @endif
-
                      </div>
                  </div>
              </div>
@@ -231,7 +240,7 @@
                                      Status de la demande
                                  </div>
                                  <div class="col-9">
-                                    {{ formatStatus($demande->status_demande)['label'] }}
+                                     {{ formatStatus($demande->status_demande)['label'] }}
                                  </div>
                              </div>
 
