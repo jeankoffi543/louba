@@ -94,6 +94,14 @@
                                      Ajouter numéro document
                                  </button>
                              @endkcan
+
+                             @if ($workflowStatus === 'END_OF_WORKFLOW')
+                                 @kcan('acquittement-delivrance-document')
+                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#livrerDocument">
+                                         Livrer
+                                     </button>
+                                 @endkcan
+                             @endif
                          @endif
 
                      </div>
@@ -215,6 +223,15 @@
                                  </div>
                                  <div class="col-9">
                                      {{ $demande->code_demande ?? '-' }}
+                                 </div>
+                             </div>
+
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Status de la demande
+                                 </div>
+                                 <div class="col-9">
+                                    {{ formatStatus($demande->status_demande)['label'] }}
                                  </div>
                              </div>
 
@@ -540,44 +557,80 @@
          </form>
 
          <form method="POST" action="{{ route('demande.manage') }}">
-            @csrf
+             @csrf
 
-            <div class="modal fade" id="ajouterNumeroDocument" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Ajouter numéro document</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
+             <div class="modal fade" id="ajouterNumeroDocument" tabindex="-1">
+                 <div class="modal-dialog modal-dialog-scrollable">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title">Ajouter numéro document</h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                 aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
 
-                            <input name="demande_id" type="hidden" value="{{ $demande->id }}">
-                            <input name="request_type" type="hidden" value="ajouter-numero-document">
+                             <input name="demande_id" type="hidden" value="{{ $demande->id }}">
+                             <input name="request_type" type="hidden" value="ajouter-numero-document">
 
-                            <div class="row mb-3 g-2">
-                                <div class="col-12 col-lg-6 text-wrap gap-2">
-                                    <label for="numero_document">Numéro du document </label>
-                                </div>
-                                <div class="col-12 col-lg-6 text-wrap gap-2">
-                                    <input id="numero_document" type="text" name="numero_document">
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Valider</button>
-                        </div>
+                             <div class="row mb-3 g-2">
+                                 <div class="col-12 col-lg-6 text-wrap gap-2">
+                                     <label for="numero_document">Numéro du document </label>
+                                 </div>
+                                 <div class="col-12 col-lg-6 text-wrap gap-2">
+                                     <input id="numero_document" type="text" name="numero_document">
+                                 </div>
+                             </div>
 
 
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                             <button type="submit" class="btn btn-primary">Valider</button>
+                         </div>
 
 
-                    </div>
-                </div>
-            </div>
-        </form>
+
+
+                     </div>
+                 </div>
+             </div>
+         </form>
+
+         @kcan('acquittement-delivrance-document')
+             <form method="POST" action="{{ route('demande.manage') }}">
+                 @csrf
+                 <div class="modal fade" id="livrerDocument" tabindex="-1">
+                     <div class="modal-dialog modal-dialog-scrollable">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h5 class="modal-title">Livrer le document</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                     aria-label="Close"></button>
+                             </div>
+                             <div class="modal-body">
+                                 <input type="hidden" id="demande_id" name="demande_id" value="{{ $demande->id }}">
+                                 <input type="hidden" id="request_type" name="request_type"
+                                     value="acquittement-delivrance-document">
+                                 <div class="row mb-3">
+                                     Vous êtes sur le de livrer ce document.
+                                     Confirmez-vous?
+                                 </div>
+
+
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                 <button type="submit" class="btn btn-primary">Valider</button>
+                             </div>
+
+
+
+
+                         </div>
+                     </div>
+                 </div>
+             </form>
+         @endkcan
          <!-- End Modal Dialog Scrollable-->
 
      </main><!-- End #main -->
