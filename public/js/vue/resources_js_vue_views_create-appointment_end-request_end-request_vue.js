@@ -287,29 +287,6 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         var _this$formDataRequest,
           _this$formDataRequest2,
           _this$formDataRequest3,
-          _this$formDataRequest4,
-          _this$formDataRequest5,
-          _this$formDataRequest6,
-          _this$formDataRequest7,
-          _this$formDataRequest8,
-          _this$formDataRequest9,
-          _this$formDataRequest10,
-          _this$formDataRequest11,
-          _this$formDataRequest12,
-          _this$formDataRequest13,
-          _this$formDataRequest14,
-          _this$formDataRequest15,
-          _this$formDataRequest16,
-          _this$formDataRequest17,
-          _this$formDataRequest18,
-          _this$formDataRequest19,
-          _this$formDataRequest20,
-          _this$formDataRequest21,
-          _this$formDataRequest22,
-          _this$formDataRequest23,
-          _this$formDataRequest24,
-          _this$formDataRequest25,
-          _this$formDataRequest26,
           _this2 = this;
         var payload, formData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -350,34 +327,11 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               };
               this.$store.dispatch('FORM_DATA_REQUEST', payload);
               formData = new FormData();
-              formData.append("document1", (_this$formDataRequest = this.formDataRequest.user) === null || _this$formDataRequest === void 0 ? void 0 : _this$formDataRequest.fileListPicture[0]);
-              formData.append("document2", (_this$formDataRequest2 = this.formDataRequest.user) === null || _this$formDataRequest2 === void 0 ? void 0 : _this$formDataRequest2.fileListBirthCertificate[0]);
               formData.append("date_rdv_demande", (0,date_fns__WEBPACK_IMPORTED_MODULE_6__.format)(new Date(this.dateAppointment), "yyyy-MM-dd"));
-              formData.append("id_type_document", (_this$formDataRequest3 = this.formDataRequest) === null || _this$formDataRequest3 === void 0 || (_this$formDataRequest3 = _this$formDataRequest3.product) === null || _this$formDataRequest3 === void 0 ? void 0 : _this$formDataRequest3.id);
+              formData.append("id_type_document", (_this$formDataRequest = this.formDataRequest) === null || _this$formDataRequest === void 0 || (_this$formDataRequest = _this$formDataRequest.product) === null || _this$formDataRequest === void 0 ? void 0 : _this$formDataRequest.id);
               formData.append("type_service_passport", null);
-              formData.append("id_type_service", (_this$formDataRequest4 = (_this$formDataRequest5 = this.formDataRequest) === null || _this$formDataRequest5 === void 0 || (_this$formDataRequest5 = _this$formDataRequest5.service) === null || _this$formDataRequest5 === void 0 ? void 0 : _this$formDataRequest5.id) !== null && _this$formDataRequest4 !== void 0 ? _this$formDataRequest4 : null);
+              formData.append("id_type_service", (_this$formDataRequest2 = (_this$formDataRequest3 = this.formDataRequest) === null || _this$formDataRequest3 === void 0 || (_this$formDataRequest3 = _this$formDataRequest3.service) === null || _this$formDataRequest3 === void 0 ? void 0 : _this$formDataRequest3.id) !== null && _this$formDataRequest2 !== void 0 ? _this$formDataRequest2 : null);
               formData.append("id_point_enrolement", this.siteAppointmentId);
-              formData.append("gender", (_this$formDataRequest6 = this.formDataRequest) === null || _this$formDataRequest6 === void 0 || (_this$formDataRequest6 = _this$formDataRequest6.user) === null || _this$formDataRequest6 === void 0 ? void 0 : _this$formDataRequest6.gender);
-              formData.append("nom", (_this$formDataRequest7 = this.formDataRequest) === null || _this$formDataRequest7 === void 0 || (_this$formDataRequest7 = _this$formDataRequest7.user) === null || _this$formDataRequest7 === void 0 ? void 0 : _this$formDataRequest7.lastname);
-              formData.append("prenom", (_this$formDataRequest8 = this.formDataRequest) === null || _this$formDataRequest8 === void 0 || (_this$formDataRequest8 = _this$formDataRequest8.user) === null || _this$formDataRequest8 === void 0 ? void 0 : _this$formDataRequest8.firstname);
-              formData.append("email", (_this$formDataRequest9 = this.formDataRequest) === null || _this$formDataRequest9 === void 0 || (_this$formDataRequest9 = _this$formDataRequest9.user) === null || _this$formDataRequest9 === void 0 ? void 0 : _this$formDataRequest9.email);
-              formData.append("telephone", (_this$formDataRequest10 = this.formDataRequest) === null || _this$formDataRequest10 === void 0 || (_this$formDataRequest10 = _this$formDataRequest10.user) === null || _this$formDataRequest10 === void 0 ? void 0 : _this$formDataRequest10.phone);
-              formData.append("nationality", (_this$formDataRequest11 = this.formDataRequest) === null || _this$formDataRequest11 === void 0 || (_this$formDataRequest11 = _this$formDataRequest11.user) === null || _this$formDataRequest11 === void 0 ? void 0 : _this$formDataRequest11.nationality);
-              formData.append("nationality_state", (_this$formDataRequest12 = this.formDataRequest) === null || _this$formDataRequest12 === void 0 || (_this$formDataRequest12 = _this$formDataRequest12.user) === null || _this$formDataRequest12 === void 0 ? void 0 : _this$formDataRequest12.nationality_state);
-              formData.append("profession", (_this$formDataRequest13 = this.formDataRequest) === null || _this$formDataRequest13 === void 0 || (_this$formDataRequest13 = _this$formDataRequest13.user) === null || _this$formDataRequest13 === void 0 ? void 0 : _this$formDataRequest13.profession);
-              formData.append("height", (_this$formDataRequest14 = this.formDataRequest) === null || _this$formDataRequest14 === void 0 || (_this$formDataRequest14 = _this$formDataRequest14.user) === null || _this$formDataRequest14 === void 0 ? void 0 : _this$formDataRequest14.height);
-              formData.append("complexion", (_this$formDataRequest15 = this.formDataRequest) === null || _this$formDataRequest15 === void 0 || (_this$formDataRequest15 = _this$formDataRequest15.user) === null || _this$formDataRequest15 === void 0 ? void 0 : _this$formDataRequest15.complexion);
-              formData.append("hair_color", (_this$formDataRequest16 = this.formDataRequest) === null || _this$formDataRequest16 === void 0 || (_this$formDataRequest16 = _this$formDataRequest16.user) === null || _this$formDataRequest16 === void 0 ? void 0 : _this$formDataRequest16.hair_color);
-              formData.append("eye_color", (_this$formDataRequest17 = this.formDataRequest) === null || _this$formDataRequest17 === void 0 || (_this$formDataRequest17 = _this$formDataRequest17.user) === null || _this$formDataRequest17 === void 0 ? void 0 : _this$formDataRequest17.eye_color);
-              formData.append("date_naissance", (0,date_fns__WEBPACK_IMPORTED_MODULE_6__.format)(new Date((_this$formDataRequest18 = this.formDataRequest) === null || _this$formDataRequest18 === void 0 || (_this$formDataRequest18 = _this$formDataRequest18.user) === null || _this$formDataRequest18 === void 0 ? void 0 : _this$formDataRequest18.dateOfBirth), "yyyy-MM-dd"));
-              formData.append("lieu_de_residence", (_this$formDataRequest19 = this.formDataRequest) === null || _this$formDataRequest19 === void 0 || (_this$formDataRequest19 = _this$formDataRequest19.user) === null || _this$formDataRequest19 === void 0 ? void 0 : _this$formDataRequest19.placeOfResidence);
-              formData.append("type_request", (_this$formDataRequest20 = this.formDataRequest) === null || _this$formDataRequest20 === void 0 ? void 0 : _this$formDataRequest20.typeRequest);
-              formData.append("type_request", (_this$formDataRequest21 = this.formDataRequest) === null || _this$formDataRequest21 === void 0 ? void 0 : _this$formDataRequest21.typeRequest);
-              formData.append("father_first_name", (_this$formDataRequest22 = this.formDataRequest) === null || _this$formDataRequest22 === void 0 || (_this$formDataRequest22 = _this$formDataRequest22.user) === null || _this$formDataRequest22 === void 0 ? void 0 : _this$formDataRequest22.father_firstname);
-              formData.append("father_last_name", (_this$formDataRequest23 = this.formDataRequest) === null || _this$formDataRequest23 === void 0 || (_this$formDataRequest23 = _this$formDataRequest23.user) === null || _this$formDataRequest23 === void 0 ? void 0 : _this$formDataRequest23.father_lastname);
-              formData.append("mother_first_name", (_this$formDataRequest24 = this.formDataRequest) === null || _this$formDataRequest24 === void 0 || (_this$formDataRequest24 = _this$formDataRequest24.user) === null || _this$formDataRequest24 === void 0 ? void 0 : _this$formDataRequest24.mother_firstname);
-              formData.append("mother_last_name", (_this$formDataRequest25 = this.formDataRequest) === null || _this$formDataRequest25 === void 0 || (_this$formDataRequest25 = _this$formDataRequest25.user) === null || _this$formDataRequest25 === void 0 ? void 0 : _this$formDataRequest25.mother_lastname);
-              formData.append("numero_recu", (_this$formDataRequest26 = this.formDataRequest) === null || _this$formDataRequest26 === void 0 || (_this$formDataRequest26 = _this$formDataRequest26.user) === null || _this$formDataRequest26 === void 0 ? void 0 : _this$formDataRequest26.numero_recu);
 
               // await this.$store.dispatch("SAVE_APPOINTMENT", formData)
               axios__WEBPACK_IMPORTED_MODULE_7__["default"].post("/api/save-appointment", formData).then(function (responseAxios) {
@@ -424,7 +378,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
                 console.log("err", err);
                 _this2.isLoadingSaveAppointment = false;
               })["finally"](function () {});
-            case 41:
+            case 18:
             case "end":
               return _context.stop();
           }

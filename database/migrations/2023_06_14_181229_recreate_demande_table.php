@@ -21,18 +21,18 @@ class RecreateDemandeTable extends Migration
 
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_point_enrolement');
-            $table->unsignedBigInteger('id_sender');
-            $table->unsignedBigInteger('id_client');
-            $table->dateTime('date_rdv_demande');
+            $table->unsignedBigInteger('id_point_enrolement')->nullable();
+            $table->unsignedBigInteger('id_sender')->nullable();
+            $table->unsignedBigInteger('id_client')->nullable();
+            $table->dateTime('date_rdv_demande')->nullable();
             $table->dateTime('date_traitement_demande')->nullable()->default(null);
             $table->enum('status_demande', ['NEW','REJECTED','PENDING_PAY','CLOSED','PENDDING','OPEN','SUSPENDED', 'RESETTED'])->default("NEW");
             $table->string('raison_status')->nullable()->default(null);
             $table->string('type_request')->nullable()->default(null);
-            $table->unsignedBigInteger('id_product');
-            $table->unsignedBigInteger('id_service');
-            $table->string('document_url');
-            $table->string('avatar_url');
+            $table->unsignedBigInteger('id_product')->nullable();
+            $table->unsignedBigInteger('id_service')->nullable();
+            $table->string('document_url')->nullable();
+            $table->string('avatar_url')->nullable();
             $table->string('code_demande')->nullable()->default(null);
             $table->foreign('id_point_enrolement')->references('id_pe')->on('point_enrolement');
             $table->foreign('id_client')->references('id')->on('client');

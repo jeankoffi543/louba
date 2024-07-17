@@ -433,6 +433,17 @@ const routes = [
                 component: () => import("../views/create-appointment/new-appointment/new-appointment.vue"),
                 children: [
                     {
+                        meta: {
+                            breadcrumb: "Pre demande"
+                        },
+                        path: "pre-demande",
+                        name: "pre-demande",
+                        component: () =>
+                            import(
+                                "../views/create-appointment/pre-demande/pre-demande.vue"
+                                )
+                    },
+                    {
                         path: "start",
                         name: "appointment-start",
                         component: () =>
@@ -440,6 +451,7 @@ const routes = [
                                 "../views/create-appointment/start-request/start-request.vue"
                                 )
                     },
+                  
                     {
                         path: "satut-doc",
                         name: "satutdocument",
@@ -529,7 +541,7 @@ const routes = [
                         }
                     }
                 ]
-            }
+            },
         ]
     },
 

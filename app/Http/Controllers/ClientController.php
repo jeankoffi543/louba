@@ -422,6 +422,160 @@ class ClientController extends Controller
         }
     }
 
+    public function save_predemande_client(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $userConnected = auth('apiJwt')->user();
+
+            $demande = new Demande();
+
+            $type_demande = "Nouvelle demande";
+            if ($request->type_request == "renouvelement") {
+                $type_demande = "Renouvelement";
+            } elseif ($request->type_request == "duplicata") {
+                $type_demande = "Duplicata";
+            } else {
+                $type_demande = "Nouvelle demande";
+            }
+
+            //$demande->id_client = $client->id;
+            $client = Client::all()
+                ->where('telephone_client', '=', $request->telephone)
+                ->where('email_client', '=', $request->email)->first();
+
+            if (!$client) {
+                $newClient = new Client();
+                $newClient->nom_client = $request->nom;
+                $newClient->prenom_client = $request->prenom;
+                $newClient->email_client = $request->email;
+                $newClient->genre_client = $request->gender == "H" ? "Homme" : "Femme";
+                $newClient->telephone_client = $request->telephone;
+                $newClient->adresse_client = $request->lieu_de_residence;
+                $newClient->date_naissance_client = Carbon::createFromFormat('Y-m-d', $request->date_naissance)->toDateTime();
+                $newClient->password = bcrypt($request->telephone);
+                $newClient->created_at = now();
+                $newClient->save();
+                $message_sms = "Votre access LOUBA est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+                try {
+                    $newSms = new SendSmS();
+                    $newSms->send($request->telephone, $message_sms);
+                } catch (GuzzleException $e) {
+                    // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
+                }
+
+                $client = $newClient;
+            }
+
+            $code_oni = "GN" . $client->id . substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10 / strlen($x)))), 1, 10);
+            $demande->id_sender = $userConnected->id;
+            $demande->nationality = $request->nationality;
+            $demande->nationality_state = $request->nationality_state;
+            $demande->profession = $request->profession;
+            $demande->height = $request->height;
+            $demande->complexion = $request->complexion;
+            $demande->hair_color = $request->hair_color;
+            $demande->eye_color = $request->eye_color;
+            $demande->father_first_name = $request->father_first_name;
+            $demande->father_last_name = $request->father_last_name;
+            $demande->mother_first_name = $request->mother_first_name;
+            $demande->mother_last_name = $request->mother_last_name;
+            $demande->numero_recu = $request->numero_recu;
+            $demande->id_client = $client->id;
+            $demande->id_product = $request->id_type_document;
+            $demande->id_service = $request->id_type_service;
+            $demande->id_point_enrolement = $request->id_point_enrolement;
+            $demande->code_demande = $code_oni;
+            $demande->type_request = $type_demande;
+            $demande->predemande_step = 1;
+            $demande->habilete_position = 0;
+            $demande->created_at = now();
+
+            if ($request->hasFile("document1")) {
+
+                $document1 = $request->file('document1');
+                $validFiles = true; // Indicateur pour vérifier si tous les fichiers sont valides
+                if (is_array($document1) && count($document1) > 0) {
+                    foreach ($document1 as $key => $file) {
+                        $extension = $file->getClientOriginalExtension();
+                        $uuid = (string)Str::uuid() . '.' . $extension;
+                        $file->storeAs('public/documents/', $uuid);
+                        $demande->document_url = Storage::url('documents/' . $uuid);
+                    }
+                } else {
+                    $extension = $document1->getClientOriginalExtension();
+                    $uuid = (string)Str::uuid() . '.' . $extension;
+                    $document1->storeAs('public/documents/', $uuid);
+                    $demande->document_url = Storage::url('documents/' . $uuid);
+                }
+            }
+            if ($request->hasFile("document2")) {
+
+                $document2 = $request->file('document2');
+                if (is_array($document2) && count($document2) > 0) {
+                    foreach ($document2 as $key => $file) {
+                        $extension = $file->getClientOriginalExtension();
+                        $uuid = (string)Str::uuid() . '.' . $extension;
+                        /** @var UploadedFile $file */
+                        $file->storeAs('public/clients/', $uuid);
+                        $demande->avatar_url = Storage::url('clients/' . $uuid);
+                    }
+                }else{
+                    $extension = $document2->getClientOriginalExtension();
+                    $uuid = (string)Str::uuid() . '.' . $extension;
+                    /** @var UploadedFile $file */
+                    $document2->storeAs('public/clients/', $uuid);
+                    $demande->avatar_url = Storage::url('clients/' . $uuid);
+                }
+            }
+
+            $demande->save();
+
+            $newSms = new SendSmS();
+            $message_sms = "Votre pré-demande a été enregistée. Merci de votre confiance";
+            try {
+                $newSms->send($request->telephone, $message_sms);
+            } catch (GuzzleException $e) {
+                // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
+            }
+         
+            $demandeSave = Demande::with(['client', 'sender',])->where("id", "=", $demande->id)->first();
+
+            $dataAttachment = [
+                'title' => 'Pré-demande: ' . $demandeSave->code_demande,
+                'body' => "Votre demande a été enregistré. $message_sms"
+            ];
+
+            $attachment = [
+                'name' => '',
+                'data' => ""
+            ];
+
+            try {
+                Mail::to($request->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
+            } catch (Exception $ex) {
+                DB::rollBack();
+                $data["demande"] = null;
+                $data["message"] = "Echèc de l'enregistré l'envoi de votre recu a échoué";
+                $data["details"] = $ex->getMessage();
+                return response()->json($data);
+            }
+            DB::commit();
+            $data["status"] = 200;
+            $data["message"] = "Pré-demande enregistrée";
+            $data["demande"] = $demande;
+
+
+            return response()->json($data);
+        } catch (Exception $ex) {
+            DB::rollBack();
+            $data["demande"] = null;
+            $data["message"] = "Echèc de l'enregistré";
+            $data["details"] = $ex->getMessage();
+            return response()->json($data, 500);
+        }
+    }
+
     /**
      * @param $code_demande
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

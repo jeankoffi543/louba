@@ -40,7 +40,7 @@ export default {
             return this.appointment?.demande ?? null;
         },
         dateNaiss() {
-            return this.appointment?.demande == null ? "-": new Date(this.appointment?.demande?.client.date_naissance_client).toLocaleDateString(undefined, {
+            return this.appointment?.demande == null ? "-": new Date(this.appointment?.demande?.client?.date_naissance_client).toLocaleDateString(undefined, {
                 weekday: "long",
                 day: "numeric",
                 month: "long",

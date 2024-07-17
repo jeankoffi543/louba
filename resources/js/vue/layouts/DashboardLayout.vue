@@ -5,38 +5,31 @@
                 <LogoApp :show-name="false"></LogoApp>
             </el-container>
 
-            <el-menu active-text-color="var(--gray400Color)"
-                     background-color="var(--gray400Color)"
-                     class="menu"
-                     text-color="#FFF"
-            >
-                <el-menu-item
-                    index="1-1"
-                    @click="$router.push({ name: 'all-documents' })"
-                >Mes demandes
+            <el-menu active-text-color="var(--gray400Color)" background-color="var(--gray400Color)" class="menu"
+                text-color="#FFF">
+                <el-menu-item index="1-1" @click="$router.push({ name: 'all-documents' })">Mes demandes
                 </el-menu-item>
-                <el-menu-item
-                    index="1-2"
-                    @click="$router.push({ name: 'appointment-start' })"
-                >Prendre rendez-vous
+                <!-- <el-menu-item index="1-2" @click="$router.push({ name: 'appointment-start' })">Prendre rendez-vous
+                </el-menu-item> -->
+
+                <el-menu-item index="1-3" @click="$router.push({ name: 'pre-demande' })">Pre demande
                 </el-menu-item>
-<!--                <el-menu-item
+
+                <!--                <el-menu-item
                     index="1-3"
                     @click="$router.push({ name: 'downloadable' })"
                 >Télécharger mes documents
                 </el-menu-item>-->
-                 <el-menu-item index="1-4" @click="$router.push({ name: 'satutdocument' })">
-                   Statut de mon document
+                <el-menu-item index="1-4" @click="$router.push({ name: 'satutdocument' })">
+                    Statut de mon document
                 </el-menu-item>
-                <el-menu-item index="1-3" @click="$router.push({ name: 'customer-home' })">
+                <!-- <el-menu-item index="1-3" @click="$router.push({ name: 'customer-home' })">
                     Retour vers le portail
-                </el-menu-item>
+                </el-menu-item> -->
 
             </el-menu>
             <el-container class="foot-aside">
-                <div
-                    class="app-w-100 app-justify-content-center app-align-items-center app-d-flex"
-                >
+                <div class="app-w-100 app-justify-content-center app-align-items-center app-d-flex">
                     <el-button class="app-w-100 text-white" type="text" v-on:click="logOut">
                         <i class="el-icon-switch-button colors"></i>
                         Déconnexion
@@ -64,9 +57,9 @@
                                 <el-dropdown>
                                     <span class="">
                                         <b>{{ user?.nom_client }} {{ user?.prenom_client }}</b>
-                                      <el-icon class="el-icon--right">
-                                        <arrow-down/>
-                                      </el-icon>
+                                        <el-icon class="el-icon--right">
+                                            <arrow-down />
+                                        </el-icon>
                                     </span>
                                     <template #dropdown>
                                         <el-dropdown-menu>
@@ -84,26 +77,20 @@
 
 
             </el-header>
-            <section class="sidebar-wrapper" v-bind:class="sidebarFlag ? 'overlay' : '' ">
+            <section class="sidebar-wrapper" v-bind:class="sidebarFlag ? 'overlay' : ''">
                 <div class="sidebar ">
                     <div class="sidebar-header">
                         <el-aside class="vert2" width="250px">
 
-                            <button class="close" @click="sidebarFlag = !sidebarFlag  ">
+                            <button class="close" @click="sidebarFlag = !sidebarFlag">
                                 <span>&times;</span>
                             </button>
                             <el-container class="container-logo app-ml-0">
                                 <LogoApp :show-name="false"></LogoApp>
                             </el-container>
-                            <el-menu active-text-color="var(--primaryColor)"
-                                     background-color="var(--primaryColor)"
-                                     class="menu1"
-                                     text-color="#FFF"
-                            >
-                                <el-menu-item
-                                    index="1-1"
-                                    @click="$router.push({ name: 'all-documents' })"
-                                >Documents
+                            <el-menu active-text-color="var(--primaryColor)" background-color="var(--primaryColor)"
+                                class="menu1" text-color="#FFF">
+                                <el-menu-item index="1-1" @click="$router.push({ name: 'all-documents' })">Documents
                                 </el-menu-item>
                                 <!--                                <el-menu-item index="1-2" @click="$router.push({ name: 'downloadable' })">
                                                                     Télécharger mes documents
@@ -137,11 +124,7 @@
             <el-container class="container-el-breadcrumb">
                 <el-breadcrumb separator-class="el-icon-arrow-right">
                     <!--          <el-breadcrumb-item :to="{ path: '/' }"> Accueil</el-breadcrumb-item>-->
-                    <el-breadcrumb-item
-                        v-for="(item, index) in breadcrumbItem"
-                        :key="index"
-                        @click="redirectTo(item)"
-                    >
+                    <el-breadcrumb-item v-for="(item, index) in breadcrumbItem" :key="index" @click="redirectTo(item)">
                         {{ item?.label }}
                     </el-breadcrumb-item>
                 </el-breadcrumb>
@@ -154,19 +137,19 @@
         <el-dialog v-model="dialogFormVisible" title="Modifier mon mot de passe">
             <el-form :model="form">
                 <el-form-item label="Ancien Mot de Passe">
-                    <el-input v-model="form.lastPassword" autocomplete="off" type="password"/>
+                    <el-input v-model="form.lastPassword" autocomplete="off" type="password" />
                 </el-form-item>
                 <el-form-item label="Nouveau Mot de Passe">
-                    <el-input v-model="form.password" autocomplete="off" type="password"/>
+                    <el-input v-model="form.password" autocomplete="off" type="password" />
                 </el-form-item>
             </el-form>
             <template #footer>
-              <span class="dialog-footer">
-                <el-button v-loading="isLoading" @click="closeModal">Annuler</el-button>
-                <el-button v-loading="isLoading" type="primary" @click="updatePassword">
-                  Confirmer
-                </el-button>
-              </span>
+                <span class="dialog-footer">
+                    <el-button v-loading="isLoading" @click="closeModal">Annuler</el-button>
+                    <el-button v-loading="isLoading" type="primary" @click="updatePassword">
+                        Confirmer
+                    </el-button>
+                </span>
             </template>
         </el-dialog>
 
@@ -175,7 +158,7 @@
 
 <script>
 import axios from "axios";
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import LogoApp from "../components/shared/LogoApp";
 import * as utils from "../core/utils";
 
@@ -219,9 +202,9 @@ export default {
     methods: {
         logOut() {
             utils.removeToken();
-          //  this.$cookies.remove("infoUserClient");
+            //  this.$cookies.remove("infoUserClient");
 
-            this.$router.push({name: "customer-home"});
+            this.$router.push({ name: "customer-home" });
         },
         closeModal() {
             // christdev19@gmail.com:
@@ -249,7 +232,7 @@ export default {
                         confirmButtonText: 'Ok',
 
                     }).then((result) => {
-                        this.$router.push({name: "all-documents"})
+                        this.$router.push({ name: "all-documents" })
                     })
 
                 } else {
@@ -277,7 +260,7 @@ export default {
         },
         redirectTo(breadcrumb) {
             if (breadcrumb && breadcrumb.pathName) {
-                this.$router.push({name: breadcrumb.pathName});
+                this.$router.push({ name: breadcrumb.pathName });
             } else {
                 this.$router.push(breadcrumb.path);
             }
@@ -308,7 +291,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .container-logo-aside {
     margin: 0 0 1rem !important;
     width: 100% !important;
@@ -342,8 +324,9 @@ export default {
     width: auto;
     flex: none;
 }
-.colors{
-    color:white;
+
+.colors {
+    color: white;
 }
 
 .sidebar-wrapper {
@@ -587,7 +570,7 @@ export default {
     background: var(--secondaryColor);
     //border-top: 1px solid #e3e3dc;
     box-shadow: rgba(14, 30, 37, 0.12) 0 2px 4px 0,
-    rgba(14, 30, 37, 0.32) 0 2px 16px 0;
+        rgba(14, 30, 37, 0.32) 0 2px 16px 0;
 
     .el-button {
         font-size: 1.1rem;
@@ -602,7 +585,7 @@ export default {
     background: var(--secondaryColor);
     //border-top: 1px solid #e3e3dc;
     box-shadow: rgba(14, 30, 37, 0.12) 0 2px 4px 0,
-    rgba(14, 30, 37, 0.32) 0 2px 16px 0;
+        rgba(14, 30, 37, 0.32) 0 2px 16px 0;
 
     .el-button {
         font-size: 1.1rem;

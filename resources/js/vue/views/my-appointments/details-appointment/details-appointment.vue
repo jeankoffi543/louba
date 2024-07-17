@@ -142,12 +142,12 @@
                         </div>
                     </el-col>
                     <el-col :sm="8" :xs="24" class="container-card-other-info">
-                        <div class="content-card-other-info">
-                            <div class="appointment">
+                        <div class="content-card-other-info  w-100 align-items-start">
+                            <div class="appointment" v-if="demandeObj?.predemande_step > 2">
                                 <h5 class="type-appointment">Rendez-vous : {{
                                     typeDocumentObj?.nom ?? '-'
                                     }}</h5>
-                                <h4 class="amount-appointment type-appointment">
+                                <h4 class="amount-appointment type-appointment" v-if="demandeObj?.predemande_step > 2">
                                     Montant à payer : {{ typeDocumentObj?.prix ?? '-' }} GNF
                                 </h4>
                                 <h4 class="date-appointment">
@@ -158,17 +158,17 @@
                             </div>
 
 
-                            <div class="app-d-flex app-justify-content-space-between app-align-items-center">
+                            <div class="app-d-flex app-justify-content-space-between app-align-items-center gap-2">
                                 <span class="title-info">Reference</span>
                                 <h5 class="app-m-0">{{ demandeObj?.code_demande ?? '-' }}</h5>
                             </div>
-
-                            <div class="app-d-flex app-justify-content-space-between app-align-items-center">
+                            
+                            <div class="app-d-flex app-justify-content-space-between app-align-items-center gap-2">
                                 <span class="title-info">Numéro du reçu</span>
                                 <h5 class="app-m-0">{{ demandeObj?.numero_recu ?? '-' }}</h5>
                             </div>
 
-                            <div class="app-d-flex app-justify-content-space-between app-align-items-center">
+                            <div class="app-d-flex app-justify-content-space-between app-align-items-center" v-if="demandeObj?.predemande_step > 2">
                                 <p class="description-info app-m-0">
                                     il est nécessaire de prendre tous vos précautions afin d’honorer
                                     votre rendez-vous pris pour le <span class="value-item" style="font-weight: bold;">{{
@@ -176,7 +176,7 @@
                                 </p>
                             </div>
 
-                            <div class="app-d-flex app-justify-content-space-between app-align-items-center">
+                            <div class="app-d-flex app-justify-content-space-between app-align-items-center" v-if="demandeObj?.predemande_step > 2">
                                 <p>
                                     Point enrolement: <span class="value-item" style="font-weight: bold;"> {{ demandeObj?.point_enrolement?.nom_pe ?? '-' }}</span> 
                                 </p>
@@ -211,8 +211,8 @@
                                     </template>
 
 </ButtonApp>-->
-
                                 <ButtonApp :loading="isLoading" :primary-btn="false" block
+                                    v-if="demandeObj?.predemande_step > 2"
                                     button-title="Télécharger le reçu" icon="el-icon-printer" @click="printAppointment">
                                     <template v-slot:icon>
                                         <el-icon>

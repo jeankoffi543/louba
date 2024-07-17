@@ -3,7 +3,7 @@
         <el-card class="box-card" >
             <div class="box-card-body" v-on:click="detailsAppointment()">
                 <div class="date-document d-flex justify-content-between align-center" style="font-size: 13px;">
-                    <span>Date du rendez-vous : {{ dateRdv }}</span>
+                    <span>Date du rendez-vous : {{ dateRdv ??'' }}</span>
                     <span style="font-style: italic">{{ dataItem?.product?.nom }}</span>
                 </div>
                 <div class="name-document">
@@ -53,10 +53,25 @@
                         Détails
                     </el-button>
                 </el-col>
+                
                 <el-col
+                    v-if="dataItem?.predemande_step == 1"
                     :sm="12" :xs="24" class="reject-appointment">
-                    <el-button class="" @click.stop="getRecu">Télécharger le reçu</el-button>
+                    <el-button class="text-danger"> Veuillez patienter...  </el-button>
                 </el-col>
+
+                <el-col
+                v-else-if="dataItem?.predemande_step == 2"
+                    :sm="12" :xs="24" class="reject-appointment">
+                    <el-button class="" @click="takeRdv"> Prendre rendez-vous</el-button>
+                </el-col>
+
+                <el-col
+                    v-else
+                    :sm="12" :xs="24" class="reject-appointment">
+                    <el-button class="" @click.stop="getRecu"> Télécharger le reçu</el-button>
+                </el-col>
+
             </el-row>
         </el-card>
     </div>
@@ -76,6 +91,11 @@ export default {
     },
 
     methods: {
+        takeRdv() {
+            this.$router.push({
+                    name: "appointment-start",
+                });
+        },
         getRecu() {
             window.open(`/recuPdf/${this.dataItem?.code_demande}`)
         },
@@ -124,15 +144,32 @@ export default {
         },
 
         dateRdv() {
-            return new Date(this.dataItem?.date_rdv_demande).toLocaleDateString(undefined, {
+           var d = this.dataItem?.date_rdv_demande ?  new Date(this.dataItem?.date_rdv_demande).toLocaleDateString(undefined, {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
                 year: "numeric"
             })
+            : null
+
+            return d
         },
         status() {
-            if (this.dataItem?.status_demande == "REJECTED") {
+            if (this.dataItem?.predemande_step == 1) {
+                return "En attente"
+            }
+            else if (this.dataItem?.status_demande == "PENDDING") {
+                return "En cours"
+            }
+            else if (this.dataItem?.status_demande == "OPEN") {
+                return "Ouvert"
+            }
+            else if (this.dataItem?.status_demande == "SUSPENDED") {
+                return "Suspendue"
+            } else if (this.dataItem?.status_demande == "RESETTED") {
+                return "Réinitialisée"
+            }
+            else if (this.dataItem?.status_demande == "REJECTED") {
                 return "Echec"
             } else if (this.dataItem?.status_demande == "NEW") {
                 return "En attente"

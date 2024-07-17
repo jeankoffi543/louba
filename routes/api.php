@@ -54,6 +54,7 @@ Route::controller(ClientController::class)->group(function () {
         Route::get('get-appointment', 'get_appointment_client');
         Route::get('get-user-info', 'user_info');
         Route::post('save-appointment', 'save_appointment_client');
+        Route::post('save-pre-demande', 'save_predemande_client');
         Route::get('get-one-appointment/{id}', 'get_one_appointment_client');
         Route::get('init-pay-demande/{id}', 'init_pay_demande');
         Route::put('update-password', 'update_password_client');
