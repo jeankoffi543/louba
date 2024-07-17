@@ -1,0 +1,179 @@
+.box-shadow {
+  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+}
+
+.item-time{
+  border: 1px solid var(--secondaryColor);
+}
+
+.item-selected{
+  color: #FFF;
+  background: var(--primaryColor);
+  border:none;
+}
+
+// text-white shadow
+.choice-date-appointment {
+  //min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 0.9;
+  //width: 90%;
+  margin: 1.5rem auto;
+
+  .legende {
+    margin-top: 20px;
+    //margin-left: auto;
+
+    .ouvrable {
+      display: flex;
+
+
+    }
+
+    .p {
+      margin-left: 20px;
+      margin-top: -10px;
+    }
+
+    .ouv-1 {
+      width: 20px;
+      height: 6px;
+      background-color: green;
+      text-align: center;
+      justify-content: right;
+    }
+
+    .non-ouvrable {
+      display: flex;
+
+      .ouv-3 {
+        width: 20px;
+        height: 22px;
+        margin-top: -9px;
+        border-radius: 50%;
+        background-color: red;
+      }
+
+      .ouv-3-1 {
+        width: 20px;
+        height: 20px;
+        margin-top: 1px;
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: white;
+      }
+    }
+
+    .ferie {
+      display: flex;
+
+      .ouv-4 {
+        margin-top: -9px;
+        margin-left: 5px;
+        width: 12px;
+      }
+    }
+  }
+
+
+  .info-personal-title {
+    margin-bottom: 2.3rem;
+
+    h3 {
+
+    }
+  }
+
+  .btne {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container-body {
+    //flex: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    .container-calandar {
+      .content-info-personal-appointment {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100%;
+
+        .content-form {
+
+          .el-form {
+
+            .container-avatar-user {
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+
+              .el-avatar-group {
+                position: relative;
+
+                .el-avatar {
+                  font-size: 3rem;
+                  color: var(--primaryColor);
+
+                  .el-avatar--icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                  }
+                }
+
+                .el-button {
+                  border-color: transparent !important;
+                  position: absolute;
+                  bottom: 0;
+                  right: 0;
+                  box-shadow: rgba(17, 17, 26, 0.1) 0 0 16px;
+                  background: var(--primaryColor);
+
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .upload-demo {
+    .el-upload {
+      width: 100% !important;
+
+      .el-upload-dragger {
+        width: 100% !important;
+      }
+    }
+
+    .el-upload.el-upload--text {
+      width: 100%;
+    }
+  }
+
+
+  .content-illustrator {
+    background-image: url("/src/assets/imgs/others/calandar.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50vh;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+.app-m-0 {
+  margin: 0 !important;
+}

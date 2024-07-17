@@ -1,0 +1,61 @@
+@height-menu: var(--height-menu);
+@nav-height: var(--nav-height);
+@height: calc(@height-menu + @nav-height);
+@height-content: var(--height-content);
+
+
+.container-new-appointment {
+  height: calc(100vh~"-"@height-content - 1rem);
+  margin-top: 1rem;
+
+  .head-appointment {
+    h3 {
+      text-align: center;
+
+    }
+  }
+
+  .body-appointment {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: space-around;
+    padding: 1rem;
+  }
+
+  .container-appointment-dot {
+    flex: 0.1;
+    margin-top: 2rem;
+    min-height: 50px;
+    align-content: center;
+    display: flex;
+
+    .appointment-dot {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 43%;
+      max-width: 50%;
+      margin: auto !important;
+
+      .content-dot {
+        padding-left: 10px !important;
+        padding-right: 20px !important;
+        cursor: pointer;
+
+        .dot {
+          background: var(--primary200Color);
+          width: 100%;
+          padding: 3px;
+          display: flex;
+          justify-content: center;
+
+          &.dotActive {
+            background: var(--primaryColor)
+          }
+        }
+      }
+    }
+  }
+}

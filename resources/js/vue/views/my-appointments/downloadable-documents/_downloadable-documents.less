@@ -1,0 +1,95 @@
+
+.downloadable-documents {
+  margin: 1rem;
+  min-height: 10vh;
+  height: 100vh;
+  background: transparent;
+
+  h3 {
+    margin: 0;
+  }
+
+  .container-row {
+    margin: 0 !important;
+
+    @media (max-width: 1000px){
+      .el-container{
+        display: block;
+      }
+      .title-card {
+        padding: 0 !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        &.underline-title {
+          &:after {
+            width: 18%;
+            margin-top: 30px;
+            margin-left: 0;
+          }
+        }
+  
+        h3 {
+          text-align: start;
+        }
+  
+  
+      }
+    }
+
+    .title-card {
+      padding: 0 !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &.underline-title {
+        &:after {
+          width: 18%;
+          margin-left: 0;
+        }
+      }
+
+      h3 {
+        text-align: start;
+      }
+
+
+    }
+
+    .box-shadow {
+      box-shadow: var(--box-shadow1);
+    }
+
+    .item {
+      //border: 2px solid @colorBorderCard;
+      box-shadow: var(--box-shadow1);
+      background: #FFF;
+      padding: 0.5rem 1rem !important;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      justify-content: space-between !important;
+
+      .file {
+        font-size: 3rem;
+        color: var(--primary400Color);
+        flex: inherit !important;
+      }
+
+      .name {
+        margin: 0 4px;
+
+        span {
+          width: 100%;
+        }
+      }
+
+      .el-button {
+        border: none;
+      }
+    }
+
+  }
+
+}

@@ -1,0 +1,455 @@
+:root {
+    --color-primary: #008f5d;
+
+    --color-green: #008f5d;
+    --color-orange: #ffc107;
+    --color-red: #e7402f;
+    --color-dark-red: #cf245f;
+    --color-white: #fff;
+
+    --soft-shadow-1: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+                     6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+                     12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+                     22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+                     41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+                     100px 100px 80px rgba(0, 0, 0, 0.07);
+
+    --bg-gradiant-button-1: linear-gradient(to bottom right, #f3c945, #ff9d00, #56fd87);
+}
+::selection {
+    color: var(--color-white);
+    background-color: var(--color-orange);
+    text-shadow: none;
+}
+
+/* HEADER */
+
+.link-take-appointment {
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    padding: 1px;
+    box-shadow: var(--soft-shadow-1);
+    z-index: 2000000000;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: .25rem;
+
+    button {
+        background-color: var(--color-dark-red);
+        background-image: var(--bg-gradiant-button-1);
+        border: 0;
+        border-radius: .25rem;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 1rem; /* 18px */
+        font-weight: 600;
+        padding: 1rem 1.25rem;
+        text-align: center;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+}
+
+.div-top-bar {
+    padding: .5rem;
+    background: var(--color-primary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 30px;
+
+    .coat-of-arms {
+        img {
+            vertical-align: middle;
+            height: 30px !important;
+        }
+
+        .text {
+            color: white;
+            margin-left: 5px;
+            margin-top: 5px;
+            text-align: center;
+            vertical-align: 50%;
+            line-height: 1em;
+            font-size: .6rem;
+        }
+    }
+
+    .social-networks-container {
+        .social-networks{
+            a{
+                margin: 0 1rem 0 0;
+                color: var(--color-white) !important;
+            }
+        }
+        a{
+            margin-top: 2px;
+            font-weight: bold;
+            color: var(--color-white) !important;
+            &:hover{
+                color: var(--color-orange) !important;
+            }
+        }
+    }
+
+}
+.div-menu-bar{
+
+}
+
+
+//Mobile
+@media (max-width: 768px) {
+    .div-top-bar {
+        .coat-of-arms {
+            img {}
+            .text {
+                display: none;
+            }
+        }
+        .social-networks-container {
+            .social-networks{
+                a{}
+            }
+            a{}
+        }
+    }
+}
+
+//Tablet and PC
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+//Large Screen
+@media (min-width: 1024px) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////Navbar
+
+:root {
+    --navbar-bg-color: hsl(0, 0%, 15%);
+    --navbar-text-color: hsl(0, 0%, 85%);
+    --navbar-text-color-focus: white;
+    --navbar-bg-contrast: hsl(0, 0%, 25%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navbar {
+    height: 64px;
+    background-color: var(--color-white);
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+}
+
+.home-link,
+.navbar-link {
+
+    color: var(--color-green);
+    //color: var(--navbar-text-color);
+    text-decoration: none;
+    display: flex;
+    font-weight: 400;
+    align-items: center;
+}
+
+.home-link:focus,
+.home-link:hover {
+    color: var(--navbar-text-color-focus);
+}
+
+.navbar-link {
+    justify-content: center;
+    width: 100%;
+    padding: 0.4em 0.8em;
+    border-radius: 5px;
+}
+
+.navbar-link:focus,
+.navbar-link:hover {
+    color: var(--navbar-text-color-focus);
+    background-color: var(--navbar-bg-contrast);
+}
+
+
+
+.navbar-toggle {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.icon-bar {
+    display: block;
+    width: 25px;
+    height: 4px;
+    margin: 2px;
+    transition: background-color 0.2s ease-in-out,
+    transform 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
+    background-color: var(--navbar-text-color);
+}
+
+.navbar-toggle:focus .icon-bar,
+.navbar-toggle:hover .icon-bar {
+    background-color: var(--navbar-text-color-focus);
+}
+
+
+#navbar.opened .navbar-toggle .icon-bar:first-child,
+#navbar.opened .navbar-toggle .icon-bar:last-child {
+    position: absolute;
+    margin: 0;
+    width: 30px;
+}
+
+#navbar.opened .navbar-toggle .icon-bar:first-child {
+    transform: rotate(45deg);
+}
+
+#navbar.opened .navbar-toggle .icon-bar:nth-child(2) {
+    opacity: 0;
+}
+
+#navbar.opened .navbar-toggle .icon-bar:last-child {
+    transform: rotate(-45deg);
+}
+
+#navbar-menu {
+    position: fixed;
+    z-index: 1000 !important;
+    top: var(--navbar-height);
+    bottom: 0;
+    transition: opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out,
+    left 0.2s ease-in-out,
+    right 0.2s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#navbar-menu.detached,
+#navbar-menu.attached {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+#navbar.opened #navbar-menu {
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-links {
+    list-style-type: none;
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    //background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#navbar.opened .navbar-links {
+    padding: 1em;
+    max-height: none;
+}
+
+.sidebar .navbar-links {
+    top: 0;
+    bottom: 0;
+}
+
+.left.sidebar .navbar-links {
+    left: 0;
+    right: unset;
+    box-shadow: 5px 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.right.sidebar .navbar-links {
+    right: 0;
+    left: unset;
+    box-shadow: -5px 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.detached .navbar-links {
+    left: 0;
+    right: 0;
+    margin: 1.4rem;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.attached .navbar-links {
+    left: 0;
+    right: 0;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-item {
+    margin: 0.4em;
+    width: 100%;
+    transition: visibility 0s, opacity 0.25s linear;
+    .navbar-dropdown{
+        /*min-width: 300px;
+        padding: .5rem;
+        position: absolute;
+        visibility: hidden;
+        height: 0;*/
+
+        color: var(--color-green);
+        -webkit-transition: max-height 1s;
+        -moz-transition: max-height 1s;
+        -ms-transition: max-height 1s;
+        -o-transition: max-height 1s;
+        transition: max-height 1s;
+        background-color: var(--color-white);
+        overflow: hidden;
+        max-height: 0;
+        // "height: 0" not work with css transitions
+    }
+    &:hover{
+        .navbar-dropdown{
+            /*background-color: var(--color-white);
+            visibility: visible;
+            height: 100%;*/
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .navbar-toggle {
+        display: none;
+    }
+
+    #navbar #navbar-menu,
+    #navbar.opened #navbar-menu {
+        visibility: visible;
+        opacity: 1;
+        position: static;
+        display: block;
+        height: 100%;
+    }
+
+    #navbar .navbar-links,
+    #navbar.opened .navbar-links {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        position: static;
+        flex-direction: row;
+        list-style-type: none;
+        max-height: max-content;
+        width: 100%;
+        height: 100%;
+    }
+
+    #navbar .navbar-link:last-child {
+        margin-right: 0;
+    }
+}
+
+#options {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+////////////////////////////////////////////////
+.accordion_{
+    margin: 0.4em;
+    width: 100%;
+    &:hover{
+        .accordion-content{
+            max-height: 300px;
+        }
+    }
+}
+.accordion-toggle{
+    -webkit-transition: background .1s linear;
+    -moz-transition: background .1s linear;
+    -ms-transition: background .1s linear;
+    -o-transition: background .1s linear;
+    transition: background .1s linear;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover{
+        //background: darken(#00b8c9, 15%);
+    }
+
+}
+
+.accordion-content{
+    -webkit-transition: max-height 1s;
+    -moz-transition: max-height 1s;
+    -ms-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    transition: max-height 1s;
+    overflow: hidden;
+    max-height: 0;
+    position: absolute;
+}
+
+.nav-link{
+    background: #777 !important;
+}
