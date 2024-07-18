@@ -278,15 +278,20 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }) != undefined;
     },
     onReturn: function onReturn() {
+      var _this$formDataRequest;
       this.$router.push({
-        name: "appointment-start"
+        name: "appointment-start",
+        params: {
+          documentId: (_this$formDataRequest = this.formDataRequest) === null || _this$formDataRequest === void 0 || (_this$formDataRequest = _this$formDataRequest.user) === null || _this$formDataRequest === void 0 ? void 0 : _this$formDataRequest.documentId
+        }
       });
     },
     onSaveAppointment: function () {
       var _onSaveAppointment = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _this$formDataRequest,
-          _this$formDataRequest2,
+        var _this$formDataRequest2,
           _this$formDataRequest3,
+          _this$formDataRequest4,
+          _this$formDataRequest5,
           _this2 = this;
         var payload, formData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -328,9 +333,16 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               this.$store.dispatch('FORM_DATA_REQUEST', payload);
               formData = new FormData();
               formData.append("date_rdv_demande", (0,date_fns__WEBPACK_IMPORTED_MODULE_6__.format)(new Date(this.dateAppointment), "yyyy-MM-dd"));
-              formData.append("id_type_document", (_this$formDataRequest = this.formDataRequest) === null || _this$formDataRequest === void 0 || (_this$formDataRequest = _this$formDataRequest.product) === null || _this$formDataRequest === void 0 ? void 0 : _this$formDataRequest.id);
+              formData.append("numero_recu", (_this$formDataRequest2 = this.formDataRequest) === null || _this$formDataRequest2 === void 0 || (_this$formDataRequest2 = _this$formDataRequest2.user) === null || _this$formDataRequest2 === void 0 ? void 0 : _this$formDataRequest2.numero_recu);
+
+              // formData.append(
+              //     "id_type_document",
+              //     this.formDataRequest?.product?.id
+              // );
+
+              formData.append("id_demande", (_this$formDataRequest3 = this.formDataRequest) === null || _this$formDataRequest3 === void 0 || (_this$formDataRequest3 = _this$formDataRequest3.user) === null || _this$formDataRequest3 === void 0 ? void 0 : _this$formDataRequest3.documentId);
               formData.append("type_service_passport", null);
-              formData.append("id_type_service", (_this$formDataRequest2 = (_this$formDataRequest3 = this.formDataRequest) === null || _this$formDataRequest3 === void 0 || (_this$formDataRequest3 = _this$formDataRequest3.service) === null || _this$formDataRequest3 === void 0 ? void 0 : _this$formDataRequest3.id) !== null && _this$formDataRequest2 !== void 0 ? _this$formDataRequest2 : null);
+              formData.append("id_type_service", (_this$formDataRequest4 = (_this$formDataRequest5 = this.formDataRequest) === null || _this$formDataRequest5 === void 0 || (_this$formDataRequest5 = _this$formDataRequest5.service) === null || _this$formDataRequest5 === void 0 ? void 0 : _this$formDataRequest5.id) !== null && _this$formDataRequest4 !== void 0 ? _this$formDataRequest4 : null);
               formData.append("id_point_enrolement", this.siteAppointmentId);
 
               // await this.$store.dispatch("SAVE_APPOINTMENT", formData)
@@ -378,7 +390,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
                 console.log("err", err);
                 _this2.isLoadingSaveAppointment = false;
               })["finally"](function () {});
-            case 18:
+            case 19:
             case "end":
               return _context.stop();
           }

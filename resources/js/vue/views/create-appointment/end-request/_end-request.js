@@ -72,7 +72,7 @@ export default {
             return this.ferry_days.find(date => new Date(data.day).getTime() == new Date(date.date_jfpe).getTime()) != undefined;
         },
         onReturn: function () {
-            this.$router.push({name: "appointment-start"})
+            this.$router.push({name: "appointment-start", params: {documentId: this.formDataRequest?.user?.documentId}})
         },
         onSaveAppointment: async function () {
             this.isLoadingSaveAppointment = true;
@@ -115,9 +115,20 @@ export default {
             );
 
             formData.append(
-                "id_type_document",
-                this.formDataRequest?.product?.id
+                "numero_recu",
+               this.formDataRequest?.user?.numero_recu
             );
+
+            // formData.append(
+            //     "id_type_document",
+            //     this.formDataRequest?.product?.id
+            // );
+            
+             formData.append(
+                "id_demande",
+                this.formDataRequest?.user?.documentId
+            );
+
             formData.append("type_service_passport", null);
             formData.append(
                 "id_type_service",

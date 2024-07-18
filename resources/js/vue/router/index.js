@@ -444,7 +444,7 @@ const routes = [
                                 )
                     },
                     {
-                        path: "start",
+                        path: "start/:documentId",
                         name: "appointment-start",
                         component: () =>
                             import(

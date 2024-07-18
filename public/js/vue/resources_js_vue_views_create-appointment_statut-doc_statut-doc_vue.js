@@ -24,11 +24,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    takeRdv: function takeRdv() {
-      this.$router.push({
-        name: "appointment-start"
-      });
-    },
     getRecu: function getRecu() {
       var _this$dataItem;
       window.open("/recuPdf/".concat((_this$dataItem = this.dataItem) === null || _this$dataItem === void 0 ? void 0 : _this$dataItem.code_demande));
@@ -71,6 +66,15 @@ __webpack_require__.r(__webpack_exports__);
           documentId: (_this$dataItem4 = this.dataItem) === null || _this$dataItem4 === void 0 ? void 0 : _this$dataItem4.id
         }
       });
+    },
+    takeRdv: function takeRdv() {
+      var _this$dataItem5;
+      this.$router.push({
+        name: "appointment-start",
+        params: {
+          documentId: (_this$dataItem5 = this.dataItem) === null || _this$dataItem5 === void 0 ? void 0 : _this$dataItem5.id
+        }
+      });
     }
   },
   computed: {
@@ -87,8 +91,8 @@ __webpack_require__.r(__webpack_exports__);
       return this.indexBuild % 2 === 0;
     },
     dateRdv: function dateRdv() {
-      var _this$dataItem5, _this$dataItem6;
-      var d = (_this$dataItem5 = this.dataItem) !== null && _this$dataItem5 !== void 0 && _this$dataItem5.date_rdv_demande ? new Date((_this$dataItem6 = this.dataItem) === null || _this$dataItem6 === void 0 ? void 0 : _this$dataItem6.date_rdv_demande).toLocaleDateString(undefined, {
+      var _this$dataItem6, _this$dataItem7;
+      var d = (_this$dataItem6 = this.dataItem) !== null && _this$dataItem6 !== void 0 && _this$dataItem6.date_rdv_demande ? new Date((_this$dataItem7 = this.dataItem) === null || _this$dataItem7 === void 0 ? void 0 : _this$dataItem7.date_rdv_demande).toLocaleDateString(undefined, {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -97,24 +101,24 @@ __webpack_require__.r(__webpack_exports__);
       return d;
     },
     status: function status() {
-      var _this$dataItem7, _this$dataItem8, _this$dataItem9, _this$dataItem10, _this$dataItem11, _this$dataItem12, _this$dataItem13, _this$dataItem14, _this$dataItem15;
-      if (((_this$dataItem7 = this.dataItem) === null || _this$dataItem7 === void 0 ? void 0 : _this$dataItem7.predemande_step) == 1) {
+      var _this$dataItem8, _this$dataItem9, _this$dataItem10, _this$dataItem11, _this$dataItem12, _this$dataItem13, _this$dataItem14, _this$dataItem15, _this$dataItem16;
+      if (((_this$dataItem8 = this.dataItem) === null || _this$dataItem8 === void 0 ? void 0 : _this$dataItem8.predemande_step) == 1) {
         return "En attente";
-      } else if (((_this$dataItem8 = this.dataItem) === null || _this$dataItem8 === void 0 ? void 0 : _this$dataItem8.status_demande) == "PENDDING") {
+      } else if (((_this$dataItem9 = this.dataItem) === null || _this$dataItem9 === void 0 ? void 0 : _this$dataItem9.status_demande) == "PENDDING") {
         return "En cours";
-      } else if (((_this$dataItem9 = this.dataItem) === null || _this$dataItem9 === void 0 ? void 0 : _this$dataItem9.status_demande) == "OPEN") {
+      } else if (((_this$dataItem10 = this.dataItem) === null || _this$dataItem10 === void 0 ? void 0 : _this$dataItem10.status_demande) == "OPEN") {
         return "Ouvert";
-      } else if (((_this$dataItem10 = this.dataItem) === null || _this$dataItem10 === void 0 ? void 0 : _this$dataItem10.status_demande) == "SUSPENDED") {
+      } else if (((_this$dataItem11 = this.dataItem) === null || _this$dataItem11 === void 0 ? void 0 : _this$dataItem11.status_demande) == "SUSPENDED") {
         return "Suspendue";
-      } else if (((_this$dataItem11 = this.dataItem) === null || _this$dataItem11 === void 0 ? void 0 : _this$dataItem11.status_demande) == "RESETTED") {
+      } else if (((_this$dataItem12 = this.dataItem) === null || _this$dataItem12 === void 0 ? void 0 : _this$dataItem12.status_demande) == "RESETTED") {
         return "Réinitialisée";
-      } else if (((_this$dataItem12 = this.dataItem) === null || _this$dataItem12 === void 0 ? void 0 : _this$dataItem12.status_demande) == "REJECTED") {
+      } else if (((_this$dataItem13 = this.dataItem) === null || _this$dataItem13 === void 0 ? void 0 : _this$dataItem13.status_demande) == "REJECTED") {
         return "Echec";
-      } else if (((_this$dataItem13 = this.dataItem) === null || _this$dataItem13 === void 0 ? void 0 : _this$dataItem13.status_demande) == "NEW") {
+      } else if (((_this$dataItem14 = this.dataItem) === null || _this$dataItem14 === void 0 ? void 0 : _this$dataItem14.status_demande) == "NEW") {
         return "En attente";
-      } else if (((_this$dataItem14 = this.dataItem) === null || _this$dataItem14 === void 0 ? void 0 : _this$dataItem14.status_demande) == "CLOSED") {
+      } else if (((_this$dataItem15 = this.dataItem) === null || _this$dataItem15 === void 0 ? void 0 : _this$dataItem15.status_demande) == "CLOSED") {
         return "Rendez-vous fait, maintenant en attente du retrait";
-      } else if (((_this$dataItem15 = this.dataItem) === null || _this$dataItem15 === void 0 ? void 0 : _this$dataItem15.status_demande) == "PENDING_PAY") {
+      } else if (((_this$dataItem16 = this.dataItem) === null || _this$dataItem16 === void 0 ? void 0 : _this$dataItem16.status_demande) == "PENDING_PAY") {
         return "en attente de paiement";
       } else {
         return "En attente";

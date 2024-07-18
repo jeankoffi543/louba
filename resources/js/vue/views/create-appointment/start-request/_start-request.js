@@ -1,12 +1,12 @@
 // @vue/component
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import ButtonApp from "../../../components/shared/ButtonApp.vue";
-import {KEY_FORM_JSON} from "../../../core/constants";
+import { KEY_FORM_JSON } from "../../../core/constants";
 
 export default {
-    name: 'StartRequest',
+    name: "StartRequest",
 
-    components: {ButtonApp},
+    components: { ButtonApp },
 
     mixins: [],
 
@@ -26,6 +26,7 @@ export default {
                 firstname: "",
                 lastname: "",
                 numero_recu: "",
+                documentId: String,
                 nationality: "",
                 nationality_state: "",
                 profession: "",
@@ -35,27 +36,27 @@ export default {
                 dateOfBirth: "",
                 placeOfResidence: "",
                 fileListPicture: [],
-                fileListBirthCertificate: []
+                fileListBirthCertificate: [],
             },
-            signalement:{
+            signalement: {
                 height: 0,
                 complexion: "",
                 hair_color: "",
                 eye_color: "",
             },
-            ascendants:{
-              father_firstname: "",
-              father_lastname: "",
-              mother_firstname: "",
-              mother_lastname: "",  
+            ascendants: {
+                father_firstname: "",
+                father_lastname: "",
+                mother_firstname: "",
+                mother_lastname: "",
             },
             demandeType: null,
             pickerOptions: {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
-                }
-            }
-        }
+                },
+            },
+        };
     },
 
     computed: {
@@ -67,103 +68,72 @@ export default {
         ]),
         ...mapGetters({
             products: "GET_PRODUCTS",
-            isLoading: "IS_LOADING_APPOINTMENT" || "IS_LOADING_PRODUCTS" || "IS_LOADING_PRODUCTS",
+            isLoading:
+                "IS_LOADING_APPOINTMENT" ||
+                "IS_LOADING_PRODUCTS" ||
+                "IS_LOADING_PRODUCTS",
             productSelected: "GET_PRODUCT_SELECTED",
             serviceSelected: "GET_SERVICE_SELECTED",
             selectService: "GET_SELECT_SERVICE",
             services: "GET_SERVICES",
-            formRequestData: "GET_FORM_DATA_REQUEST"
+            formRequestData: "GET_FORM_DATA_REQUEST",
         }),
 
         servivesAvailable() {
-            return (this.services || []).filter(value => value.visible_in_flow);
-        }
+            return (this.services || []).filter(
+                (value) => value.visible_in_flow
+            );
+        },
     },
 
     watch: {
         products() {
             this.productSelected = this.products[0];
             this.radioAppointmentChangeProduct(this.products[0], 2);
-
-        }
+        },
     },
 
     beforeMount() {
-        this.fetchDataProducts()
-        this.fetchDataSerives()
+        this.fetchDataProducts();
+        this.fetchDataSerives();
+        this.formPersonalInfo.documentId = this.$route.params.documentId;
     },
-    created() {
-    },
+    created() {},
 
     methods: {
-
-
         onSwitchPage: function () {
-
-
-            if (this.productSelected?.select_service_is_required  && this.typeServiceSelected == null) {
+            if (
+                this.productSelected?.select_service_is_required &&
+                this.typeServiceSelected == null
+            ) {
                 this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Le type de service est obligatoire",
                     showConfirmButton: false,
-                    timer: 4500
+                    timer: 4500,
                 });
                 return;
-            }
-            else if (Object.values(this.formPersonalInfo).some(item => item === "")) {
+            } else if (this.formPersonalInfo.numero_recu === "") {
                 this.$swal({
                     position: "center",
                     icon: "warning",
-                    title: "Toutes les informations personnelles sont obligatoire",
+                    title: "Le numéro du récu est obligatoire",
                     showConfirmButton: false,
-                    timer: 4500
-
-                });
-                return;
-            } 
-            else if (Object.values(this.signalement).some(item => item === "")) {
-                this.$swal({
-                    position: "center",
-                    icon: "warning",
-                    title: "Tous les champs du signalement sont obligatoire",
-                    showConfirmButton: false,
-                    timer: 4500
-
-                });
-                return;
-            } 
-
-            else if (Object.values(this.ascendants).some(item => item === "")) {
-                this.$swal({
-                    position: "center",
-                    icon: "warning",
-                    title: "Tous les champs Ascendants sont obligatoire",
-                    showConfirmButton: false,
-                    timer: 4500
-
-                });
-                return;
-            } 
-
-            else if (this.formPersonalInfo.fileListBirthCertificate.length == 0 || this.formPersonalInfo.fileListPicture.length == 0) {
-                this.$swal({
-                    position: "center",
-                    icon: "warning",
-                    title: "Les documents sont obligatoire",
-                    showConfirmButton: false,
-                    timer: 4500
-
+                    timer: 4500,
                 });
                 return;
             } else {
-
                 const payload = {
                     key: [KEY_FORM_JSON.FORM_INFO_USER],
-                    data: {...this.formPersonalInfo, ...this.signalement, ...this.ascendants}
+                    data: {
+                        ...this.formPersonalInfo,
+                        ...this.signalement,
+                        ...this.ascendants,
+                    },
                 };
-                this.$store.dispatch('FORM_DATA_REQUEST', payload);
-                this.$router.push({name: "appointment-end"})
+                this.$store.dispatch("FORM_DATA_REQUEST", payload);
+                this.$router.push({ name: "appointment-end" });
             }
         },
         handleChange: function (val) {
@@ -197,7 +167,7 @@ export default {
         onChangTypeDemande(nameNextStep) {
             this.$store.dispatch("FORM_DATA_REQUEST", {
                 key: [KEY_FORM_JSON.TYPE_REQUEST],
-                data: this.typeDemand
+                data: this.typeDemand,
             });
             // this.disabledStep4 = false;
 
@@ -213,32 +183,29 @@ export default {
         },
         /*END STEP 3*/
 
-
         /*STEP 2*/
         fetchDataSerives() {
-            this.$store.dispatch('FETCH_SERVICES');
+            this.$store.dispatch("FETCH_SERVICES");
         },
         radioAppointmentChangeService(item, nameNextStep) {
             this.$store.dispatch("SERVICE_SELECTED", item);
             this.typeServiceSelected = item;
             this.$store.dispatch("FORM_DATA_REQUEST", {
                 key: [KEY_FORM_JSON.SERVICE],
-                data: item
+                data: item,
             });
             this.onNextStep(nameNextStep);
         },
 
         /*END STEP 2*/
 
-
         /*STEP 1*/
         fetchDataProducts() {
-            this.$store.dispatch('FETCH_PRODUCTS');
+            this.$store.dispatch("FETCH_PRODUCTS");
         },
 
         onNextStep: function (name) {
             this.activeNames.push(name);
-
         },
         radioAppointmentChangeProduct(item, nameNextStep) {
             if (!item?.flow_enable) {
@@ -248,23 +215,25 @@ export default {
             this.$store.dispatch("PRODUCT_SELECTED", item);
             this.$store.dispatch("FORM_DATA_REQUEST", {
                 key: [KEY_FORM_JSON.PRODUCT],
-                data: item
+                data: item,
             });
 
             if (!item?.select_service_is_required) {
                 // this.disabledStep2 = true;
                 // this.disabledStep3 = false;
-                this.activeNames = this.activeNames.filter(it => it != nameNextStep);
+                this.activeNames = this.activeNames.filter(
+                    (it) => it != nameNextStep
+                );
                 this.$store.dispatch("FORM_DATA_REQUEST", {
                     key: [KEY_FORM_JSON.SERVICE],
-                    data: null
+                    data: null,
                 });
                 this.onNextStep(3);
             } else {
                 // this.disabledStep2 = false;
                 this.onNextStep(nameNextStep);
             }
-        }
+        },
         /*END STEP 1*/
-    }
-}
+    },
+};

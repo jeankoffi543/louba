@@ -1,47 +1,36 @@
 <template>
     <div class="container-item">
-        <el-card class="box-card" >
+        <el-card class="box-card">
             <div class="box-card-body" v-on:click="detailsAppointment()">
                 <div class="date-document d-flex justify-content-between align-center" style="font-size: 13px;">
-                    <span>Date du rendez-vous : {{ dateRdv ??'' }}</span>
+                    <span>Date du rendez-vous : {{ dateRdv ?? '' }}</span>
                     <span style="font-style: italic">{{ dataItem?.product?.nom }}</span>
                 </div>
                 <div class="name-document">
                     <h3 class="">{{ dataItem?.client?.prenom_client }} {{ dataItem?.client?.nom_client }} </h3>
                 </div>
                 <el-row :gutter="24" class="app-m-0 app-justify-content-space-between">
-                    <el-col
-                        :sm="24" :xs="24">
-            <span class="user-name point-enrolment flew flex-row">
-               <small>Point d'enrôlement : </small>
-                {{ dataItem?.point_enrolement?.nom_pe }}
-            </span>
+                    <el-col :sm="24" :xs="24">
+                        <span class="user-name point-enrolment flew flex-row">
+                            <small>Point d'enrôlement : </small>
+                            {{ dataItem?.point_enrolement?.nom_pe }}
+                        </span>
                     </el-col>
 
                 </el-row>
-                <el-row
-                    :gutter="24"
-                    class="app-m-0 app-justify-content-space-between"
-                    style="margin-bottom: 8px"
-                >
+                <el-row :gutter="24" class="app-m-0 app-justify-content-space-between" style="margin-bottom: 8px">
                     <el-col :sm="12" :xs="24" class="date-appointment">
-                        <el-button class="button-primary" type="success"
-                        >{{ dataItem?.code_demande }}
+                        <el-button class="button-primary" type="success">{{ dataItem?.code_demande }}
                         </el-button>
                     </el-col>
                     <el-col :sm="12" :xs="24" class="status-appointment">
-                        <el-button
-                            class="button-primary app-d-flex app-justify-content-flex-end"
-                            type="success"
-                        >{{ status }}
+                        <el-button class="button-primary app-d-flex app-justify-content-flex-end" type="success">{{
+                            status }}
                         </el-button>
                     </el-col>
                 </el-row>
             </div>
-            <el-row
-                :gutter="24"
-                class="app-ml-0 app-mr-0 app-justify-content-space-between"
-            >
+            <el-row :gutter="24" class="app-ml-0 app-mr-0 app-justify-content-space-between">
                 <!--                <el-col v-if="dataItem?.paiement?.reference_pay == null" :sm="24" :xs="24" class="print-appointment">
                                     <el-button class="" @click.stop="buyMaDemande">
                                         Payer
@@ -53,22 +42,16 @@
                         Détails
                     </el-button>
                 </el-col>
-                
-                <el-col
-                    v-if="dataItem?.predemande_step == 1"
-                    :sm="12" :xs="24" class="reject-appointment">
-                    <el-button class="text-danger"> Veuillez patienter...  </el-button>
+
+                <el-col v-if="dataItem?.predemande_step == 1" :sm="12" :xs="24" class="reject-appointment">
+                    <el-button class="text-danger"> Veuillez patienter... </el-button>
                 </el-col>
 
-                <el-col
-                v-else-if="dataItem?.predemande_step == 2"
-                    :sm="12" :xs="24" class="reject-appointment">
+                <el-col v-else-if="dataItem?.predemande_step == 2" :sm="12" :xs="24" class="reject-appointment">
                     <el-button class="" @click="takeRdv"> Prendre rendez-vous</el-button>
                 </el-col>
 
-                <el-col
-                    v-else
-                    :sm="12" :xs="24" class="reject-appointment">
+                <el-col v-else :sm="12" :xs="24" class="reject-appointment">
                     <el-button class="" @click.stop="getRecu"> Télécharger le reçu</el-button>
                 </el-col>
 
@@ -91,11 +74,6 @@ export default {
     },
 
     methods: {
-        takeRdv() {
-            this.$router.push({
-                    name: "appointment-start",
-                });
-        },
         getRecu() {
             window.open(`/recuPdf/${this.dataItem?.code_demande}`)
         },
@@ -114,12 +92,12 @@ export default {
             if (this.isReportingAppointment) {
                 this.$router.push({
                     name: "report-appointment",
-                    params: {documentId: this.indexBuild + this.dataItem.refDoc}
+                    params: { documentId: this.indexBuild + this.dataItem.refDoc }
                 });
             } else {
                 this.$router.push({
                     name: "pay-appointment",
-                    params: {documentId: this.indexBuild + this.dataItem.refDoc}
+                    params: { documentId: this.indexBuild + this.dataItem.refDoc }
                 });
             }
         },
@@ -130,27 +108,36 @@ export default {
                     documentId: this.dataItem?.id
                 }
             })
-        }
+        },
+
+        takeRdv() {
+
+            this.$router.push({
+                name: "appointment-start", params: {
+                    documentId: this.dataItem?.id
+                }
+            })
+        },
     },
 
     computed: {
         action() {
             return this.isReportingAppointment
-                ? {name: "Reporter", type: "danger"}
-                : {name: "Payer", type: "warning"};
+                ? { name: "Reporter", type: "danger" }
+                : { name: "Payer", type: "warning" };
         },
         isReportingAppointment() {
             return this.indexBuild % 2 === 0;
         },
 
         dateRdv() {
-           var d = this.dataItem?.date_rdv_demande ?  new Date(this.dataItem?.date_rdv_demande).toLocaleDateString(undefined, {
+            var d = this.dataItem?.date_rdv_demande ? new Date(this.dataItem?.date_rdv_demande).toLocaleDateString(undefined, {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
                 year: "numeric"
             })
-            : null
+                : null
 
             return d
         },
@@ -257,7 +244,8 @@ export default {
         border-left: 0.2px solid #e3e3e3;
     }
 
-    .print-appointment, .reject-appointment {
+    .print-appointment,
+    .reject-appointment {
         .el-button {
             background: beige;
             color: #2e3138;
