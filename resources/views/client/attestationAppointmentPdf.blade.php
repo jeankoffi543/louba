@@ -171,7 +171,7 @@
                 {{  optional($maDemande->point_enrolement)->nom_pe }}</span></p>
 
         <p>Montant à payer : <span style="text-transform: uppercase; margin-right: 40px">
-                {{ optional($maDemande->product)->prix }} GNF</span></p>
+                {{ optional($maDemande->service)->prix }} GNF</span></p>
         <br>
         <p>
             Je certifie l'exactitude de ces déclarations.

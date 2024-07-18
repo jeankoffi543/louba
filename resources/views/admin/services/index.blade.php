@@ -222,6 +222,24 @@
                                                 </div>
 
                                                 <div class="row mb-3">
+                                                    <label for="inputText" class="col-sm-2 col-form-label">Coût</label>
+                                                    <div class="col-sm-10">
+                                                        <input name="prix" required class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label for="inputText" class="col-sm-2 col-form-label">Type</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="form_type" >
+                                                            <option value="passport" selected>PASSEPORT</option>
+                                                            <option value="cni">CNI</option>
+                                                            <option value="birth_act">Extrait de naissance</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
                                                     <label for="inputPassword"
                                                         class="col-sm-2 col-form-label">Description</label>
                                                     <div class="col-sm-10">
@@ -282,6 +300,8 @@
                                         <th scope="col">#id</th>
                                         <th></th>
                                         <th scope="col">nom </th>
+                                        <th scope="col">Coût </th>
+                                        <th scope="col">Type</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Afficher sur site</th>
                                         <th scope="col">Désactiver</th>
@@ -303,6 +323,8 @@
                                                 </a>
                                             </td>
                                             <td>{{ $service->name }}</td>
+                                            <td>{{ $service->prix }}</td>
+                                            <td>{{ $service->form_type }}</td>
                                             <td>{{ mb_strimwidth($service->description, 0, 50) }}</td>
                                             <td>
                                                 {{ $service->is_public == "1" ? 'oui' : 'non' }}
@@ -349,6 +371,31 @@
                                                                                         class="form-control">
                                                                                 </div>
                                                                             </div>
+
+                                                                            <div class="row mb-3">
+                                                                                <label for="inputText"
+                                                                                    class="col-sm-2 col-form-label">Coût</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input name="prix"
+                                                                                        value="{{ $service->prix }}"
+                                                                                        class="form-control">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row mb-3">
+                                                                                <label for="#type"
+                                                                                    class="col-sm-2 col-form-label">Type</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <select name="form_type" id="type" >
+                                                                                        <option value="passport" {{ $service->form_type == 'passport' ? 'selected' : ''}} >PASSEPORT</option>
+                                                                                        <option value="cni" {{ $service->form_type == 'cni' ? 'selected' : ''}}>CNI</option>
+                                                                                        <option value="birth_act" {{ $service->form_type == 'birth_act' ? 'selected' : ''}}>Extrait de naissance</option>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                
+                                                                            </div>
+
 
                                                                             <div class="row mb-3">
                                                                                 <label for="inputPassword"

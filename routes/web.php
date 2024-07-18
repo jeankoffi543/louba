@@ -72,11 +72,11 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::prefix('produit')->middleware('CheckHabiletesPermissions:gestion-produits')->group(function () {
-        Route::get('/', [ProduitController::class, 'index'])->name('products')->withoutMiddleware('CheckHabiletesPermissions:gestion-produits');
-        Route::post('/store', [ProduitController::class, 'insert'])->name('products.store');
-        Route::put('/edit/{product}', [ProduitController::class, 'update'])->name('products.update');
-    });
+    // Route::prefix('produit')->middleware('CheckHabiletesPermissions:gestion-des-services')->group(function () {
+    //     Route::get('/', [ProduitController::class, 'index'])->name('products')->withoutMiddleware('CheckHabiletesPermissions:gestion-des-services');
+    //     Route::post('/store', [ProduitController::class, 'insert'])->name('products.store');
+    //     Route::put('/edit/{product}', [ProduitController::class, 'update'])->name('products.update');
+    // });
 
 
 
@@ -172,7 +172,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('services')->middleware('CheckHabiletesPermissions:gestion-portail-web')->group(function () {
-        Route::get('/', [ServiceController::class, 'index'])->name('services')->withoutMiddleware('CheckHabiletesPermissions:gestion-produits');
+        Route::get('/', [ServiceController::class, 'index'])->name('services')->withoutMiddleware('CheckHabiletesPermissions:gestion-des-services');
         Route::put('/edit/{service}', [ServiceController::class, 'edit'])->name('services.edit');
 
         Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
