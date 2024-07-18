@@ -89,7 +89,7 @@
 
         <tr>
             <td>Montant à payer</td>
-            <td class="donnees">{{$maDemande->product->prix }} GNF</td>
+            <td class="donnees">{{optional($maDemande->product)->prix }} GNF</td>
         </tr>
 
     </table>
