@@ -80,7 +80,7 @@
 
         <tr>
             <td>point d'enrollement</td>
-            <td class="donnees">{{ $maDemande->point_enrolement->nom_pe }}</td>
+            <td class="donnees">{{  optional($maDemande->point_enrolement)->nom_pe }}</td>
         </tr>
 
 
