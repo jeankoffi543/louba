@@ -7,6 +7,7 @@ use App\Models\PointEnrolementLienTypeDocument;
 use App\Models\PointEnrolementProduct;
 use App\Models\Product;
 use App\Models\PublicHoliday;
+use App\Models\Service;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,9 +18,9 @@ class PointenrollementController extends Controller
 
     public static function get()
     {
-        $pointenrollements = PointEnrolement::all();
+        $pointenrollements = PointEnrolement::with('services')->get();
         $jourferiers = PublicHoliday::all();
-        $produits = Product::all();
+        $produits = Service::all();
         $produits_lk = []; // DB::table('point_enrolement_lien_type_document')->get()
 
         //dd($users);
@@ -35,9 +36,9 @@ class PointenrollementController extends Controller
     public static function index()
     {
 
-        $pointenrollements = PointEnrolement::all();
+        $pointenrollements = PointEnrolement::with('services')->get();
         $jourferiers = PublicHoliday::all();
-        $produits = Product::all();
+        $produits = Service::all();
         $produits_lk = []; // DB::table('point_enrolement_lien_type_document')->get()
 
         //dd($users);
@@ -57,19 +58,24 @@ class PointenrollementController extends Controller
 
         $pointEnrolement = PointEnrolement::find($id);
 
-        $availableProduct = PointEnrolementProduct::with('products')->where('id_point_enrolement', $id)->get();
+        $availableProduct = PointEnrolementProduct::with('services')->where('id_point_enrolement', $id)->get();
 
-        $products  = Product::all();
+        $products  = Service::all();
         return view('admin.pointenrollement.details', compact('pointEnrolement', 'products', 'availableProduct'));
     }
 
     public static function insert(Request $request)
     {
 
-        DB::table('point_enrolement')->insert([
-            'nom_pe' => $request->nom_pe,
-            'capacite_maximale_jour_pe' => $request->capacite_maximale_jour_pe,
-        ]);
+        $pointEnrolements = new PointEnrolement();
+        $pointEnrolements->nom_pe = $request->nom_pe;
+        $pointEnrolements->capacite_maximale_jour_pe = $request->capacite_maximale_jour_pe;
+        $pointEnrolements->save();
+        $pointEnrolements->services()->attach($request->services);
+        // DB::table('point_enrolement')->insert([
+        //     'nom_pe' => $request->nom_pe,
+        //     'capacite_maximale_jour_pe' => $request->capacite_maximale_jour_pe,
+        // ]);
 
         return redirect()->back()->with('success_message', 'Point d\'enrolement enregistré');
     }
@@ -85,6 +91,7 @@ class PointenrollementController extends Controller
             $pointEnrolement->capacite_maximale_jour_pe = $request->capacite_maximale_jour_pe;
 
             $pointEnrolement->update();
+            $pointEnrolement->services()->sync($request->services);
 
             return redirect()->back()->with('success_message', 'Point d\'enrolement mis à jour');
         } catch (Exception $e) {
@@ -104,17 +111,11 @@ class PointenrollementController extends Controller
 
         $id_point_enrolement = $id;
 
-        $exist = PointEnrolementProduct::where('id_product', $request->product_id)
-            ->where('id_point_enrolement', $id_point_enrolement)
-            ->get();
 
-        if (count($exist) == 0) {
+        $pointEnrolement = PointEnrolement::where('id_pe', $id_point_enrolement)->first();
+            $pointEnrolement->services()->attach($request->service_id);
 
-
-            PointEnrolementProduct::create([
-                'id_product' => $request->product_id,
-                'id_point_enrolement' => $id_point_enrolement,
-            ]);
+        if ($pointEnrolement) {
 
             return redirect()->route('pointenrollement.details', $id_point_enrolement)->with('success_message', 'Ce produit a été ajouté au point d\'enrolement');
         } else {
@@ -128,11 +129,9 @@ class PointenrollementController extends Controller
 
         try {
 
-            $existingProduct = PointEnrolementProduct::where('id_product', $idProduct)
-                ->where('id_point_enrolement', $id_point_enrolement)
+            $pointEnrolement = PointEnrolement::where('id_pe', $id_point_enrolement)
                 ->first();
-
-            $existingProduct->delete();
+            $pointEnrolement->services()->detach($idProduct);
 
             return redirect()->route('pointenrollement.details', $id_point_enrolement)->with('success_message', 'Ce produit a été rétiré au point d\'enrolement');
         } catch (Exception $e) {

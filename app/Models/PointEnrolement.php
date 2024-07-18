@@ -11,6 +11,9 @@ class PointEnrolement extends Model
     protected $table = "point_enrolement";
     protected $primaryKey = "id_pe";
 
-
+public function services()
+{
+    return $this->belongsToMany(Service::class, "service_point_enrolement", "point_enrolement_id", "service_id");
+}
 
 }

@@ -68,6 +68,17 @@
                                                  </div>
 
                                                  <div class="row mb-3">
+                                                    <label for="services" class="col-sm-2 col-form-label">Service</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="services" class="form-select" required multiple id="services">
+                                                            @foreach ($produits as $service)
+                                                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                 <div class="row mb-3">
                                                      <label for="inputText" class="col-sm-2 col-form-label">capacite
                                                          maximale jour</label>
                                                      <div class="col-sm-10">
@@ -260,6 +271,16 @@
                                                                      </div>
 
 
+                                                                     <div class="row mb-3">
+                                                                        <label for="services" class="col-sm-2 col-form-label">Service</label>
+                                                                        <div class="col-sm-10">
+                                                                            <select name="services" class="form-select" required multiple id="services">
+                                                                                @foreach ($produits as $service)
+                                                                                    <option value="{{ $service->id }}" {{ in_array($service->id, $pointenrollement->services->pluck('id')->toArray()) ? 'selected' : ''}}>{{ $service->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
 
 
 

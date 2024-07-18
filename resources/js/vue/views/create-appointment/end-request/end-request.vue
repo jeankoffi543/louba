@@ -5,7 +5,7 @@
         <div class="card padding-1">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12">
+                    <!-- <div class="col-sm-12 col-md-12">
                         <el-form class="g-3 needs-validation" label-position="top">
                             <div class="row d-flex " style="margin-top: 1rem;">
                                 <div class="col-sm-12 col-item col-md-8" style=" ">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </el-form>
-                    </div>
+                    </div> -->
 
                     <div class="col-sm-12 col-md-12 d-flex justify-content-center center">
                         <div class="row">

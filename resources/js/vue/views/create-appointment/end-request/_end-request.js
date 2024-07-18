@@ -78,17 +78,17 @@ export default {
             this.isLoadingSaveAppointment = true;
             console.log("this.formDataRequest =====", this.formDataRequest)
             console.log('date de rdv ', new Date(this.dateAppointment).getTime())
-            if (this.siteAppointmentId == "" || this.siteAppointmentId == null) {
-                this.$swal({
-                    position: "center",
-                    icon: "warning",
-                    title: "Le site du rendez-vous est boligatoire",
-                    showConfirmButton: false,
-                    timer: 4500
+            // if (this.siteAppointmentId == "" || this.siteAppointmentId == null) {
+            //     this.$swal({
+            //         position: "center",
+            //         icon: "warning",
+            //         title: "Le site du rendez-vous est boligatoire",
+            //         showConfirmButton: false,
+            //         timer: 4500
 
-                });
-                return
-            }
+            //     });
+            //     return
+            // }
 
             if (this.dateAppointment == "" || new Date(this.dateAppointment).getTime() <= new Date().getTime()) {
                 this.$swal({
@@ -134,7 +134,7 @@ export default {
                 "id_type_service",
                 this.formDataRequest?.service?.id ?? null
             );
-            formData.append("id_point_enrolement", this.siteAppointmentId);
+            formData.append("id_point_enrolement", this.formDataRequest?.user?.siteAppointmentId?.id_pe);
          
 
             // await this.$store.dispatch("SAVE_APPOINTMENT", formData)

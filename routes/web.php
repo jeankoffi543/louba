@@ -115,7 +115,7 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/link_product/{id}', [PointenrollementController::class, 'linkProduct'])->name('pointenrollement.link_product');
 
-        Route::get('/unlink_product/{product_id}/{id_point_enrolement}', [PointenrollementController::class, 'unlinkProduct'])->name('pointenrollement.unlink_product');
+        Route::get('/unlink_product/{service_id}/{id_point_enrolement}', [PointenrollementController::class, 'unlinkProduct'])->name('pointenrollement.unlink_product');
         Route::get('/delete_produit_a_gerer/{id}', [PointenrollementController::class, 'delete_produit_a_gerer']);
     });
 

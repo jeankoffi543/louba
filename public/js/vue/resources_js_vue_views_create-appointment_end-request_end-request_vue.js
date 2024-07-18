@@ -29,94 +29,44 @@ var _hoisted_4 = {
   "class": "row"
 };
 var _hoisted_5 = {
-  "class": "col-sm-12 col-md-12"
-};
-var _hoisted_6 = {
-  "class": "row d-flex",
-  style: {
-    "margin-top": "1rem"
-  }
-};
-var _hoisted_7 = {
-  "class": "col-sm-12 col-item col-md-8",
-  style: {}
-};
-var _hoisted_8 = {
   "class": "col-sm-12 col-md-12 d-flex justify-content-center center"
 };
-var _hoisted_9 = {
+var _hoisted_6 = {
   "class": "row"
 };
-var _hoisted_10 = {
+var _hoisted_7 = {
   "class": "col-md-8 col-sm-12"
 };
-var _hoisted_11 = {
+var _hoisted_8 = {
   "class": "content-info-personal-appointment mt-0"
 };
-var _hoisted_12 = {
+var _hoisted_9 = {
   "class": "col-sm-12 col-md 4"
 };
-var _hoisted_13 = {
+var _hoisted_10 = {
   "class": "d-flex flex-column"
 };
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "col-sm-12 col-md-12 mb-1"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Légende")], -1 /* HOISTED */);
 });
-var _hoisted_15 = {
+var _hoisted_12 = {
   "class": "col-sm-12 col-md-12 mb-1"
 };
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-sm-12 col-md-12 mb-1\" style=\"margin-top:1.5rem;\" data-v-c5606edc><b data-v-c5606edc>Horaire</b></div><div class=\"col-sm-12 col-md-12 d-flex\" data-v-c5606edc><div class=\"item-time text-center w-100 rounded-2 w-auto\" data-v-c5606edc><span class=\"\" data-v-c5606edc>Matin 8h30-12h30</span></div><div class=\"col-sm-12 col-md-6 col-lg-6 w-auto mr-1 ml-1\" data-v-c5606edc> / </div><div class=\"item-time text-center w-100 rounded-2 w-auto\" data-v-c5606edc><span class=\"\" data-v-c5606edc>Soir 13h30-17h00</span></div></div>", 2);
-var _hoisted_18 = {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-sm-12 col-md-12 mb-1\" style=\"margin-top:1.5rem;\" data-v-c5606edc><b data-v-c5606edc>Horaire</b></div><div class=\"col-sm-12 col-md-12 d-flex\" data-v-c5606edc><div class=\"item-time text-center w-100 rounded-2 w-auto\" data-v-c5606edc><span class=\"\" data-v-c5606edc>Matin 8h30-12h30</span></div><div class=\"col-sm-12 col-md-6 col-lg-6 w-auto mr-1 ml-1\" data-v-c5606edc> / </div><div class=\"item-time text-center w-100 rounded-2 w-auto\" data-v-c5606edc><span class=\"\" data-v-c5606edc>Soir 13h30-17h00</span></div></div>", 2);
+var _hoisted_15 = {
   "class": "col-sm-6 col-md-8 d-flex justify-content-between align-items-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_el_option = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-option");
-  var _component_el_select = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-select");
-  var _component_el_form_item = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-form-item");
-  var _component_el_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-form");
   var _component_el_tag = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-tag");
   var _component_el_calendar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-calendar");
   var _component_ButtonApp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonApp");
   var _directive_loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("loading");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form, {
-    "class": "g-3 needs-validation",
-    "label-position": "top"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, {
-        label: "Choisir le point d'enrollement",
-        required: ""
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
-            modelValue: _ctx.siteAppointmentId,
-            "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-              return _ctx.siteAppointmentId = $event;
-            }),
-            "class": "w-100"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.enrolmentsPoint, function (item) {
-                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_option, {
-                  key: item.id_pe,
-                  label: item.nom_pe,
-                  value: item.id_pe
-                }, null, 8 /* PROPS */, ["label", "value"]);
-              }), 128 /* KEYED_FRAGMENT */))];
-            }),
-            _: 1 /* STABLE */
-          }, 8 /* PROPS */, ["modelValue"])];
-        }),
-        _: 1 /* STABLE */
-      })])])];
-    }),
-    _: 1 /* STABLE */
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_calendar, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-sm-12 col-md-12\">\n                        <el-form class=\"g-3 needs-validation\" label-position=\"top\">\n                            <div class=\"row d-flex \" style=\"margin-top: 1rem;\">\n                                <div class=\"col-sm-12 col-item col-md-8\" style=\" \">\n                                    <el-form-item label=\"Choisir le point d'enrollement\" required>\n\n                                        <el-select v-model=\"siteAppointmentId\" class=\"w-100\">\n                                            <el-option\n                                                v-for=\"item in enrolmentsPoint\"\n                                                :key=\"item.id_pe\"\n                                                :label=\"item.nom_pe\"\n                                                :value=\"item.id_pe\"\n                                            >\n                                            </el-option>\n                                        </el-select>\n                                    </el-form-item>\n                                </div>\n                            </div>\n                        </el-form>\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_calendar, {
     ref: "calendar",
     modelValue: _ctx.dateAppointment,
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return _ctx.dateAppointment = $event;
     })
   }, {
@@ -151,7 +101,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }))], 2 /* CLASS */)];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_tag, {
+  }, 8 /* PROPS */, ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_tag, {
     "class": "",
     style: {
       "width": "auto",
@@ -175,7 +125,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" jour ouvrable ")];
     }),
     _: 1 /* STABLE */
-  })]), _hoisted_16])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
+  })]), _hoisted_13])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
     "primary-btn": false,
     "button-title": "Retour",
     "class": "space1",
@@ -292,6 +242,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           _this$formDataRequest3,
           _this$formDataRequest4,
           _this$formDataRequest5,
+          _this$formDataRequest6,
           _this2 = this;
         var payload, formData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -300,21 +251,19 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               this.isLoadingSaveAppointment = true;
               console.log("this.formDataRequest =====", this.formDataRequest);
               console.log('date de rdv ', new Date(this.dateAppointment).getTime());
-              if (!(this.siteAppointmentId == "" || this.siteAppointmentId == null)) {
-                _context.next = 6;
-                break;
-              }
-              this.$swal({
-                position: "center",
-                icon: "warning",
-                title: "Le site du rendez-vous est boligatoire",
-                showConfirmButton: false,
-                timer: 4500
-              });
-              return _context.abrupt("return");
-            case 6:
+              // if (this.siteAppointmentId == "" || this.siteAppointmentId == null) {
+              //     this.$swal({
+              //         position: "center",
+              //         icon: "warning",
+              //         title: "Le site du rendez-vous est boligatoire",
+              //         showConfirmButton: false,
+              //         timer: 4500
+
+              //     });
+              //     return
+              // }
               if (!(this.dateAppointment == "" || new Date(this.dateAppointment).getTime() <= new Date().getTime())) {
-                _context.next = 9;
+                _context.next = 6;
                 break;
               }
               this.$swal({
@@ -325,7 +274,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
                 timer: 4500
               });
               return _context.abrupt("return");
-            case 9:
+            case 6:
               payload = {
                 key: [_core_constants__WEBPACK_IMPORTED_MODULE_2__.KEY_FORM_JSON.DATE_APPOINTMENT],
                 data: this.dateAppointment
@@ -343,7 +292,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               formData.append("id_demande", (_this$formDataRequest3 = this.formDataRequest) === null || _this$formDataRequest3 === void 0 || (_this$formDataRequest3 = _this$formDataRequest3.user) === null || _this$formDataRequest3 === void 0 ? void 0 : _this$formDataRequest3.documentId);
               formData.append("type_service_passport", null);
               formData.append("id_type_service", (_this$formDataRequest4 = (_this$formDataRequest5 = this.formDataRequest) === null || _this$formDataRequest5 === void 0 || (_this$formDataRequest5 = _this$formDataRequest5.service) === null || _this$formDataRequest5 === void 0 ? void 0 : _this$formDataRequest5.id) !== null && _this$formDataRequest4 !== void 0 ? _this$formDataRequest4 : null);
-              formData.append("id_point_enrolement", this.siteAppointmentId);
+              formData.append("id_point_enrolement", (_this$formDataRequest6 = this.formDataRequest) === null || _this$formDataRequest6 === void 0 || (_this$formDataRequest6 = _this$formDataRequest6.user) === null || _this$formDataRequest6 === void 0 || (_this$formDataRequest6 = _this$formDataRequest6.siteAppointmentId) === null || _this$formDataRequest6 === void 0 ? void 0 : _this$formDataRequest6.id_pe);
 
               // await this.$store.dispatch("SAVE_APPOINTMENT", formData)
               axios__WEBPACK_IMPORTED_MODULE_7__["default"].post("/api/save-appointment", formData).then(function (responseAxios) {
@@ -390,7 +339,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
                 console.log("err", err);
                 _this2.isLoadingSaveAppointment = false;
               })["finally"](function () {});
-            case 19:
+            case 16:
             case "end":
               return _context.stop();
           }

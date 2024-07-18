@@ -23,4 +23,9 @@ class Service extends Model
     protected $casts = [
         'habiletes' => 'array',
     ];
+
+    public function pointEnrolements()
+    {
+        return $this->belongsToMany(PointEnrolement::class,'service_point_enrolement','service_id','point_enrolement_id');
+    }
 }
