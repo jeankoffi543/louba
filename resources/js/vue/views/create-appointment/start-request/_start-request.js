@@ -24,9 +24,11 @@ export default {
             typeServiceSelected: null,
             formPersonalInfo: {
                 firstname: "",
+                pointEnrolementServices: [],
                 lastname: "",
                 numero_recu: "",
                 documentId: String,
+                siteAppointmentId: "",
                 nationality: "",
                 nationality_state: "",
                 profession: "",
@@ -65,9 +67,11 @@ export default {
             "FETCH_PRODUCTS",
             "FETCH_SERVICES",
             "FETCH_SELECT_SERVICE",
+            "FETCH_ENROLMENTS_POINTS",
         ]),
         ...mapGetters({
             products: "GET_PRODUCTS",
+            enrolmentsPoint: "GET_ENROLMENTS_POINTS",
             isLoading:
                 "IS_LOADING_APPOINTMENT" ||
                 "IS_LOADING_PRODUCTS" ||
@@ -98,9 +102,16 @@ export default {
         this.fetchDataSerives();
         this.formPersonalInfo.documentId = this.$route.params.documentId;
     },
-    created() {},
+    created() {
+        this.$store.dispatch("FETCH_ENROLMENTS_POINTS");
+    },
 
     methods: {
+        changeEnrolment: function (item) {
+            console.log("changeEnrolment pointEnrolement_id", item);
+
+            this.formPersonalInfo.pointEnrolementServices = item?.services;
+        },
         onSwitchPage: function () {
             if (
                 this.productSelected?.select_service_is_required &&
@@ -114,7 +125,14 @@ export default {
                     timer: 4500,
                 });
                 return;
-            } else if (this.formPersonalInfo.numero_recu === "") {
+            } else if (
+                this.formPersonalInfo.numero_recu === "" ||
+                this.formPersonalInfo.numero_recu === null ||
+                this.formPersonalInfo.numero_recu === undefined ||
+                this.formPersonalInfo.numero_recu === "" ||
+                this.formPersonalInfo.siteAppointmentId === null ||
+                this.formPersonalInfo.siteAppointmentId == ""
+            ) {
                 this.$swal({
                     position: "center",
                     icon: "warning",

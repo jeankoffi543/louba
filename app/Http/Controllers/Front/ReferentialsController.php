@@ -88,7 +88,7 @@ class ReferentialsController extends Controller
     public static function getPointEnrolement()
     {
         try {
-            return response()->json(PointEnrolement::all());
+            return response()->json(PointEnrolement::with('services')->get());
         } catch (\Exception $ex) {
             return response(500)->json([
                 "error" => $ex->getMessage(),

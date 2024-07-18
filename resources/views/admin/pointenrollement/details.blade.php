@@ -71,26 +71,26 @@
 
 
                                 <div class="card-header">
-                                    <b> Produits du centre</b>
+                                    <b> Service du centre</b>
                                 </div>
 
                                 <div class="table-responsive">
                                     <table class="table  table-striped">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Produit</th>
-                                                <th>Retirer le produit</th>
+                                                <th scope="col">Services</th>
+                                                <th>Retirer le service</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
 
-                                            @foreach ($availableProduct as $avProduct)
+                                            @foreach ($pointEnrolement->services as $service)
                                                 <tr>
-                                                    <td><a href="#">#{{ $avProduct->products->nom }}</a>
+                                                    <td><a href="#">#{{ $service->name }}</a>
                                                     </td>
                                                     <td><a
-                                                            href="{{ route('pointenrollement.unlink_product', ['product_id' => $avProduct->products->id, 'id_point_enrolement' => $pointEnrolement->id_pe]) }}">Délier</a>
+                                                            href="{{ route('pointenrollement.unlink_product', ['service_id' => $service->id, 'id_point_enrolement' => $pointEnrolement->id_pe]) }}">Délier</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -111,7 +111,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-save2"></i> Lier un nouveau produit
+                    <h5 class="modal-title"><i class="bi bi-save2"></i> Lier un nouveau servcie
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -121,12 +121,12 @@
                     <div class="modal-body">
 
                         <div class="row mb-3">
-                            <label for="inputText" class="col-sm-2 col-form-label">Produit</label>
+                            <label for="inputText" class="col-sm-2 col-form-label">Services</label>
                             <div class="col-sm-10">
-                                <select name="product_id" id="" class="form-control">
+                                <select name="service_id" id="" class="form-control">
                                     <option value=""></option>
                                     @foreach ($products as $product)
-                                        <option value="{{ $product->id }}">{{ $product->nom }}</option>
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

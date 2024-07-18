@@ -2,13 +2,34 @@
     <div class="start-request">
         <div class="demo-collapse">
             <el-collapse ref="collapse" v-model="activeNames" @change="handleChange">
+
+                <div class="col-sm-12 col-md-12">
+                        <el-form class="g-3 needs-validation" label-position="top">
+                            <div class="row d-flex " style="margin-top: 1rem;">
+                                <div class="col-sm-12 col-md-12" style=" ">
+                                    <el-form-item label="Choisir le point d'enrollement" required>
+
+                                        <el-select v-model="formPersonalInfo.siteAppointmentId" class="w-100" @change="item => changeEnrolment(item)">
+                                            <el-option
+                                                v-for="item in enrolmentsPoint"
+                                                :key="item.id_pe"
+                                                :label="item.nom_pe"
+                                                :value="item"
+                                            >
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                        </el-form>
+                    </div>
                  
                         <el-collapse-item id="typeServiceRef" ref="typeServiceRef" name="2"
                             title="Selectionner le type de service">
                             <div class="service-appointment">
                                 <div class="container-fluid">
                                     <div class="row container-appointment-form-row">
-                                        <div v-for="(item, index) in servivesAvailable" :key="index"
+                                        <div v-for="(item, index) in formPersonalInfo.pointEnrolementServices" :key="index"
                                             class="item-request-type col-sm-12 col-md-6  col-lg-3 mb-2"
                                             @click="radioAppointmentChangeService(item, 3)">
                                             <div :class="{ selected: item?.id == serviceSelected?.id }"
@@ -28,7 +49,7 @@
                             </div>
 
                             <div class="row my-2">
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="group">
                                             <h1 class="fs-5 item-title">Numéro reçu</h1>
 

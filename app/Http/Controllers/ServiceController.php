@@ -77,6 +77,7 @@ class ServiceController extends Controller
             }
 
             $service->delete();
+            $service->pointEnrolements()->detach();
 
             return redirect()->route('services')->with('success_message', 'Le service a été rétiré');
         } catch (Exception $e) {
