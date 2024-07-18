@@ -509,6 +509,7 @@ echo $nextday;
                         </a>
                     </li>
 
+                    @kcan('gestion-des-services')
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('services') ? 'text-danger' : '' }}"
                             href="{{ route('services') }}">
@@ -516,15 +517,16 @@ echo $nextday;
                             <span>Services</span>
                         </a>
                     </li>
+                    @endkcan
 
-                    @kcan('gestion-produits')
+                    {{-- @kcan('gestion-des-services')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('produit') ? 'text-danger' : '' }}" href="/produit">
                                 <i class="bi bi-plug-fill"></i>
                                 <span>Produits</span>
                             </a>
                         </li>
-                    @endkcan
+                    @endkcan --}}
 
 
                     <li class="nav-item">

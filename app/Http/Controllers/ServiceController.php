@@ -109,6 +109,8 @@ class ServiceController extends Controller
         Service::create([
             'name' => $request->name,
             'description' => $request->description,
+            'prix' => $request->prix,
+            'form_type' => $request->form_type,
             'image' => $imageUrl,
             'is_public' => $request->is_public ? 1 : 0,
             'is_disable' => $request->is_disable ? 1 : 0,
@@ -148,6 +150,8 @@ class ServiceController extends Controller
 
             $service->name = $request->name;
             $service->description = $request->description;
+            $service->prix = $request->prix;
+            $service->form_type = $request->form_type;
             $service->is_public = $request->is_public ? 1 : 0;
             $service->is_disable =  $request->is_disable ? 1 : 0;
             $service->update();

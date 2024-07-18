@@ -72,7 +72,7 @@ class WorkFlowManger
 
       } else {
          $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW', 'CLOSED']);
-         $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
+         $demandes = $demandes->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes');
       }
       return $demandes->get();
    }

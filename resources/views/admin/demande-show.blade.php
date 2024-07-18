@@ -346,7 +346,7 @@
                                      Montant à payer
                                  </div>
                                  <div class="col-9">
-                                     {{ optional($demande->product)->prix ?? '-' }} GNF
+                                     {{ optional($demande->service)->prix ?? '-' }} GNF
                                  </div>
                              </div>
 
