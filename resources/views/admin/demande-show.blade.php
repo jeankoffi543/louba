@@ -150,8 +150,8 @@
                                      Nom & Prénom
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->client->nom_client ?? '-' }}
-                                     {{ $demande->client->prenom_client ?? '-' }}
+                                     {{  optional($demande->client)->nom_client ?? '-' }}
+                                     {{  optional($demande->client)->prenom_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -161,7 +161,7 @@
                                      Email
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->client->email_client ?? '-' }}
+                                     {{  optional($demande->client)->email_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -172,7 +172,7 @@
                                      contact
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->client->telephone_client ?? '-' }}
+                                     {{  optional($demande->client)->telephone_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -182,7 +182,7 @@
                                      contact
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->client->telephone_client ?? '-' }}
+                                     {{  optional($demande->client)->telephone_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -191,7 +191,7 @@
                                      Adresse
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->client->address ?? '-' }}
+                                     {{  optional($demande->client)->address ?? '-' }}
                                  </div>
                              </div>
 
@@ -201,7 +201,7 @@
                                      Date de naissance
                                  </div>
                                  <div class="col-9">
-                                     {{ (new DateTime($demande->client->date_naissance_client))->format('d/m/Y') ?? '-' }}
+                                     {{ (new DateTime( optional($demande->client)->date_naissance_client))->format('d/m/Y') ?? '-' }}
                                  </div>
                              </div>
 
@@ -210,7 +210,7 @@
                                      Genre
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->client->genre_client ?? '-' }}
+                                     {{  optional($demande->client)->genre_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -276,7 +276,7 @@
                                      Point d'enrolement
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->point_enrolement->nom_pe ?? '-' }}
+                                     {{  optional($demande->point_enrolement)->nom_pe ?? '-' }}
                                  </div>
                              </div>
 
@@ -285,7 +285,7 @@
                                      capacité journalière
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->point_enrolement->capacite_maximale_jour_pe ?? '-' }}
+                                     {{  optional($demande->point_enrolement)->capacite_maximale_jour_pe ?? '-' }}
                                  </div>
                              </div>
 
@@ -315,7 +315,7 @@
                                      Service
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->service->name ?? '-' }}
+                                     {{  optional($demande->service)->name ?? '-' }}
                                  </div>
                              </div>
 

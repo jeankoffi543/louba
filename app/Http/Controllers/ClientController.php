@@ -398,7 +398,7 @@ class ClientController extends Controller
             ];
 
             try {
-                Mail::to($demandeSave->client->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
+                Mail::to( optional($demandeSave->client)->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
             } catch (Exception $ex) {
                 DB::rollBack();
                 $data["demande"] = null;
@@ -718,10 +718,10 @@ class ClientController extends Controller
                         $message_email = "Votre paiement à été validé \n reference de paiement:" . $transaction_reference . "\n montant: " . $amount;
                         //                        $curl = new \GuzzleHttp\Client();
                         //                        $url = "https://smswanwaran.com/index.php";
-                        //                        $response = $curl->request('GET', $url, ['query' => ['app' => "ws", 'u' => "theonemonk",  "from" => "LOUBA", 'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d", 'op' => "pv", 'to' => "224" . $demande->client->telephone_client, 'msg' => $message_sms,]]);
+                        //                        $response = $curl->request('GET', $url, ['query' => ['app' => "ws", 'u' => "theonemonk",  "from" => "LOUBA", 'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d", 'op' => "pv", 'to' => "224" .  optional($demande->client)->telephone_client, 'msg' => $message_sms,]]);
                         $newSms = new SendSmS();
                         try {
-                            $newSms->send($demande->client->telephone_client, $message_sms);
+                            $newSms->send( optional($demande->client)->telephone_client, $message_sms);
                         } catch (GuzzleException $e) {
                             throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
                         }
@@ -741,7 +741,7 @@ class ClientController extends Controller
                             'data' => $pdf->output()
                         ];
 
-                        Mail::to($demande->client->email_client)->send(new AttachmentTicketMail($data, $attachment));
+                        Mail::to( optional($demande->client)->email_client)->send(new AttachmentTicketMail($data, $attachment));
 
 
                         return response()->json(['data' => $paiement, "status" => "ACCEPTED", 'message' => 'paiement éfféctué'], 200);
@@ -794,7 +794,7 @@ class ClientController extends Controller
             //            $paiement = new Paiement();
             //            $paiement->amount_pay = $amount;
             //            $paiement->reference_pay = null;
-            //            $paiement->id_client = $demande->client->id_client;
+            //            $paiement->id_client =  optional($demande->client)->id_client;
             //            $paiement->id_demande = $request->id;
             //            $paiement->created_at = now();
             $paiement = Paiement::query()->where('id_demande', $demande->id)->first();
@@ -803,7 +803,7 @@ class ClientController extends Controller
                 $paiement = Paiement::query()->create([
                     "amount_pay" => $amount,
                     "reference_pay" => null,
-                    "id_client" => $demande->client->id,
+                    "id_client" =>  optional($demande->client)->id,
                     "id_demande" => $request->id,
                     "created_at" => now()
                 ]);
@@ -820,7 +820,7 @@ class ClientController extends Controller
                 "currency" => $currency,
                 "description" => $description,
                 "channels" => $channels,
-                "customer_id" => "" . $demande->client->id,
+                "customer_id" => "" .  optional($demande->client)->id,
                 "customer_name" => $customer_name,
                 "return_url" => $return_url
             ];

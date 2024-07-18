@@ -60,13 +60,16 @@ class WorkFlowManger
             $demandes = $demandes->where('production_disponible', 1)->where('id_point_enrolement', $user->id_point_enrolement);
          } 
          else if ($status && $status === "PRE-DEMANDE") {
-            // $demandes = $demandes->where('predemande_step', 1);
-            // dd($demandes->get());
+            
+            return Demande::where('predemande_step', '=', 1)->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
          }
          else {
-            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW', 'CLOSED'])->where('id_point_enrolement', $user->id_point_enrolement);
+            $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW'])->where('id_point_enrolement', $user->id_point_enrolement)->where('predemande_step', '>', 2);
+
          }
+
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
+
       } else {
          $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW', 'CLOSED']);
          $demandes = $demandes->with('demandes.product', 'demandes.service', 'demandes.client', 'demandes.point_enrolement', 'demandes.piece_jointes');
@@ -85,7 +88,7 @@ class WorkFlowManger
 
       if (!$demande) return;
 
-      $habiletes = $demande->service->habiletes;
+      $habiletes = optional($demande->service)->habiletes;
       $habiletes = is_array($habiletes) ? $habiletes : (is_null($habiletes) ? [] : json_decode($habiletes, true));
       $habilete_position = intval($demande->habilete_position);
 
@@ -220,7 +223,15 @@ class WorkFlowManger
       } else if ($request->request_type === "acquittement-delivrance-document" && $this->userCan("acquittement-delivrance-document")) {
          $demande->status_demande = "CLOSED";
          $demande->save();
-      } else {
+      }else if ($request->request_type === "gestion-pre-demande-valider" && $this->userCan("gestion-pre-demande")) {
+         $demande->predemande_step = 2;
+         $demande->save();
+      }else if ($request->request_type === "gestion-pre-demande-rejeter" && $this->userCan("gestion-pre-demande")) {
+         $demande->predemande_step = 1;
+         $demande->status_demande = "REJECTED";
+         $demande->save();
+      }  
+      else {
          abort(404, 'Forbidden');
       }
    }

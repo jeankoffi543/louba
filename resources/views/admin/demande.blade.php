@@ -71,7 +71,7 @@ url_piece_fournie_demande,
                                          <th scope="col">#</th>
                                          <th scope="col">Code</th>
                                          <th scope="col">Service</th>
-                                         <th scope="col">Produit</th>
+                                         {{-- <th scope="col">Produit</th> --}}
                                          <th scope="col">Client</th>
                                          <th scope="col">Date de rendez-vous</th>
                                          <th scope="col">Point d'enrolement</th>
@@ -180,13 +180,16 @@ url_piece_fournie_demande,
 
                                              <td class="align-middle"> {{ $demande->id }}</td>
                                              <td class="align-middle"> {{ $demande->code_demande }}</td>
-                                             <td class="align-middle"> {{ $demande->service->name }}</td>
-                                             <td class="align-middle"> {{ $demande->product->nom }}</td>
-                                             <td class="align-middle"> {{ $demande->client->nom_client }} {{ $demande->client->prenom_client }}
+                                             <td class="align-middle"> {{ optional($demande->service)->name }}</td>
+                                             {{-- <td class="align-middle"> {{ $demande->product->nom }}</td> --}}
+                                             <td class="align-middle"> {{ $demande->client->nom_client }}
+                                                 {{ $demande->client->prenom_client }}
                                              </td>
                                              <td class="align-middle"> {{ $demande->date_rdv_demande }}</td>
-                                             <td class="align-middle"> {{ $demande->point_enrolement->nom_pe }}</td>
-                                             <td class="align-middle"><span class="rounded-pill px-3 py-1" style="background-color: {{formatStatus($demande->status_demande)['color']}}">{{formatStatus($demande->status_demande)['label']}}</span> </td>
+                                             <td class="align-middle"> {{  optional($demande->point_enrolement)->nom_pe }}</td>
+                                             <td class="align-middle"><span class="rounded-pill px-3 py-1"
+                                                     style="background-color: {{ formatStatus($demande->status_demande)['color'] }}">{{ formatStatus($demande->status_demande)['label'] }}</span>
+                                             </td>
                                              @kcan('consulter-demande,gestion-demandes')
                                                  <td><a class="btn btn-primary"
                                                          href="{{ route('demande.show', $demande->id) }}"> Détails</a> </td>

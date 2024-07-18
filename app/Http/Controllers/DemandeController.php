@@ -134,7 +134,7 @@ class DemandeController extends Controller
                         "from" => "LOUBA",
                         'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d",
                         'op' => "pv",
-                        'to' => "224" . $demande->client->telephone_client,
+                        'to' => "224" .  optional($demande->client)->telephone_client,
                         'msg' => $message_sms,
                     ]]);
 
@@ -473,6 +473,10 @@ class DemandeController extends Controller
     public function manage(Request $request)
     {
         WorkFlow::manage($request);
+
+        if($request->request_type === "gestion-pre-demande-valider" || $request->request_type === "gestion-demande-rejeter"){
+        return redirect()->route('pre.demande')->with('success_message', 'Enregistrée avec succès.');
+        }
         return redirect()->route('demande.show', ['id' => $request->demande_id])->with('success_message', 'Enregistrée avec succès.');
     }
 
@@ -487,8 +491,16 @@ class DemandeController extends Controller
     public function preDemande()
     {
         $authUser = auth()->user();
-        return view('admin.demande', [
+        return view('admin.pre-demande', [
             'demandes' => WorkFlow::getDemandeByHabilete($authUser, "PRE-DEMANDE"),
         ]);
+    }
+
+    public function preDemandeShow($id)
+    {
+        $demande = Demande::query()
+        ->where('id', $id)->with('client' , 'piece_jointes')->first();
+
+        return view('admin.pre-demande-show', ["demande" => $demande]);
     }
 }

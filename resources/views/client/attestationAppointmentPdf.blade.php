@@ -168,7 +168,7 @@
             </span></p>
 
         <p>Point de l'enrolement : <span style="text-transform: uppercase; margin-right: 40px">
-                {{ $maDemande->point_enrolement->nom_pe }}</span></p>
+                {{  optional($maDemande->point_enrolement)->nom_pe }}</span></p>
 
         <p>Montant à payer : <span style="text-transform: uppercase; margin-right: 40px">
                 {{ $maDemande->product->prix }} GNF</span></p>

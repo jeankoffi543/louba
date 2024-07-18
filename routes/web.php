@@ -94,6 +94,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('pre-demande')->group(function () {
         Route::get('/', [demandeController::class, 'preDemande'])->name('pre.demande')->middleware('CheckHabiletesPermissions:gestion-pre-demande');
+        Route::get('/{id}', [demandeController::class, 'preDemandeShow'])->name('pre.demande.show')->middleware('CheckHabiletesPermissions:gestion-pre-demande');
     });
 
     Route::prefix('productionDocument')->group(function () {

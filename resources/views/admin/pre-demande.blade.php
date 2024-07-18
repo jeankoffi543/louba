@@ -6,11 +6,11 @@
      <main id="main" class="main">
 
          <div class="pagetitle">
-             <h1>Demande</h1>
+             <h1>Pré Demande</h1>
              <nav>
                  <ol class="breadcrumb">
                      <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                     <li class="breadcrumb-item active">Demande</li>
+                     <li class="breadcrumb-item active">Pré Demande</li>
                  </ol>
              </nav>
          </div><!-- End Page Title -->
@@ -57,7 +57,7 @@ url_piece_fournie_demande,
                              ?>
 
 
-                             <h5 class="card-title">Traitements de Demandes <span>| {{ $demandes->count() }}</span></h5>
+                             <h5 class="card-title">Traitements des Pré Demandes <span>| {{ $demandes->count() }}</span></h5>
 
 
 
@@ -71,7 +71,7 @@ url_piece_fournie_demande,
                                          <th scope="col">#</th>
                                          <th scope="col">Code</th>
                                          <th scope="col">Service</th>
-                                         <th scope="col">Produit</th>
+                                         {{-- <th scope="col">Produit</th> --}}
                                          <th scope="col">Client</th>
                                          <th scope="col">Date de rendez-vous</th>
                                          <th scope="col">Point d'enrolement</th>
@@ -180,16 +180,19 @@ url_piece_fournie_demande,
 
                                              <td class="align-middle"> {{ $demande->id }}</td>
                                              <td class="align-middle"> {{ $demande->code_demande }}</td>
-                                             <td class="align-middle"> {{  optional($demande->service)->name }}</td>
-                                             <td class="align-middle"> {{ $demande->product->nom }}</td>
-                                             <td class="align-middle"> {{  optional($demande->client)->nom_client }} {{  optional($demande->client)->prenom_client }}
+                                             <td class="align-middle"> {{ optional($demande->service)->name }}</td>
+                                             {{-- <td class="align-middle"> {{ $demande->product->nom }}</td> --}}
+                                             <td class="align-middle"> {{ $demande->client->nom_client }}
+                                                 {{ $demande->client->prenom_client }}
                                              </td>
                                              <td class="align-middle"> {{ $demande->date_rdv_demande }}</td>
                                              <td class="align-middle"> {{  optional($demande->point_enrolement)->nom_pe }}</td>
-                                             <td class="align-middle"><span class="rounded-pill px-3 py-1" style="background-color: {{formatStatus($demande->status_demande)['color']}}">{{formatStatus($demande->status_demande)['label']}}</span> </td>
+                                             <td class="align-middle"><span class="rounded-pill px-3 py-1"
+                                                     style="background-color: {{ formatStatus($demande->status_demande)['color'] }}">{{ formatStatus($demande->status_demande)['label'] }}</span>
+                                             </td>
                                              @kcan('consulter-demande,gestion-demandes')
                                                  <td><a class="btn btn-primary"
-                                                         href="{{ route('demande.show', $demande->id) }}"> Détails</a> </td>
+                                                         href="{{ route('pre.demande.show', $demande->id) }}"> Détails</a> </td>
                                              @endkcan
                                              <?php
                                              
@@ -216,7 +219,7 @@ url_piece_fournie_demande,
                                                  <!-- Modal Dialog Scrollable -->
                                                  <a class="badge bg-success" data-bs-toggle="modal"
                                                      data-bs-target="#modalDialogScrollable2{{ $demande->id_type_document }}">Traiter
-                                                     Demande</a>
+                                                     Pré Demande</a>
                                                  <div class="modal fade"
                                                      id="modalDialogScrollable2{{ $demande->id_type_document }}"
                                                      tabindex="-1">
