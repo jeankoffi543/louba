@@ -384,14 +384,12 @@ $(document).ready(function () {
             $(`#circuitModal`).append(
                 generateCircuitSlectTemplate(habCount, allHabiletes)
             );
-          
-                $(`#removeCircuit${habCount}`).on("click", function (e) {
-                    e.preventDefault();
-                    $(this).parent().remove();
-                });
-          
+
+            $(`#removeCircuit${habCount}`).on("click", function (e) {
+                e.preventDefault();
+                $(this).parent().remove();
+            });
         });
-        
 
         if ($(`#hab`).data("hab") && Number($(`#hab`).data("hab")) > 0) {
             $habCount = Number($(`#hab`).data("hab"));
@@ -404,3 +402,71 @@ $(document).ready(function () {
         }
     }
 });
+
+function checkSMSLength(event) {
+    const maxLength = 160; // Set the maximum number of characters for an SMS
+    const text = event.target.value;
+
+    if (text.length > maxLength) {
+        event.target.value = text.slice(0, maxLength);
+    }
+
+    document.getElementById(
+        "charCount"
+    ).innerText = `${event.target.value.length} caractères`;
+}
+
+function validateSMS(event) {
+    const disallowedChars = ["$", "%", "#"]; // Specify the characters you want to disallow
+
+    const charCode = event.which || event.keyCode;
+    const char = String.fromCharCode(charCode);
+
+    if (disallowedChars.includes(char)) {
+        event.preventDefault();
+        return false;
+    }
+
+    return true;
+}
+
+function countUser(event, id, _token) {
+    var value = event.target.value;
+    var button = document.getElementById("envoyerMsg");
+    var buttonMail = document.getElementById("envoyerMail2");
+    button.disabled = true;
+    buttonMail.disabled = true;
+    document.getElementById(
+        "userCount"
+    ).innerText = `0 utilisateur(s)`;
+    document.getElementById(
+        "userCount2"
+    ).innerText = `0 utilisateur(s)`;
+
+    $.ajax({
+        type: "POST",
+        url: "/demande/manage/count",
+        data: {
+            destinataire: value,
+            request_type: "possibilite-d-envoyer-count-user",
+            demande_id: id,
+            _token: _token,
+        },
+        success: function (data) {
+            if (data.data.count == 0) {
+                button.disabled = true;
+                buttonMail.disabled = true;
+            } else {
+                button.disabled = false;
+                buttonMail.disabled = false;
+            }
+            document.getElementById(
+                "userCount"
+            ).innerText = `${data?.data?.count} utilisateur(s)`;
+
+            document.getElementById(
+                "userCount2"
+            ).innerText = `${data?.data?.count} utilisateur(s)`;
+        },
+    });
+}

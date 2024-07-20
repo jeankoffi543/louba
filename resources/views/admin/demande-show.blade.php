@@ -103,6 +103,18 @@
                                      </button>
                                  @endkcan
 
+                                 @kcan('possibilite-d-envoyer-mail')
+                                     <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#envoyerMail">
+                                         Enoyer mail
+                                     </button>
+                                 @endkcan
+
+                                 @kcan('possibilite-d-envoyer-sms')
+                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#envoyerSMS">
+                                         Enoyer SMS
+                                     </button>
+                                 @endkcan
+
                                  @if ($workflowStatus === 'END_OF_WORKFLOW')
                                      @kcan('acquittement-delivrance-document')
                                          <button class="btn btn-success" data-bs-toggle="modal"
@@ -500,7 +512,7 @@
                                      <label for="url">Selectioner des pèces jointes </label>
                                  </div>
                                  <div class="col-12 col-lg-6 text-wrap gap-2">
-                                     <input id="url" type="file" name="url[]" accept=".jpg, .png, .pdf"
+                                     <input id="url" type="file" class="form-control" name="url[]" accept=".jpg, .png, .pdf"
                                          multiple required>
                                  </div>
 
@@ -642,6 +654,124 @@
                      </div>
                  </div>
              </form>
+         @endkcan
+
+         @kcan('possibilite-d-envoyer-sms')
+             <form method="POST" action="{{ route('demande.manage') }}">
+                 @csrf
+
+                 <div class="modal fade" id="envoyerSMS" tabindex="-1">
+                     <div class="modal-dialog modal-dialog-scrollable">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h5 class="modal-title">Envoie de SMS</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                     aria-label="Close"></button>
+                             </div>
+                             <div class="modal-body">
+
+                                 <input name="demande_id" type="hidden" value="{{ $demande->id }}">
+                                 <input name="request_type" type="hidden" value="possibilite-d-envoyer-sms">
+
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-3 text-wrap gap-2">
+                                         <label for="#smsDestinataire">Destinataire </label>
+                                     </div>
+                                     <div class="col-12 col-lg-9 text-wrap gap-2">
+                                         <select class="form-select" name="destinataire" id="smsDestinataire" onchange="countUser(event, {{ $demande->id }},  '{{ csrf_token() }}')">
+                                             <option value="1">Groupe suivant</option>
+                                             <option value="-1">Groupe précédent</option>
+                                             <option value="demandeur">Demandeur</option>
+                                         </select>
+                                         <p id="userCount">0 utilisateur(s)</p>
+                                        </div>
+                                 </div>
+
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-3 text-wrap gap-2">
+                                         <label for="smsMsg">Entrer le message </label>
+                                     </div>
+                                     <div class="col-12 col-lg-9 text-wrap gap-2">
+                                         <textarea class="form-control" id="smsMsg" name="contenu" oninput="checkSMSLength(event)" onkeypress="return validateSMS(event)"></textarea>
+                                         <p id="charCount">0 caractères / 160</p>
+
+                                     </div>
+                                 </div>
+
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                 <button type="submit" class="btn btn-primary" id="envoyerMsg" disabled>Valider</button>
+                             </div>
+
+
+
+
+                         </div>
+                     </div>
+                 </div>
+             </form>
+         @endkcan
+
+         @kcan('possibilite-d-envoyer-mail')
+         <form method="POST" action="{{ route('demande.manage') }}" enctype="multipart/form-data">
+            @csrf
+
+            <div class="modal fade" id="envoyerMail" tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Envoie de Mail</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <input name="demande_id" type="hidden" value="{{ $demande->id }}">
+                            <input name="request_type" type="hidden" value="possibilite-d-envoyer-mail">
+
+                            <div class="row mb-3 g-2">
+                                <div class="col-12 col-lg-3 text-wrap gap-2">
+                                    <label for="#mailDestinataire">Destinataire </label>
+                                </div>
+                                <div class="col-12 col-lg-9 text-wrap gap-2">
+                                    <select class="form-select" name="destinataire" id="mailDestinataire" onchange="countUser(event, {{ $demande->id }},  '{{ csrf_token() }}')">
+                                        <option value="1">Groupe suivant</option>
+                                        <option value="-1">Groupe précédent</option>
+                                        <option value="demandeur">Demandeur</option>
+                                    </select>
+                                    <p id="userCount2">0 utilisateur(s)</p>
+                                   </div>
+                            </div>
+
+                            <div class="row mb-3 g-2">
+                                <div class="col-12 col-lg-3 text-wrap gap-2">
+                                    <label for="smsMail">Entrer le message </label>
+                                </div>
+                                <div class="col-12 col-lg-9 text-wrap gap-2">
+                                    <textarea class="form-control" id="smsMail2" name="contenu"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 g-2">
+                                <div class="col-12 col-lg-3 text-wrap gap-2">
+                                    <label for="#pj">Pièces jointes </label>
+                                </div>
+                                <div class="col-12 col-lg-9 text-wrap gap-2">
+                                    <input type="file" multiple class="form-control" id="pj" name="pieces_jointes[]">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary" id="envoyerMail2" disabled>Valider</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
          @endkcan
          <!-- End Modal Dialog Scrollable-->
 

@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/manage', [DemandeController::class, 'manage'])->name('demande.manage')->middleware('CheckHabiletesPermissions:gestion-demandes');
 
+        Route::post('/manage/count', [DemandeController::class, 'manageCount'])->name('demande.manage.count')->middleware('CheckHabiletesPermissions:gestion-demandes');
     });
 
     Route::prefix('pre-demande')->group(function () {

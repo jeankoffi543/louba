@@ -474,8 +474,8 @@ class DemandeController extends Controller
     {
         WorkFlow::manage($request);
 
-        if($request->request_type === "gestion-pre-demande-valider" || $request->request_type === "gestion-demande-rejeter"){
-        return redirect()->route('pre.demande')->with('success_message', 'Enregistrée avec succès.');
+        if ($request->request_type === "gestion-pre-demande-valider" || $request->request_type === "gestion-demande-rejeter") {
+            return redirect()->route('pre.demande')->with('success_message', 'Enregistrée avec succès.');
         }
         return redirect()->route('demande.show', ['id' => $request->demande_id])->with('success_message', 'Enregistrée avec succès.');
     }
@@ -499,8 +499,15 @@ class DemandeController extends Controller
     public function preDemandeShow($id)
     {
         $demande = Demande::query()
-        ->where('id', $id)->with('client' , 'piece_jointes')->first();
+            ->where('id', $id)->with('client', 'piece_jointes')->first();
 
         return view('admin.pre-demande-show', ["demande" => $demande]);
+    }
+
+    public function manageCount(Request $request)
+    {
+        return response()->json([
+            'data' => WorkFlow::countUsers($request),
+        ]);
     }
 }
