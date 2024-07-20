@@ -616,7 +616,7 @@ echo $nextday;
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>LOUBA</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>RADIANGN</span></strong>. All Rights Reserved
         </div>
 
     </footer><!-- End Footer -->

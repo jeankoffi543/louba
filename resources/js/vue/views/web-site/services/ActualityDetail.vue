@@ -10,7 +10,7 @@
       </div>
       <div class="bg-light fw-bold fs-1 py-5 ps-3 mb-3 text-start">
 
-        Signature de convention entre LOUBA
+        Signature de convention entre RADIANGN
 
       </div>
       <div class="bg-light p-3 d-flex justify-content-around mb-3">

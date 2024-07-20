@@ -20,7 +20,7 @@ export default {
 
     data() {
         return {
-            title: "LOUBA EN CHIFFRES"
+            title: "RADIANGN EN CHIFFRES"
         }
     },
     computed: {

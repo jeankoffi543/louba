@@ -22,8 +22,8 @@
 
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
-    <title>LOUBA | E-rdv</title>
-    <meta name="description" content="Louba | E-rdv">
+    <title>RADIANGN | E-rdv</title>
+    <meta name="description" content="radiangn | E-rdv">
     <meta name="author" content="Radian">
 
     <!-- Mobile Specific Metas -->
@@ -222,8 +222,8 @@
                 <a class="s-10">
                     <i class="icon-phone"></i> +224620000001
                 </a>
-                <a class="s-10" href='mailto:contact@loubaservices'>
-                    <i class="icon-envelope-alt"></i> contact@loubaservices
+                <a class="s-10" href='mailto:contact@radiangn'>
+                    <i class="icon-envelope-alt"></i> contact@radiangn
                 </a>
             </div>
         </div>
@@ -596,7 +596,7 @@
                                     </li>
                                     <li><a style="text-transform:initial;color:#008f5d" href="/equipe">Equipe
                                             (Organigramme)</a></li>
-                                    <li><a style="text-transform:initial;color:#008f5d" href="/content/oni-en-chiffre">LOUBA
+                                    <li><a style="text-transform:initial;color:#008f5d" href="/content/oni-en-chiffre">RADIANGN
                                             en chiffres</a></li>
                                 </ul>
                             </li>
@@ -645,7 +645,7 @@
 
                             <li><a style="text-transform:uppercase;color:#008f5d" href="#">Contacts</a>
                                 <ul>
-                                    <li><a style="text-transform:initial;color:#008f5d" href="/contact">LOUBA vous
+                                    <li><a style="text-transform:initial;color:#008f5d" href="/contact">RADIANGN vous
                                             ecoute</a></li>
                                 </ul>
                             </li>

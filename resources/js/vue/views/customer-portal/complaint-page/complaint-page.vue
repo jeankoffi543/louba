@@ -110,7 +110,7 @@
                                                 </button>
                                             <hr class="my-4">
                                             <p class="text-center text-muted">
-                                                By LOUBA © 2022
+                                                By RADIANGN © 2022
                                             </p>
 
                                         </form>-->
