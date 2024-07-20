@@ -64,7 +64,7 @@ class SlideSeeder extends Seeder
                 "id" => 4,
                 "tagdur" => "sl4",
                 "titre" => "Rectifier simplement les erreurs de frappe de vos documents administratifs",
-                "paragraphe1" => "Le téléservice de LOUBA vous assistera en un bref délai!",
+                "paragraphe1" => "Le téléservice de RADIANGN vous assistera en un bref délai!",
                 "paragraphe2" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                 "image" => Storage::url("sliders/images/sl7-rmbg.png"),
                 "imagebg" => Storage::url("sliders/backgrounds/slider-bg-2.jpg"),

@@ -3,7 +3,7 @@
     <div class="overlay shadow"></div>
     <div class="text-center p-3 text-light" data-aos="fade-down-right">
       <h1 class="fw-bold oni-color-primary fs-1">
-        LOUBA <br/>
+        RADIANGN <br/>
         en chiffres
       </h1>
       <img src="/assets/vue/imgs/others/divider-red.png"/>

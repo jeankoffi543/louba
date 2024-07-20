@@ -189,12 +189,12 @@
 
         <div class="four columns bottom-2">
             <img src="/imgg/logo.png">
-            <h3 style="display:none" class="title">Publie par LOUBA</h3>
+            <h3 style="display:none" class="title">Publie par RADIANGN</h3>
 
             <ul class="arrow-list job bottom-2" style="display:none">
                 <li><a href="#">Adresse: Kaloum </a></li>
                 <li><a href="#">Tel: 620-111-222 </a></li>
-                <li><a href="#">Email: contact@louba.com</a></li>
+                <li><a href="#">Email: contact@radiangn.com</a></li>
             </ul><!-- End square-list -->
 
 

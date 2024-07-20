@@ -84,7 +84,7 @@ class ClientController extends Controller
             $numero = request()->telephone;
 
             if ($client->save()) {
-                $message_sms = "Votre access LOUBA est \n identifiant:" . request()->email . "\n Mot de passe: " . request()->telephone;
+                $message_sms = "Votre access RADIANGN est \n identifiant:" . request()->email . "\n Mot de passe: " . request()->telephone;
                 try {
                     // $mailMsg = "Cher Utilisateur, Votre inscription à la plateforme de prise de rendez-vous est désormais effective.Votre nom d'utilisateur est : $username Votre mot de passe est : $numero de téléphone";
 
@@ -253,7 +253,7 @@ class ClientController extends Controller
     //             $newClient->password = bcrypt($request->telephone);
     //             $newClient->created_at = now();
     //             $newClient->save();
-    //             $message_sms = "Votre access LOUBA est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+    //             $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
     //             try {
     //                 $newSms = new SendSmS();
     //                 $newSms->send($request->telephone, $message_sms);
@@ -374,7 +374,7 @@ class ClientController extends Controller
 
     //         $URL_DOWNLOAD = $_SERVER["APP_URL"] . "/recuPdf/$code_oni";
     //         $SATUS_DEMANDE = $_SERVER["APP_URL"] . "/site#/personal-space/appointment/documents";
-    //         $message_sms = "Votre code document LOUBA est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
+    //         $message_sms = "Votre code document RADIANGN est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
 
     //         $newSms = new SendSmS();
     //         try {
@@ -388,7 +388,7 @@ class ClientController extends Controller
     //         $demandeSave = Demande::with(['client', 'sender', 'product', 'point_enrolement'])->where("id", "=", $demande->id)->first();
 
     //         $dataAttachment = [
-    //             'title' => 'Reçu de prise de rendez-vous LOUBA SERVICE : ' . optional(demandeSave->product)->nom,
+    //             'title' => 'Reçu de prise de rendez-vous RADIANGN SERVICE : ' . optional(demandeSave->product)->nom,
     //             'body' => "Votre demande a été enregistré. $message_sms"
     //         ];
 
@@ -457,7 +457,7 @@ class ClientController extends Controller
             //     $newClient->password = bcrypt($request->telephone);
             //     $newClient->created_at = now();
             //     $newClient->save();
-            //     $message_sms = "Votre access LOUBA est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+            //     $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
             //     try {
             //         $newSms = new SendSmS();
             //         $newSms->send($request->telephone, $message_sms);
@@ -570,7 +570,7 @@ class ClientController extends Controller
 
             $URL_DOWNLOAD = $_SERVER["APP_URL"] . "/recuPdf/$code_oni";
             $SATUS_DEMANDE = $_SERVER["APP_URL"] . "/site#/personal-space/appointment/documents";
-            $message_sms = "Votre code document LOUBA est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
+            $message_sms = "Votre code document RADIANGN est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
 
             $newSms = new SendSmS();
             try {
@@ -584,7 +584,7 @@ class ClientController extends Controller
             $demandeSave = Demande::with(['client', 'sender', 'product', 'point_enrolement'])->where("id", "=", $demande->id)->first();
 
             $dataAttachment = [
-                'title' => 'Reçu de prise de rendez-vous LOUBA SERVICE : ' . optional($demandeSave->product)->nom,
+                'title' => 'Reçu de prise de rendez-vous RADIANGN SERVICE : ' . optional($demandeSave->product)->nom,
                 'body' => "Votre demande a été enregistré. $message_sms"
             ];
 
@@ -652,7 +652,7 @@ class ClientController extends Controller
                 $newClient->password = bcrypt($request->telephone);
                 $newClient->created_at = now();
                 $newClient->save();
-                $message_sms = "Votre access LOUBA est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+                $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
                 try {
                     $newSms = new SendSmS();
                     $newSms->send($request->telephone, $message_sms);
@@ -913,7 +913,7 @@ class ClientController extends Controller
                         $message_email = "Votre paiement à été validé \n reference de paiement:" . $transaction_reference . "\n montant: " . $amount;
                         //                        $curl = new \GuzzleHttp\Client();
                         //                        $url = "https://smswanwaran.com/index.php";
-                        //                        $response = $curl->request('GET', $url, ['query' => ['app' => "ws", 'u' => "theonemonk",  "from" => "LOUBA", 'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d", 'op' => "pv", 'to' => "224" .  optional($demande->client)->telephone_client, 'msg' => $message_sms,]]);
+                        //                        $response = $curl->request('GET', $url, ['query' => ['app' => "ws", 'u' => "theonemonk",  "from" => "RADIANGN", 'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d", 'op' => "pv", 'to' => "224" .  optional($demande->client)->telephone_client, 'msg' => $message_sms,]]);
                         $newSms = new SendSmS();
                         try {
                             $newSms->send( optional($demande->client)->telephone_client, $message_sms);
@@ -926,8 +926,8 @@ class ClientController extends Controller
 
 
                         $data = [
-                            'title' => 'Reçu de paiement LOUBA SERVICE : ' . optional($demande->product)->nom,
-                            'body' => $message_email . "\nVotre code document LOUBA est " . $demande->code_demande . "\n Veuillez suivre le parcours ici $STATUS_DEMANDE_URL \net télécharger votre recu sur $URL_DOWNLOAD_RECU"
+                            'title' => 'Reçu de paiement RADIANGN SERVICE : ' . optional($demande->product)->nom,
+                            'body' => $message_email . "\nVotre code document RADIANGN est " . $demande->code_demande . "\n Veuillez suivre le parcours ici $STATUS_DEMANDE_URL \net télécharger votre recu sur $URL_DOWNLOAD_RECU"
                         ];
 
 

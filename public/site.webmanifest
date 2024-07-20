@@ -1,6 +1,6 @@
 {
-    "name": "LOUBA",
-    "short_name": "LOUBA",
+    "name": "RADIANGN",
+    "short_name": "RADIANGN",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -15,6 +15,6 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "start_url": "http://louba.poc-demo.com",
+    "start_url": "http://radiangn.poc-demo.com",
     "display": "standalone"
 }
