@@ -150,8 +150,8 @@
                                      Nom & Prénom
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->client)->nom_client ?? '-' }}
-                                     {{  optional($demande->client)->prenom_client ?? '-' }}
+                                     {{ optional($demande->client)->nom_client ?? '-' }}
+                                     {{ optional($demande->client)->prenom_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -161,7 +161,7 @@
                                      Email
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->client)->email_client ?? '-' }}
+                                     {{ optional($demande->client)->email_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -172,7 +172,7 @@
                                      contact
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->client)->telephone_client ?? '-' }}
+                                     {{ optional($demande->client)->telephone_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -182,7 +182,7 @@
                                      contact
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->client)->telephone_client ?? '-' }}
+                                     {{ optional($demande->client)->telephone_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -191,7 +191,7 @@
                                      Adresse
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->client)->address ?? '-' }}
+                                     {{ optional($demande->client)->address ?? '-' }}
                                  </div>
                              </div>
 
@@ -201,7 +201,7 @@
                                      Date de naissance
                                  </div>
                                  <div class="col-9">
-                                     {{ (new DateTime( optional($demande->client)->date_naissance_client))->format('d/m/Y') ?? '-' }}
+                                     {{ (new DateTime(optional($demande->client)->date_naissance_client))->format('d/m/Y') ?? '-' }}
                                  </div>
                              </div>
 
@@ -210,7 +210,7 @@
                                      Genre
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->client)->genre_client ?? '-' }}
+                                     {{ optional($demande->client)->genre_client ?? '-' }}
                                  </div>
                              </div>
 
@@ -276,7 +276,7 @@
                                      Point d'enrolement
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->point_enrolement)->nom_pe ?? '-' }}
+                                     {{ optional($demande->point_enrolement)->nom_pe ?? '-' }}
                                  </div>
                              </div>
 
@@ -285,7 +285,7 @@
                                      capacité journalière
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->point_enrolement)->capacite_maximale_jour_pe ?? '-' }}
+                                     {{ optional($demande->point_enrolement)->capacite_maximale_jour_pe ?? '-' }}
                                  </div>
                              </div>
 
@@ -315,7 +315,7 @@
                                      Service
                                  </div>
                                  <div class="col-9">
-                                     {{  optional($demande->service)->name ?? '-' }}
+                                     {{ optional($demande->service)->name ?? '-' }}
                                  </div>
                              </div>
 
@@ -349,40 +349,40 @@
                                      {{ optional($demande->service)->prix ?? '-' }} GNF
                                  </div>
                              </div>
+                             @if ($circuit !== null)
+                                 <div class="row align-items-center my-3">
+                                     <div class="col-3 fw-bold">
+                                         Circuit du traitement
+                                     </div>
+                                     <div class="col-9">
+                                         <div class="d-flex flex-row justify-content-start align-items-center gap-1">
+                                             @foreach ($circuit as $i => $habilete)
+                                                 <div class="d-flex flex-column justify-content-center align-items-center">
+                                                     @if (intval($demande->habilete_position) == $i)
+                                                         <i class="bi bi-arrow-down"></i>
+                                                     @endif
+                                                     <div
+                                                         class="d-flex flex-column justify-content-center align-items-center gap-1 p-2 {{ intval($demande->habilete_position) == $i ? 'border border-3' : '' }}">
+                                                         @foreach ($habilete as $hab)
+                                                             <div class="badge p-1"
+                                                                 style="background-color: {{ $colors[array_rand($colors)] }}">
+                                                                 {{ $hab->libelle }}
+                                                             </div>
+                                                         @endforeach
 
-                             <div class="row align-items-center my-3">
-                                 <div class="col-3 fw-bold">
-                                     Circuit du traitement
-                                 </div>
-                                 <div class="col-9">
-                                     <div class="d-flex flex-row justify-content-start align-items-center gap-1">
-                                         @foreach ($circuit as $i => $habilete)
-                                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                                 @if (intval($demande->habilete_position) == $i)
-                                                     <i class="bi bi-arrow-down"></i>
-                                                 @endif
-                                                 <div
-                                                     class="d-flex flex-column justify-content-center align-items-center gap-1 p-2 {{ intval($demande->habilete_position) == $i ? 'border border-3' : '' }}">
-                                                     @foreach ($habilete as $hab)
-                                                         <div class="badge p-1"
-                                                             style="background-color: {{ $colors[array_rand($colors)] }}">
-                                                             {{ $hab->libelle }}
-                                                         </div>
-                                                     @endforeach
-
+                                                     </div>
                                                  </div>
-                                             </div>
 
-                                             @if ($i < count($circuit) - 1)
-                                                 <i class="bi bi-arrow-right"></i>
-                                             @endif
-                                         @endforeach
+                                                 @if ($i < count($circuit) - 1)
+                                                     <i class="bi bi-arrow-right"></i>
+                                                 @endif
+                                             @endforeach
+                                         </div>
+
                                      </div>
 
                                  </div>
-
-                             </div>
-
+                             @endif
                          </div>
 
 
@@ -436,47 +436,50 @@
          </section>
 
          {{-- Modal start --}}
-         <div class="modal fade" id="modalTransmettre" tabindex="-1">
-             <div class="modal-dialog modal-dialog-scrollable">
-                 <div class="modal-content">
-                     <div class="modal-header">
-                         <h5 class="modal-title">Tranfert de demande</h5>
-                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     </div>
-                     <div class="modal-body">
+         @if ($circuit !== null)
 
-                         <div class="row mb-3">
-                             <div class="col-12">
-                                 La demande sera transféré au groupe:
+             <div class="modal fade" id="modalTransmettre" tabindex="-1">
+                 <div class="modal-dialog modal-dialog-scrollable">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title">Tranfert de demande</h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                 aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+
+                             <div class="row mb-3">
+                                 <div class="col-12">
+                                     La demande sera transféré au groupe:
+                                 </div>
+                                 <div class="col-12 text-wrap gap-2">
+                                     @if ($workflowStatus !== 'END_OF_WORKFLOW')
+                                         @foreach ($circuit[intval($demande->habilete_position) + 1] as $hab)
+                                             <div class="badge p-1"
+                                                 style="background-color: {{ $colors[array_rand($colors)] }}">
+                                                 {{ $hab->libelle }}
+                                             </div>
+                                         @endforeach
+                                     @endif
+                                 </div>
                              </div>
-                             <div class="col-12 text-wrap gap-2">
-                                 @if ($workflowStatus !== 'END_OF_WORKFLOW')
-                                     @foreach ($circuit[intval($demande->habilete_position) + 1] as $hab)
-                                         <div class="badge p-1"
-                                             style="background-color: {{ $colors[array_rand($colors)] }}">
-                                             {{ $hab->libelle }}
-                                         </div>
-                                     @endforeach
-                                 @endif
-                             </div>
+
+
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                             <a type="submit"
+                                 href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'TRANSMITTED']) }}"
+                                 class="btn btn-primary">Valider</a>
                          </div>
 
 
+
+
                      </div>
-                     <div class="modal-footer">
-                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                         <a type="submit"
-                             href="{{ route('demande.show', ['id' => $demande->id, 'type' => 'TRANSMITTED']) }}"
-                             class="btn btn-primary">Valider</a>
-                     </div>
-
-
-
-
                  </div>
              </div>
-         </div>
-
+         @endif
          <form method="POST" action="{{ route('piece_jointes.store') }}" enctype="multipart/form-data">
              @csrf
 
