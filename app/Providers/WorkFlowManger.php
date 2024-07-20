@@ -88,6 +88,15 @@ class WorkFlowManger
 
       if (!$demande) return;
 
+      if($demande->predemande_step == 1){
+         return [
+            'demande' => $demande,
+            'circuit' => null,
+            'workflowStatus' => null,
+            'isTransmitted' => false,
+            'isOwner' => false,
+         ];
+      }
       $habiletes = optional($demande->service)->habiletes;
       $habiletes = is_array($habiletes) ? $habiletes : (is_null($habiletes) ? [] : json_decode($habiletes, true));
       $habilete_position = intval($demande->habilete_position);

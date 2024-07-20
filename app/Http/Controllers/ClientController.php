@@ -440,33 +440,33 @@ class ClientController extends Controller
                 $type_demande = "Nouvelle demande";
             }
 
-            //$demande->id_client = $client->id;
+            // $demande->id_client = $client->id;
             $client = Client::all()
                 ->where('telephone_client', '=', $request->telephone)
                 ->where('email_client', '=', $request->email)->first();
                
-            // if (!$client) {
-            //     $newClient = new Client();
-            //     $newClient->nom_client = $request->nom;
-            //     $newClient->prenom_client = $request->prenom;
-            //     $newClient->email_client = $request->email;
-            //     $newClient->genre_client = $request->gender == "H" ? "Homme" : "Femme";
-            //     $newClient->telephone_client = $request->telephone;
-            //     $newClient->adresse_client = $request->lieu_de_residence;
-            //     $newClient->date_naissance_client = Carbon::createFromFormat('Y-m-d', $request->date_naissance)->toDateTime();
-            //     $newClient->password = bcrypt($request->telephone);
-            //     $newClient->created_at = now();
-            //     $newClient->save();
-            //     $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
-            //     try {
-            //         $newSms = new SendSmS();
-            //         $newSms->send($request->telephone, $message_sms);
-            //     } catch (GuzzleException $e) {
-            //         throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
-            //     }
+            if (!$client) {
+                $newClient = new Client();
+                $newClient->nom_client = $request->nom;
+                $newClient->prenom_client = $request->prenom;
+                $newClient->email_client = $request->email;
+                $newClient->genre_client = $request->gender == "H" ? "Homme" : "Femme";
+                $newClient->telephone_client = $request->telephone;
+                $newClient->adresse_client = $request->lieu_de_residence;
+                $newClient->date_naissance_client = Carbon::createFromFormat('Y-m-d', $request->date_naissance)->toDateTime();
+                $newClient->password = bcrypt($request->telephone);
+                $newClient->created_at = now();
+                $newClient->save();
+                $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+                try {
+                    $newSms = new SendSmS();
+                    $newSms->send($request->telephone, $message_sms);
+                } catch (GuzzleException $e) {
+                    // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
+                }
 
-            //     $client = $newClient;
-            // }
+                $client = $newClient;
+            }
             if(!$client){
                 $client = $userConnected;
             }

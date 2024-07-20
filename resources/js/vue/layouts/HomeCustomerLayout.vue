@@ -31,7 +31,7 @@ export default {
     },
     methods:{
         startAppointment() {
-            this.$router.push({name: "appointment-start"});
+            this.$router.push({name: "login"});
         },
     }
 };
