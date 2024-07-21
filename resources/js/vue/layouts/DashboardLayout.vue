@@ -95,7 +95,7 @@
                                 <!--                                <el-menu-item index="1-2" @click="$router.push({ name: 'downloadable' })">
                                                                     Télécharger mes documents
                                                                 </el-menu-item>-->
-                                <el-menu-item index="1-3" @click="$router.push({ name: 'customer-home' })">
+                                <el-menu-item index="1-3" @click="$router.push({ name: 'login' })">
                                     Retour vers le portail
                                 </el-menu-item>
 
@@ -204,7 +204,7 @@ export default {
             utils.removeToken();
             //  this.$cookies.remove("infoUserClient");
 
-            this.$router.push({ name: "customer-home" });
+            this.$router.push({ name: "login" });
         },
         closeModal() {
             // christdev19@gmail.com:
