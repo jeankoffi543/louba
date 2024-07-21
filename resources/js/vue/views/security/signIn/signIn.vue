@@ -4,7 +4,7 @@
 
         <div class="d-flex justify-content-center py-4">
             <a class="logo d-flex align-items-center " href="#">
-                <img alt="" src="/assets/vue/imgs/logo/logo-oni-old-bg-transparent.png">
+                <img alt="" src="/imgg/logo.png">
             </a>
         </div><!-- End Logo -->
 
