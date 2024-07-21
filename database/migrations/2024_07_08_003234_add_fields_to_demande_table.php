@@ -13,10 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('service', function (Blueprint $table) {
-            $table->dropColumn('habilete_position');
-        });
-
         Schema::table('demande', function (Blueprint $table) {
             $table->integer('habilete_position')->default(0);
         });
