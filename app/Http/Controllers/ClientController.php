@@ -25,7 +25,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PDF;
 use App\Exceptions\ErrorException;
+use App\Mail\GlobalSenderMail;
 use App\Models\AdminAction;
+use App\Models\Historique;
 use App\Models\IndexTraitement;
 use App\Models\Service;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -90,10 +92,11 @@ class ClientController extends Controller
 
                     // Mail::to(request()->email)->send(new AttachmentTicketAppointmentMail($mailMsg));
 
+                    Mail::to(request()->email)->send(new GlobalSenderMail($message_sms, "CREATION DE COMPTE", []));
                     $newSms = new SendSmS();
                     $newSms->send(request()->telephone, $message_sms);
                 } catch (GuzzleException $e) {
-                    throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
+                    // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
                 }
 
                 // $infoUserClient = DB::table('client')->where('email_client', request()->email)->where('password_client', request()->telephone)->first();
@@ -607,6 +610,12 @@ class ClientController extends Controller
             $data["message"] = "Demande enregistré";
             $data["demande"] = $demande;
 
+             // Commentaire
+             $historique = new Historique();
+             $historique->description = "Création d'une nouvelle demande";
+             $historique->demande_id =  $demande->id;
+             $historique->user_id = auth()->user()->id;
+             $historique->save();
 
             return response()->json($data);
         } catch (Exception $ex) {
@@ -801,7 +810,11 @@ class ClientController extends Controller
         $maDemande = Demande::where('id', $request->id)->with(['client', 'product', 'service', 'point_enrolement'])->first();
         $maDemande['paiement'] = Paiement::where('id_demande', $request->id)->first();
 
+      $historiques = Historique::where('demande_id', $request->id)->orderBy('created_at', 'desc')->with('client')->with('user')->with('commentaires')->get();
+
+
         $data['demande'] = $maDemande;
+        $data['historiques'] = $historiques;
         $data['message'] = "ok";
 
         return response()->json($data);

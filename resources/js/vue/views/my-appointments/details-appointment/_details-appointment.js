@@ -2,6 +2,7 @@
 import ButtonApp from "../../../components/shared/ButtonApp";
 import {mapActions, mapGetters} from "vuex";
 import EmptyState from "../../../components/shared/EmptyState.vue";
+import {format} from "date-fns";
 
 export default {
     name: "DetailsAppointment",
@@ -73,7 +74,15 @@ export default {
             }
 
             return timeList;
-        }
+        },
+        historiques(){
+            return this.appointment?.historiques
+        },
+
+        // formattedTimestamp(date) {
+        //     // return format(date, 'dd MMMM yyyy HH:mm');
+        //     return "dd MMMM yyyy HH:mm";
+        //   },
     },
 
     watch: {
@@ -113,6 +122,18 @@ export default {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
+            })
+        },
+        
+        formateDateAppointement2(date) {
+            return new Date(date).toLocaleDateString(undefined, {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric" 
             })
         },
         printAppointment() {
