@@ -291,7 +291,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
               formData.append("id_demande", (_this$formDataRequest3 = this.formDataRequest) === null || _this$formDataRequest3 === void 0 || (_this$formDataRequest3 = _this$formDataRequest3.user) === null || _this$formDataRequest3 === void 0 ? void 0 : _this$formDataRequest3.documentId);
               formData.append("type_service_passport", null);
-              formData.append("id_type_service", (_this$formDataRequest4 = (_this$formDataRequest5 = this.formDataRequest) === null || _this$formDataRequest5 === void 0 || (_this$formDataRequest5 = _this$formDataRequest5.service) === null || _this$formDataRequest5 === void 0 ? void 0 : _this$formDataRequest5.id) !== null && _this$formDataRequest4 !== void 0 ? _this$formDataRequest4 : null);
+              formData.append("id_type_service", (_this$formDataRequest4 = (_this$formDataRequest5 = this.formDataRequest) === null || _this$formDataRequest5 === void 0 || (_this$formDataRequest5 = _this$formDataRequest5.user) === null || _this$formDataRequest5 === void 0 ? void 0 : _this$formDataRequest5.serviceId.id) !== null && _this$formDataRequest4 !== void 0 ? _this$formDataRequest4 : null);
               formData.append("id_point_enrolement", (_this$formDataRequest6 = this.formDataRequest) === null || _this$formDataRequest6 === void 0 || (_this$formDataRequest6 = _this$formDataRequest6.user) === null || _this$formDataRequest6 === void 0 || (_this$formDataRequest6 = _this$formDataRequest6.siteAppointmentId) === null || _this$formDataRequest6 === void 0 ? void 0 : _this$formDataRequest6.id_pe);
 
               // await this.$store.dispatch("SAVE_APPOINTMENT", formData)

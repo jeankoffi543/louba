@@ -36,43 +36,56 @@ var _hoisted_5 = {
   style: {}
 };
 var _hoisted_6 = {
-  "class": "service-appointment"
+  "class": "col-sm-12 col-md-12"
 };
 var _hoisted_7 = {
-  "class": "container-fluid"
+  "class": "row d-flex",
+  style: {
+    "margin-top": "1rem"
+  }
 };
 var _hoisted_8 = {
+  "class": "col-sm-12 col-md-12",
+  style: {}
+};
+var _hoisted_9 = {
+  "class": "service-appointment"
+};
+var _hoisted_10 = {
+  "class": "container-fluid"
+};
+var _hoisted_11 = {
   "class": "row container-appointment-form-row"
 };
-var _hoisted_9 = ["onClick"];
-var _hoisted_10 = {
+var _hoisted_12 = ["onClick"];
+var _hoisted_13 = {
   "class": "item-request-type-head mt-3 text-center border-0"
 };
-var _hoisted_11 = ["alt", "src"];
-var _hoisted_12 = {
+var _hoisted_14 = ["alt", "src"];
+var _hoisted_15 = {
   "class": "my-0 fw-bold text-center",
   style: {
     "margin": "13px 0px !important"
   }
 };
-var _hoisted_13 = {
+var _hoisted_16 = {
   "class": "row my-2"
 };
-var _hoisted_14 = {
+var _hoisted_17 = {
   "class": "col-sm-12 col-md-12"
 };
-var _hoisted_15 = {
+var _hoisted_18 = {
   "class": "group"
 };
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     "class": "fs-5 item-title"
   }, "Numéro reçu", -1 /* HOISTED */);
 });
-var _hoisted_17 = {
+var _hoisted_20 = {
   "class": "row"
 };
-var _hoisted_18 = {
+var _hoisted_21 = {
   "class": "app-w-100 app-d-flex app-d-flex app-justify-content-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -89,7 +102,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse, {
     ref: "collapse",
     modelValue: _ctx.activeNames,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return _ctx.activeNames = $event;
     }),
     onChange: _ctx.handleChange
@@ -131,6 +144,42 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })])])];
         }),
         _: 1 /* STABLE */
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form, {
+        "class": "g-3 needs-validation",
+        "label-position": "top"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, {
+            label: "Selectionner le type de service",
+            required: ""
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
+                modelValue: _ctx.formPersonalInfo.serviceId,
+                "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                  return _ctx.formPersonalInfo.serviceId = $event;
+                }),
+                "class": "w-100",
+                onChange: _cache[3] || (_cache[3] = function (item) {
+                  return _ctx.changeEnrolment(item);
+                })
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.pointEnrolementServices, function (item) {
+                    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_option, {
+                      key: item.id,
+                      label: item.name,
+                      value: item
+                    }, null, 8 /* PROPS */, ["label", "value"]);
+                  }), 128 /* KEYED_FRAGMENT */))];
+                }),
+                _: 1 /* STABLE */
+              }, 8 /* PROPS */, ["modelValue"])];
+            }),
+            _: 1 /* STABLE */
+          })])])];
+        }),
+        _: 1 /* STABLE */
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse_item, {
         id: "typeServiceRef",
         ref: "typeServiceRef",
@@ -138,7 +187,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         title: "Selectionner le type de service"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.formPersonalInfo.pointEnrolementServices, function (item, index) {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.formPersonalInfo.pointEnrolementServices, function (item, index) {
             var _ctx$serviceSelected;
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
               key: index,
@@ -150,16 +199,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
                 selected: (item === null || item === void 0 ? void 0 : item.id) == ((_ctx$serviceSelected = _ctx.serviceSelected) === null || _ctx$serviceSelected === void 0 ? void 0 : _ctx$serviceSelected.id)
               }, "card shadow border-0 h-100"])
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
               alt: item === null || item === void 0 ? void 0 : item.name,
               src: item === null || item === void 0 ? void 0 : item.image,
               "class": "border-0 img"
-            }, null, 8 /* PROPS */, _hoisted_11)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item === null || item === void 0 ? void 0 : item.name), 1 /* TEXT */)], 2 /* CLASS */)], 8 /* PROPS */, _hoisted_9);
-          }), 128 /* KEYED_FRAGMENT */))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
+            }, null, 8 /* PROPS */, _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item === null || item === void 0 ? void 0 : item.name), 1 /* TEXT */)], 2 /* CLASS */)], 8 /* PROPS */, _hoisted_12);
+          }), 128 /* KEYED_FRAGMENT */))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_input, {
                 modelValue: _ctx.formPersonalInfo.numero_recu,
-                "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
                   return _ctx.formPersonalInfo.numero_recu = $event;
                 }),
                 placeholder: "Numéro du reçu",
@@ -167,7 +216,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, null, 8 /* PROPS */, ["modelValue"])];
             }),
             _: 1 /* STABLE */
-          })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
+          })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
             gutter: 24,
             "class": "app-w-50"
           }, {
@@ -239,13 +288,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       typeDemand: "nouvelle_demande",
       titleDocumentUpload: "Extrait de naissance",
       typeServiceSelected: null,
+      pointEnrolementServices: [],
       formPersonalInfo: {
         firstname: "",
-        pointEnrolementServices: [],
         lastname: "",
         numero_recu: "",
         documentId: String,
         siteAppointmentId: "",
+        serviceId: "",
         nationality: "",
         nationality_state: "",
         profession: "",
@@ -310,11 +360,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   methods: {
     changeEnrolment: function changeEnrolment(item) {
       console.log("changeEnrolment pointEnrolement_id", item);
-      this.formPersonalInfo.pointEnrolementServices = item === null || item === void 0 ? void 0 : item.services;
+      this.pointEnrolementServices = item === null || item === void 0 ? void 0 : item.services;
     },
     onSwitchPage: function onSwitchPage() {
-      var _this$productSelected;
-      if ((_this$productSelected = this.productSelected) !== null && _this$productSelected !== void 0 && _this$productSelected.select_service_is_required && this.typeServiceSelected == null) {
+      if (!this.formPersonalInfo.serviceId || this.formPersonalInfo.serviceId == null || this.formPersonalInfo.serviceId == "") {
         this.$swal({
           position: "center",
           icon: "warning",

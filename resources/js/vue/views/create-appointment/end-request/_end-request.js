@@ -108,7 +108,6 @@ export default {
             this.$store.dispatch('FORM_DATA_REQUEST', payload);
             const formData = new FormData();
          
-
             formData.append(
                 "date_rdv_demande",
                 format(new Date(this.dateAppointment), "yyyy-MM-dd")
@@ -132,7 +131,7 @@ export default {
             formData.append("type_service_passport", null);
             formData.append(
                 "id_type_service",
-                this.formDataRequest?.service?.id ?? null
+                this.formDataRequest?.user?.serviceId.id ?? null
             );
             formData.append("id_point_enrolement", this.formDataRequest?.user?.siteAppointmentId?.id_pe);
          

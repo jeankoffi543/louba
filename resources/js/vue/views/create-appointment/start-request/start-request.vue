@@ -23,7 +23,28 @@
                             </div>
                         </el-form>
                     </div>
-                 
+                
+                    <div class="col-sm-12 col-md-12">
+                        <el-form class="g-3 needs-validation" label-position="top">
+                            <div class="row d-flex " style="margin-top: 1rem;">
+                                <div class="col-sm-12 col-md-12" style=" ">
+                                    <el-form-item label="Selectionner le type de service" required>
+
+                                        <el-select v-model="formPersonalInfo.serviceId" class="w-100" @change="item => changeEnrolment(item)">
+                                            <el-option
+                                                v-for="item in pointEnrolementServices"
+                                                :key="item.id"
+                                                :label="item.name"
+                                                :value="item"
+                                            >
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                        </el-form>
+                    </div>
+                
                         <el-collapse-item id="typeServiceRef" ref="typeServiceRef" name="2"
                             title="Selectionner le type de service">
                             <div class="service-appointment">
