@@ -20,7 +20,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (!$request->session()->has("jwtLouba")) {
-            return response()->redirectToRoute('seLoguer')->setStatusCode(401);
+            return response()->redirectToRoute('admin_oni')->withStatus(401);
         }
     }
 

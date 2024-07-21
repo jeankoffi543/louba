@@ -83,7 +83,8 @@ $results = DB::table('users')
         //Session::forget(['sessionKey1', 'sessionkey2']);
         //remove all sessions
         //Session::flush();
-        return redirect('admin_oni');
+        Auth::logout();
+        return redirect('administration');
     }
 
 
