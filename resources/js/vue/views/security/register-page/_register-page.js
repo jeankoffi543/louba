@@ -107,7 +107,7 @@ export default {
                     } else {
                         utils.setJwt(response?.token);
                         //this.$cookies.set("infoUserClient", response?.client);
-                        this.$router.push({name: "appointment-start"});
+                        this.$router.push({name: "login"});
                     }
                 })
                 .catch((err) => {
