@@ -22,13 +22,14 @@ export default {
             typeDemand: "nouvelle_demande",
             titleDocumentUpload: "Extrait de naissance",
             typeServiceSelected: null,
+            pointEnrolementServices: [],
             formPersonalInfo: {
                 firstname: "",
-                pointEnrolementServices: [],
                 lastname: "",
                 numero_recu: "",
                 documentId: String,
                 siteAppointmentId: "",
+                serviceId: "",
                 nationality: "",
                 nationality_state: "",
                 profession: "",
@@ -110,12 +111,13 @@ export default {
         changeEnrolment: function (item) {
             console.log("changeEnrolment pointEnrolement_id", item);
 
-            this.formPersonalInfo.pointEnrolementServices = item?.services;
+            this.pointEnrolementServices = item?.services;
         },
         onSwitchPage: function () {
             if (
-                this.productSelected?.select_service_is_required &&
-                this.typeServiceSelected == null
+                !this.formPersonalInfo.serviceId  ||
+                this.formPersonalInfo.serviceId == null ||
+                this.formPersonalInfo.serviceId == ""
             ) {
                 this.$swal({
                     position: "center",
