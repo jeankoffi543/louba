@@ -1,8 +1,15 @@
 /*!
-  * Bootstrap v5.2.3 (https://getbootstrap.com/)
-  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
+
+/*!
+ * Quill Editor v1.3.7
+ * https://quilljs.com/
+ * Copyright (c) 2014, Jason Chen
+ * Copyright (c) 2013, salesforce.com
+ */
 
 /*!
  * The buffer module from node.js, for the browser.
@@ -12,22 +19,21 @@
  */
 
 /*!
- * escape-html
- * Copyright(c) 2012-2013 TJ Holowaychuk
- * Copyright(c) 2015 Andreas Lubbe
- * Copyright(c) 2015 Tiancheng "Timothy" Gu
- * MIT Licensed
- */
-
-/*!
  * vuex v4.1.0
  * (c) 2022 Evan You
  * @license MIT
  */
 
-/*! Element Plus Icons Vue v2.0.10 */
+/*!
+* sweetalert2 v11.4.4
+* Released under the MIT License.
+*/
 
-/*! Element Plus v2.2.32 */
+/*! #__NO_SIDE_EFFECTS__ */
+
+/*! Element Plus Icons Vue v2.3.1 */
+
+/*! Element Plus v2.7.6 */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
@@ -56,6 +62,12 @@
  * @internal
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
  */
+
+/**
+* @vue/shared v3.4.29
+* (c) 2018-present Yuxi (Evan) You and Vue contributors
+* @license MIT
+**/
 
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
