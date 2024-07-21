@@ -15,7 +15,7 @@ yarn-error.log
 #manage packages
 composer-lock.json
 package-lock.json
-
+composer.lock
 #Laravel Specific files
 /vendor
 .env
