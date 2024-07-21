@@ -11,334 +11,334 @@ import RegisterPage from "../views/security/register-page/register-page.vue";
 import SignIn from "../views/security/signIn/signIn.vue";
 
 const routes = [
-    {
-        path: "/",
-        name: "index",
-        redirect: {name: "customer-home"},
-        component: HomeCustomerLayout,
-        children: [
-            {
-                path: "home",
-                name: "customer-home",
-                component: () => import("../views/customer-portal/home-customer.vue")
-            },
-            {
-                path: "empty-page",
-                name: "empty-page",
-                component: () => import("../components/shared/EmptyPage.vue")
-            },
-            {
-                path: "page/:title?",
-                name: "work-page",
-                component: () => import("../views/fake-page.vue")
-            },
+    // {
+    //     path: "/",
+    //     name: "index",
+    //     redirect: {name: "customer-home"},
+    //     component: HomeCustomerLayout,
+    //     children: [
+    //         {
+    //             path: "home",
+    //             name: "customer-home",
+    //             component: () => import("../views/customer-portal/home-customer.vue")
+    //         },
+    //         {
+    //             path: "empty-page",
+    //             name: "empty-page",
+    //             component: () => import("../components/shared/EmptyPage.vue")
+    //         },
+    //         {
+    //             path: "page/:title?",
+    //             name: "work-page",
+    //             component: () => import("../views/fake-page.vue")
+    //         },
 
-            {
-                path: "contact",
-                name: "contact",
-                component: () =>
-                    import("../views/customer-portal/contact-view/contact-view.vue")
-            },
-            {
-                path: "useful",
-                name: "utiles",
-                component: () =>
-                    import("../views/customer-portal/liens-utiles/liens-utiles.vue")
-            },
+    //         {
+    //             path: "contact",
+    //             name: "contact",
+    //             component: () =>
+    //                 import("../views/customer-portal/contact-view/contact-view.vue")
+    //         },
+    //         {
+    //             path: "useful",
+    //             name: "utiles",
+    //             component: () =>
+    //                 import("../views/customer-portal/liens-utiles/liens-utiles.vue")
+    //         },
 
-            {
-                path: "actuality",
-                children: [
-                    {
-                        path: "list",
-                        name: "actualities",
-                        component: () =>
-                            import("../views/customer-portal/actualities/ListActualities.vue")
-                    },
-                    {
-                        path: "details/:id",
-                        name: "actuality-details",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/actualities/actuality-details/actuality-details.vue"
-                                )
-                    }
-                ]
-            },
+    //         {
+    //             path: "actuality",
+    //             children: [
+    //                 {
+    //                     path: "list",
+    //                     name: "actualities",
+    //                     component: () =>
+    //                         import("../views/customer-portal/actualities/ListActualities.vue")
+    //                 },
+    //                 {
+    //                     path: "details/:id",
+    //                     name: "actuality-details",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/actualities/actuality-details/actuality-details.vue"
+    //                             )
+    //                 }
+    //             ]
+    //         },
 
-            {
-                path: "about-us", // qui-nous-sommes
-                name: "about-us",
-                children: [
-                    {
-                        path: "oni",
-                        name: "presentation-oni",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/about-us/presentation-oni-view/presentation-oni-view.vue"
-                                )
-                    },
-                    {
-                        path: "dg",
-                        name: "sentense-dg",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/about-us/sentense-dg/sentense-dg.vue"
-                                )
-                    },
-                    {
-                        path: "team",
-                        name: "team-page",
-                        component: () =>
-                            import("../views/customer-portal/about-us/teamView/teamView.vue")
-                    },
-                    {
-                        path: "oni-figure",
-                        name: "oni-figure",
-                        component: () =>
-                            import("../views/customer-portal/about-us/oni-figure/oni-figure.vue")
-                    },
-                    {
-                        path: "ambassadors",
-                        name: "list-ambassade",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/about-us/ambassade-view/ambassade-view.vue"
-                                )
-                    },
-                    {
-                        path: "enrolment-centres",
-                        name: "list-of-enrolment-centres",
-                        component: () => import("../components/shared/EmptyPage.vue")
-                    }
-                ]
-            },
-            {
-                path: "our-products",
-                name: "our-products",
-                children: [
-                    {
-                        path: "passeport",
-                        name: "passport",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/ordinary-passport-view/ordinary-passport-view.vue"
-                                )
-                    },
+    //         {
+    //             path: "about-us", // qui-nous-sommes
+    //             name: "about-us",
+    //             children: [
+    //                 {
+    //                     path: "oni",
+    //                     name: "presentation-oni",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/about-us/presentation-oni-view/presentation-oni-view.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "dg",
+    //                     name: "sentense-dg",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/about-us/sentense-dg/sentense-dg.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "team",
+    //                     name: "team-page",
+    //                     component: () =>
+    //                         import("../views/customer-portal/about-us/teamView/teamView.vue")
+    //                 },
+    //                 {
+    //                     path: "oni-figure",
+    //                     name: "oni-figure",
+    //                     component: () =>
+    //                         import("../views/customer-portal/about-us/oni-figure/oni-figure.vue")
+    //                 },
+    //                 {
+    //                     path: "ambassadors",
+    //                     name: "list-ambassade",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/about-us/ambassade-view/ambassade-view.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "enrolment-centres",
+    //                     name: "list-of-enrolment-centres",
+    //                     component: () => import("../components/shared/EmptyPage.vue")
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             path: "our-products",
+    //             name: "our-products",
+    //             children: [
+    //                 {
+    //                     path: "passeport",
+    //                     name: "passport",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/ordinary-passport-view/ordinary-passport-view.vue"
+    //                             )
+    //                 },
 
-                    {
-                        path: "visa-list-docs",
-                        name: "list-docs-visa",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/list-doc-visa/list-doc-visa.vue"
-                                )
-                    },
-                    {
-                        path: "residency-permit",
-                        name: "titre-sejour",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/list-doc-sejour/list-doc-sejour.vue"
-                                )
-                    },
-                    {
-                        path: "cni-list-docs",
-                        name: "cni-list-docs",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/cni-list-doc/cni-list-doc.vue"
-                                )
-                    },
+    //                 {
+    //                     path: "visa-list-docs",
+    //                     name: "list-docs-visa",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/list-doc-visa/list-doc-visa.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "residency-permit",
+    //                     name: "titre-sejour",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/list-doc-sejour/list-doc-sejour.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "cni-list-docs",
+    //                     name: "cni-list-docs",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/cni-list-doc/cni-list-doc.vue"
+    //                             )
+    //                 },
 
-                    /*./USE */
+    //                 /*./USE */
 
-                    // procedure-d-urgence
-                    {
-                        path: "services",
-                        name: "product-services",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/service-view/service-view.vue"
-                                )
-                    },
+    //                 // procedure-d-urgence
+    //                 {
+    //                     path: "services",
+    //                     name: "product-services",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/service-view/service-view.vue"
+    //                             )
+    //                 },
 
-                    {
-                        path: "passeport-diplomatique",
-                        name: "passeport-diplomatique",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/official-passport-view/official-passport-view.vue"
-                                )
-                    },
+    //                 {
+    //                     path: "passeport-diplomatique",
+    //                     name: "passeport-diplomatique",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/official-passport-view/official-passport-view.vue"
+    //                             )
+    //                 },
 
-                    {
-                        path: "evacuation-sanitaire",
-                        name: "sanitary-evacuation",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/sanitary-evacuation-view/sanitary-evacuation-view.vue"
-                                )
-                    },
+    //                 {
+    //                     path: "evacuation-sanitaire",
+    //                     name: "sanitary-evacuation",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/sanitary-evacuation-view/sanitary-evacuation-view.vue"
+    //                             )
+    //                 },
 
-                    {
-                        path: "visa-centres",
-                        name: "visa-centers",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/list-center-visa/list-center-visa.vue"
-                                )
-                    },
+    //                 {
+    //                     path: "visa-centres",
+    //                     name: "visa-centers",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/list-center-visa/list-center-visa.vue"
+    //                             )
+    //                 },
 
-                    {
-                        path: "titre-sejour-centres",
-                        name: "titre-sejour-centres",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/list-center-sejour/list-center-sejour.vue"
-                                )
-                    },
+    //                 {
+    //                     path: "titre-sejour-centres",
+    //                     name: "titre-sejour-centres",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/list-center-sejour/list-center-sejour.vue"
+    //                             )
+    //                 },
 
 
-                    {
-                        path: "cni-vip-service",
-                        name: "cni-vip-service",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/products/list-center-cni/list-center-cni.vue"
-                                )
-                    }
-                ]
-            },
-            {
-                path: "nos-services",
-                name: "our-services",
-                children: [
-                    {
-                        path: "service-vip",
-                        name: "service-vip",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/services/service-vip-view/service-vip-view.vue"
-                                )
-                    },
+    //                 {
+    //                     path: "cni-vip-service",
+    //                     name: "cni-vip-service",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/products/list-center-cni/list-center-cni.vue"
+    //                             )
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             path: "nos-services",
+    //             name: "our-services",
+    //             children: [
+    //                 {
+    //                     path: "service-vip",
+    //                     name: "service-vip",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/services/service-vip-view/service-vip-view.vue"
+    //                             )
+    //                 },
 
-                    {
-                        path: "urgency-procedure",
-                        name: "procedure-urgence",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/services/urgency-procedure/urgency-procedure.vue"
-                                )
-                    },
-                    {
-                        path: "status-document",
-                        name: "status-document",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/services/status-document/status-document.vue"
-                                )
-                    },
-                    {
-                        path: "list-center",
-                        name: "search-center",
-                        component: () => import("../views/customer-portal/services/search-center/search-center.vue")
-                    },
+    //                 {
+    //                     path: "urgency-procedure",
+    //                     name: "procedure-urgence",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/services/urgency-procedure/urgency-procedure.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "status-document",
+    //                     name: "status-document",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/services/status-document/status-document.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "list-center",
+    //                     name: "search-center",
+    //                     component: () => import("../views/customer-portal/services/search-center/search-center.vue")
+    //                 },
 
-                    /*USE*/
+    //                 /*USE*/
 
-                    {
-                        path: "service-list-docs",
-                        name: "service-list-docs",
-                        component: () => import("../components/shared/EmptyPage.vue")
-                    },
-                    {
-                        path: "prorogation",
-                        name: "prorogation",
-                        component: () => import("../components/shared/EmptyPage.vue")
-                    },
-                    {
-                        path: "on-site-enrolment",
-                        name: "on-site-enrolment",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/services/on-site-enrolment-view/on-site-enrolment-view.vue"
-                                )
-                    },
-                    {
-                        path: "evacuation-sanitary",
-                        name: "process-evacuation-sanitary",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/services/evacuation-sanitary-view/evacuation-sanitary-view.vue"
-                                )
-                    },
-                    {
-                        path: "procedure-student",
-                        name: "process-student",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/services/process-student-view/process-student-view.vue"
-                                )
-                    },
-                    {
-                        path: "service-reclamation",
-                        name: "reclamation",
-                        component: () =>
-                            import("../views/customer-portal/complaint-page/complaint-page.vue")
-                    },
-                    {
-                        path: "service-pelerinage",
-                        name: "pilgrimage",
-                        component: () =>
-                            import(
-                                "../views/customer-portal/services/pilgrimage-view/pilgrimage-view.vue"
-                                )
-                    }
-                ]
-            },
-            {
-                path: "divers",
-                name: "divers",
-                children: [
-                    {
-                        path: "documentation",
-                        name: "documentation",
-                        component: () => import("../components/shared/EmptyPage.vue")
-                    },
-                    {
-                        path: "mediatheque",
-                        name: "mediatheque",
-                        component: () => import("../components/shared/EmptyPage.vue")
-                    },
-                    {
-                        path: "gallery",
-                        name: "gallery",
-                        component: () => import("../components/shared/EmptyPage.vue")
-                    },
-                    {
-                        path: "video",
-                        name: "video",
-                        component: () => import("../components/shared/EmptyPage.vue")
-                    }
-                ]
-            },
-            {
-                path: "liste-centres-retrait",
-                component: () => import("../components/shared/EmptyPage.vue")
-            },
-            {
-                path: "process-evac-sanitaire",
-                name: "process-evac-sanitaire",
-                component: () => import("../components/shared/EmptyPage.vue")
-            },
-            {
-                path: "list-docs",
-                name: "list-docs",
-                component: () => import("../components/shared/EmptyPage.vue")
-            }
-        ]
-    },
+    //                 {
+    //                     path: "service-list-docs",
+    //                     name: "service-list-docs",
+    //                     component: () => import("../components/shared/EmptyPage.vue")
+    //                 },
+    //                 {
+    //                     path: "prorogation",
+    //                     name: "prorogation",
+    //                     component: () => import("../components/shared/EmptyPage.vue")
+    //                 },
+    //                 {
+    //                     path: "on-site-enrolment",
+    //                     name: "on-site-enrolment",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/services/on-site-enrolment-view/on-site-enrolment-view.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "evacuation-sanitary",
+    //                     name: "process-evacuation-sanitary",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/services/evacuation-sanitary-view/evacuation-sanitary-view.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "procedure-student",
+    //                     name: "process-student",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/services/process-student-view/process-student-view.vue"
+    //                             )
+    //                 },
+    //                 {
+    //                     path: "service-reclamation",
+    //                     name: "reclamation",
+    //                     component: () =>
+    //                         import("../views/customer-portal/complaint-page/complaint-page.vue")
+    //                 },
+    //                 {
+    //                     path: "service-pelerinage",
+    //                     name: "pilgrimage",
+    //                     component: () =>
+    //                         import(
+    //                             "../views/customer-portal/services/pilgrimage-view/pilgrimage-view.vue"
+    //                             )
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             path: "divers",
+    //             name: "divers",
+    //             children: [
+    //                 {
+    //                     path: "documentation",
+    //                     name: "documentation",
+    //                     component: () => import("../components/shared/EmptyPage.vue")
+    //                 },
+    //                 {
+    //                     path: "mediatheque",
+    //                     name: "mediatheque",
+    //                     component: () => import("../components/shared/EmptyPage.vue")
+    //                 },
+    //                 {
+    //                     path: "gallery",
+    //                     name: "gallery",
+    //                     component: () => import("../components/shared/EmptyPage.vue")
+    //                 },
+    //                 {
+    //                     path: "video",
+    //                     name: "video",
+    //                     component: () => import("../components/shared/EmptyPage.vue")
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             path: "liste-centres-retrait",
+    //             component: () => import("../components/shared/EmptyPage.vue")
+    //         },
+    //         {
+    //             path: "process-evac-sanitaire",
+    //             name: "process-evac-sanitaire",
+    //             component: () => import("../components/shared/EmptyPage.vue")
+    //         },
+    //         {
+    //             path: "list-docs",
+    //             name: "list-docs",
+    //             component: () => import("../components/shared/EmptyPage.vue")
+    //         }
+    //     ]
+    // },
     /*{
         path: "/appointment",
         redirect: {name: "home-page"},
@@ -571,7 +571,9 @@ const routes = [
     {
         path: "/:pathMatch(.*)*",
         name: "NotFound",
-        component: () => import("../views/customer-portal/home-customer.vue")
+        // component: () => import("../views/customer-portal/home-customer.vue")
+        component: SignIn
+
     }
 ];
 
