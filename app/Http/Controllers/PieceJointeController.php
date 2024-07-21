@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreHolidayRequest;
+use App\Models\Commentaire;
 use App\Models\Demande;
 use App\Models\Habilete;
+use App\Models\Historique;
 use App\Models\IndexTraitement;
 use App\Models\PieceJointe;
 use App\Models\PointEnrolement;
@@ -70,6 +72,21 @@ class PieceJointeController extends Controller
                 $data['user_id'] = auth()->user()->id;
                 $data['libelle'] = $data['libelle'];
                 PieceJointe::create($data);
+
+                // Commentaire
+                $historique = new Historique();
+                $historique->description = "Enregistrement d'une pièce jointe";
+                $historique->demande_id = intval($data['demande_id']);
+                $historique->user_id = auth()->user()->id;
+                $historique->save();
+
+                if($request->commentaire){
+                    $commentaire = new Commentaire();
+                    $commentaire->description = $request->commentaire;
+                    $commentaire->historique_id = $historique->id;
+                    $commentaire->save();
+                }
+
                 return redirect()->route("demande.show", ['id' => $data['demande_id']])->with('success_message', 'Pièce jointe enregistrée avec succès');
             }
         } catch (Exception $e) {

@@ -10,18 +10,12 @@ class Commentaire extends Model
     use HasFactory;
     public $table = 'commentaires';
     protected $fillable = [
-        'user_id',
-        "id_demande",
-        "commentaire",
+        'description',
+        "historique_id",
     ];
     public $timestamps = false;
-    public function demande()
+    public function historique()
     {
-        return $this->belongsTo(Demande::class, 'id_demande', 'id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Historique::class, 'historique_id', 'id');
     }
 }

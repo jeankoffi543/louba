@@ -553,22 +553,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                   return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_timeline, null, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.timelineItem, function (item, index) {
+                      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.historiques, function (item, index) {
                         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_timeline_item, {
-                          timestamp: item === null || item === void 0 ? void 0 : item.date,
+                          timestamp: _ctx.formateDateAppointement2(item === null || item === void 0 ? void 0 : item.created_at),
                           placement: "top"
                         }, {
                           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_card, null, {
                               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item === null || item === void 0 ? void 0 : item.action), 1 /* TEXT */)];
+                                var _item$user, _item$user2, _item$client;
+                                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item !== null && item !== void 0 && (_item$user = item.user) !== null && _item$user !== void 0 && _item$user.nom ? item === null || item === void 0 || (_item$user2 = item.user) === null || _item$user2 === void 0 ? void 0 : _item$user2.nom : item === null || item === void 0 || (_item$client = item.client) === null || _item$client === void 0 ? void 0 : _item$client.nom_client), 1 /* TEXT */)];
                               }),
                               _: 2 /* DYNAMIC */
-                            }, 1024 /* DYNAMIC_SLOTS */)];
+                            }, 1024 /* DYNAMIC_SLOTS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item === null || item === void 0 ? void 0 : item.description), 1 /* TEXT */)];
                           }),
                           _: 2 /* DYNAMIC */
                         }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["timestamp"]);
-                      }), 256 /* UNKEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <el-timeline-item\r\n                                                placement=\"top\"\r\n                                                timestamp=\"14 Novembre 2022 11:50\"\r\n                                            >\r\n                                              <el-card>\r\n                                                <h4>Paiement</h4>\r\n                                                <p>Commit de Tom le 2018/4/3 20:46</p>\r\n                                              </el-card>\r\n                                            </el-timeline-item>\r\n                                            <el-timeline-item\r\n                                                placement=\"top\"\r\n                                                timestamp=\"13 Novembre 2022 11:50\"\r\n                                            >\r\n                                              <el-card>\r\n                                                <h4>Enregistrement</h4>\r\n                                                <p>Commit de Tom le 2018/4/2 20:46</p>\r\n                                              </el-card>\r\n                                            </el-timeline-item>")];
+                      }), 256 /* UNKEYED_FRAGMENT */))];
                     }),
                     _: 1 /* STABLE */
                   })])];
@@ -612,6 +613,7 @@ function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 // @vue/component
+
 
 
 
@@ -677,7 +679,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         });
       }
       return timeList;
-    }
+    },
+    historiques: function historiques() {
+      var _this$appointment10;
+      return (_this$appointment10 = this.appointment) === null || _this$appointment10 === void 0 ? void 0 : _this$appointment10.historiques;
+    } // formattedTimestamp(date) {
+    //     // return format(date, 'dd MMMM yyyy HH:mm');
+    //     return "dd MMMM yyyy HH:mm";
+    //   },
   }),
   watch: {
     initPayData: function initPayData() {
@@ -706,6 +715,17 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         day: "numeric",
         month: "long",
         year: "numeric"
+      });
+    },
+    formateDateAppointement2: function formateDateAppointement2(date) {
+      return new Date(date).toLocaleDateString(undefined, {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric"
       });
     },
     printAppointment: function printAppointment() {

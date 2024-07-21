@@ -7,8 +7,10 @@ use App\Mail\AttachmentTicketAppointmentMail;
 use App\Mail\GlobalSenderMail;
 use App\Mail\SimpleMail;
 use App\Models\AdminAction;
+use App\Models\Commentaire;
 use App\Models\Demande;
 use App\Models\Habilete;
+use App\Models\Historique;
 use App\Models\IndexTraitement;
 use App\Models\Traitement;
 use App\Models\User;
@@ -89,17 +91,21 @@ class WorkFlowManger
       $workflowStatus = "PENDING";
       $user = auth()->user();
 
+      $historiques = Historique::where('demande_id', $demandeId)->orderBy('created_at', 'desc')->with('client')->with('user')->with('commentaires')->get();
+
       if (!$demande) return;
 
-      if ($demande->predemande_step == 1) {
+      if ($demande->predemande_step == 1 || $demande->predemande_step == 2) {
          return [
             'demande' => $demande,
             'circuit' => null,
             'workflowStatus' => null,
+            'historiques' => $historiques,
             'isTransmitted' => false,
             'isOwner' => false,
          ];
       }
+
       $habiletes = optional($demande->service)->habiletes;
       $habiletes = is_array($habiletes) ? $habiletes : (is_null($habiletes) ? [] : json_decode($habiletes, true));
       $habilete_position = intval($demande->habilete_position);
@@ -166,6 +172,13 @@ class WorkFlowManger
             $traitement->user_id = $user->id;
             $traitement->action = 'TRANSMITTED';
             $traitement->save();
+
+            // Commentaire
+            $historique = new Historique();
+            $historique->description = " Transfert de la demande";
+            $historique->demande_id =  $demande->id;
+            $historique->user_id = auth()->user()->id;
+            $historique->save();
          } else if ($type === 'REJECTED' && $habilete_position > 0 && $this->userCan('possibilite-rejeter-dossier')) {
             $habiletes = $habiletes_array[$habilete_position]->pluck('id')->toArray();
             foreach ($habiletes as $item) {
@@ -198,12 +211,32 @@ class WorkFlowManger
             $demande->habilete_position = intval($demande->habilete_position) - 1;
             $demande->status_demande = 'REJECTED';
             $demande->save();
+
+            // Commentaire
+            $historique = new Historique();
+            $historique->description = " Rejet de la demande";
+            $historique->demande_id =  $demande->id;
+            $historique->user_id = auth()->user()->id;
+            $historique->save();
          } else if ($type === "SUSPENDED" && $this->userCan('possibilite-suspendre-dossier')) {
             $demande->status_demande = 'SUSPENDED';
             $demande->save();
+            // Commentaire
+            $historique = new Historique();
+            $historique->description = "Suspension de la demande";
+            $historique->demande_id =  $demande->id;
+            $historique->user_id = auth()->user()->id;
+            $historique->save();
          } else if ($type === "RECALLED_SUSPENDED" && $this->userCan('possibilite-de-rapeller-dossier-suspendu')) {
             $demande->status_demande = 'PENDDING';
             $demande->save();
+
+            // Commentaire
+            $historique = new Historique();
+            $historique->description = "Rappel de la demande";
+            $historique->demande_id =  $demande->id;
+            $historique->user_id = auth()->user()->id;
+            $historique->save();
          }
       }
 
@@ -219,6 +252,7 @@ class WorkFlowManger
          'workflowStatus' => $workflowStatus,
          'isTransmitted' => $isTransmitted,
          'isOwner' => $isOwner,
+         'historiques' => $historiques,
       ];
    }
 
@@ -229,15 +263,72 @@ class WorkFlowManger
       if ($request->request_type === "ajouter-numero-recepisse" && $this->userCan("ajouter-numero-recepisse")) {
          $demande->recepice_number = $request->recepice_number;
          $demande->save();
+
+
+         // Commentaire
+         $historique = new Historique();
+         $historique->description = "Ajout d'un numéro de recepisse";
+         $historique->demande_id =  $request->demande_id;
+         $historique->user_id = auth()->user()->id;
+         $historique->save();
+
+         if ($request->commentaire) {
+            $commentaire = new Commentaire();
+            $commentaire->description = $request->commentaire;
+            $commentaire->historique_id = $historique->id;
+            $commentaire->save();
+         }
       } else if ($request->request_type === "ajouter-numero-document" && $this->userCan("ajouter-numero-document")) {
          $demande->numero_document = $request->numero_document;
          $demande->save();
+
+         // Commentaire
+         $historique = new Historique();
+         $historique->description = "Ajout d'un numéro de document";
+         $historique->demande_id =  $request->demande_id;
+         $historique->user_id = auth()->user()->id;
+         $historique->save();
+
+         if ($request->commentaire) {
+            $commentaire = new Commentaire();
+            $commentaire->description = $request->commentaire;
+            $commentaire->historique_id = $historique->id;
+            $commentaire->save();
+         }
       } else if ($request->request_type === "acquittement-delivrance-document" && $this->userCan("acquittement-delivrance-document")) {
          $demande->status_demande = "CLOSED";
          $demande->save();
+
+         // Commentaire
+         $historique = new Historique();
+         $historique->description = "Acquittement de la delivrance du document";
+         $historique->demande_id =  $request->demande_id;
+         $historique->user_id = auth()->user()->id;
+         $historique->save();
+
+         if ($request->commentaire) {
+            $commentaire = new Commentaire();
+            $commentaire->description = $request->commentaire;
+            $commentaire->historique_id = $historique->id;
+            $commentaire->save();
+         }
       } else if ($request->request_type === "gestion-pre-demande-valider" && $this->userCan("gestion-pre-demande")) {
          $demande->predemande_step = 2;
          $demande->save();
+
+         // Commentaire
+         $historique = new Historique();
+         $historique->description = "Validation de la pre-demande";
+         $historique->demande_id =  $request->demande_id;
+         $historique->user_id = auth()->user()->id;
+         $historique->save();
+
+         if ($request->commentaire) {
+            $commentaire = new Commentaire();
+            $commentaire->description = $request->commentaire;
+            $commentaire->historique_id = $historique->id;
+            $commentaire->save();
+         }
       } else if ($request->request_type === "possibilite-d-envoyer-sms" && $this->userCan("possibilite-d-envoyer-sms")) {
          $destinataire = $request->destinataire;
          $contenu = $request->contenu;
@@ -260,6 +351,20 @@ class WorkFlowManger
                }
             }
          }
+
+         // Commentaire
+         $historique = new Historique();
+         $historique->description = " Envoi d'un SMS";
+         $historique->demande_id =  $request->demande_id;
+         $historique->user_id = auth()->user()->id;
+         $historique->save();
+
+         if ($request->commentaire) {
+            $commentaire = new Commentaire();
+            $commentaire->description = $request->commentaire;
+            $commentaire->historique_id = $historique->id;
+            $commentaire->save();
+         }
       } else if ($request->request_type === "possibilite-d-envoyer-mail" && $this->userCan("possibilite-d-envoyer-mail")) {
          $destinataire = $request->destinataire;
          $contenu = $request->contenu;
@@ -277,7 +382,7 @@ class WorkFlowManger
                $attachments[] = $filePath;
             }
          }
-         
+
          $message = $contenu;
          $subject = "Commentaire de demande: " . $demande->code_demande;
          if ($destinataire === "demandeur") {
@@ -290,16 +395,44 @@ class WorkFlowManger
                   $sender = User::where("habilete_id", $value)->get()->pluck('email')->toArray();
                   if (count($sender) > 0) {
                      foreach ($sender as $key2 => $value2) {
-                        Mail::to($value2)->send(new SimpleMail($dataAttachment, $attachments));
+                        Mail::to($value2)->send(new GlobalSenderMail($message, $subject, $attachments));
                      }
                   }
                }
             }
          }
+
+         // Commentaire
+         $historique = new Historique();
+         $historique->description = " Envoi d'un mail";
+         $historique->demande_id =  $request->demande_id;
+         $historique->user_id = auth()->user()->id;
+         $historique->save();
+
+         if ($request->commentaire) {
+            $commentaire = new Commentaire();
+            $commentaire->description = $request->commentaire;
+            $commentaire->historique_id = $historique->id;
+            $commentaire->save();
+         }
       } else if ($request->request_type === "gestion-pre-demande-rejeter" && $this->userCan("gestion-pre-demande")) {
          $demande->predemande_step = 1;
          $demande->status_demande = "REJECTED";
          $demande->save();
+
+         // Commentaire
+         $historique = new Historique();
+         $historique->description = " Rejeter la pre-demande";
+         $historique->demande_id =  $request->demande_id;
+         $historique->user_id = auth()->user()->id;
+         $historique->save();
+
+         if ($request->commentaire) {
+            $commentaire = new Commentaire();
+            $commentaire->description = $request->commentaire;
+            $commentaire->historique_id = $historique->id;
+            $commentaire->save();
+         }
       } else {
          abort(404, 'Forbidden');
       }

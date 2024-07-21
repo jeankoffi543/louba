@@ -442,7 +442,43 @@
 
                              </div>
                          </div>
+                         <br>
+                         <div class="pagetitle">
+                             <h1>Historiques</h1>
+                             <hr class="line bottom-3">
+                             <div class="container">
+                                 <div class="row">
+                                     <div class="col-12">
+                                         {{-- <div class="bg-danger" style="width: 10px; height: 10px; border-radius: 50%">&nbsp;</div> --}}
+                                         {{-- <div style="width: 4px; height: 100%; background-color: #0b5ed7">
+                                                 &nbsp;
+                                            </div> --}}
 
+                                         @foreach ($historiques as $historique)
+                                             <div class=" d-flex gap-2">
+                                                 <div class="vr" style="background-color: #0b5ed7;">
+                                                 </div>
+                                                 <div class="">
+                                                     <p class="text-muted" style="font-size: 0.8rem;">
+                                                         {{ $historique->created_at }}</p>
+                                                     <p style="font-size: 0.8rem;">
+                                                         <strong>{{ optional($historique->user)->nom ? optional($historique->client)->nom_client : '-' }}</strong>
+                                                         : {{ $historique->description }}
+                                                     </p>
+                                                     <p style="font-size: 0.8rem;"> Commentaire :
+                                                         @if (isset($historique->commentaires[0]))
+                                                             {{ $historique->commentaires[0]->description }}
+                                                         @endif
+                                                     </p>
+                                                 </div>
+                                             </div>
+
+                                             <br>
+                                         @endforeach
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
                      </div>
                  </div>
          </section>
@@ -512,8 +548,8 @@
                                      <label for="url">Selectioner des pèces jointes </label>
                                  </div>
                                  <div class="col-12 col-lg-6 text-wrap gap-2">
-                                     <input id="url" type="file" class="form-control" name="url[]" accept=".jpg, .png, .pdf"
-                                         multiple required>
+                                     <input id="url" type="file" class="form-control" name="url[]"
+                                         accept=".jpg, .png, .pdf" multiple required>
                                  </div>
 
                                  <div class="col-12 col-lg-6 text-wrap gap-2">
@@ -523,6 +559,15 @@
                                      <input id="libelle" type="text" name="libelle" required>
                                  </div>
 
+                             </div>
+
+                             <div class="row mb-3 g-2">
+                                 <div class="col-12 col-lg-3 text-wrap gap-2">
+                                     <label for="#commentaire">Laisser un commentaire </label>
+                                 </div>
+                                 <div class="col-12 col-lg-9 text-wrap gap-2">
+                                     <input id="commentaire" type="text" name="commentaire">
+                                 </div>
                              </div>
 
 
@@ -565,6 +610,14 @@
                                  </div>
                              </div>
 
+                             <div class="row mb-3 g-2">
+                                 <div class="col-12 col-lg-3 text-wrap gap-2">
+                                     <label for="#commentaire2">Laisser un commentaire </label>
+                                 </div>
+                                 <div class="col-12 col-lg-9 text-wrap gap-2">
+                                     <input id="commentaire2" type="text" name="commentaire">
+                                 </div>
+                             </div>
 
                          </div>
                          <div class="modal-footer">
@@ -605,6 +658,16 @@
                                  </div>
                              </div>
 
+                             <div class="row mb-3 g-2">
+                                 <div class="col-12 col-lg-3 text-wrap gap-2">
+                                     <label for="#commentaire2">Laisser un commentaire </label>
+                                 </div>
+                                 <div class="col-12 col-lg-9 text-wrap gap-2">
+                                     <input id="commentaire2" type="text" name="commentaire">
+                                 </div>
+                             </div>
+
+
 
                          </div>
                          <div class="modal-footer">
@@ -638,6 +701,15 @@
                                  <div class="row mb-3">
                                      Vous êtes sur le de livrer ce document.
                                      Confirmez-vous?
+                                 </div>
+
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-3 text-wrap gap-2">
+                                         <label for="#commentaire2">Laisser un commentaire </label>
+                                     </div>
+                                     <div class="col-12 col-lg-9 text-wrap gap-2">
+                                         <input id="commentaire2" type="text" name="commentaire">
+                                     </div>
                                  </div>
 
 
@@ -678,13 +750,14 @@
                                          <label for="#smsDestinataire">Destinataire </label>
                                      </div>
                                      <div class="col-12 col-lg-9 text-wrap gap-2">
-                                         <select class="form-select" name="destinataire" id="smsDestinataire" onchange="countUser(event, {{ $demande->id }},  '{{ csrf_token() }}')">
+                                         <select class="form-select" name="destinataire" id="smsDestinataire"
+                                             onchange="countUser(event, {{ $demande->id }},  '{{ csrf_token() }}')">
                                              <option value="1">Groupe suivant</option>
                                              <option value="-1">Groupe précédent</option>
                                              <option value="demandeur">Demandeur</option>
                                          </select>
                                          <p id="userCount">0 utilisateur(s)</p>
-                                        </div>
+                                     </div>
                                  </div>
 
                                  <div class="row mb-3 g-2">
@@ -692,7 +765,8 @@
                                          <label for="smsMsg">Entrer le message </label>
                                      </div>
                                      <div class="col-12 col-lg-9 text-wrap gap-2">
-                                         <textarea class="form-control" id="smsMsg" name="contenu" oninput="checkSMSLength(event)" onkeypress="return validateSMS(event)"></textarea>
+                                         <textarea class="form-control" id="smsMsg" name="contenu" oninput="checkSMSLength(event)"
+                                             onkeypress="return validateSMS(event)"></textarea>
                                          <p id="charCount">0 caractères / 160</p>
 
                                      </div>
@@ -714,64 +788,66 @@
          @endkcan
 
          @kcan('possibilite-d-envoyer-mail')
-         <form method="POST" action="{{ route('demande.manage') }}" enctype="multipart/form-data">
-            @csrf
+             <form method="POST" action="{{ route('demande.manage') }}" enctype="multipart/form-data">
+                 @csrf
 
-            <div class="modal fade" id="envoyerMail" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Envoie de Mail</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
+                 <div class="modal fade" id="envoyerMail" tabindex="-1">
+                     <div class="modal-dialog modal-dialog-scrollable">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h5 class="modal-title">Envoie de Mail</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                     aria-label="Close"></button>
+                             </div>
+                             <div class="modal-body">
 
-                            <input name="demande_id" type="hidden" value="{{ $demande->id }}">
-                            <input name="request_type" type="hidden" value="possibilite-d-envoyer-mail">
+                                 <input name="demande_id" type="hidden" value="{{ $demande->id }}">
+                                 <input name="request_type" type="hidden" value="possibilite-d-envoyer-mail">
 
-                            <div class="row mb-3 g-2">
-                                <div class="col-12 col-lg-3 text-wrap gap-2">
-                                    <label for="#mailDestinataire">Destinataire </label>
-                                </div>
-                                <div class="col-12 col-lg-9 text-wrap gap-2">
-                                    <select class="form-select" name="destinataire" id="mailDestinataire" onchange="countUser(event, {{ $demande->id }},  '{{ csrf_token() }}')">
-                                        <option value="1">Groupe suivant</option>
-                                        <option value="-1">Groupe précédent</option>
-                                        <option value="demandeur">Demandeur</option>
-                                    </select>
-                                    <p id="userCount2">0 utilisateur(s)</p>
-                                   </div>
-                            </div>
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-3 text-wrap gap-2">
+                                         <label for="#mailDestinataire">Destinataire </label>
+                                     </div>
+                                     <div class="col-12 col-lg-9 text-wrap gap-2">
+                                         <select class="form-select" name="destinataire" id="mailDestinataire"
+                                             onchange="countUser(event, {{ $demande->id }},  '{{ csrf_token() }}')">
+                                             <option value="1">Groupe suivant</option>
+                                             <option value="-1">Groupe précédent</option>
+                                             <option value="demandeur">Demandeur</option>
+                                         </select>
+                                         <p id="userCount2">0 utilisateur(s)</p>
+                                     </div>
+                                 </div>
 
-                            <div class="row mb-3 g-2">
-                                <div class="col-12 col-lg-3 text-wrap gap-2">
-                                    <label for="smsMail">Entrer le message </label>
-                                </div>
-                                <div class="col-12 col-lg-9 text-wrap gap-2">
-                                    <textarea class="form-control" id="smsMail2" name="contenu"></textarea>
-                                </div>
-                            </div>
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-3 text-wrap gap-2">
+                                         <label for="smsMail">Entrer le message </label>
+                                     </div>
+                                     <div class="col-12 col-lg-9 text-wrap gap-2">
+                                         <textarea class="form-control" id="smsMail2" name="contenu"></textarea>
+                                     </div>
+                                 </div>
 
-                            <div class="row mb-3 g-2">
-                                <div class="col-12 col-lg-3 text-wrap gap-2">
-                                    <label for="#pj">Pièces jointes </label>
-                                </div>
-                                <div class="col-12 col-lg-9 text-wrap gap-2">
-                                    <input type="file" multiple class="form-control" id="pj" name="pieces_jointes[]">
-                                </div>
-                            </div>
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-3 text-wrap gap-2">
+                                         <label for="#pj">Pièces jointes </label>
+                                     </div>
+                                     <div class="col-12 col-lg-9 text-wrap gap-2">
+                                         <input type="file" multiple class="form-control" id="pj"
+                                             name="pieces_jointes[]">
+                                     </div>
+                                 </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary" id="envoyerMail2" disabled>Valider</button>
-                        </div>
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                 <button type="submit" class="btn btn-primary" id="envoyerMail2" disabled>Valider</button>
+                             </div>
 
-                    </div>
-                </div>
-            </div>
-        </form>
+                         </div>
+                     </div>
+                 </div>
+             </form>
          @endkcan
          <!-- End Modal Dialog Scrollable-->
 
