@@ -18,6 +18,8 @@ class Service extends Model
         'is_public',
         'is_disable',
         'habiletes',
+        'prix',
+        'form_type',
     ];
 
     protected $casts = [
