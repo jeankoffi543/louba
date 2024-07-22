@@ -89,6 +89,7 @@ class ServiceController extends Controller
     public  function store(StoreServiceRequest $request)
     {
 
+        // dd($request->all());
         $imageUrl = NULL;
         if ($request->hasFile('newimage1')) {
             $file = $request->file('newimage1');
