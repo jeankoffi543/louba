@@ -375,8 +375,8 @@ class ClientController extends Controller
     //         }
 
 
-    //         $URL_DOWNLOAD = $_SERVER["APP_URL"] . "/recuPdf/$code_oni";
-    //         $SATUS_DEMANDE = $_SERVER["APP_URL"] . "/site#/personal-space/appointment/documents";
+    //         $URL_DOWNLOAD = env('APP_URL') . "/recuPdf/$code_oni";
+    //         $SATUS_DEMANDE = env('APP_URL') . "/site#/personal-space/appointment/documents";
     //         $message_sms = "Votre code document RADIANGN est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
 
     //         $newSms = new SendSmS();
@@ -580,8 +580,8 @@ class ClientController extends Controller
             }
 
 
-            $URL_DOWNLOAD = $_SERVER["APP_URL"] . "/recuPdf/$code_oni";
-            $SATUS_DEMANDE = $_SERVER["APP_URL"] . "/site#/personal-space/appointment/documents";
+            $URL_DOWNLOAD = env('APP_URL') . "/recuPdf/$code_oni";
+            $SATUS_DEMANDE = env('APP_URL') . "/site#/personal-space/appointment/documents";
             $message_sms = "Votre code document RADIANGN est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
 
             $newSms = new SendSmS();
@@ -929,7 +929,7 @@ class ClientController extends Controller
                     case '00':
                         $paiement->update();
                         $URL_DOWNLOAD_RECU = $_SERVER['APP_URL'] . "/recuPdf/" . $demande->code_demande;
-                        $STATUS_DEMANDE_URL = $_SERVER["APP_URL"] . "/site#/personal-space/my-appointments/documents";
+                        $STATUS_DEMANDE_URL = env('APP_URL') . "/site#/personal-space/my-appointments/documents";
 
                         $message_sms = "Felicitation! Vous venez de payer $amount GNF pour un passeport . \nFrais 0 GNF . Téléchargez votre recu ici $URL_DOWNLOAD_RECU \nMerci";
                         $message_email = "Votre paiement à été validé \n reference de paiement:" . $transaction_reference . "\n montant: " . $amount;
@@ -990,8 +990,8 @@ class ClientController extends Controller
             $demande = Demande::query()->where('id', $request->id)->with(['client', 'product'])->first();
             $apikey = env('CINETPAY_APP_KEY_PUBLIC');
             $site_id = env('CINETPAY_SITE_ID');
-            $notify_url = $_SERVER["APP_URL"] . '/api/cinetpayNotify';
-            $return_url = $_SERVER["APP_URL"] . '/site#/personal-space/my-appointments/documents';
+            $notify_url = env('APP_URL') . '/api/cinetpayNotify';
+            $return_url = env('APP_URL') . '/site#/personal-space/my-appointments/documents';
             $mode = 'PRODUCTION';
             $amount = "200"; //optional($demande->product)->prix;
             $currency = 'XOF';
