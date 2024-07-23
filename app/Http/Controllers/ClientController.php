@@ -623,7 +623,7 @@ class ClientController extends Controller
             $historique = new Historique();
             $historique->description = "Création d'une nouvelle demande";
             $historique->demande_id =  $demande->id;
-            $historique->user_id = $userConnected->id;
+            $historique->client_id = $userConnected->id;
             $historique->save();
 
             return response()->json($data);
