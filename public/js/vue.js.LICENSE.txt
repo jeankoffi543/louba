@@ -33,7 +33,7 @@
 
 /*! Element Plus Icons Vue v2.3.1 */
 
-/*! Element Plus v2.7.6 */
+/*! Element Plus v2.7.7 */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
@@ -64,7 +64,7 @@
  */
 
 /**
-* @vue/shared v3.4.29
+* @vue/shared v3.4.33
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
