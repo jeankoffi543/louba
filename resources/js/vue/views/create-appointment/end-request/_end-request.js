@@ -107,7 +107,7 @@ export default {
             };
             this.$store.dispatch('FORM_DATA_REQUEST', payload);
             const formData = new FormData();
-         
+            
             formData.append(
                 "date_rdv_demande",
                 format(new Date(this.dateAppointment), "yyyy-MM-dd")

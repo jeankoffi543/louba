@@ -428,11 +428,12 @@ class ClientController extends Controller
     public function save_appointment_client(Request $request)
     {
         try {
-       
+
+
             DB::beginTransaction();
             $userConnected = auth('apiJwt')->user();
 
-            $demande = Demande::find($request->id_demande);
+            $demande = Demande::where('id', $request->id_demande)->with('client')->first();
 
             $type_demande = "Nouvelle demande";
             if ($request->type_request == "renouvelement") {
@@ -444,39 +445,38 @@ class ClientController extends Controller
             }
 
             // $demande->id_client = $client->id;
-            $client = Client::all()
-                ->where('telephone_client', '=', $request->telephone)
-                ->where('email_client', '=', $request->email)->first();
-               
-            if (!$client) {
-                $newClient = new Client();
-                $newClient->nom_client = $request->nom;
-                $newClient->prenom_client = $request->prenom;
-                $newClient->email_client = $request->email;
-                $newClient->genre_client = $request->gender == "H" ? "Homme" : "Femme";
-                $newClient->telephone_client = $request->telephone;
-                $newClient->adresse_client = $request->lieu_de_residence;
-                $newClient->date_naissance_client = Carbon::createFromFormat('Y-m-d', $request->date_naissance)->toDateTime();
-                $newClient->password = bcrypt($request->telephone);
-                $newClient->created_at = now();
-                $newClient->save();
-                $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
-                try {
-                    $newSms = new SendSmS();
-                    $newSms->send($request->telephone, $message_sms);
-                } catch (GuzzleException $e) {
-                    // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
-                }
 
-                $client = $newClient;
-            }
-            if(!$client){
-                $client = $userConnected;
-            }
-            $code_oni = "GN" . $client->id . substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10 / strlen($x)))), 1, 10);
+            // if (!$client) {
+            //     $newClient = new Client();
+            //     $newClient->nom_client = $request->nom;
+            //     $newClient->prenom_client = $request->prenom;
+            //     $newClient->email_client = $request->email;
+            //     $newClient->genre_client = $request->gender == "H" ? "Homme" : "Femme";
+            //     $newClient->telephone_client = $request->telephone;
+            //     $newClient->adresse_client = $request->lieu_de_residence;
+            //     $newClient->date_naissance_client = Carbon::createFromFormat('Y-m-d', $request->date_naissance)->toDateTime();
+            //     $newClient->password = bcrypt($request->telephone);
+            //     $newClient->created_at = now();
+            //     $newClient->save();
+            //     $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+            //     try {
+            //         $newSms = new SendSmS();
+            //         $newSms->send($request->telephone, $message_sms);
+            //     } catch (GuzzleException $e) {
+            //         // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
+            //     }
+
+            //     $client = $newClient;
+            // }
+            // if(!$client){
+            //     $client = $userConnected;
+            // }
+
+            $code_oni = "GN" . $demande->client->id . substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10 / strlen($x)))), 1, 10);
+
             $demande->id_sender = $userConnected->id;
             $demande->numero_recu = $request->numero_recu;
-            $demande->id_client = $client->id;
+            // $demande->id_client = $client->id;
             $demande->date_rdv_demande = Carbon::createFromFormat('Y-m-d', $request->date_rdv_demande)->toDateTime();
             // $demande->id_product = $request->id_type_document;
             $demande->id_service = $request->id_type_service;
@@ -487,43 +487,43 @@ class ClientController extends Controller
             $demande->habilete_position = 0;
             $demande->updated_at = now();
 
-            if ($request->hasFile("document1")) {
+            // if ($request->hasFile("document1")) {
 
-                $document1 = $request->file('document1');
-                $validFiles = true; // Indicateur pour vérifier si tous les fichiers sont valides
-                if (is_array($document1) && count($document1) > 0) {
-                    foreach ($document1 as $key => $file) {
-                        $extension = $file->getClientOriginalExtension();
-                        $uuid = (string)Str::uuid() . '.' . $extension;
-                        $file->storeAs('public/documents/', $uuid);
-                        $demande->document_url = Storage::url('documents/' . $uuid);
-                    }
-                } else {
-                    $extension = $document1->getClientOriginalExtension();
-                    $uuid = (string)Str::uuid() . '.' . $extension;
-                    $document1->storeAs('public/documents/', $uuid);
-                    $demande->document_url = Storage::url('documents/' . $uuid);
-                }
-            }
-            if ($request->hasFile("document2")) {
+            //     $document1 = $request->file('document1');
+            //     $validFiles = true; // Indicateur pour vérifier si tous les fichiers sont valides
+            //     if (is_array($document1) && count($document1) > 0) {
+            //         foreach ($document1 as $key => $file) {
+            //             $extension = $file->getClientOriginalExtension();
+            //             $uuid = (string)Str::uuid() . '.' . $extension;
+            //             $file->storeAs('public/documents/', $uuid);
+            //             $demande->document_url = Storage::url('documents/' . $uuid);
+            //         }
+            //     } else {
+            //         $extension = $document1->getClientOriginalExtension();
+            //         $uuid = (string)Str::uuid() . '.' . $extension;
+            //         $document1->storeAs('public/documents/', $uuid);
+            //         $demande->document_url = Storage::url('documents/' . $uuid);
+            //     }
+            // }
+            // if ($request->hasFile("document2")) {
 
-                $document2 = $request->file('document2');
-                if (is_array($document2) && count($document2) > 0) {
-                    foreach ($document2 as $key => $file) {
-                        $extension = $file->getClientOriginalExtension();
-                        $uuid = (string)Str::uuid() . '.' . $extension;
-                        /** @var UploadedFile $file */
-                        $file->storeAs('public/clients/', $uuid);
-                        $demande->avatar_url = Storage::url('clients/' . $uuid);
-                    }
-                }else{
-                    $extension = $document2->getClientOriginalExtension();
-                    $uuid = (string)Str::uuid() . '.' . $extension;
-                    /** @var UploadedFile $file */
-                    $document2->storeAs('public/clients/', $uuid);
-                    $demande->avatar_url = Storage::url('clients/' . $uuid);
-                }
-            }
+            //     $document2 = $request->file('document2');
+            //     if (is_array($document2) && count($document2) > 0) {
+            //         foreach ($document2 as $key => $file) {
+            //             $extension = $file->getClientOriginalExtension();
+            //             $uuid = (string)Str::uuid() . '.' . $extension;
+            //             /** @var UploadedFile $file */
+            //             $file->storeAs('public/clients/', $uuid);
+            //             $demande->avatar_url = Storage::url('clients/' . $uuid);
+            //         }
+            //     }else{
+            //         $extension = $document2->getClientOriginalExtension();
+            //         $uuid = (string)Str::uuid() . '.' . $extension;
+            //         /** @var UploadedFile $file */
+            //         $document2->storeAs('public/clients/', $uuid);
+            //         $demande->avatar_url = Storage::url('clients/' . $uuid);
+            //     }
+            // }
 
             $demande->save();
 
@@ -539,19 +539,28 @@ class ClientController extends Controller
                 $currentHabiletes = $habiletes[$habilete_position];
                 if (is_array($currentHabiletes) && count($currentHabiletes) > 0) {
                     foreach ($currentHabiletes as $habilete) {
-                        $data1 = [
-                            'habilete_id' => intval($habilete),
-                            'id_demande' => $demande->id,
-                        ];
+                        try {
+                            DB::beginTransaction();
 
-                        $data2 = [
-                            'habilete_id' => intval($habilete),
-                            'id_demande' => $demande->id,
-                            'action' => 'create',
-                        ];
+                            $data1 = [
+                                'habilete_id' => intval($habilete),
+                                'id_demande' => $demande->id,
+                            ];
 
-                        IndexTraitement::create($data1);
-                        AdminAction::create($data2);
+                            $data2 = [
+                                'habilete_id' => intval($habilete),
+                                'id_demande' => $demande->id,
+                                'action' => 'create',
+                            ];
+
+                            IndexTraitement::create($data1);
+                            AdminAction::create($data2);
+
+                            DB::commit();
+                        } catch (\Exception $e) {
+                            DB::rollBack();
+                            // Handle the exception or log it
+                        }
                     }
                 } else {
                     $data1 = [
@@ -597,7 +606,7 @@ class ClientController extends Controller
             ];
 
             try {
-                Mail::to( optional($demandeSave->client)->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
+                Mail::to(optional($demandeSave->client)->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
             } catch (Exception $ex) {
                 // DB::rollBack();
                 // $data["demande"] = null;
@@ -610,12 +619,12 @@ class ClientController extends Controller
             $data["message"] = "Demande enregistré";
             $data["demande"] = $demande;
 
-             // Commentaire
-             $historique = new Historique();
-             $historique->description = "Création d'une nouvelle demande";
-             $historique->demande_id =  $demande->id;
-             $historique->user_id = auth()->user()->id;
-             $historique->save();
+            // Commentaire
+            $historique = new Historique();
+            $historique->description = "Création d'une nouvelle demande";
+            $historique->demande_id =  $demande->id;
+            $historique->user_id = $userConnected->id;
+            $historique->save();
 
             return response()->json($data);
         } catch (Exception $ex) {
@@ -626,7 +635,7 @@ class ClientController extends Controller
             return response()->json($data, 500);
         }
     }
-    
+
     public function save_predemande_client(Request $request)
     {
         try {
@@ -725,7 +734,7 @@ class ClientController extends Controller
                         $file->storeAs('public/clients/', $uuid);
                         $demande->avatar_url = Storage::url('clients/' . $uuid);
                     }
-                }else{
+                } else {
                     $extension = $document2->getClientOriginalExtension();
                     $uuid = (string)Str::uuid() . '.' . $extension;
                     /** @var UploadedFile $file */
@@ -743,7 +752,7 @@ class ClientController extends Controller
             } catch (GuzzleException $e) {
                 // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
             }
-         
+
             $demandeSave = Demande::with(['client', 'sender',])->where("id", "=", $demande->id)->first();
 
             $dataAttachment = [
@@ -810,7 +819,7 @@ class ClientController extends Controller
         $maDemande = Demande::where('id', $request->id)->with(['client', 'product', 'service', 'point_enrolement'])->first();
         $maDemande['paiement'] = Paiement::where('id_demande', $request->id)->first();
 
-      $historiques = Historique::where('demande_id', $request->id)->orderBy('created_at', 'desc')->with('client')->with('user')->with('commentaires')->get();
+        $historiques = Historique::where('demande_id', $request->id)->orderBy('created_at', 'desc')->with('client')->with('user')->with('commentaires')->get();
 
 
         $data['demande'] = $maDemande;
@@ -929,7 +938,7 @@ class ClientController extends Controller
                         //                        $response = $curl->request('GET', $url, ['query' => ['app' => "ws", 'u' => "theonemonk",  "from" => "RADIANGN", 'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d", 'op' => "pv", 'to' => "224" .  optional($demande->client)->telephone_client, 'msg' => $message_sms,]]);
                         $newSms = new SendSmS();
                         try {
-                            $newSms->send( optional($demande->client)->telephone_client, $message_sms);
+                            $newSms->send(optional($demande->client)->telephone_client, $message_sms);
                         } catch (GuzzleException $e) {
                             throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
                         }
@@ -949,7 +958,7 @@ class ClientController extends Controller
                             'data' => $pdf->output()
                         ];
 
-                        Mail::to( optional($demande->client)->email_client)->send(new AttachmentTicketMail($data, $attachment));
+                        Mail::to(optional($demande->client)->email_client)->send(new AttachmentTicketMail($data, $attachment));
 
 
                         return response()->json(['data' => $paiement, "status" => "ACCEPTED", 'message' => 'paiement éfféctué'], 200);
