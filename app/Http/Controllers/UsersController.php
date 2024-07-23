@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SendSmS;
+use App\Mail\GlobalSenderMail;
 use App\Models\Habilete;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -22,24 +27,14 @@ $results = DB::table('users')
     public static function updatePassword(Request $request)
     {
 
-        $users = DB::table('users')
-            ->where('password', $request->oldPassword)
-            ->where('id', auth()->user()->id)
-            ->get();
-
-        //dd(session('infoUserClient')->id_client, $clients->count(), $request->oldPassword);
-
-        if ($users->count() == 1) {
-            DB::table('users')
-                ->where('id', auth()->user()->id)
-                ->update([
-                    'password' => $request->newPassword,
-                ]);
-            flash('Votre mot de passe a ete actualiser, veuillez vous reconnecter!');
+        $user = auth()->user();
+        if(Hash::check($request->oldPassword, $user->password)) {
+            $user = User::find($user->id);
+            $user->password = Hash::make($request->newPassword);
+            $user->update();
             return redirect('/disconnect');
-        } else {
-            flash('Echec confirmation ancien mot de passe!');
-            return redirect()->back();
+        }else{
+            return redirect()->back()->with('error_message', 'Erreur de mot de passe');
         }
     }
 
@@ -110,36 +105,41 @@ $results = DB::table('users')
 
     public static function insert(Request $request)
     {
+        $data = $request->all();
 
-
-        DB::table('users')->insert([
-            'nom' => $request->nom,
-            'email' => $request->email,
-            'telephone' => $request->telephone,
-            'password' => 123456,
-            'id_role' => 4,
-            'habilete_id' => $request->id_role,
-            'id_point_enrolement' => $request->id_point_enrolement,
-            'actif' => 1,
+        $valodator = Validator::make($data, [
+            'nom' => 'required',
+            'email' => 'required|unique:users,email',
+            'telephone' => 'required|unique:users,telephone',
+            'id_point_enrolement' => 'required',
+            'id_role' => 'required',
         ]);
 
-        /*
-        $message_sms = "Votre mot de passe est ".$request->telephone."-rz-". substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)) )),1,10);
+        if (!$valodator->fails()) {
+            DB::table('users')->insert([
+                'nom' => $request->nom,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+                'password' => Hash::make('123456789'),
+                'id_role' => 4,
+                'habilete_id' => $request->id_role,
+                'id_point_enrolement' => $request->id_point_enrolement,
+                'actif' => 1,
+            ]);
+
+            $msgSMS = "Hello, " . $request->nom . " Votre compte a éé créé avec succès. Votre mot de passe est 123456789, Veuillez changer votre mot de passe à la prochaine connexion. Cordialement. " . env('APP_URL', "Omniform");
+
+            $msgMail =  $request->nom . " Votre compte a éé créé avec succès. Votre mot de passe est 123456789, Veuillez changer votre mot de passe à la prochaine connexion. Cordialement. " . env('APP_URL', "Omniform");
 
 
-                $curl = new \GuzzleHttp\Client();
-                $url = "https://smswanwaran.com/index.php";
-                $response = $curl->request('GET', $url, ['query' => [
-                                            'app' => "ws",
-                                            'u' => "theonemonk",
-                                            'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d",
-                                            'op' => "pv",
-                                            'to' => "224".$request->telephone,
-                                            'msg' => $message_sms,
-                                        ]]);
-            */
+            $sms = new SendSmS();
+            $sms->send($request->telephone, $msgSMS);
+            Mail::to(request()->email)->send(new GlobalSenderMail($msgMail, "CREATION DE COMPTE", []));
 
-        return redirect(route('user'));
+            return redirect(route('user'))->with('success_message', $valodator->errors()->first());
+        } else {
+            return redirect(route('user'))->with('error_message', $valodator->errors()->first());
+        }
     }
 
 
@@ -153,7 +153,7 @@ $results = DB::table('users')
                 'nom' => $request->nom,
                 'email' => $request->email,
                 'telephone' => $request->telephone,
-                'password' => 123456,
+                // 'password' => 123456,
                 'id_role' => 4,
                 'habilete_id' => $request->id_role,
                 'id_point_enrolement' => $request->id_point_enrolement,

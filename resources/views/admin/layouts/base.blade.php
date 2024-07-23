@@ -226,7 +226,11 @@
 
 
 
-
+                    @if (Session::get('error_message'))
+                        <script>
+                            alert("{{ Session::get('error_message') }}");
+                        </script>
+                    @endif
 
 
                 <li class="nav-item dropdown pe-3">
