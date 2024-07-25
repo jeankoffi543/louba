@@ -46,7 +46,7 @@ export default {
                 gender: "H",
                 phone: "",
                 dateOfBirth: "",
-                placeOfResidence: "",
+                // placeOfResidence: "",
                 birth_address: "",
                 fileListPicture: [],
                 fileListBirthCertificate: [],

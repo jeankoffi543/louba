@@ -553,9 +553,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_input, {
-                modelValue: _ctx.formPersonalInfo.placeOfResidence,
+                modelValue: _ctx.formPersonalInfo.birth_address,
                 "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-                  return _ctx.formPersonalInfo.placeOfResidence = $event;
+                  return _ctx.formPersonalInfo.birth_address = $event;
                 }),
                 placeholder: "Lieu de Naissance",
                 size: "default"
@@ -803,7 +803,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         gender: "H",
         phone: "",
         dateOfBirth: "",
-        placeOfResidence: "",
+        // placeOfResidence: "",
         birth_address: "",
         fileListPicture: [],
         fileListBirthCertificate: []

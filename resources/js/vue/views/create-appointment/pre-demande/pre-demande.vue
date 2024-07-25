@@ -147,7 +147,7 @@
                                 <div class="group">
                                     <h1 class="fs-5 item-title">Lieu de Naissance</h1>
                                     <el-form-item>
-                                        <el-input v-model="formPersonalInfo.placeOfResidence"
+                                        <el-input v-model="formPersonalInfo.birth_address"
                                             placeholder="Lieu de Naissance" size="default"></el-input>
                                     </el-form-item>
                                 </div>
