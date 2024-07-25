@@ -236,6 +236,11 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         }
       });
     },
+    disabledDates: function disabledDates(date) {
+      console.log('date', date);
+      var dayOfWeek = date.getDay();
+      return dayOfWeek === 0 || dayOfWeek === 6; // 0 represents Sunday, 6 represents Saturday
+    },
     onSaveAppointment: function () {
       var _onSaveAppointment = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _this$formDataRequest2,

@@ -45,8 +45,6 @@
                         </el-form>
                     </div>
                 
-                        <el-collapse-item id="typeServiceRef" ref="typeServiceRef" name="2"
-                            title="Selectionner le type de service">
                             <div class="service-appointment">
                                 <div class="container-fluid">
                                     <div class="row container-appointment-form-row">
@@ -93,7 +91,6 @@
 
                                     </div>
                                 </div>
-                        </el-collapse-item>
             </el-collapse>
         </div>
     </div>

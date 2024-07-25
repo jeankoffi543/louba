@@ -22,8 +22,8 @@
 
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
-    <title>RADIANGN | E-rdv</title>
-    <meta name="description" content="radiangn | E-rdv">
+    <title>OMNIFORM | E-rdv</title>
+    <meta name="description" content="OMNIFORM | E-rdv">
     <meta name="author" content="Radian">
 
     <!-- Mobile Specific Metas -->
@@ -596,7 +596,7 @@
                                     </li>
                                     <li><a style="text-transform:initial;color:#008f5d" href="/equipe">Equipe
                                             (Organigramme)</a></li>
-                                    <li><a style="text-transform:initial;color:#008f5d" href="/content/oni-en-chiffre">RADIANGN
+                                    <li><a style="text-transform:initial;color:#008f5d" href="/content/oni-en-chiffre">OMNIFORM
                                             en chiffres</a></li>
                                 </ul>
                             </li>
@@ -645,7 +645,7 @@
 
                             <li><a style="text-transform:uppercase;color:#008f5d" href="#">Contacts</a>
                                 <ul>
-                                    <li><a style="text-transform:initial;color:#008f5d" href="/contact">RADIANGN vous
+                                    <li><a style="text-transform:initial;color:#008f5d" href="/contact">OMNIFORM vous
                                             ecoute</a></li>
                                 </ul>
                             </li>

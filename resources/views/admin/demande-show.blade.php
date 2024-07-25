@@ -157,6 +157,25 @@
                          </div>
 
                          <div class="container">
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Type de la demande
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->type_request ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Numéro du reçu
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->numero_recu ?? '-' }}
+                                </div>
+                            </div>
+
                              <div class="row">
                                  <div class="col-3 fw-bold">
                                      Nom & Prénom
@@ -168,6 +187,42 @@
                              </div>
 
 
+                             <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Genre
+                                </div>
+                                <div class="col-9">
+                                    {{ optional($demande->client)->genre_client ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Nationnalité d'origine
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->nationality ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Status nationnalité
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->nationality_state ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Profession
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->profession ?? '-' }}
+                                </div>
+                            </div>
+                            
                              <div class="row">
                                  <div class="col-3 fw-bold">
                                      Email
@@ -189,21 +244,13 @@
                              </div>
 
 
-                             <div class="row">
-                                 <div class="col-3 fw-bold">
-                                     contact
-                                 </div>
-                                 <div class="col-9">
-                                     {{ optional($demande->client)->telephone_client ?? '-' }}
-                                 </div>
-                             </div>
 
                              <div class="row">
                                  <div class="col-3 fw-bold">
                                      Adresse
                                  </div>
                                  <div class="col-9">
-                                     {{ optional($demande->client)->address ?? '-' }}
+                                     {{ $demande->address ?? '-' }}
                                  </div>
                              </div>
 
@@ -218,13 +265,69 @@
                              </div>
 
                              <div class="row">
-                                 <div class="col-3 fw-bold">
-                                     Genre
-                                 </div>
-                                 <div class="col-9">
-                                     {{ optional($demande->client)->genre_client ?? '-' }}
-                                 </div>
-                             </div>
+                                <div class="col-3 fw-bold">
+                                    Lieu de naissance
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->birth_address ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Taille
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->height ?? '-' }}
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Teint
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->complexion ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Couleur des yeux
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->eye_color ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Couleur des cheveux
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->hair_color ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Nom & Prénom du père
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->father_last_name ?? '-' }} {{ $demande->father_first_name ?? '-' }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3 fw-bold">
+                                    Nom & Prénom de la mère
+                                </div>
+                                <div class="col-9">
+                                    {{ $demande->mother_last_name ?? '-' }} {{ $demande->mother_first_name ?? '-' }}
+                                </div>
+                            </div>
+
 
                          </div>
 
@@ -274,14 +377,6 @@
                                  </div>
                              </div>
 
-                             <div class="row">
-                                 <div class="col-3 fw-bold">
-                                     Numéro du reçu
-                                 </div>
-                                 <div class="col-9">
-                                     {{ $demande->numero_recu ?? '-' }}
-                                 </div>
-                             </div>
 
                              <div class="row">
                                  <div class="col-3 fw-bold">
@@ -307,7 +402,7 @@
                                      Date de demande
                                  </div>
                                  <div class="col-9">
-                                     {{ (new DateTime($demande->created_at))->format('d/m/Y H:i') ?? '-' }}
+                                     {{ (new DateTime($demande->created_at))->format('d/m/Y') ?? '-' }}
                                  </div>
                              </div>
 
@@ -316,7 +411,7 @@
                                      Date du rendez-vous
                                  </div>
                                  <div class="col-9">
-                                     {{ $demande->date_rdv_demande ?? '-' }}
+                                     {{ (new DateTime($demande->date_rendez_vous))->format('d/m/Y') ?? '-' }}
                                  </div>
                              </div>
 
@@ -331,26 +426,6 @@
                                  </div>
                              </div>
 
-
-                             <div class="row">
-                                 <div class="col-3 fw-bold">
-                                     Produit
-                                 </div>
-                                 <div class="col-9">
-                                     {{ $demande->product->nom ?? '-' }}
-                                 </div>
-                             </div>
-
-
-
-                             <div class="row">
-                                 <div class="col-3 fw-bold">
-                                     Type
-                                 </div>
-                                 <div class="col-9">
-                                     {{ $demande->type_request ?? '-' }}
-                                 </div>
-                             </div>
 
 
                              <div class="row">

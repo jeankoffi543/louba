@@ -34,11 +34,6 @@
                             <div class="card-body p-4">
 
 
-
-
-
-
-
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Raison</label>
                                     <div class="col-sm-10">
@@ -54,7 +49,7 @@
                                 </div>
 
 
-
+                                {{-- 
                                 <div class="row mb-3">
                                     <label for="inputPassword" class="col-sm-2 col-form-label">Point d'enrolement</label>
                                     <div class="col-sm-10">
@@ -65,7 +60,7 @@
                                             @endforelse
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
 

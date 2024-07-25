@@ -24,7 +24,7 @@
           <button class="w-100 btn btn-lg btn-primary bg-oni-primary" type="submit">Contactez nous</button>
           <hr class="my-4">
           <p class="text-center text-muted">
-            By RADIANGN  © 2022
+            By OMNIFORM  © 2022
           </p>
 
         </form>

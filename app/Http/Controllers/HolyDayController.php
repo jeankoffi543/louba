@@ -37,7 +37,7 @@ class HolyDayController extends Controller
 
         $publicHoliday->name = $request->name;
         $publicHoliday->date = $request->date;
-        $publicHoliday->id_point_enrolement = $request->id_point_enrolement;
+        // $publicHoliday->id_point_enrolement = $request->id_point_enrolement;
 
         $publicHoliday->save();
 

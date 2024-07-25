@@ -119,7 +119,7 @@
         <div class="container clearfix">
 
             <div class="sixteen columns" sstyle="background-image: url(/imgg/passeportbg.png);">
-                <h1>RADIANGN SERVICE vous ecoute</h1>
+                <h1>OMNIFORM SERVICE vous ecoute</h1>
             </div>
 
         </div><!-- End Container -->
@@ -230,7 +230,7 @@
 
                     <BR><BR>
 
-                    <span> By RADIANGN © 2022 </span>
+                    <span> By OMNIFORM © 2022 </span>
 
                 </form>
 

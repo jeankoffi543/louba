@@ -5,6 +5,7 @@ import { KEY_FORM_JSON } from "../../../core/constants";
 import axios from "axios";
 import { format } from "date-fns";
 
+
 export default {
     name: "StartRequest",
 
@@ -17,13 +18,21 @@ export default {
     data() {
         return {
             isLoadingSaveAppointment: false,
+            documentPreview: {
+                type : "",
+                url : ""
+            },
+            picturePreview: {
+                url : "",
+                type : ""
+            },
             activeNames: ["1", "2", "3", "4", "5"],
             disabledStep1: false,
             disabledStep2: false,
             disabledStep3: true,
             disabledStep4: true,
             typeDemand: "nouvelle_demande",
-            titleDocumentUpload: "Extrait de naissance",
+            titleDocumentUpload: "Extrait de naissance (PDF, JPEG, JPG, PNG)",
             typeServiceSelected: null,
             formPersonalInfo: {
                 firstname: "",
@@ -32,11 +41,13 @@ export default {
                 nationality: "",
                 nationality_state: "",
                 profession: "",
+                address: "",
                 email: "",
                 gender: "H",
                 phone: "",
                 dateOfBirth: "",
                 placeOfResidence: "",
+                birth_address: "",
                 fileListPicture: [],
                 fileListBirthCertificate: [],
             },
@@ -116,10 +127,10 @@ export default {
                     timer: 4500,
                 });
 
-                if(this.isLoadingSaveAppointment) {
+                if (this.isLoadingSaveAppointment) {
                     setTimeout(() => {
-                        this.isLoadingSaveAppointment = false
-                    }, 3000)
+                        this.isLoadingSaveAppointment = false;
+                    }, 3000);
                 }
             } else if (
                 Object.values(this.signalement).some((item) => item === "")
@@ -131,10 +142,10 @@ export default {
                     showConfirmButton: false,
                     timer: 4500,
                 });
-                if(this.isLoadingSaveAppointment) {
+                if (this.isLoadingSaveAppointment) {
                     setTimeout(() => {
-                        this.isLoadingSaveAppointment = false
-                    }, 3000)
+                        this.isLoadingSaveAppointment = false;
+                    }, 3000);
                 }
             } else if (
                 Object.values(this.ascendants).some((item) => item === "")
@@ -146,10 +157,10 @@ export default {
                     showConfirmButton: false,
                     timer: 4500,
                 });
-                if(this.isLoadingSaveAppointment) {
+                if (this.isLoadingSaveAppointment) {
                     setTimeout(() => {
-                        this.isLoadingSaveAppointment = false
-                    }, 3000)
+                        this.isLoadingSaveAppointment = false;
+                    }, 3000);
                 }
             } else if (
                 this.formPersonalInfo.fileListBirthCertificate.length == 0 ||
@@ -162,10 +173,10 @@ export default {
                     showConfirmButton: false,
                     timer: 4500,
                 });
-                if(this.isLoadingSaveAppointment) {
+                if (this.isLoadingSaveAppointment) {
                     setTimeout(() => {
-                        this.isLoadingSaveAppointment = false
-                    }, 3000)
+                        this.isLoadingSaveAppointment = false;
+                    }, 3000);
                 }
             } else {
                 const formData = new FormData();
@@ -195,6 +206,12 @@ export default {
                     "profession",
                     this.formPersonalInfo?.profession
                 );
+
+                formData.append(
+                    "address",
+                    this.formPersonalInfo?.address
+                );
+
                 formData.append("height", this.signalement?.height);
                 formData.append("complexion", this.signalement?.complexion);
                 formData.append("hair_color", this.signalement?.hair_color);
@@ -211,10 +228,15 @@ export default {
                     "lieu_de_residence",
                     this.formPersonalInfo?.placeOfResidence
                 );
-                // formData.append(
-                //     "type_request",
-                //     this.formPersonalInfo.typeRequest
-                // );
+                formData.append(
+                    "birth_address",
+                    this.formPersonalInfo?.birth_address
+                );
+
+                formData.append(
+                    "type_request",
+                    this.typeDemand
+                );
                 formData.append(
                     "father_first_name",
                     this.ascendants?.father_firstname
@@ -284,9 +306,6 @@ export default {
                     })
                     .finally(() => {});
             }
-
-           
-
         },
         handleChange: function (val) {
             // console.log("handleChange val", val)
@@ -299,18 +318,31 @@ export default {
         uploadBirthCertificate(file, fileList) {
             this.formPersonalInfo.fileListBirthCertificate = [];
             this.formPersonalInfo.fileListBirthCertificate.push(file.raw);
+            this.picturePreview.type = 'image';
             // this.onSubmitImage();
         },
         onRemoveBirthCertificate(file, fileList) {
             this.formPersonalInfo.fileListBirthCertificate = [];
+            this.picturePreview.type = '';
         },
 
         uploadPicture(file, fileList) {
             this.formPersonalInfo.fileListPicture = [];
             this.formPersonalInfo.fileListPicture.push(file.raw);
+
+            if (file.raw.type.startsWith("image/")) {
+                this.documentPreview.url = fileList[0]?.url;
+                this.documentPreview.type = "image";
+            } else if (file.raw.type === "application/pdf") {
+                this.documentPreview.type = "pdf";
+                var pdffile = file.raw;
+                var pdffile_url = URL.createObjectURL(pdffile);
+                document.getElementById("viewer").src = pdffile_url;
+            }
         },
         onRemovePicture(file, fileList) {
             this.formPersonalInfo.fileListPicture = [];
+            this.documentPreview.type = "";
         },
 
         /*END STEP 4*/
@@ -322,7 +354,7 @@ export default {
                 data: this.typeDemand,
             });
             // this.disabledStep4 = false;
-
+            console.log("this.typeDemand", this.typeDemand);
             if (this.typeDemand === "nouvelle_demande") {
                 this.titleDocumentUpload = "Extrait de naissance";
             } else if (this.typeDemand === "duplicata") {

@@ -110,7 +110,7 @@
                                                 </button>
                                             <hr class="my-4">
                                             <p class="text-center text-muted">
-                                                By RADIANGN © 2022
+                                                By OMNIFORM © 2022
                                             </p>
 
                                         </form>-->

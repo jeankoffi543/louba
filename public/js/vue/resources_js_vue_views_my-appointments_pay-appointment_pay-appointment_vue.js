@@ -156,7 +156,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-1 content container-card-other-info"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\n            class=\"app-d-flex app-justify-content-space-between app-align-items-center\"\n          >\n            <span class=\"title-info\">Reference</span>\n            <h5 class=\"app-m-0\">662215050</h5>\n          </div> "), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\r\n            class=\"app-d-flex app-justify-content-space-between app-align-items-center\"\r\n          >\r\n            <span class=\"title-info\">Reference</span>\r\n            <h5 class=\"app-m-0\">662215050</h5>\r\n          </div> "), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
             loading: _ctx.isLoading,
             "primary-btn": false,
             block: "",
@@ -183,7 +183,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Payer plus tard ")];
             }),
             _: 1 /* STABLE */
-          }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("          <ButtonApp\n                        :loading=\"isLoading\"\n                        :primary-btn=\"true\"\n                        block\n                        button-title=\"\"\n\n                    ></ButtonApp>")])];
+          }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("          <ButtonApp\r\n                        :loading=\"isLoading\"\r\n                        :primary-btn=\"true\"\r\n                        block\r\n                        button-title=\"\"\r\n\r\n                    ></ButtonApp>")])];
         }),
         _: 1 /* STABLE */
       })];
@@ -335,7 +335,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pay_appointment_vue_vue_type_template_id_2a86b293_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pay-appointment.vue?vue&type=template&id=2a86b293&scoped=true */ "./resources/js/vue/views/my-appointments/pay-appointment/pay-appointment.vue?vue&type=template&id=2a86b293&scoped=true");
 /* harmony import */ var _pay_appointment_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_pay-appointment.js?vue&type=script&lang=js */ "./resources/js/vue/views/my-appointments/pay-appointment/_pay-appointment.js?vue&type=script&lang=js");
 /* harmony import */ var _pay_appointment_less_vue_type_style_index_0_id_2a86b293_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_pay-appointment.less?vue&type=style&index=0&id=2a86b293&lang=less&scoped=true */ "./resources/js/vue/views/my-appointments/pay-appointment/_pay-appointment.less?vue&type=style&index=0&id=2a86b293&lang=less&scoped=true");
-/* harmony import */ var C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -343,7 +343,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_pay_appointment_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_pay_appointment_vue_vue_type_template_id_2a86b293_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-2a86b293"],['__file',"resources/js/vue/views/my-appointments/pay-appointment/pay-appointment.vue"]])
+const __exports__ = /*#__PURE__*/(0,E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_pay_appointment_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_pay_appointment_vue_vue_type_template_id_2a86b293_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-2a86b293"],['__file',"resources/js/vue/views/my-appointments/pay-appointment/pay-appointment.vue"]])
 /* hot reload */
 if (false) {}
 

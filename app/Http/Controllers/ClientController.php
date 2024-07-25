@@ -26,10 +26,13 @@ use Illuminate\Support\Str;
 use PDF;
 use App\Exceptions\ErrorException;
 use App\Mail\GlobalSenderMail;
+use App\Mail\PreRendezVousDemandeMail;
+use App\Mail\RendezVousDemandeMail;
 use App\Models\AdminAction;
 use App\Models\Historique;
 use App\Models\IndexTraitement;
 use App\Models\Service;
+use DateTime;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use const Grpc\STATUS_CANCELLED;
@@ -86,7 +89,7 @@ class ClientController extends Controller
             $numero = request()->telephone;
 
             if ($client->save()) {
-                $message_sms = "Votre access RADIANGN est \n identifiant:" . request()->email . "\n Mot de passe: " . request()->telephone;
+                $message_sms = "Bienvenue sur la plateforme de prise de rendez-vous. Votre accès OMNIForm est: \nidentifiant: " . request()->email . "\n Mot de passe: " . request()->telephone;
                 try {
                     // $mailMsg = "Cher Utilisateur, Votre inscription à la plateforme de prise de rendez-vous est désormais effective.Votre nom d'utilisateur est : $username Votre mot de passe est : $numero de téléphone";
 
@@ -145,12 +148,12 @@ class ClientController extends Controller
                 }
 
                 $users = auth('apiJwt')->user();
-                /*if ($users->actif_client == 0) {
-                $data['message'] = "Echec connection : Utilisateur suspendu";
-                $data['client'] = null;
+                if ($users->actif_client == 0) {
+                    $data['message'] = "Echec connection : Utilisateur suspendu";
+                    $data['client'] = null;
 
-                return response()->json($data, 421);
-            }*/
+                    return response()->json($data, 421);
+                }
                 session(['infoUserClient' => $users]);
 
                 $data['message'] = "ok";
@@ -256,7 +259,7 @@ class ClientController extends Controller
     //             $newClient->password = bcrypt($request->telephone);
     //             $newClient->created_at = now();
     //             $newClient->save();
-    //             $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+    //             $message_sms = "Votre access OMNIFORM est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
     //             try {
     //                 $newSms = new SendSmS();
     //                 $newSms->send($request->telephone, $message_sms);
@@ -377,7 +380,7 @@ class ClientController extends Controller
 
     //         $URL_DOWNLOAD = env('APP_URL') . "/recuPdf/$code_oni";
     //         $SATUS_DEMANDE = env('APP_URL') . "/site#/personal-space/appointment/documents";
-    //         $message_sms = "Votre code document RADIANGN est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
+    //         $message_sms = "Votre code document OMNIFORM est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
 
     //         $newSms = new SendSmS();
     //         try {
@@ -391,7 +394,7 @@ class ClientController extends Controller
     //         $demandeSave = Demande::with(['client', 'sender', 'product', 'point_enrolement'])->where("id", "=", $demande->id)->first();
 
     //         $dataAttachment = [
-    //             'title' => 'Reçu de prise de rendez-vous RADIANGN SERVICE : ' . optional(demandeSave->product)->nom,
+    //             'title' => 'Reçu de prise de rendez-vous OMNIFORM SERVICE : ' . optional(demandeSave->product)->nom,
     //             'body' => "Votre demande a été enregistré. $message_sms"
     //         ];
 
@@ -435,14 +438,14 @@ class ClientController extends Controller
 
             $demande = Demande::where('id', $request->id_demande)->with('client')->first();
 
-            $type_demande = "Nouvelle demande";
-            if ($request->type_request == "renouvelement") {
-                $type_demande = "Renouvelement";
-            } elseif ($request->type_request == "duplicata") {
-                $type_demande = "Duplicata";
-            } else {
-                $type_demande = "Nouvelle demande";
-            }
+            // $type_demande = "Nouvelle demande";
+            // if ($request->type_request == "renouvelement") {
+            //     $type_demande = "Renouvelement";
+            // } elseif ($request->type_request == "duplicata") {
+            //     $type_demande = "Duplicata";
+            // } else {
+            //     $type_demande = "Nouvelle demande";
+            // }
 
             // $demande->id_client = $client->id;
 
@@ -458,7 +461,7 @@ class ClientController extends Controller
             //     $newClient->password = bcrypt($request->telephone);
             //     $newClient->created_at = now();
             //     $newClient->save();
-            //     $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+            //     $message_sms = "Votre access OMNIFORM est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
             //     try {
             //         $newSms = new SendSmS();
             //         $newSms->send($request->telephone, $message_sms);
@@ -482,7 +485,7 @@ class ClientController extends Controller
             $demande->id_service = $request->id_type_service;
             $demande->id_point_enrolement = $request->id_point_enrolement;
             // $demande->code_demande = $code_oni;
-            $demande->type_request = $type_demande;
+            // $demande->type_request = $type_demande;
             $demande->predemande_step = 3;
             $demande->habilete_position = 0;
             $demande->updated_at = now();
@@ -563,26 +566,35 @@ class ClientController extends Controller
                         }
                     }
                 } else {
-                    $data1 = [
-                        'habilete_id' => intval($currentHabiletes),
-                        'id_demande' => $demande->id,
-                    ];
+                    try {
+                        DB::beginTransaction();
 
-                    $data2 = [
-                        'habilete_id' => intval($currentHabiletes),
-                        'id_demande' => $demande->id,
-                        'action' => 'create',
-                    ];
+                        $data1 = [
+                            'habilete_id' => intval($currentHabiletes),
+                            'id_demande' => $demande->id,
+                        ];
 
-                    IndexTraitement::create($data1);
-                    AdminAction::create($data2);
+                        $data2 = [
+                            'habilete_id' => intval($currentHabiletes),
+                            'id_demande' => $demande->id,
+                            'action' => 'create',
+                        ];
+
+                        IndexTraitement::create($data1);
+                        AdminAction::create($data2);
+                        DB::commit();
+                    } catch (\Exception $e) {
+                        DB::rollBack();
+                    }
                 }
             }
 
 
             $URL_DOWNLOAD = env('APP_URL') . "/recuPdf/$code_oni";
             $SATUS_DEMANDE = env('APP_URL') . "/site#/personal-space/appointment/documents";
-            $message_sms = "Votre code document RADIANGN est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
+            $message_sms = "Votre code document OMNIFORM est " . $code_oni . "\n Veuillez suivre le parcours ici $SATUS_DEMANDE \n et telecharger votre recu sur $URL_DOWNLOAD";
+
+            $subject = "Email de confirmation de prise rendez-vous pour le service : " . optional($demande->service)->name;
 
             $newSms = new SendSmS();
             try {
@@ -596,7 +608,7 @@ class ClientController extends Controller
             $demandeSave = Demande::with(['client', 'sender', 'product', 'point_enrolement'])->where("id", "=", $demande->id)->first();
 
             $dataAttachment = [
-                'title' => 'Reçu de prise de rendez-vous RADIANGN SERVICE : ' . optional($demandeSave->product)->nom,
+                'title' => 'Reçu de prise de rendez-vous OMNIFORM SERVICE : ' . optional($demandeSave->product)->nom,
                 'body' => "Votre demande a été enregistré. $message_sms"
             ];
 
@@ -606,7 +618,17 @@ class ClientController extends Controller
             ];
 
             try {
-                Mail::to(optional($demandeSave->client)->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
+                // Mail::to(optional($demandeSave->client)->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
+                $detail = [
+                    'username' => $userConnected->nom_client,
+                    'date' => $demande->date_rdv_demande->format('d-m-Y'),
+                    'point_enrolement' => optional($demande->point_enrolement)->nom_pe,
+                    'code_demande' => $demande->code_demande,
+                    'telephone' => optional($demande->client)->telephone_client,
+                    'service' => optional($demande->product)->name,
+                ];
+
+                Mail::to($userConnected->email_client)->send(new RendezVousDemandeMail($subject, $detail, $attachment));
             } catch (Exception $ex) {
                 // DB::rollBack();
                 // $data["demande"] = null;
@@ -670,7 +692,7 @@ class ClientController extends Controller
                 $newClient->password = bcrypt($request->telephone);
                 $newClient->created_at = now();
                 $newClient->save();
-                $message_sms = "Votre access RADIANGN est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+                $message_sms = "Votre access OMNIFORM est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
                 try {
                     $newSms = new SendSmS();
                     $newSms->send($request->telephone, $message_sms);
@@ -695,6 +717,8 @@ class ClientController extends Controller
             $demande->mother_first_name = $request->mother_first_name;
             $demande->mother_last_name = $request->mother_last_name;
             $demande->numero_recu = $request->numero_recu;
+            $demande->address = $request->address;
+            $demande->birth_address = $request->birth_address;
             $demande->id_client = $client->id;
             $demande->id_product = null;
             $demande->id_service = null;
@@ -766,13 +790,18 @@ class ClientController extends Controller
             ];
 
             try {
-                Mail::to($request->email_client)->send(new AttachmentTicketAppointmentMail($dataAttachment, $attachment));
+                $detail = [
+                    'username' => $userConnected->nom_client,
+                ];
+
+                $subject = "Email de confirmation de la pré-demande ";
+                Mail::to($userConnected->email_client)->send(new PreRendezVousDemandeMail($subject, $detail, []));
             } catch (Exception $ex) {
-                DB::rollBack();
-                $data["demande"] = null;
-                $data["message"] = "Echèc de l'enregistré l'envoi de votre recu a échoué";
-                $data["details"] = $ex->getMessage();
-                return response()->json($data);
+                // DB::rollBack();
+                // $data["demande"] = null;
+                // $data["message"] = "Echèc de l'enregistré l'envoi de votre recu a échoué";
+                // $data["details"] = $ex->getMessage();
+                // return response()->json($data);
             }
             DB::commit();
             $data["status"] = 200;
@@ -935,7 +964,7 @@ class ClientController extends Controller
                         $message_email = "Votre paiement à été validé \n reference de paiement:" . $transaction_reference . "\n montant: " . $amount;
                         //                        $curl = new \GuzzleHttp\Client();
                         //                        $url = "https://smswanwaran.com/index.php";
-                        //                        $response = $curl->request('GET', $url, ['query' => ['app' => "ws", 'u' => "theonemonk",  "from" => "RADIANGN", 'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d", 'op' => "pv", 'to' => "224" .  optional($demande->client)->telephone_client, 'msg' => $message_sms,]]);
+                        //                        $response = $curl->request('GET', $url, ['query' => ['app' => "ws", 'u' => "theonemonk",  "from" => "OMNIFORM", 'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d", 'op' => "pv", 'to' => "224" .  optional($demande->client)->telephone_client, 'msg' => $message_sms,]]);
                         $newSms = new SendSmS();
                         try {
                             $newSms->send(optional($demande->client)->telephone_client, $message_sms);
@@ -948,8 +977,8 @@ class ClientController extends Controller
 
 
                         $data = [
-                            'title' => 'Reçu de paiement RADIANGN SERVICE : ' . optional($demande->product)->nom,
-                            'body' => $message_email . "\nVotre code document RADIANGN est " . $demande->code_demande . "\n Veuillez suivre le parcours ici $STATUS_DEMANDE_URL \net télécharger votre recu sur $URL_DOWNLOAD_RECU"
+                            'title' => 'Reçu de paiement OMNIFORM SERVICE : ' . optional($demande->product)->nom,
+                            'body' => $message_email . "\nVotre code document OMNIFORM est " . $demande->code_demande . "\n Veuillez suivre le parcours ici $STATUS_DEMANDE_URL \net télécharger votre recu sur $URL_DOWNLOAD_RECU"
                         ];
 
 

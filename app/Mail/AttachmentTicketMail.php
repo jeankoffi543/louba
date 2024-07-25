@@ -23,7 +23,7 @@ class AttachmentTicketMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Votre reçu de paiement RADIANGN')->view('emails.ticket')
+        return $this->subject('Votre reçu de paiement OMNIFORM')->view('emails.ticket')
             ->attachData($this->attachment['data'], $this->attachment['name'], [
                 'mime' => 'application/pdf'
             ]);

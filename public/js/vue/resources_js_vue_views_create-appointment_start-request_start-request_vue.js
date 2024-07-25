@@ -97,7 +97,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ButtonApp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonApp");
   var _component_el_col = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-col");
   var _component_el_row = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-row");
-  var _component_el_collapse_item = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-collapse-item");
   var _component_el_collapse = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-collapse");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse, {
     ref: "collapse",
@@ -180,67 +179,57 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })])])];
         }),
         _: 1 /* STABLE */
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse_item, {
-        id: "typeServiceRef",
-        ref: "typeServiceRef",
-        name: "2",
-        title: "Selectionner le type de service"
-      }, {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.formPersonalInfo.pointEnrolementServices, function (item, index) {
+        var _ctx$serviceSelected;
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+          key: index,
+          "class": "item-request-type col-sm-12 col-md-6 col-lg-3 mb-2",
+          onClick: function onClick($event) {
+            return _ctx.radioAppointmentChangeService(item, 3);
+          }
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+            selected: (item === null || item === void 0 ? void 0 : item.id) == ((_ctx$serviceSelected = _ctx.serviceSelected) === null || _ctx$serviceSelected === void 0 ? void 0 : _ctx$serviceSelected.id)
+          }, "card shadow border-0 h-100"])
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+          alt: item === null || item === void 0 ? void 0 : item.name,
+          src: item === null || item === void 0 ? void 0 : item.image,
+          "class": "border-0 img"
+        }, null, 8 /* PROPS */, _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item === null || item === void 0 ? void 0 : item.name), 1 /* TEXT */)], 2 /* CLASS */)], 8 /* PROPS */, _hoisted_12);
+      }), 128 /* KEYED_FRAGMENT */))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.formPersonalInfo.pointEnrolementServices, function (item, index) {
-            var _ctx$serviceSelected;
-            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-              key: index,
-              "class": "item-request-type col-sm-12 col-md-6 col-lg-3 mb-2",
-              onClick: function onClick($event) {
-                return _ctx.radioAppointmentChangeService(item, 3);
-              }
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-                selected: (item === null || item === void 0 ? void 0 : item.id) == ((_ctx$serviceSelected = _ctx.serviceSelected) === null || _ctx$serviceSelected === void 0 ? void 0 : _ctx$serviceSelected.id)
-              }, "card shadow border-0 h-100"])
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-              alt: item === null || item === void 0 ? void 0 : item.name,
-              src: item === null || item === void 0 ? void 0 : item.image,
-              "class": "border-0 img"
-            }, null, 8 /* PROPS */, _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item === null || item === void 0 ? void 0 : item.name), 1 /* TEXT */)], 2 /* CLASS */)], 8 /* PROPS */, _hoisted_12);
-          }), 128 /* KEYED_FRAGMENT */))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_input, {
-                modelValue: _ctx.formPersonalInfo.numero_recu,
-                "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-                  return _ctx.formPersonalInfo.numero_recu = $event;
-                }),
-                placeholder: "Numéro du reçu",
-                size: "default"
-              }, null, 8 /* PROPS */, ["modelValue"])];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_input, {
+            modelValue: _ctx.formPersonalInfo.numero_recu,
+            "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+              return _ctx.formPersonalInfo.numero_recu = $event;
             }),
-            _: 1 /* STABLE */
-          })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
-            gutter: 24,
-            "class": "app-w-50"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_col, {
-                sm: 24,
-                xs: 24,
-                "class": "mt-3"
-              }, {
-                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
-                    block: "",
-                    "button-title": "Suivant",
-                    onClick: _ctx.onSwitchPage
-                  }, null, 8 /* PROPS */, ["onClick"])];
-                }),
-                _: 1 /* STABLE */
-              })];
-            }),
-            _: 1 /* STABLE */
-          })])])];
+            placeholder: "Numéro du reçu",
+            size: "default"
+          }, null, 8 /* PROPS */, ["modelValue"])];
         }),
         _: 1 /* STABLE */
-      }, 512 /* NEED_PATCH */)];
+      })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
+        gutter: 24,
+        "class": "app-w-50"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_col, {
+            sm: 24,
+            xs: 24,
+            "class": "mt-3"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
+                block: "",
+                "button-title": "Suivant",
+                onClick: _ctx.onSwitchPage
+              }, null, 8 /* PROPS */, ["onClick"])];
+            }),
+            _: 1 /* STABLE */
+          })];
+        }),
+        _: 1 /* STABLE */
+      })])])];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["modelValue", "onChange"])])]);
@@ -549,7 +538,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _start_request_vue_vue_type_template_id_11a25140_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./start-request.vue?vue&type=template&id=11a25140&scoped=true */ "./resources/js/vue/views/create-appointment/start-request/start-request.vue?vue&type=template&id=11a25140&scoped=true");
 /* harmony import */ var _start_request_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_start-request.js?vue&type=script&lang=js */ "./resources/js/vue/views/create-appointment/start-request/_start-request.js?vue&type=script&lang=js");
 /* harmony import */ var _start_request_less_vue_type_style_index_0_id_11a25140_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_start-request.less?vue&type=style&index=0&id=11a25140&lang=less&scoped=true */ "./resources/js/vue/views/create-appointment/start-request/_start-request.less?vue&type=style&index=0&id=11a25140&lang=less&scoped=true");
-/* harmony import */ var C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -557,7 +546,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_start_request_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_start_request_vue_vue_type_template_id_11a25140_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-11a25140"],['__file',"resources/js/vue/views/create-appointment/start-request/start-request.vue"]])
+const __exports__ = /*#__PURE__*/(0,E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_start_request_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_start_request_vue_vue_type_template_id_11a25140_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-11a25140"],['__file',"resources/js/vue/views/create-appointment/start-request/start-request.vue"]])
 /* hot reload */
 if (false) {}
 

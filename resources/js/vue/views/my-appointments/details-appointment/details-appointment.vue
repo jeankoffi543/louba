@@ -9,7 +9,7 @@
                 <el-row :gutter="24" class="container-row">
                     <el-col :sm="16" :xs="24" class="info-user">
                         <div class="head-card-user app-flex-d-column app-align-items-center">
-                            <el-avatar :size="60" :src="circleUrl"></el-avatar>
+                            <el-avatar :size="60" :src="demandeObj?.avatar_url"></el-avatar>
                             <h4 class="app-m-0 name-user text-center">{{ demandeObj?.client?.nom_client }} {{
                                 demandeObj?.client?.prenom_client
                             }}</h4>
@@ -18,11 +18,7 @@
                                 <a :href="'tel:' + demandeObj?.client?.telephone_client">{{
                                     demandeObj?.client?.telephone_client }}</a>
                             </span>
-                            <div class="content-qr-code">
-                                <img alt="QR CODE" height="50" src="/assets/vue/imgs/others/fake_qrcode.jpeg"
-                                    width="50">
-
-                            </div>
+                          
                         </div>
                         <div class="content-card-other-info-user app-mb-1">
                             <el-row :gutter="24" class="container-item">
@@ -148,7 +144,7 @@
                                     typeDocumentObj?.nom ?? '-'
                                 }}</h5>
                                 <h4 class="amount-appointment type-appointment" v-if="demandeObj?.predemande_step > 2">
-                                    Montant à payer : {{ typeDocumentObj?.prix ?? '-' }} GNF
+                                    Montant à payer : {{ demandeObj?.service?.prix ?? '-' }} GNF
                                 </h4>
                                 <h4 class="date-appointment">
                                     {{ formateDateAppointement(demandeObj?.date_rdv_demande ?? '-') }}

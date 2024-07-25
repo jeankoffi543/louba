@@ -143,7 +143,7 @@
 
                                     <div class="col-sm-12 col-md-12">
                                         <div class="group">
-                                            <h1 class="fs-5 item-title">Pofession</h1>
+                                            <h1 class="fs-5 item-title">Profession</h1>
                                             <el-form-item>
                                                 <el-input v-model="formPersonalInfo.profession" placeholder="Profession"
                                                     size="default" type="text"></el-input>

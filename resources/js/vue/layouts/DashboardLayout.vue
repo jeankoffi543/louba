@@ -7,13 +7,15 @@
 
             <el-menu active-text-color="var(--gray400Color)" background-color="var(--gray400Color)" class="menu"
                 text-color="#FFF">
+                
+                <el-menu-item index="1-3" @click="$router.push({ name: 'pre-demande' })">Mes pré demandes
+                </el-menu-item>
+                
                 <el-menu-item index="1-1" @click="$router.push({ name: 'all-documents' })">Mes rendez-vous
                 </el-menu-item>
                 <!-- <el-menu-item index="1-2" @click="$router.push({ name: 'appointment-start' })">Prendre rendez-vous
                 </el-menu-item> -->
 
-                <el-menu-item index="1-3" @click="$router.push({ name: 'pre-demande' })">Mes pré demandes
-                </el-menu-item>
 
                 <!--                <el-menu-item
                     index="1-3"

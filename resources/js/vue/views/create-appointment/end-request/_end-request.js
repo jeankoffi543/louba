@@ -74,6 +74,13 @@ export default {
         onReturn: function () {
             this.$router.push({name: "appointment-start", params: {documentId: this.formDataRequest?.user?.documentId}})
         },
+
+        disabledDates(date) {
+            console.log('date', date)
+            const dayOfWeek = date.getDay();
+            return dayOfWeek === 0 || dayOfWeek === 6; // 0 represents Sunday, 6 represents Saturday
+          },
+
         onSaveAppointment: async function () {
             this.isLoadingSaveAppointment = true;
             console.log("this.formDataRequest =====", this.formDataRequest)

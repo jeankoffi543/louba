@@ -41,7 +41,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">date</th>
                                         <th scope="col">Raison</th>
-                                        <th scope="col">Point d'enrolement</th>
+                                        {{-- <th scope="col">Point d'enrolement</th> --}}
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -55,9 +55,9 @@
                                             <td>
                                                 {{ $holiday->name }}
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 {{ $holiday->enrolement->nom_pe }}
-                                            </td>
+                                            </td> --}}
 
                                             <td>
 

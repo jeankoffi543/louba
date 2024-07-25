@@ -20,12 +20,12 @@
                 </el-row>
                 <el-row :gutter="24" class="app-m-0 app-justify-content-space-between" style="margin-bottom: 8px">
                     <el-col :sm="12" :xs="24" class="date-appointment">
-                        <el-button class="button-primary" type="success">{{ dataItem?.code_demande }}
+                        <el-button class="button-primary" type="success">N° dossier : {{ dataItem?.code_demande }}
                         </el-button>
                     </el-col>
                     <el-col :sm="12" :xs="24" class="status-appointment">
                         <el-button class="button-primary app-d-flex app-justify-content-flex-end" type="success">{{
-                            status }}
+                            status(dataItem) }}
                         </el-button>
                     </el-col>
                 </el-row>
@@ -74,6 +74,35 @@ export default {
     },
 
     methods: {
+        status(dataItem) {
+            if (dataItem?.predemande_step == 1) {
+                return "En attente"
+            } else {
+                if (dataItem?.status_demande == "PENDDING") {
+                    return "En cours"
+                }
+                else if (dataItem?.status_demande == "OPEN") {
+                    return "Ouvert"
+                }
+                else if (dataItem?.status_demande == "SUSPENDED") {
+                    return "Suspendue"
+                } else if (dataItem?.status_demande == "RESETTED") {
+                    return "Réinitialisée"
+                }
+                else if (dataItem?.status_demande == "REJECTED") {
+                    return "Echec"
+                } else if (dataItem?.status_demande == "NEW") {
+                    return "Nouveau"
+                } else if (dataItem?.status_demande == "CLOSED") {
+                    return "Rendez-vous fait, maintenant en attente du retrait"
+                } else if (dataItem?.status_demande == "PENDING_PAY") {
+                    return "en attente de paiement"
+                } else {
+                    return "En attente"
+                }
+            }
+
+        },
         getRecu() {
             window.open(`/recuPdf/${this.dataItem?.code_demande}`)
         },
@@ -141,34 +170,7 @@ export default {
 
             return d
         },
-        status() {
-            if (this.dataItem?.predemande_step == 1) {
-                return "En attente"
-            }
-            else if (this.dataItem?.status_demande == "PENDDING") {
-                return "En cours"
-            }
-            else if (this.dataItem?.status_demande == "OPEN") {
-                return "Ouvert"
-            }
-            else if (this.dataItem?.status_demande == "SUSPENDED") {
-                return "Suspendue"
-            } else if (this.dataItem?.status_demande == "RESETTED") {
-                return "Réinitialisée"
-            }
-            else if (this.dataItem?.status_demande == "REJECTED") {
-                return "Echec"
-            } else if (this.dataItem?.status_demande == "NEW") {
-                return "En attente"
-            } else if (this.dataItem?.status_demande == "CLOSED") {
-                return "Rendez-vous fait, maintenant en attente du retrait"
-            } else if (this.dataItem?.status_demande == "PENDING_PAY") {
-                return "en attente de paiement"
-            } else {
-                return "En attente"
-            }
-
-        },
+       
     }
 };
 </script>

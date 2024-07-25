@@ -18,7 +18,7 @@ class CreatePublicHolidaysTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('date');
-            $table->unsignedBigInteger('id_point_enrolement');
+            $table->unsignedBigInteger('id_point_enrolement')->nullable();
             $table->foreign('id_point_enrolement')->references('id_pe')->on('point_enrolement');
             $table->timestamps();
         });

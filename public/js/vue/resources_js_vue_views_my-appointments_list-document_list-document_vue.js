@@ -24,6 +24,31 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    status: function status(dataItem) {
+      if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.predemande_step) == 1) {
+        return "En attente";
+      } else {
+        if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "PENDDING") {
+          return "En cours";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "OPEN") {
+          return "Ouvert";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "SUSPENDED") {
+          return "Suspendue";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "RESETTED") {
+          return "Réinitialisée";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "REJECTED") {
+          return "Echec";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "NEW") {
+          return "Nouveau";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "CLOSED") {
+          return "Rendez-vous fait, maintenant en attente du retrait";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "PENDING_PAY") {
+          return "en attente de paiement";
+        } else {
+          return "En attente";
+        }
+      }
+    },
     getRecu: function getRecu() {
       var _this$dataItem;
       window.open("/recuPdf/".concat((_this$dataItem = this.dataItem) === null || _this$dataItem === void 0 ? void 0 : _this$dataItem.code_demande));
@@ -99,30 +124,6 @@ __webpack_require__.r(__webpack_exports__);
         year: "numeric"
       }) : null;
       return d;
-    },
-    status: function status() {
-      var _this$dataItem8, _this$dataItem9, _this$dataItem10, _this$dataItem11, _this$dataItem12, _this$dataItem13, _this$dataItem14, _this$dataItem15, _this$dataItem16;
-      if (((_this$dataItem8 = this.dataItem) === null || _this$dataItem8 === void 0 ? void 0 : _this$dataItem8.predemande_step) == 1) {
-        return "En attente";
-      } else if (((_this$dataItem9 = this.dataItem) === null || _this$dataItem9 === void 0 ? void 0 : _this$dataItem9.status_demande) == "PENDDING") {
-        return "En cours";
-      } else if (((_this$dataItem10 = this.dataItem) === null || _this$dataItem10 === void 0 ? void 0 : _this$dataItem10.status_demande) == "OPEN") {
-        return "Ouvert";
-      } else if (((_this$dataItem11 = this.dataItem) === null || _this$dataItem11 === void 0 ? void 0 : _this$dataItem11.status_demande) == "SUSPENDED") {
-        return "Suspendue";
-      } else if (((_this$dataItem12 = this.dataItem) === null || _this$dataItem12 === void 0 ? void 0 : _this$dataItem12.status_demande) == "RESETTED") {
-        return "Réinitialisée";
-      } else if (((_this$dataItem13 = this.dataItem) === null || _this$dataItem13 === void 0 ? void 0 : _this$dataItem13.status_demande) == "REJECTED") {
-        return "Echec";
-      } else if (((_this$dataItem14 = this.dataItem) === null || _this$dataItem14 === void 0 ? void 0 : _this$dataItem14.status_demande) == "NEW") {
-        return "En attente";
-      } else if (((_this$dataItem15 = this.dataItem) === null || _this$dataItem15 === void 0 ? void 0 : _this$dataItem15.status_demande) == "CLOSED") {
-        return "Rendez-vous fait, maintenant en attente du retrait";
-      } else if (((_this$dataItem16 = this.dataItem) === null || _this$dataItem16 === void 0 ? void 0 : _this$dataItem16.status_demande) == "PENDING_PAY") {
-        return "en attente de paiement";
-      } else {
-        return "En attente";
-      }
     }
   }
 });
@@ -222,7 +223,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                   var _$props$dataItem5;
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$dataItem5 = $props.dataItem) === null || _$props$dataItem5 === void 0 ? void 0 : _$props$dataItem5.code_demande), 1 /* TEXT */)];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("N° dossier : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$dataItem5 = $props.dataItem) === null || _$props$dataItem5 === void 0 ? void 0 : _$props$dataItem5.code_demande), 1 /* TEXT */)];
                 }),
                 _: 1 /* STABLE */
               })];
@@ -239,7 +240,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 type: "success"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.status), 1 /* TEXT */)];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.status($props.dataItem)), 1 /* TEXT */)];
                 }),
                 _: 1 /* STABLE */
               })];
@@ -404,7 +405,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       })];
     }),
     _: 1 /* STABLE */
-  })), [[_directive_loading, _ctx.isLoading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <el-tabs type=\"card\">\n              <el-tab-pane label=\"VISA\">\n\n              </el-tab-pane>\n              <el-tab-pane label=\"PASSEPORT\">\n                <el-container class=\"container-item-doc\">\n                  <el-row :gutter=\"24\" class=\"app-w-100\">\n                    <el-col\n                      v-for=\"(item, index) in documentsAppointmentPassport\"\n                      :key=\"index\"\n                      :sm=\"8\"\n                      :xs=\"24\"\n                      class=\"app-mb-1\"\n                    >\n                      <ItemDocument\n                        :key=\"index\"\n                        :dataItem=\"item\"\n                        :index-build=\"index\"\n                      ></ItemDocument>\n                    </el-col>\n                  </el-row>\n                </el-container>\n              </el-tab-pane>\n              <el-tab-pane label=\"TITRE DE SEJOUR\">\n                <el-container class=\"container-item-doc\">\n                  <el-row :gutter=\"24\" class=\"app-w-100\">\n                    <el-col\n                      v-for=\"(item, index) in documentsAppointmentResidencePermit\"\n                      :key=\"index\"\n                      :sm=\"8\"\n                      :xs=\"24\"\n                      class=\"app-mb-1\"\n                    >\n                      <ItemDocument\n                        :key=\"index\"\n                        :dataItem=\"item\"\n                        :index-build=\"index\"\n                      ></ItemDocument>\n                    </el-col>\n                  </el-row>\n                </el-container>\n              </el-tab-pane>\n            </el-tabs>")]);
+  })), [[_directive_loading, _ctx.isLoading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <el-tabs type=\"card\">\r\n              <el-tab-pane label=\"VISA\">\r\n\r\n              </el-tab-pane>\r\n              <el-tab-pane label=\"PASSEPORT\">\r\n                <el-container class=\"container-item-doc\">\r\n                  <el-row :gutter=\"24\" class=\"app-w-100\">\r\n                    <el-col\r\n                      v-for=\"(item, index) in documentsAppointmentPassport\"\r\n                      :key=\"index\"\r\n                      :sm=\"8\"\r\n                      :xs=\"24\"\r\n                      class=\"app-mb-1\"\r\n                    >\r\n                      <ItemDocument\r\n                        :key=\"index\"\r\n                        :dataItem=\"item\"\r\n                        :index-build=\"index\"\r\n                      ></ItemDocument>\r\n                    </el-col>\r\n                  </el-row>\r\n                </el-container>\r\n              </el-tab-pane>\r\n              <el-tab-pane label=\"TITRE DE SEJOUR\">\r\n                <el-container class=\"container-item-doc\">\r\n                  <el-row :gutter=\"24\" class=\"app-w-100\">\r\n                    <el-col\r\n                      v-for=\"(item, index) in documentsAppointmentResidencePermit\"\r\n                      :key=\"index\"\r\n                      :sm=\"8\"\r\n                      :xs=\"24\"\r\n                      class=\"app-mb-1\"\r\n                    >\r\n                      <ItemDocument\r\n                        :key=\"index\"\r\n                        :dataItem=\"item\"\r\n                        :index-build=\"index\"\r\n                      ></ItemDocument>\r\n                    </el-col>\r\n                  </el-row>\r\n                </el-container>\r\n              </el-tab-pane>\r\n            </el-tabs>")]);
 }
 
 /***/ }),
@@ -579,7 +580,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ItemDocument_vue_vue_type_template_id_267b5706_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemDocument.vue?vue&type=template&id=267b5706&scoped=true */ "./resources/js/vue/components/shared/ItemDocument.vue?vue&type=template&id=267b5706&scoped=true");
 /* harmony import */ var _ItemDocument_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemDocument.vue?vue&type=script&lang=js */ "./resources/js/vue/components/shared/ItemDocument.vue?vue&type=script&lang=js");
 /* harmony import */ var _ItemDocument_vue_vue_type_style_index_0_id_267b5706_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ItemDocument.vue?vue&type=style&index=0&id=267b5706&lang=less&scoped=true */ "./resources/js/vue/components/shared/ItemDocument.vue?vue&type=style&index=0&id=267b5706&lang=less&scoped=true");
-/* harmony import */ var C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -587,7 +588,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_ItemDocument_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ItemDocument_vue_vue_type_template_id_267b5706_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-267b5706"],['__file',"resources/js/vue/components/shared/ItemDocument.vue"]])
+const __exports__ = /*#__PURE__*/(0,E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_ItemDocument_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ItemDocument_vue_vue_type_template_id_267b5706_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-267b5706"],['__file',"resources/js/vue/components/shared/ItemDocument.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -609,7 +610,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _list_document_vue_vue_type_template_id_257c7f33_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list-document.vue?vue&type=template&id=257c7f33&scoped=true */ "./resources/js/vue/views/my-appointments/list-document/list-document.vue?vue&type=template&id=257c7f33&scoped=true");
 /* harmony import */ var _list_document_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_list-document.js?vue&type=script&lang=js */ "./resources/js/vue/views/my-appointments/list-document/_list-document.js?vue&type=script&lang=js");
 /* harmony import */ var _list_document_less_vue_type_style_index_0_id_257c7f33_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_list-document.less?vue&type=style&index=0&id=257c7f33&lang=less&scoped=true */ "./resources/js/vue/views/my-appointments/list-document/_list-document.less?vue&type=style&index=0&id=257c7f33&lang=less&scoped=true");
-/* harmony import */ var C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -617,7 +618,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_list_document_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_list_document_vue_vue_type_template_id_257c7f33_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-257c7f33"],['__file',"resources/js/vue/views/my-appointments/list-document/list-document.vue"]])
+const __exports__ = /*#__PURE__*/(0,E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_list_document_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_list_document_vue_vue_type_template_id_257c7f33_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-257c7f33"],['__file',"resources/js/vue/views/my-appointments/list-document/list-document.vue"]])
 /* hot reload */
 if (false) {}
 

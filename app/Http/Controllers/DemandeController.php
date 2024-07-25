@@ -103,7 +103,7 @@ class DemandeController extends Controller
             //         $response = $curl->request('GET', $url, ['query' => [
             //             'app' => "ws",
             //             'u' => "theonemonk",
-            //             "from" => "RADIANGN",
+            //             "from" => "OMNIFORM",
             //             'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d",
             //             'op' => "pv",
             //             'to' => "224" . $demandei->telephone_client,
@@ -172,7 +172,7 @@ class DemandeController extends Controller
             //dd($code_onis);
 
             if ($code_onis->count() == 0)
-                return redirect('/rdv')->with('flashMessage', "Echec: identifiant RADIANGN incorrect ");
+                return redirect('/rdv')->with('flashMessage', "Echec: identifiant OMNIFORM incorrect ");
             else {
                 $client_information = DB::table('client')
                     ->where('code_oni', $request->code_oni)
@@ -301,7 +301,7 @@ class DemandeController extends Controller
                     'code_demande' => $code_oni,
                 ]);
 
-                $message_sms = "Votre identifiant RADIANGN est : " . $code_oni . "\n Ce identifiant unique vous permet de suivre vos documents sur radiangn-gn.com";
+                $message_sms = "Votre identifiant OMNIFORM est : " . $code_oni . "\n Ce identifiant unique vous permet de suivre vos documents sur " . env('APP_URL');
                 //dd($message_sms,$request->telephone);
 
 
@@ -337,7 +337,7 @@ class DemandeController extends Controller
                 return redirect('/suivreMesDocuments');
             } else {
                 return redirect('/rdv')->with('flashMessage', "Ce numero telephone est deja lier a un compte,
-					veuillez vous l'identifiant RADIANGN envoyer au telephone ou creer un nouveau compte sans  ");
+					veuillez vous l'identifiant OMNIFORM envoyer au telephone ou creer un nouveau compte sans  ");
             }
         }
     }
