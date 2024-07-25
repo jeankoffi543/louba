@@ -20,7 +20,7 @@ export default {
 
     data() {
         return {
-            title: "RADIANGN EN CHIFFRES"
+            title: "OMNIFORM EN CHIFFRES"
         }
     },
     computed: {

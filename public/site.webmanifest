@@ -1,6 +1,6 @@
 {
-    "name": "RADIANGN",
-    "short_name": "RADIANGN",
+    "name": "OMNIFORM",
+    "short_name": "OMNIFORM",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -15,6 +15,6 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "start_url": "http://radiangn.poc-demo.com",
+    "start_url": "httpS://omniform.radiangn.com",
     "display": "standalone"
 }

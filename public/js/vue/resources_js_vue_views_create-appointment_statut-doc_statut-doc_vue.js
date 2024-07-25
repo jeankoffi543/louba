@@ -24,6 +24,31 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    status: function status(dataItem) {
+      if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.predemande_step) == 1) {
+        return "En attente";
+      } else {
+        if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "PENDDING") {
+          return "En cours";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "OPEN") {
+          return "Ouvert";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "SUSPENDED") {
+          return "Suspendue";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "RESETTED") {
+          return "Réinitialisée";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "REJECTED") {
+          return "Echec";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "NEW") {
+          return "Nouveau";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "CLOSED") {
+          return "Rendez-vous fait, maintenant en attente du retrait";
+        } else if ((dataItem === null || dataItem === void 0 ? void 0 : dataItem.status_demande) == "PENDING_PAY") {
+          return "en attente de paiement";
+        } else {
+          return "En attente";
+        }
+      }
+    },
     getRecu: function getRecu() {
       var _this$dataItem;
       window.open("/recuPdf/".concat((_this$dataItem = this.dataItem) === null || _this$dataItem === void 0 ? void 0 : _this$dataItem.code_demande));
@@ -99,30 +124,6 @@ __webpack_require__.r(__webpack_exports__);
         year: "numeric"
       }) : null;
       return d;
-    },
-    status: function status() {
-      var _this$dataItem8, _this$dataItem9, _this$dataItem10, _this$dataItem11, _this$dataItem12, _this$dataItem13, _this$dataItem14, _this$dataItem15, _this$dataItem16;
-      if (((_this$dataItem8 = this.dataItem) === null || _this$dataItem8 === void 0 ? void 0 : _this$dataItem8.predemande_step) == 1) {
-        return "En attente";
-      } else if (((_this$dataItem9 = this.dataItem) === null || _this$dataItem9 === void 0 ? void 0 : _this$dataItem9.status_demande) == "PENDDING") {
-        return "En cours";
-      } else if (((_this$dataItem10 = this.dataItem) === null || _this$dataItem10 === void 0 ? void 0 : _this$dataItem10.status_demande) == "OPEN") {
-        return "Ouvert";
-      } else if (((_this$dataItem11 = this.dataItem) === null || _this$dataItem11 === void 0 ? void 0 : _this$dataItem11.status_demande) == "SUSPENDED") {
-        return "Suspendue";
-      } else if (((_this$dataItem12 = this.dataItem) === null || _this$dataItem12 === void 0 ? void 0 : _this$dataItem12.status_demande) == "RESETTED") {
-        return "Réinitialisée";
-      } else if (((_this$dataItem13 = this.dataItem) === null || _this$dataItem13 === void 0 ? void 0 : _this$dataItem13.status_demande) == "REJECTED") {
-        return "Echec";
-      } else if (((_this$dataItem14 = this.dataItem) === null || _this$dataItem14 === void 0 ? void 0 : _this$dataItem14.status_demande) == "NEW") {
-        return "En attente";
-      } else if (((_this$dataItem15 = this.dataItem) === null || _this$dataItem15 === void 0 ? void 0 : _this$dataItem15.status_demande) == "CLOSED") {
-        return "Rendez-vous fait, maintenant en attente du retrait";
-      } else if (((_this$dataItem16 = this.dataItem) === null || _this$dataItem16 === void 0 ? void 0 : _this$dataItem16.status_demande) == "PENDING_PAY") {
-        return "en attente de paiement";
-      } else {
-        return "En attente";
-      }
     }
   }
 });
@@ -222,7 +223,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                   var _$props$dataItem5;
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$dataItem5 = $props.dataItem) === null || _$props$dataItem5 === void 0 ? void 0 : _$props$dataItem5.code_demande), 1 /* TEXT */)];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("N° dossier : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$dataItem5 = $props.dataItem) === null || _$props$dataItem5 === void 0 ? void 0 : _$props$dataItem5.code_demande), 1 /* TEXT */)];
                 }),
                 _: 1 /* STABLE */
               })];
@@ -239,7 +240,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 type: "success"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.status), 1 /* TEXT */)];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.status($props.dataItem)), 1 /* TEXT */)];
                 }),
                 _: 1 /* STABLE */
               })];
@@ -367,7 +368,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       })];
     }),
     _: 1 /* STABLE */
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <div class=\"list-document app-container-page\">\n                    <div class=\"card\">\n                        <div class=\"contenu\">\n                            <div class=\"info\">\n                                <p>mercredi 6 septembre 2023</p>\n                                 <p> <em>Kone Christian </em> </p>\n                            </div>\n                            <div class=\"papier\">\n                                <p>Passeports</p>\n\n                            </div>\n                            <div class=\"position\">\n                                 <span> <img src=\"/imgg/location.png\" class=\"imgages\"/> </span>\n                                    <span > Coléha </span>\n                                    <p class=\"para\">GN1MOUYVDINFG</p>\n                            </div>\n                         </div>\n\n                           <div class=\"resultat\">\n                             <em> En attente de paiement ... </em>\n                             </div>\n                     </div>\n\n                      <div class=\"card\">\n                        <div class=\"contenu\">\n                            <div class=\"info\">\n                                <p>mercredi 6 septembre 2023</p>\n                                 <p> <em>Kone Christian </em> </p>\n                            </div>\n                            <div class=\"papier\">\n                                <p>Titre de séjour</p>\n\n                            </div>\n                            <div class=\"position\">\n                                 <span> <img src=\"/imgg/location.png\" class=\"imgages\"/> </span>\n                                    <span > Matoto </span>\n                                    <p class=\"para\">GN1MOUYVDINFG</p>\n                            </div>\n                             </div>\n\n                           <div class=\"resultat\">\n                             <em> En cour de traitement ... </em>\n                             </div>\n                         </div>\n\n                          <div class=\"card\">\n                        <div class=\"contenu\">\n                            <div class=\"info\">\n                                <p>mercredi 6 septembre 2023</p>\n                                 <p> <em>Kone Christian </em> </p>\n                            </div>\n                            <div class=\"papier\">\n                                <p>Visa</p>\n\n                            </div>\n                            <div class=\"position\">\n                                 <span> <img src=\"/imgg/location.png\" class=\"imgages\"/> </span>\n                                    <span > Coléha </span>\n                                    <p class=\"para\">GN1MOUYVDINFG</p>\n                            </div>\n                         </div>\n\n                           <div class=\"resultat\">\n                             <em>Validé  </em>\n                             </div>\n                     </div>\n        </div>")], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <div class=\"list-document app-container-page\">\r\n                    <div class=\"card\">\r\n                        <div class=\"contenu\">\r\n                            <div class=\"info\">\r\n                                <p>mercredi 6 septembre 2023</p>\r\n                                 <p> <em>Kone Christian </em> </p>\r\n                            </div>\r\n                            <div class=\"papier\">\r\n                                <p>Passeports</p>\r\n\r\n                            </div>\r\n                            <div class=\"position\">\r\n                                 <span> <img src=\"/imgg/location.png\" class=\"imgages\"/> </span>\r\n                                    <span > Coléha </span>\r\n                                    <p class=\"para\">GN1MOUYVDINFG</p>\r\n                            </div>\r\n                         </div>\r\n\r\n                           <div class=\"resultat\">\r\n                             <em> En attente de paiement ... </em>\r\n                             </div>\r\n                     </div>\r\n\r\n                      <div class=\"card\">\r\n                        <div class=\"contenu\">\r\n                            <div class=\"info\">\r\n                                <p>mercredi 6 septembre 2023</p>\r\n                                 <p> <em>Kone Christian </em> </p>\r\n                            </div>\r\n                            <div class=\"papier\">\r\n                                <p>Titre de séjour</p>\r\n\r\n                            </div>\r\n                            <div class=\"position\">\r\n                                 <span> <img src=\"/imgg/location.png\" class=\"imgages\"/> </span>\r\n                                    <span > Matoto </span>\r\n                                    <p class=\"para\">GN1MOUYVDINFG</p>\r\n                            </div>\r\n                             </div>\r\n\r\n                           <div class=\"resultat\">\r\n                             <em> En cour de traitement ... </em>\r\n                             </div>\r\n                         </div>\r\n\r\n                          <div class=\"card\">\r\n                        <div class=\"contenu\">\r\n                            <div class=\"info\">\r\n                                <p>mercredi 6 septembre 2023</p>\r\n                                 <p> <em>Kone Christian </em> </p>\r\n                            </div>\r\n                            <div class=\"papier\">\r\n                                <p>Visa</p>\r\n\r\n                            </div>\r\n                            <div class=\"position\">\r\n                                 <span> <img src=\"/imgg/location.png\" class=\"imgages\"/> </span>\r\n                                    <span > Coléha </span>\r\n                                    <p class=\"para\">GN1MOUYVDINFG</p>\r\n                            </div>\r\n                         </div>\r\n\r\n                           <div class=\"resultat\">\r\n                             <em>Validé  </em>\r\n                             </div>\r\n                     </div>\r\n        </div>")], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
 }
 
 /***/ }),
@@ -550,7 +551,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ItemDocument_vue_vue_type_template_id_267b5706_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemDocument.vue?vue&type=template&id=267b5706&scoped=true */ "./resources/js/vue/components/shared/ItemDocument.vue?vue&type=template&id=267b5706&scoped=true");
 /* harmony import */ var _ItemDocument_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemDocument.vue?vue&type=script&lang=js */ "./resources/js/vue/components/shared/ItemDocument.vue?vue&type=script&lang=js");
 /* harmony import */ var _ItemDocument_vue_vue_type_style_index_0_id_267b5706_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ItemDocument.vue?vue&type=style&index=0&id=267b5706&lang=less&scoped=true */ "./resources/js/vue/components/shared/ItemDocument.vue?vue&type=style&index=0&id=267b5706&lang=less&scoped=true");
-/* harmony import */ var C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -558,7 +559,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_ItemDocument_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ItemDocument_vue_vue_type_template_id_267b5706_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-267b5706"],['__file',"resources/js/vue/components/shared/ItemDocument.vue"]])
+const __exports__ = /*#__PURE__*/(0,E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_ItemDocument_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ItemDocument_vue_vue_type_template_id_267b5706_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-267b5706"],['__file',"resources/js/vue/components/shared/ItemDocument.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -580,7 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _statut_doc_vue_vue_type_template_id_cdbd0e54_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./statut-doc.vue?vue&type=template&id=cdbd0e54&scoped=true */ "./resources/js/vue/views/create-appointment/statut-doc/statut-doc.vue?vue&type=template&id=cdbd0e54&scoped=true");
 /* harmony import */ var _statut_doc_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_statut-doc.js?vue&type=script&lang=js */ "./resources/js/vue/views/create-appointment/statut-doc/_statut-doc.js?vue&type=script&lang=js");
 /* harmony import */ var _statut_doc_less_vue_type_style_index_0_id_cdbd0e54_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_statut-doc.less?vue&type=style&index=0&id=cdbd0e54&lang=less&scoped=true */ "./resources/js/vue/views/create-appointment/statut-doc/_statut-doc.less?vue&type=style&index=0&id=cdbd0e54&lang=less&scoped=true");
-/* harmony import */ var C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -588,7 +589,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_louba_main_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_statut_doc_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_statut_doc_vue_vue_type_template_id_cdbd0e54_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-cdbd0e54"],['__file',"resources/js/vue/views/create-appointment/statut-doc/statut-doc.vue"]])
+const __exports__ = /*#__PURE__*/(0,E_www_freelance_louba_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_statut_doc_js_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_statut_doc_vue_vue_type_template_id_cdbd0e54_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-cdbd0e54"],['__file',"resources/js/vue/views/create-appointment/statut-doc/statut-doc.vue"]])
 /* hot reload */
 if (false) {}
 

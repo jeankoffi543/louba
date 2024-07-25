@@ -24,12 +24,12 @@ class AttachmentTicketAppointmentMail extends Mailable
     public function build()
     {
         if(is_array($this->attachment) && isset($this->attachment['data']) && isset($this->attachment['name'])) {
-            return $this->subject('Votre reçu de prise de rendez-vous RADIANGN')->view('emails.ticket_appointment')
+            return $this->subject('Votre reçu de prise de rendez-vous OMNIFORM')->view('emails.ticket_appointment')
             ->attachData($this->attachment['data'], $this->attachment['name'], [
                 'mime' => 'application/pdf'
             ]);
         }
 
-        return $this->subject('Votre reçu de prise de rendez-vous RADIANGN')->view('emails.ticket_appointment');
+        return $this->subject('Votre reçu de prise de rendez-vous OMNIFORM')->view('emails.ticket_appointment');
     }
 }

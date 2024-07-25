@@ -89,11 +89,22 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="group">
-                                    <h1 class="fs-5 item-title">Pofession</h1>
+                                    <h1 class="fs-5 item-title">Profession</h1>
                                     <el-form-item>
                                         <el-input v-model="formPersonalInfo.profession" placeholder="Profession"
+                                            size="default" type="text"></el-input>
+                                    </el-form-item>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="group">
+                                    <h1 class="fs-5 item-title">Adresse</h1>
+                                    <el-form-item>
+                                        <el-input v-model="formPersonalInfo.address" placeholder="Adresse"
                                             size="default" type="text"></el-input>
                                     </el-form-item>
                                 </div>
@@ -134,10 +145,10 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="group">
-                                    <h1 class="fs-5 item-title">Lieu de résidence</h1>
+                                    <h1 class="fs-5 item-title">Lieu de Naissance</h1>
                                     <el-form-item>
                                         <el-input v-model="formPersonalInfo.placeOfResidence"
-                                            placeholder="Lieu de résidence" size="default"></el-input>
+                                            placeholder="Lieu de Naissance" size="default"></el-input>
                                     </el-form-item>
                                 </div>
                             </div>
@@ -225,44 +236,45 @@
                     </div>
                 </el-collapse-item>
 
-                <el-collapse-item name="6" title="Documents à charger">
-                    <div class="document-upload container-fluid">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12">
-                                <el-upload ref="upload" :auto-upload="false" :limit="1" :multiple="false"
-                                    :on-change="uploadPicture" action="#" :on-remove="onRemovePicture"
-                                    class="upload-demo" drag list-type="picture-card">
-                                    <img v-if="formPersonalInfo.fileListBirthCertificate?.length > 0"
-                                        :src="formPersonalInfo.fileListBirthCertificate[0]" class="avatar">
-                                    <div v-else class="el-upload__text">{{ titleDocumentUpload }}</div>
+                <div class="document-upload container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
 
-                                </el-upload>
-                            </div>
-                            <div class="col-md-12 col-sm-12 mt-2">
-                                <el-upload ref="upload" :auto-upload="false" :limit="1" :multiple="false"
-                                    :on-change="uploadBirthCertificate" action="#" :on-remove="onRemoveBirthCertificate"
-                                    class="upload-demo" drag list-type="picture-card">
-                                    <img v-if="formPersonalInfo.fileListPicture?.length > 0"
-                                        :src="formPersonalInfo.fileListPicture[0]" class="avatar">
-                                    <div v-else class="el-upload__text">Déposer la photo ici</div>
+                            <el-upload ref="upload" :auto-upload="false" :limit="1" :multiple="false"
+                                :on-change="uploadPicture" action="#" :on-remove="onRemovePicture"
+                                accept="application/pdf, image/jpg, image/jpeg, image/png" class="upload-demo" drag
+                                :list-type="'text'" show-file-list="false">
+                                <div v-if="documentPreview?.type == ''" class="el-upload__text">{{ titleDocumentUpload }}</div>
+                            </el-upload>
 
-                                </el-upload>
-                            </div>
                         </div>
+                        <div class="col-md-12 col-sm-12 mt-2">
+                            <el-upload ref="upload" :auto-upload="false" :limit="1" :multiple="false"
+                                accept="image/jpg, image/jpeg, image/png" :on-change="uploadBirthCertificate" action="#"
+                                :on-remove="onRemoveBirthCertificate" class="upload-demo" drag list-type="picture-card">
+                                <!-- <img v-if="formPersonalInfo.fileListBirthCertificate?.length > 0" :src="picturePreview[0]?.url" class="avatar"> -->
 
-                        <div class="row">
-                            <div class="app-w-100 app-d-flex app-d-flex app-justify-content-center">
-                                <el-row :gutter="24" class="app-w-50">
-                                    <el-col :sm="24" :xs="24" class="mt-3">
-                                        <ButtonApp v-loading="isLoadingSaveAppointment" button-title="Valider"
-                                            class="space" @click="sendPredemande"></ButtonApp>
-                                    </el-col>
-                                </el-row>
-
-                            </div>
+                                <div v-if="picturePreview?.type == ''" class="el-upload__text">Déposer la photo ici (JPEG, JPG, PNG)</div>
+                                <div id="pageContainer">
+                                    <div id="viewer" class="pdfViewer"></div>
+                                </div>
+                            </el-upload>
                         </div>
                     </div>
-                </el-collapse-item>
+
+                    <div class="row">
+                        <div class="app-w-100 app-d-flex app-d-flex app-justify-content-center">
+                            <el-row :gutter="24" class="app-w-50">
+                                <el-col :sm="24" :xs="24" class="mt-3">
+                                    <ButtonApp v-loading="isLoadingSaveAppointment" button-title="Valider" class="space"
+                                        @click="sendPredemande"></ButtonApp>
+                                </el-col>
+                            </el-row>
+
+                        </div>
+                    </div>
+                </div>
+
 
             </el-collapse>
         </div>

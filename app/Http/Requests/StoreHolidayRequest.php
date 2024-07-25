@@ -26,7 +26,7 @@ class StoreHolidayRequest extends FormRequest
         return [
             'name' => 'required|string',
             'date' => 'required|date',
-            'id_point_enrolement' => 'required|integer'
+            // 'id_point_enrolement' => 'required|integer'
         ];
     }
 
