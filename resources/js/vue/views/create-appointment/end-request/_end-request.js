@@ -7,11 +7,15 @@ import ButtonApp from "../../../components/shared/ButtonApp.vue";
 import {KEY_FORM_JSON} from "../../../core/constants";
 import utils from "../../../core/utils";
 import {format} from "date-fns";
+import FullCalendar from '@fullcalendar/vue3';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
 export default {
     name: 'EndRequest',
 
-    components: {ButtonApp, ElCalendar},
+    components: {ButtonApp, ElCalendar, FullCalendar},
 
     mixins: [],
 
@@ -19,6 +23,25 @@ export default {
 
     data() {
         return {
+            calendarOptions: {
+                plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
+                initialView: 'dayGridMonth', // Set the initial view
+                // weekends: false, // initial value
+                locale: "fr",
+                // selectable: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    { title: 'Event 1', date: '2024-07-25' },
+                    { title: 'Event 2', date: '2019-04-02' },
+                ],
+                dateClick: this.handleDateClick, // Handle date clicks
+                
+            },
+          
             dateAppointment: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 24),
             siteAppointmentId: "",
             isLoadingSaveAppointment: false,
@@ -61,6 +84,10 @@ export default {
     },
 
     methods: {
+        handleDateClick(arg) {
+            alert('Date clicked! ' + arg.dateStr);
+            this.dateAppointment = arg.dateStr
+        },
         onDateChange: (data) => {
             const payload = {
                 key: [KEY_FORM_JSON.DATE_APPOINTMENT],
@@ -114,7 +141,7 @@ export default {
             };
             this.$store.dispatch('FORM_DATA_REQUEST', payload);
             const formData = new FormData();
-            
+            console.log("dateAppointment---------------------", this.dateAppointment)
             formData.append(
                 "date_rdv_demande",
                 format(new Date(this.dateAppointment), "yyyy-MM-dd")
@@ -141,7 +168,7 @@ export default {
                 this.formDataRequest?.user?.serviceId.id ?? null
             );
             formData.append("id_point_enrolement", this.formDataRequest?.user?.siteAppointmentId?.id_pe);
-         
+            return;
 
             // await this.$store.dispatch("SAVE_APPOINTMENT", formData)
             axios.post(`/api/save-appointment`, formData).then(responseAxios => {

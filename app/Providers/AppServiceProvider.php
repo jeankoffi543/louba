@@ -55,11 +55,11 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('dstatus', function ($status) {
             $demande = "Nouveau";
-            $color = "#f6b93b";
+            $color = "#008000";
             switch ($status) {
                 case "NEW":
                     $demande = "Nouveau";
-                    $color = "#f6b93b";
+                    $color = "#008000";
                     break;
                 case "REJECTED":
                     $demande = "Rejeté";

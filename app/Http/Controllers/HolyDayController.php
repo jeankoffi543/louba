@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreHolidayRequest;
 use App\Models\PointEnrolement;
 use App\Models\PublicHoliday;
+use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,8 @@ class HolyDayController extends Controller
         $publicHoliday = new PublicHoliday();
 
         $publicHoliday->name = $request->name;
+        $publicHoliday->title = $request->name;
+        $publicHoliday->start = new DateTime($request->date);
         $publicHoliday->date = $request->date;
         // $publicHoliday->id_point_enrolement = $request->id_point_enrolement;
 
@@ -51,7 +54,9 @@ class HolyDayController extends Controller
         try {
             $publicHoliday->name = $request->name;
             $publicHoliday->date = $request->date;
-            $publicHoliday->id_point_enrolement = $request->id_point_enrolement;
+            $publicHoliday->title = $request->name;
+            $publicHoliday->start = new DateTime($request->date);
+            // $publicHoliday->id_point_enrolement = $request->id_point_enrolement;
 
             $publicHoliday->update();
 

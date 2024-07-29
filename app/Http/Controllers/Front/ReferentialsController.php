@@ -13,6 +13,7 @@ use App\Models\PublicHoliday;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Social;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,6 @@ class ReferentialsController extends Controller
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 
@@ -40,14 +40,12 @@ class ReferentialsController extends Controller
         try {
 
             return response()->json(Service::all());
-
         } catch (\Exception $ex) {
             return response(500)->json([
                 "error" => $ex->getMessage(),
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 
@@ -56,15 +54,12 @@ class ReferentialsController extends Controller
 
         try {
             return response()->json(Equipe::all());
-
-
         } catch (\Exception $ex) {
             return response(500)->json([
                 "error" => $ex->getMessage(),
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 
@@ -80,9 +75,7 @@ class ReferentialsController extends Controller
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
-
     }
 
     public static function getPointEnrolement()
@@ -95,7 +88,6 @@ class ReferentialsController extends Controller
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 
@@ -103,15 +95,12 @@ class ReferentialsController extends Controller
     {
         try {
             return response()->json(PublicHoliday::all());
-
-
         } catch (\Exception $ex) {
             return response(500)->json([
                 "error" => $ex->getMessage(),
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 
@@ -119,14 +108,12 @@ class ReferentialsController extends Controller
     {
         try {
             return response()->json(Partner::all());
-
         } catch (\Exception $ex) {
             return response(500)->json([
                 "error" => $ex->getMessage(),
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 
@@ -169,7 +156,6 @@ class ReferentialsController extends Controller
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 
@@ -183,7 +169,6 @@ class ReferentialsController extends Controller
                 "file" => $ex->getFile(),
                 "line" => $ex->getLine(),
             ]);
-
         }
     }
 }

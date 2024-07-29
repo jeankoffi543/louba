@@ -151,7 +151,7 @@
                  <div class="col-12">
                      <div class="card recent-sales overflow-auto"></div>
                      <div class="card-body bg-white rounded rounded-md p-2">
-                         <div class="pagetitle">
+                             <div class="pagetitle">
                              <h1>Informations du client</h1>
                              <hr class="line bottom-3">
                          </div>

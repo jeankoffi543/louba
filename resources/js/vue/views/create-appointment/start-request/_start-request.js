@@ -14,6 +14,7 @@ export default {
 
     data() {
         return {
+            formError: false,
             activeNames: ["1", "2", "3", "4", "5"],
             disabledStep1: false,
             disabledStep2: false,
@@ -109,17 +110,18 @@ export default {
 
     methods: {
         changeEnrolment: function (item) {
-            console.log("changeEnrolment pointEnrolement_id", item);
-
-            this.pointEnrolementServices = item?.services;
+            const pointEnrol = this.enrolmentsPoint?.find((enrolment) => enrolment.id_pe == item);
+            this.pointEnrolementServices = pointEnrol?.services;
         },
         onSwitchPage: function () {
+            this.formError = false;
             if (
                 !this.formPersonalInfo.serviceId  ||
                 this.formPersonalInfo.serviceId == null ||
                 this.formPersonalInfo.serviceId == ""
             ) {
-                this.$swal({
+            this.formError = true;
+            this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Le type de service est obligatoire",
@@ -135,7 +137,8 @@ export default {
                 this.formPersonalInfo.siteAppointmentId === null ||
                 this.formPersonalInfo.siteAppointmentId == ""
             ) {
-                this.$swal({
+            this.formError = true;
+            this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Le numéro du récu est obligatoire",
@@ -144,7 +147,8 @@ export default {
                 });
                 return;
             } else {
-                const payload = {
+            this.formError = false;
+            const payload = {
                     key: [KEY_FORM_JSON.FORM_INFO_USER],
                     data: {
                         ...this.formPersonalInfo,

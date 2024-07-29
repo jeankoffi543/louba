@@ -18,6 +18,7 @@ export default {
     data() {
         return {
             isLoadingSaveAppointment: false,
+            formError: false,
             documentPreview: {
                 type : "",
                 url : ""
@@ -35,7 +36,7 @@ export default {
             titleDocumentUpload: "Extrait de naissance (PDF, JPEG, JPG, PNG)",
             typeServiceSelected: null,
             formPersonalInfo: {
-                firstname: "",
+                firstname: '',
                 lastname: "",
                 numero_recu: "",
                 nationality: "",
@@ -114,12 +115,13 @@ export default {
 
     methods: {
         sendPredemande: function () {
+            this.formError = false;
             this.isLoadingSaveAppointment = true;
-
             if (
                 Object.values(this.formPersonalInfo).some((item) => item === "")
             ) {
-                this.$swal({
+            this.formError = true;
+            this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Toutes les informations personnelles sont obligatoire",
@@ -135,7 +137,8 @@ export default {
             } else if (
                 Object.values(this.signalement).some((item) => item === "")
             ) {
-                this.$swal({
+            this.formError = true;
+            this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Tous les champs du signalement sont obligatoire",
@@ -150,7 +153,8 @@ export default {
             } else if (
                 Object.values(this.ascendants).some((item) => item === "")
             ) {
-                this.$swal({
+            this.formError = true;
+            this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Tous les champs Ascendants sont obligatoire",
@@ -166,7 +170,8 @@ export default {
                 this.formPersonalInfo.fileListBirthCertificate.length == 0 ||
                 this.formPersonalInfo.fileListPicture.length == 0
             ) {
-                this.$swal({
+            this.formError = true;
+            this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Les documents sont obligatoire",
@@ -179,6 +184,8 @@ export default {
                     }, 3000);
                 }
             } else {
+            this.formError = false;
+
                 const formData = new FormData();
                 formData.append(
                     "document1",

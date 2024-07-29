@@ -365,6 +365,22 @@ echo $nextday;
                                 <span>Pré-demandes</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('pre-demande') && request()->query('status') === 'REJECTED' ? 'text-danger' : '' }}"
+                                href="{{ route('pre.demande', ['status' => 'REJECTED']) }}">
+                                <i class="bi bi-menu-button-wide"></i>
+                                <span>Pré-demandes rejétées</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('pre-demande') && request()->query('status') === 'TRANSMITTED' ? 'text-danger' : '' }}"
+                                href="{{ route('pre.demande', ['status' => 'TRANSMITTED']) }}">
+                                <i class="bi bi-menu-button-wide"></i>
+                                <span>Pré-demandes validées</span>
+                            </a>
+                        </li>
                     @endkcan
 
                     @kcan('gestion-demandes')
@@ -413,7 +429,7 @@ echo $nextday;
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('users') ? 'text-danger' : '' }}" href="/users">
                         <i class="bi bi-grid"></i>
-                        <span>Gestion Utilsateurs</span>
+                        <span>Gestion Utilisateurs</span>
                     </a>
                 </li>
 
@@ -488,7 +504,7 @@ echo $nextday;
                     <a class="nav-link {{ request()->is('holidays') ? 'text-danger' : '' }}"
                         href="{{ route('holidays') }}">
                         <i class="bi bi-door-open-fill"></i>
-                        <span>Calandrier point enrolement</span>
+                        <span>Calendrier point enrolement</span>
                     </a>
                 </li>
             @endkcan

@@ -64,6 +64,14 @@ $results = DB::table('users')
     public function handleLogin(Request $request)
     {
         if (Auth::attempt($request->only(['email', 'password']))) {
+            $user = auth()->user();
+            if ($user->actif == 0) {
+                $data['message'] = "Echec connection : Utilisateur suspendu";
+                $data['client'] = null;
+
+                return response()->json($data, 421);
+            }
+
             return redirect('/dashboard');
         } else {
             return redirect()->back()->with('error_message', 'Email ou mot de passe non valide');
