@@ -70,7 +70,12 @@ class WorkFlowManger
          } else if ($status && $status === "PRE-DEMANDE") {
 
             return Demande::where('predemande_step', '=', 1)->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
-         } else {
+         } else if ($status && $status === "PRE-DEMANDE_REJECTED") {
+            
+            return Demande::where('predemande_step', '=', 1)->where('status_demande', '=', 'REJECTED')->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
+         } else if ($status && $status === "PRE-DEMANDE_TRANSMITTED") {
+            return Demande::where('predemande_step', '=', 2)->with('product', 'service', 'client', 'point_enrolement', 'piece_jointes')->get();
+         }else {
             $demandes = $demandes->whereIn('status_demande', ['PENDDING', 'OPEN', 'SUSPENDED', 'RESETTED', 'NEW'])->where('id_point_enrolement', $user->id_point_enrolement)->where('predemande_step', '>', 2);
          }
 

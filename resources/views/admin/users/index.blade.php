@@ -163,33 +163,36 @@
                                             <td>{{ $user->nom }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->telephone }}</td>
-                                            <td>{{ $user->id_role === 1 ? 'Supperadmin' :  $user->habilete->libelle}}</td>
+                                            <td>{{ $user->id_role === 1 ? 'Supperadmin' : $user->habilete->libelle }}</td>
                                             <td>{{ $user->enrollPoint->nom_pe }}</td>
 
                                             <td>
 
+                                                @if ($user->id_role != 1)
                                                 <!-- Modal Dialog Scrollable -->
                                                 <a class="badge bg-success" data-bs-toggle="modal"
                                                     data-bs-target="#modalDialogScrollable{{ $user->id }}">Modifier</a>
 
 
+                                                    <form method="POST" action="{{ route('user.active', $user->id) }}"
+                                                        id="form{{ $user->id }}">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <input name="id" id="id{{ $user->id }}" type="hidden"
+                                                            value="{{ $user->id }}">
+                                                        <input name="actif" id="actif{{ $user->id }}"
+                                                            type="hidden">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="flexSwitchCheckChecked{{ $user->id }}"
+                                                                <?php if ($user->actif == 1) {
+                                                                    echo 'checked=""';
+                                                                } ?>
+                                                                onclick="activator{{ $user->id }}()">
 
-                                                <form method="POST" action="{{ route('user.active', $user->id) }}"
-                                                    id="form{{ $user->id }}">
-                                                    @method('PUT')
-                                                    @csrf
-                                                    <input name="id" id="id{{ $user->id }}" type="hidden"
-                                                        value="{{ $user->id }}">
-                                                    <input name="actif" id="actif{{ $user->id }}" type="hidden">
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="flexSwitchCheckChecked{{ $user->id }}"
-                                                            <?php if ($user->actif == 1) {
-                                                                echo 'checked=""';
-                                                            } ?> onclick="activator{{ $user->id }}()">
-
-                                                    </div>
-                                                </form>
+                                                        </div>
+                                                    </form>
+                                                @endif
 
                                                 <script>
                                                     function activator{{ $user->id }}() {
@@ -340,7 +343,8 @@
                                                                                 aria-label="Default select example">
 
                                                                                 @foreach ($roles as $role)
-                                                                                    <option {{$user->habilete_id == $role->id ? 'selected' : ''}} 
+                                                                                    <option
+                                                                                        {{ $user->habilete_id == $role->id ? 'selected' : '' }}
                                                                                         value="{{ $role->id }}">
                                                                                         {{ $role->libelle }}</option>
                                                                                 @endforeach

@@ -48,7 +48,7 @@
                              </div>
 
                            <div class="resultat">
-                             <em> En cour de traitement ... </em>
+                             <em> En cours de traitement ... </em>
                              </div>
                          </div>
 

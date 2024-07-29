@@ -31,6 +31,8 @@ use App\Mail\RendezVousDemandeMail;
 use App\Models\AdminAction;
 use App\Models\Historique;
 use App\Models\IndexTraitement;
+use App\Models\PointEnrolement;
+use App\Models\PublicHoliday;
 use App\Models\Service;
 use DateTime;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -432,6 +434,19 @@ class ClientController extends Controller
     {
         try {
 
+            // Today
+            $date_rdv_demande = Carbon::createFromFormat('Y-m-d', $request->date_rdv_demande)->toDateTime();
+            $demandeToday = Demande::where('id_point_enrolement', $request->id_point_enrolement)
+                ->whereDate('date_rdv_demande', $date_rdv_demande);
+
+            $demandeCount = $demandeToday->count();
+            $pointEnrolement = PointEnrolement::find($request->id_point_enrolement);
+
+            if ($demandeCount >= optional($pointEnrolement)->capacite_maximale_jour_pe) {
+                $data["demande"] = null;
+                $data["message"] = "Capacité maximum atteinte pour ce point d'enrolement en la date choisie";
+                return response()->json($data);
+            }
 
             DB::beginTransaction();
             $userConnected = auth('apiJwt')->user();
@@ -480,7 +495,7 @@ class ClientController extends Controller
             $demande->id_sender = $userConnected->id;
             $demande->numero_recu = $request->numero_recu;
             // $demande->id_client = $client->id;
-            $demande->date_rdv_demande = Carbon::createFromFormat('Y-m-d', $request->date_rdv_demande)->toDateTime();
+            $demande->date_rdv_demande = $date_rdv_demande;
             // $demande->id_product = $request->id_type_document;
             $demande->id_service = $request->id_type_service;
             $demande->id_point_enrolement = $request->id_point_enrolement;
@@ -858,6 +873,27 @@ class ClientController extends Controller
         return response()->json($data);
     }
 
+    public static function get_one_appointment_by_id($id)
+    {
+        $today = Carbon::today();
+        if (request('today')) {
+            $today = Carbon::parse(request('today'))->toDateTime();
+        }
+
+        $pointEnrolement = PointEnrolement::find($id);
+
+        // Today
+        $demandeToday = Demande::where('id_point_enrolement', $id)
+            ->whereDate('date_rdv_demande', $today)
+            ->with(['client', 'product', 'service', 'point_enrolement']);
+
+
+        $data['pointEnrolement'] = $pointEnrolement;
+        $data['message'] = "ok";
+        $data['countToday'] = $demandeToday->count();
+
+        return response()->json($data);
+    }
     /**
      * @param $code_demande
      * @return mixed
@@ -1121,6 +1157,27 @@ class ClientController extends Controller
                 "description" => $ex->getMessage(),
                 "status" => 500
             ], 500);
+        }
+    }
+
+
+    public static function getCurrentPublicHoliday(Request $request)
+    {
+        try {
+            // Holidays
+            $start = $request->query('start');
+            $end = $request->query('end');
+
+            $events = PublicHoliday::whereBetween('start', [$start, $end])
+                ->get(['title', 'start']);
+
+            return response()->json($events);
+        } catch (\Exception $ex) {
+            return response(500)->json([
+                "error" => $ex->getMessage(),
+                "file" => $ex->getFile(),
+                "line" => $ex->getLine(),
+            ]);
         }
     }
 }

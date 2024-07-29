@@ -3,11 +3,11 @@ if (!function_exists('formatStatus')) {
    function formatStatus($status)
    {
       $demande = "Nouveau";
-      $color = "#f6b93b";
+      $color = "#008000";
       switch ($status) {
          case "NEW":
             $demande = "Nouveau";
-            $color = "#f6b93b";
+            $color = "#008000";
             break;
          case "REJECTED":
             $demande = "Rejeté";
@@ -30,7 +30,7 @@ if (!function_exists('formatStatus')) {
             $color = "#16a085";
             break;
          case "PENDDING":
-            $demande = "En cour";
+            $demande = "En cours";
             $color = "#f39c12";
             break;
          case "PENDING_PAY":

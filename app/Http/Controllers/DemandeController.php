@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Demande;
 use App\Models\Habilete;
 use App\Facades\Manager as WorkFlow;
+use App\Helpers\SendSmS;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -111,9 +112,9 @@ class DemandeController extends Controller
             //         ]]);
             //     }
             // }
+            $di = 0;
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 if ($nbredoc_total > 0) $rows[] = $data;
-
                 $demande = Demande::where('numero_document', $data[0])
                     ->update([
                         'production_disponible' => 1,
@@ -125,19 +126,8 @@ class DemandeController extends Controller
                 if ($demande) {
                     $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
                     $message_sms = "Votre document du n° [" . $data[0] . "] est disponible, passez le recuperer au point d enrollement " . $demande->point_enrolement->nom_pe;
-
-                    $curl = new \GuzzleHttp\Client();
-                    $url = "https://smswanwaran.com/index.php";
-                    $response = $curl->request('GET', $url, ['query' => [
-                        'app' => "ws",
-                        'u' => "theonemonk",
-                        "from" => "LOUBA",
-                        'h' => "67a3e2c5fab0c9f5e4df3286de3f7b5d",
-                        'op' => "pv",
-                        'to' => "224" .  optional($demande->client)->telephone_client,
-                        'msg' => $message_sms,
-                    ]]);
-
+                    $sms = new SendSmS();
+                    $sms->send(optional($demande->client)->telephone_client, $message_sms);
                     $nbredoc_importer++;
                 }
                 $nbredoc_total++;
@@ -491,6 +481,17 @@ class DemandeController extends Controller
     public function preDemande()
     {
         $authUser = auth()->user();
+
+        if(request('status') === "REJECTED"){
+            return view('admin.pre-demande', [
+                'demandes' => WorkFlow::getDemandeByHabilete($authUser, 'PRE-DEMANDE_' . request('status')),
+            ]);
+        }else if(request('status') === "TRANSMITTED"){
+            return view('admin.pre-demande', [
+                'demandes' => WorkFlow::getDemandeByHabilete($authUser, 'PRE-DEMANDE_' . request('status')),
+            ]);
+        }
+
         return view('admin.pre-demande', [
             'demandes' => WorkFlow::getDemandeByHabilete($authUser, "PRE-DEMANDE"),
         ]);

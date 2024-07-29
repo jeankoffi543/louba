@@ -20,7 +20,7 @@
       </el-button> -->
     <span class="label-btn">{{ buttonTitle }}</span>
 
-    <el-button :loading="loading" circle type="success" v-if="loading">
+    <el-button :loading="loading" circle type="success" v-if="loading" :disabled="disabled">
        <span class="icon" v-if="!loading">
          <slot name="icon"></slot>
        </span>
@@ -39,6 +39,7 @@ export default {
     buttonTitle: {type: String, default: "Suivant"},
     loading: {type: Boolean, default: false},
     block: {type: Boolean, default: false},
+    disabled: {type: Boolean, default: false},
   },
 
   methods: {
