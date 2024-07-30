@@ -51,13 +51,13 @@
 
                          @kcan('possibilite-d-envoyer-mail')
                              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#envoyerMail">
-                                 Enoyer mail
+                                Envoyer mail
                              </button>
                          @endkcan
 
                          @kcan('possibilite-d-envoyer-sms')
                              <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#envoyerSMS">
-                                 Enoyer SMS
+                                Envoyer SMS
                              </button>
                          @endkcan
                      </div>

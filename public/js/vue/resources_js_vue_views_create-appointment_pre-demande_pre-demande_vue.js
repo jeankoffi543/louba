@@ -43,7 +43,7 @@ var _hoisted_8 = {
 var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     "class": "fs-5 item-title"
-  }, "Numéro reçu (optionnel)", -1 /* HOISTED */);
+  }, "Référence bordereau banque (optionnel)", -1 /* HOISTED */);
 });
 var _hoisted_10 = {
   "class": "row"
@@ -372,7 +372,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse_item, {
         name: "3",
-        title: "TYPE DE DEMANDE"
+        title: "1- TYPE DE DEMANDE"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
@@ -425,7 +425,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1 /* STABLE */
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse_item, {
         name: "4",
-        title: "Informations personnelle"
+        title: "2- Informations personnelle"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
@@ -636,7 +636,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1 /* STABLE */
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse_item, {
         name: "5",
-        title: "Signalement"
+        title: "3- Signalement"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [_hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
@@ -691,7 +691,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1 /* STABLE */
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse_item, {
         name: "5",
-        title: "Information ascendants"
+        title: "4- Information ascendants"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_74, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_76, [_hoisted_77, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_form_item, null, {
@@ -743,7 +743,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1 /* STABLE */
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_collapse_item, {
         name: "5",
-        title: "Charger des documents"
+        title: "5- Charger des documents"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_83, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_84, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-upload ref=\"upload\" :auto-upload=\"false\" :limit=\"1\" :multiple=\"true\"\r\n                                :on-change=\"uploadPicture\" action=\"#\" :on-remove=\"onRemovePicture\"\r\n                                accept=\"application/pdf, image/jpg, image/jpeg, image/png\" class=\"upload-demo\" drag\r\n                                :list-type=\"'text'\" show-file-list=\"false\">\r\n                                <div v-if=\"documentPreview?.type == ''\" class=\"el-upload__text\">{{ titleDocumentUpload }}</div>\r\n                            </el-upload> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
@@ -777,7 +777,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: _ctx.triggerUpload2
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Charger des fichiers")];
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Charger une photo")];
             }),
             _: 1 /* STABLE */
           }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_upload, {
@@ -1250,7 +1250,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".start-request[data-v-79efe310] {\n  min-height: 100vh;\n}\n.colors[data-v-79efe310] {\n  color: #030b3c;\n}\n.trait[data-v-79efe310] {\n  display: flex;\n  justify-content: center;\n  width: 25px;\n  height: 3px;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: 15px;\n  border-radius: 5px;\n  background: #00ccc2;\n}\n.cartes[data-v-79efe310] {\n  border: 1px solid gray ;\n  justify-content: space-between;\n  display: flex;\n  flex-direction: column;\n}\n.cartes[data-v-79efe310]:disabled,\n.cartes.disabled[data-v-79efe310] {\n  filter: opacity(0.5);\n  box-shadow: none !important;\n  cursor: not-allowed;\n}\n[data-v-79efe310] .el-collapse-item__header {\n  padding: 1rem;\n  font-weight: bold;\n  text-transform: uppercase;\n  font-size: 1rem;\n  border-bottom: 1px solid #dddddd5c;\n}\n[data-v-79efe310] .el-collapse-item__content {\n  padding: 1rem;\n}\n.object-appointment .item-request-type .fileInput[data-v-79efe310] {\n  height: 0px;\n  width: 0px;\n}\n.object-appointment .item-request-type[data-v-79efe310]:hover {\n  cursor: pointer;\n}\n.object-appointment .item-request-type .item-request-type-head[data-v-79efe310] {\n  width: 40%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin: auto !important;\n  max-width: 40%;\n  padding: 1rem 0;\n}\n.object-appointment .item-request-type .item-request-type-head img[data-v-79efe310] {\n  width: 100%;\n  height: 100%;\n  margin: auto;\n  -o-object-fit: contain;\n     object-fit: contain;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n}\n.object-appointment .item-request-type .card-body[data-v-79efe310] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n.object-appointment .selected[data-v-79efe310] {\n  border: 3px solid green !important;\n}\n.object-appointment .object-appointment[data-v-79efe310] {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.object-appointment .container-appointment-form .container-appointment-form-row[data-v-79efe310] {\n  height: inherit;\n  margin: 0;\n  flex: 1;\n}\n.object-appointment .appointment-title h3[data-v-79efe310] {\n  color: var(--primaryColor);\n  font-size: 25px;\n  margin: 0 0 1rem;\n}\n.service-appointment .item-request-type .fileInput[data-v-79efe310] {\n  height: 0px;\n  width: 0px;\n}\n.service-appointment .item-request-type[data-v-79efe310]:hover {\n  cursor: pointer;\n}\n.service-appointment .item-request-type .item-request-type-head[data-v-79efe310] {\n  width: 40%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin: auto !important;\n  max-width: 40%;\n  padding: 1rem 0;\n}\n.service-appointment .item-request-type .item-request-type-head img[data-v-79efe310] {\n  width: 110px;\n  height: 110px;\n  margin: auto;\n  -o-object-fit: cover;\n     object-fit: cover;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n}\n.service-appointment .item-request-type .card-body[data-v-79efe310] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n.service-appointment .selected[data-v-79efe310] {\n  border: 3px solid green !important;\n}\n.service-appointment .object-appointment[data-v-79efe310] {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.service-appointment .container-appointment-form .container-appointment-form-row[data-v-79efe310] {\n  height: inherit;\n  margin: 0;\n  flex: 1;\n}\n.service-appointment .appointment-title h3[data-v-79efe310] {\n  color: var(--primaryColor);\n  font-size: 25px;\n  margin: 0 0 1rem;\n}\n.information-personne .group[data-v-79efe310] {\n  margin-bottom: 1.6rem;\n}\n.information-personne .group .item-title[data-v-79efe310] {\n  font-size: 15px !important;\n}\n.information-personne .el-form-item[data-v-79efe310] {\n  margin-bottom: 0 !important;\n}\n.error-message[data-v-79efe310] {\n  color: red;\n  margin-top: 5px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".start-request[data-v-79efe310] {\n  min-height: 100vh;\n}\n.colors[data-v-79efe310] {\n  color: #030b3c;\n}\n.trait[data-v-79efe310] {\n  display: flex;\n  justify-content: center;\n  width: 25px;\n  height: 3px;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: 15px;\n  border-radius: 5px;\n  background: #00ccc2;\n}\n.cartes[data-v-79efe310] {\n  border: 1px solid gray ;\n  justify-content: space-between;\n  display: flex;\n  flex-direction: column;\n}\n.cartes[data-v-79efe310]:disabled,\n.cartes.disabled[data-v-79efe310] {\n  filter: opacity(0.5);\n  box-shadow: none !important;\n  cursor: not-allowed;\n}\n[data-v-79efe310] .el-collapse-item__header {\n  padding: 1rem;\n  font-weight: bold;\n  text-transform: uppercase;\n  font-size: 1rem;\n  border-bottom: 1px solid #dddddd5c;\n  background-color: #dddddd5c;\n}\n[data-v-79efe310] .el-collapse-item__content {\n  padding: 1rem;\n  background-color: #dddddd5c;\n}\n.object-appointment .item-request-type .fileInput[data-v-79efe310] {\n  height: 0px;\n  width: 0px;\n}\n.object-appointment .item-request-type[data-v-79efe310]:hover {\n  cursor: pointer;\n}\n.object-appointment .item-request-type .item-request-type-head[data-v-79efe310] {\n  width: 40%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin: auto !important;\n  max-width: 40%;\n  padding: 1rem 0;\n}\n.object-appointment .item-request-type .item-request-type-head img[data-v-79efe310] {\n  width: 100%;\n  height: 100%;\n  margin: auto;\n  -o-object-fit: contain;\n     object-fit: contain;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n}\n.object-appointment .item-request-type .card-body[data-v-79efe310] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n.object-appointment .selected[data-v-79efe310] {\n  border: 3px solid green !important;\n}\n.object-appointment .object-appointment[data-v-79efe310] {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.object-appointment .container-appointment-form .container-appointment-form-row[data-v-79efe310] {\n  height: inherit;\n  margin: 0;\n  flex: 1;\n}\n.object-appointment .appointment-title h3[data-v-79efe310] {\n  color: var(--primaryColor);\n  font-size: 25px;\n  margin: 0 0 1rem;\n}\n.service-appointment .item-request-type .fileInput[data-v-79efe310] {\n  height: 0px;\n  width: 0px;\n}\n.service-appointment .item-request-type[data-v-79efe310]:hover {\n  cursor: pointer;\n}\n.service-appointment .item-request-type .item-request-type-head[data-v-79efe310] {\n  width: 40%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin: auto !important;\n  max-width: 40%;\n  padding: 1rem 0;\n}\n.service-appointment .item-request-type .item-request-type-head img[data-v-79efe310] {\n  width: 110px;\n  height: 110px;\n  margin: auto;\n  -o-object-fit: cover;\n     object-fit: cover;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n}\n.service-appointment .item-request-type .card-body[data-v-79efe310] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n}\n.service-appointment .selected[data-v-79efe310] {\n  border: 3px solid green !important;\n}\n.service-appointment .object-appointment[data-v-79efe310] {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.service-appointment .container-appointment-form .container-appointment-form-row[data-v-79efe310] {\n  height: inherit;\n  margin: 0;\n  flex: 1;\n}\n.service-appointment .appointment-title h3[data-v-79efe310] {\n  color: var(--primaryColor);\n  font-size: 25px;\n  margin: 0 0 1rem;\n}\n.information-personne .group[data-v-79efe310] {\n  margin-bottom: 1.6rem;\n}\n.information-personne .group .item-title[data-v-79efe310] {\n  font-size: 15px !important;\n}\n.information-personne .el-form-item[data-v-79efe310] {\n  margin-bottom: 0 !important;\n}\n.error-message[data-v-79efe310] {\n  color: red;\n  margin-top: 5px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

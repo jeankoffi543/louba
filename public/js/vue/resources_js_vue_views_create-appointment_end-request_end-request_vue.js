@@ -269,14 +269,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     //     const cellText = document.createElement('div');
     //     cellText.className = 'cell-text';
     //     if (day === 0 || day === 6) {
-    //         cellText.textContent = 'fermé';
+    //         cellText.textContent = 'indisponible';
     //         cellText.style.color = 'red';
     //         args.el.classList.add('closed');
     //         args.el.style.pointerEvents = 'none';
     //     } else if (eventCount > 0) {
     //         cellText.textContent = args.el.querySelector('.fc-event-title').textContent;
     //     } else {
-    //         cellText.textContent = 'ouvrable';
+    //         cellText.textContent = 'disponible';
     //     }
     //     cellContent.appendChild(cellText);
     // },
@@ -300,17 +300,17 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
       if (this.holidays.includes(formattedDate)) {
         console.log("Holiday detected:", formattedDate);
-        cellText.textContent = 'fermé';
+        cellText.textContent = 'indisponible';
         cellText.style.color = 'white';
         args.el.classList.add('holiday');
         args.el.style.pointerEvents = 'none';
       } else if (day === 0 || day === 6 || cellDateTimestamp < todayTimestamp) {
-        cellText.textContent = 'fermé';
+        cellText.textContent = 'indisponible';
         cellText.style.color = 'red';
         cellText.style.textDecoration = 'none';
         args.el.classList.add('closed');
       } else {
-        cellText.textContent = 'ouvrable';
+        cellText.textContent = 'disponible';
       }
       cellContent.appendChild(cellText);
     },
@@ -330,10 +330,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         eventTitle.textContent = args.event.title;
         cellContent.appendChild(eventTitle);
 
-        // Ajouter le texte "fermé" en dessous du titre
+        // Ajouter le texte "indisponible" en dessous du titre
         var closedText = document.createElement('div');
         closedText.className = 'closed-text';
-        closedText.textContent = 'fermé';
+        closedText.textContent = 'indisponible';
         cellContent.appendChild(closedText);
 
         // Ajouter des styles CSS
@@ -606,7 +606,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "danger"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Jour férié ")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Jour indisponible ")];
     }),
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_tag, {
@@ -618,7 +618,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "info"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" jour ouvrable ")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" jour disponible ")];
     }),
     _: 1 /* STABLE */
   })]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$pointEnrolemen = $data.pointEnrolement) === null || _$data$pointEnrolemen === void 0 || (_$data$pointEnrolemen = _$data$pointEnrolemen.pointEnrolement) === null || _$data$pointEnrolemen === void 0 ? void 0 : _$data$pointEnrolemen.nom_pe), 1 /* TEXT */), !((_$data$pointEnrolemen2 = $data.pointEnrolement) !== null && _$data$pointEnrolemen2 !== void 0 && (_$data$pointEnrolemen2 = _$data$pointEnrolemen2.pointEnrolement) !== null && _$data$pointEnrolemen2 !== void 0 && _$data$pointEnrolemen2.nom_pe) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, "chargement... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$pointEnrolemen3 = $data.pointEnrolement) === null || _$data$pointEnrolemen3 === void 0 ? void 0 : _$data$pointEnrolemen3.countToday), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" / "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$pointEnrolemen4 = $data.pointEnrolement) === null || _$data$pointEnrolemen4 === void 0 || (_$data$pointEnrolemen4 = _$data$pointEnrolemen4.pointEnrolement) === null || _$data$pointEnrolemen4 === void 0 ? void 0 : _$data$pointEnrolemen4.capacite_maximale_jour_pe), 1 /* TEXT */), !((_$data$pointEnrolemen5 = $data.pointEnrolement) !== null && _$data$pointEnrolemen5 !== void 0 && (_$data$pointEnrolemen5 = _$data$pointEnrolemen5.pointEnrolement) !== null && _$data$pointEnrolemen5 !== void 0 && _$data$pointEnrolemen5.capacite_maximale_jour_pe) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_19, "chargement... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
@@ -662,7 +662,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.selected {\r\n    background-color: lightblue;\r\n    position: relative;\n}\n.selected input[type=\"checkbox\"] {\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50;\n}\n.cell-text {\r\n    text-align: center;\r\n    height: 100%;\r\n    font-size: 0.9rem;\r\n    color: black;\r\n    text-decoration: underline;\n}\n.closed {\r\n    background-color: #f0f0f0;\r\n    pointer-events: none;\r\n    -webkit-user-select: none;\r\n       -moz-user-select: none;\r\n            user-select: none;\n}\n.padding-1 {\r\n    padding: 1rem;\n}\n.w-auto {\r\n    width: auto;\n}\n.is-selected {\r\n    color: #1989fa;\n}\n.el-tag {\r\n    margin-right: 5px;\n}\n.cell {\r\n    flex-direction: column;\r\n    display: flex;\r\n    margin: 0;\r\n    height: 100%;\r\n    justify-content: space-between;\n}\n.content-info-personal-appointment {\r\n    margin-top: 2rem;\n}\n.space1 {\r\n    width: -moz-fit-content;\r\n    width: fit-content;\n}\n.space {\r\n    width: -moz-fit-content;\r\n    width: fit-content;\n}\r\n\r\n/*.center {\r\n    margin-left: 10%;\r\n    margin-top: 25%;\r\n    margin-bottom: 0;\r\n    position: relative;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%,-50%);\r\n}\r\n*/\n.calendar-container {\r\n    width: 100%;\r\n    margin-bottom: 0;\n}\n.buttonE {\r\n    padding: 1.6em 21px;\r\n    height: 40px;\r\n    width: 50%;\n}\n.holiday {\r\n    background-color: #f0f0f0 !important;\r\n    pointer-events: none;\r\n    cursor: not-allowed;\n}\n.holiday .cell-text {\r\n    color: white;\n}\n.fc-daygrid-day-frame {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100%;\r\n    /* Assure que le contenu prend toute la hauteur disponible */\r\n    width: 100%;\r\n    /* Assure que le contenu prend toute la largeur disponible */\n}\n.event-title {\r\n    font-size: 1rem;\r\n    /* Ajustez la taille de la police si nécessaire */\r\n    color: black;\r\n    /* Couleur du titre */\r\n    margin-bottom: 0.2rem;\r\n    /* Espace entre le titre et le texte \"fermé\" */\r\n    text-align: center;\r\n    /* Centre le texte horizontalement */\n}\n.closed-text {\r\n    font-size: 0.9rem;\r\n    /* Ajustez la taille de la police pour le texte \"fermé\" */\r\n    color: red;\r\n    /* Couleur rouge pour le texte \"fermé\" */\r\n    text-align: center;\r\n    /* Centre le texte horizontalement */\n}\n.disabled-date {\r\n    background-color: #e0e0e0;\r\n    /* Couleur pour les cellules désactivées */\r\n    color: #a0a0a0;\r\n    /* Couleur du texte pour les cellules désactivées */\r\n    pointer-events: none;\r\n    /* Désactive les clics sur ces cellules */\r\n    cursor: not-allowed;\r\n    /* Change le curseur pour indiquer que l'interaction est interdite */\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.selected {\r\n    background-color: lightblue;\r\n    position: relative;\n}\n.selected input[type=\"checkbox\"] {\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50;\n}\n.cell-text {\r\n    text-align: center;\r\n    height: 100%;\r\n    font-size: 0.9rem;\r\n    color: black;\r\n    text-decoration: underline;\n}\n.closed {\r\n    background-color: #f0f0f0;\r\n    pointer-events: none;\r\n    -webkit-user-select: none;\r\n       -moz-user-select: none;\r\n            user-select: none;\n}\n.padding-1 {\r\n    padding: 1rem;\n}\n.w-auto {\r\n    width: auto;\n}\n.is-selected {\r\n    color: #1989fa;\n}\n.el-tag {\r\n    margin-right: 5px;\n}\n.cell {\r\n    flex-direction: column;\r\n    display: flex;\r\n    margin: 0;\r\n    height: 100%;\r\n    justify-content: space-between;\n}\n.content-info-personal-appointment {\r\n    margin-top: 2rem;\n}\n.space1 {\r\n    width: -moz-fit-content;\r\n    width: fit-content;\n}\n.space {\r\n    width: -moz-fit-content;\r\n    width: fit-content;\n}\r\n\r\n/*.center {\r\n    margin-left: 10%;\r\n    margin-top: 25%;\r\n    margin-bottom: 0;\r\n    position: relative;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%,-50%);\r\n}\r\n*/\n.calendar-container {\r\n    width: 100%;\r\n    margin-bottom: 0;\n}\n.buttonE {\r\n    padding: 1.6em 21px;\r\n    height: 40px;\r\n    width: 50%;\n}\n.holiday {\r\n    background-color: #f0f0f0 !important;\r\n    pointer-events: none;\r\n    cursor: not-allowed;\n}\n.holiday .cell-text {\r\n    color: white;\n}\n.fc-daygrid-day-frame {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100%;\r\n    /* Assure que le contenu prend toute la hauteur disponible */\r\n    width: 100%;\r\n    /* Assure que le contenu prend toute la largeur disponible */\n}\n.event-title {\r\n    font-size: 1rem;\r\n    /* Ajustez la taille de la police si nécessaire */\r\n    color: black;\r\n    /* Couleur du titre */\r\n    margin-bottom: 0.2rem;\r\n    /* Espace entre le titre et le texte \"indisponible\" */\r\n    text-align: center;\r\n    /* Centre le texte horizontalement */\n}\n.closed-text {\r\n    font-size: 0.9rem;\r\n    /* Ajustez la taille de la police pour le texte \"indisponible\" */\r\n    color: red;\r\n    /* Couleur rouge pour le texte \"indisponible\" */\r\n    text-align: center;\r\n    /* Centre le texte horizontalement */\n}\n.disabled-date {\r\n    background-color: #e0e0e0;\r\n    /* Couleur pour les cellules désactivées */\r\n    color: #a0a0a0;\r\n    /* Couleur du texte pour les cellules désactivées */\r\n    pointer-events: none;\r\n    /* Désactive les clics sur ces cellules */\r\n    cursor: not-allowed;\r\n    /* Change le curseur pour indiquer que l'interaction est interdite */\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
