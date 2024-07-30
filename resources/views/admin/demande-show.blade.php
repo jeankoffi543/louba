@@ -85,8 +85,9 @@
                                          Ajouter doc</button>
                                  @endkcan
                                  @kcan('possibilite-changer-date-rendez-vous')
-                                     <a class="btn btn-info" href="{{ route('demande.show', $demande->id) }}"> Modifier date
-                                         RDV</a>
+                                     <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#changerDateRdv">
+                                         Modifier date
+                                         RDV </button>
                                  @endkcan
 
                                  @kcan('ajouter-numero-recepisse')
@@ -151,30 +152,30 @@
                  <div class="col-12">
                      <div class="card recent-sales overflow-auto"></div>
                      <div class="card-body bg-white rounded rounded-md p-2">
-                             <div class="pagetitle">
+                         <div class="pagetitle">
                              <h1>Informations du client</h1>
                              <hr class="line bottom-3">
                          </div>
 
                          <div class="container">
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Type de la demande
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->type_request ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Type de la demande
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->type_request ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Numéro du reçu
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->numero_recu ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Numéro du reçu
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->numero_recu ?? '-' }}
+                                 </div>
+                             </div>
 
                              <div class="row">
                                  <div class="col-3 fw-bold">
@@ -188,41 +189,41 @@
 
 
                              <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Genre
-                                </div>
-                                <div class="col-9">
-                                    {{ optional($demande->client)->genre_client ?? '-' }}
-                                </div>
-                            </div>
+                                 <div class="col-3 fw-bold">
+                                     Genre
+                                 </div>
+                                 <div class="col-9">
+                                     {{ optional($demande->client)->genre_client ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Nationnalité d'origine
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->nationality ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Nationnalité d'origine
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->nationality ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Status nationnalité
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->nationality_state ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Status nationnalité
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->nationality_state ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Profession
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->profession ?? '-' }}
-                                </div>
-                            </div>
-                            
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Profession
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->profession ?? '-' }}
+                                 </div>
+                             </div>
+
                              <div class="row">
                                  <div class="col-3 fw-bold">
                                      Email
@@ -265,68 +266,68 @@
                              </div>
 
                              <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Lieu de naissance
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->birth_address ?? '-' }}
-                                </div>
-                            </div>
+                                 <div class="col-3 fw-bold">
+                                     Lieu de naissance
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->birth_address ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Taille
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->height ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Taille
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->height ?? '-' }}
+                                 </div>
+                             </div>
 
-                            
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Teint
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->complexion ?? '-' }}
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Couleur des yeux
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->eye_color ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Teint
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->complexion ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Couleur des cheveux
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->hair_color ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Couleur des yeux
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->eye_color ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Nom & Prénom du père
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->father_last_name ?? '-' }} {{ $demande->father_first_name ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Couleur des cheveux
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->hair_color ?? '-' }}
+                                 </div>
+                             </div>
 
-                            <div class="row">
-                                <div class="col-3 fw-bold">
-                                    Nom & Prénom de la mère
-                                </div>
-                                <div class="col-9">
-                                    {{ $demande->mother_last_name ?? '-' }} {{ $demande->mother_first_name ?? '-' }}
-                                </div>
-                            </div>
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Nom & Prénom du père
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->father_last_name ?? '-' }} {{ $demande->father_first_name ?? '-' }}
+                                 </div>
+                             </div>
+
+                             <div class="row">
+                                 <div class="col-3 fw-bold">
+                                     Nom & Prénom de la mère
+                                 </div>
+                                 <div class="col-9">
+                                     {{ $demande->mother_last_name ?? '-' }} {{ $demande->mother_first_name ?? '-' }}
+                                 </div>
+                             </div>
 
 
                          </div>
@@ -411,7 +412,7 @@
                                      Date du rendez-vous
                                  </div>
                                  <div class="col-9">
-                                     {{ (new DateTime($demande->date_rendez_vous))->format('d/m/Y') ?? '-' }}
+                                     {{ (new DateTime($demande->date_rdv_demande))->format('d/m/Y') ?? '-' }}
                                  </div>
                              </div>
 
@@ -481,35 +482,21 @@
                          <div class="container">
                              <div class="row">
                                  <div class="col-12">
-                                     <a href="{{ asset($demande->avatar_url) }}" target="_blank">Document 1</a>
-                                 </div>
-
-                                 <div class="col-12">
-                                     <a href="{{ asset($demande->document_url) }}" target="_blank">Document 2</a>
+                                     <a href="{{ asset($demande->avatar_url) }}" target="_blank">Photo d'identité</a>
                                  </div>
                              </div>
 
+
                              <div class="row my-1">
-                                 @if (count($demande->piece_jointes) > 0)
-                                     @foreach ($demande->piece_jointes as $piece_jointe)
-                                         <div class="col-3 fw-bold">
-                                             {{ $piece_jointe->libelle }} :
-                                         </div>
+                                 @if (count(explode(',', $demande->document_url)) > 0)
+                                     @foreach (explode(',', $demande->document_url) as $j => $document_url)
                                          <div class="col-9">
                                              <div class="d-flex flex-row gap-2 align-items-center">
 
                                                  <div class="d-flex flex-column">
-                                                     @if ($piece_jointe->url !== null && count(explode(',', $piece_jointe->url)) > 0)
-                                                         @foreach (explode(',', $piece_jointe->url) as $i => $url)
-                                                             <a href="{{ asset($url) }}"
-                                                                 target="_blank">{{ $piece_jointe->libelle }}
-                                                                 {{ $i + 1 }}</a>
-                                                         @endforeach
-                                                     @endif
+                                                     <a href="{{ asset($document_url) }}" target="_blank">Document
+                                                         {{ $j + 1 }}</a>
                                                  </div>
-                                                 <a
-                                                     href="{{ route('piece_jointes.delete', ['id' => $piece_jointe->id]) }}"><i
-                                                         class="bi bi-trash"></i></a>
                                              </div>
                                          </div>
                                      @endforeach
@@ -518,44 +505,83 @@
                              </div>
                          </div>
                          <br>
+
+                         <br><br>
                          <div class="pagetitle">
-                             <h1>Historiques</h1>
+                             <h1>Pièce jointe </h1>
                              <hr class="line bottom-3">
-                             <div class="container">
-                                 <div class="row">
-                                     <div class="col-12">
-                                         {{-- <div class="bg-danger" style="width: 10px; height: 10px; border-radius: 50%">&nbsp;</div> --}}
-                                         {{-- <div style="width: 4px; height: 100%; background-color: #0b5ed7">
+                         </div>
+                         <div class="container">
+                             <div class="row">
+
+                                 <div class="row my-1">
+                                     @if (count($demande->piece_jointes) > 0)
+                                         @foreach ($demande->piece_jointes as $piece_jointe)
+                                             <div class="col-3 fw-bold">
+                                                 {{ $piece_jointe->libelle }} :
+                                             </div>
+                                             <div class="col-9">
+                                                 <div class="d-flex flex-row gap-2 align-items-center">
+
+                                                     <div class="d-flex flex-column">
+                                                         @if ($piece_jointe->url !== null && count(explode(',', $piece_jointe->url)) > 0)
+                                                             @foreach (explode(',', $piece_jointe->url) as $i => $url)
+                                                                 <a href="{{ asset($url) }}"
+                                                                     target="_blank">{{ $piece_jointe->libelle }}
+                                                                     {{ $i + 1 }}</a>
+                                                             @endforeach
+                                                         @endif
+                                                     </div>
+                                                     <a
+                                                         href="{{ route('piece_jointes.delete', ['id' => $piece_jointe->id]) }}"><i
+                                                             class="bi bi-trash"></i></a>
+                                                 </div>
+                                             </div>
+                                         @endforeach
+                                     @endif
+
+                                 </div>
+                             </div>
+                             <br>
+
+                             <div class="pagetitle">
+                                 <h1>Historiques</h1>
+                                 <hr class="line bottom-3">
+                                 <div class="container">
+                                     <div class="row">
+                                         <div class="col-12">
+                                             {{-- <div class="bg-danger" style="width: 10px; height: 10px; border-radius: 50%">&nbsp;</div> --}}
+                                             {{-- <div style="width: 4px; height: 100%; background-color: #0b5ed7">
                                                  &nbsp;
                                             </div> --}}
 
-                                         @foreach ($historiques as $historique)
-                                             <div class=" d-flex gap-2">
-                                                 <div class="vr" style="background-color: #0b5ed7;">
+                                             @foreach ($historiques as $historique)
+                                                 <div class=" d-flex gap-2">
+                                                     <div class="vr" style="background-color: #0b5ed7;">
+                                                     </div>
+                                                     <div class="">
+                                                         <p class="text-muted" style="font-size: 0.8rem;">
+                                                             {{ $historique->created_at }}</p>
+                                                         <p style="font-size: 0.8rem;">
+                                                             <strong>{{ optional($historique->user)->nom ? optional($historique->client)->nom_client : '-' }}</strong>
+                                                             : {{ $historique->description }}
+                                                         </p>
+                                                         <p style="font-size: 0.8rem;"> Commentaire :
+                                                             @if (isset($historique->commentaires[0]))
+                                                                 {{ $historique->commentaires[0]->description }}
+                                                             @endif
+                                                         </p>
+                                                     </div>
                                                  </div>
-                                                 <div class="">
-                                                     <p class="text-muted" style="font-size: 0.8rem;">
-                                                         {{ $historique->created_at }}</p>
-                                                     <p style="font-size: 0.8rem;">
-                                                         <strong>{{ optional($historique->user)->nom ? optional($historique->client)->nom_client : '-' }}</strong>
-                                                         : {{ $historique->description }}
-                                                     </p>
-                                                     <p style="font-size: 0.8rem;"> Commentaire :
-                                                         @if (isset($historique->commentaires[0]))
-                                                             {{ $historique->commentaires[0]->description }}
-                                                         @endif
-                                                     </p>
-                                                 </div>
-                                             </div>
 
-                                             <br>
-                                         @endforeach
+                                                 <br>
+                                             @endforeach
+                                         </div>
                                      </div>
                                  </div>
                              </div>
                          </div>
                      </div>
-                 </div>
          </section>
 
          {{-- Modal start --}}
@@ -638,10 +664,10 @@
 
                              <div class="row mb-3 g-2">
                                  <div class="col-12 col-lg-3 text-wrap gap-2">
-                                     <label for="#commentaire">Laisser un commentaire </label>
+                                     <label for="#commentairePj">Laisser un commentaire </label>
                                  </div>
                                  <div class="col-12 col-lg-9 text-wrap gap-2">
-                                     <input id="commentaire" type="text" name="commentaire">
+                                     <textarea class="form-control" id="#commentairePj" type="text" name="commentaire"> </textarea>
                                  </div>
                              </div>
 
@@ -687,10 +713,10 @@
 
                              <div class="row mb-3 g-2">
                                  <div class="col-12 col-lg-3 text-wrap gap-2">
-                                     <label for="#commentaire2">Laisser un commentaire </label>
+                                     <label for="#commentaireAjouterRecepisse">Laisser un commentaire </label>
                                  </div>
                                  <div class="col-12 col-lg-9 text-wrap gap-2">
-                                     <input id="commentaire2" type="text" name="commentaire">
+                                     <textarea class="form-control" id="#commentaireAjouterRecepisse" type="text" name="commentaire"> </textarea>
                                  </div>
                              </div>
 
@@ -735,10 +761,10 @@
 
                              <div class="row mb-3 g-2">
                                  <div class="col-12 col-lg-3 text-wrap gap-2">
-                                     <label for="#commentaire2">Laisser un commentaire </label>
+                                     <label for="#commentaireAjouterDoc">Laisser un commentaire </label>
                                  </div>
                                  <div class="col-12 col-lg-9 text-wrap gap-2">
-                                     <input id="commentaire2" type="text" name="commentaire">
+                                     <textarea class="form-control" id="#commentaireAjouterDoc" type="text" name="commentaire"> </textarea>
                                  </div>
                              </div>
 
@@ -780,10 +806,10 @@
 
                                  <div class="row mb-3 g-2">
                                      <div class="col-12 col-lg-3 text-wrap gap-2">
-                                         <label for="#commentaire2">Laisser un commentaire </label>
+                                         <label for="#commentaireLivrerDoc">Laisser un commentaire </label>
                                      </div>
                                      <div class="col-12 col-lg-9 text-wrap gap-2">
-                                         <input id="commentaire2" type="text" name="commentaire">
+                                         <textarea class="form-control" id="#commentairLivrerDoc" type="text" name="commentaire"> </textarea>
                                      </div>
                                  </div>
 
@@ -926,6 +952,62 @@
          @endkcan
          <!-- End Modal Dialog Scrollable-->
 
+         @kcan('possibilite-changer-date-rendez-vous')
+             <form method="POST" action="{{ route('demande.manage') }}">
+                 @csrf
+
+                 <div class="modal fade" id="changerDateRdv" tabindex="-1">
+                     <div class="modal-dialog modal-dialog-scrollable">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h5 class="modal-title">Changer la date du rendez-vous</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                     aria-label="Close"></button>
+                             </div>
+                             <div class="modal-body">
+
+                                 <input name="demande_id" type="hidden" value="{{ $demande->id }}">
+                                 <input name="request_type" type="hidden" value="possibilite-changer-date-rendez-vous">
+
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-6 text-wrap gap-2">
+                                         <label for="#changer_date">Choisir une date </label>
+                                     </div>
+                                     <div class="col-12 col-lg-6 text-wrap gap-2">
+                                        <input 
+                                        id="changer_date" 
+                                        class="form-control" 
+                                        type="date" 
+                                        name="date_rdv_demande" 
+                                        min="<?php echo date('Y-m-d'); ?>">
+                                     </div>
+                                 </div>
+
+                                 <div class="row mb-3 g-2">
+                                     <div class="col-12 col-lg-3 text-wrap gap-2">
+                                         <label for="#commentaireDateRdv">Laisser un commentaire </label>
+                                     </div>
+                                     <div class="col-12 col-lg-9 text-wrap gap-2">
+                                         <textarea class="form-control" id="commentaireDateRdv" type="text" name="commentaire"> </textarea>
+                                     </div>
+                                 </div>
+
+
+
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                 <button type="submit" class="btn btn-primary">Valider</button>
+                             </div>
+
+
+
+
+                         </div>
+                     </div>
+                 </div>
+             </form>
+         @endkcan
      </main><!-- End #main -->
 
 

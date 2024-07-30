@@ -14,6 +14,7 @@ use App\Models\Historique;
 use App\Models\IndexTraitement;
 use App\Models\Traitement;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -283,7 +284,25 @@ class WorkFlowManger
             $commentaire->historique_id = $historique->id;
             $commentaire->save();
          }
-      } else if ($request->request_type === "ajouter-numero-document" && $this->userCan("ajouter-numero-document")) {
+      } 
+      else if ($request->request_type === "possibilite-changer-date-rendez-vous" && $this->userCan("possibilite-changer-date-rendez-vous")){
+         $demande->date_rdv_demande = new DateTime($request->date_rdv_demande);
+         $demande->save();
+          // Commentaire
+          $historique = new Historique();
+          $historique->description = "Changement de date de rendez-vous";
+          $historique->demande_id =  $request->demande_id;
+          $historique->user_id = auth()->user()->id;
+          $historique->save();
+ 
+          if ($request->commentaire) {
+             $commentaire = new Commentaire();
+             $commentaire->description = $request->commentaire;
+             $commentaire->historique_id = $historique->id;
+             $commentaire->save();
+          }
+      }
+      else if ($request->request_type === "ajouter-numero-document" && $this->userCan("ajouter-numero-document")) {
          $demande->numero_document = $request->numero_document;
          $demande->save();
 
@@ -342,7 +361,8 @@ class WorkFlowManger
             $sender = optional($demande->client)->telephone_client;
             $newSms = new SendSmS();
             $newSms->send($sender, $contenu);
-         } else {
+         } 
+         else {
             if (isset($groupe) && count($groupe) > 0) {
                $groupe = $groupe->pluck('id')->toArray();
                foreach ($groupe as $key => $value) {

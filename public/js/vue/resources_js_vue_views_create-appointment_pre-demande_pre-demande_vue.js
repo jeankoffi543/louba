@@ -325,28 +325,26 @@ var _hoisted_85 = {
   "class": "col-sm-12 col-md-12"
 };
 var _hoisted_86 = {
-  key: 0,
-  "class": "el-upload__text"
+  "class": "d-flex flex-row justify-content-start align-items-center gap-4"
 };
 var _hoisted_87 = {
-  "class": "col-md-12 col-sm-12 mt-2"
-};
-var _hoisted_88 = {
   key: 0,
   "class": "el-upload__text"
 };
-var _hoisted_89 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    id: "pageContainer"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    id: "viewer",
-    "class": "pdfViewer"
-  })], -1 /* HOISTED */);
-});
+var _hoisted_88 = {
+  "class": "col-md-12 col-sm-12 mt-2"
+};
+var _hoisted_89 = {
+  "class": "d-flex flex-row justify-content-start align-items-center gap-4"
+};
 var _hoisted_90 = {
-  "class": "row"
+  key: 0,
+  "class": "el-upload__text"
 };
 var _hoisted_91 = {
+  "class": "row"
+};
+var _hoisted_92 = {
   "class": "app-w-100 app-d-flex app-d-flex app-justify-content-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -356,6 +354,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_el_collapse_item = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-collapse-item");
   var _component_el_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-input");
   var _component_el_date_picker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-date-picker");
+  var _component_el_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-button");
   var _component_el_upload = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-upload");
   var _component_ButtonApp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonApp");
   var _component_el_col = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-col");
@@ -747,44 +746,59 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         title: "Charger des documents"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_83, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_84, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_upload, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_83, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_84, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-upload ref=\"upload\" :auto-upload=\"false\" :limit=\"1\" :multiple=\"true\"\r\n                                :on-change=\"uploadPicture\" action=\"#\" :on-remove=\"onRemovePicture\"\r\n                                accept=\"application/pdf, image/jpg, image/jpeg, image/png\" class=\"upload-demo\" drag\r\n                                :list-type=\"'text'\" show-file-list=\"false\">\r\n                                <div v-if=\"documentPreview?.type == ''\" class=\"el-upload__text\">{{ titleDocumentUpload }}</div>\r\n                            </el-upload> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
+            type: "primary",
+            onClick: _ctx.triggerUpload
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Charger des fichiers")];
+            }),
+            _: 1 /* STABLE */
+          }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_upload, {
             ref: "upload",
             "auto-upload": false,
-            limit: 1,
+            limit: 5,
             multiple: true,
+            "before-upload": _ctx.beforeUpload,
             "on-change": _ctx.uploadPicture,
-            action: "#",
             "on-remove": _ctx.onRemovePicture,
+            action: "#",
             accept: "application/pdf, image/jpg, image/jpeg, image/png",
             "class": "upload-demo",
-            drag: "",
-            "list-type": 'text',
-            "show-file-list": "false"
+            "list-type": 'text'
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               var _ctx$documentPreview;
-              return [((_ctx$documentPreview = _ctx.documentPreview) === null || _ctx$documentPreview === void 0 ? void 0 : _ctx$documentPreview.type) == '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_86, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.titleDocumentUpload), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+              return [((_ctx$documentPreview = _ctx.documentPreview) === null || _ctx$documentPreview === void 0 ? void 0 : _ctx$documentPreview.type) === '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.titleDocumentUpload), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
             _: 1 /* STABLE */
-          }, 8 /* PROPS */, ["on-change", "on-remove"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_87, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_upload, {
-            ref: "upload",
+          }, 8 /* PROPS */, ["before-upload", "on-change", "on-remove"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_88, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_89, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
+            type: "primary",
+            onClick: _ctx.triggerUpload2
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Charger des fichiers")];
+            }),
+            _: 1 /* STABLE */
+          }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_upload, {
+            ref: "upload2",
             "auto-upload": false,
             limit: 1,
             multiple: false,
-            accept: "image/jpg, image/jpeg, image/png",
+            "before-upload": _ctx.beforeUpload,
             "on-change": _ctx.uploadBirthCertificate,
-            action: "#",
             "on-remove": _ctx.onRemoveBirthCertificate,
+            action: "#",
+            accept: "image/jpg, image/jpeg, image/png",
             "class": "upload-demo",
-            drag: "",
-            "list-type": "picture-card"
+            "list-type": 'text'
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               var _ctx$picturePreview;
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <img v-if=\"formPersonalInfo.fileListBirthCertificate?.length > 0\" :src=\"picturePreview[0]?.url\" class=\"avatar\"> "), ((_ctx$picturePreview = _ctx.picturePreview) === null || _ctx$picturePreview === void 0 ? void 0 : _ctx$picturePreview.type) == '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_88, "Déposer la photo ici (JPEG, JPG, PNG)")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_89];
+              return [((_ctx$picturePreview = _ctx.picturePreview) === null || _ctx$picturePreview === void 0 ? void 0 : _ctx$picturePreview.type) === '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_90, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.titlePhotoUpload), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
             _: 1 /* STABLE */
-          }, 8 /* PROPS */, ["on-change", "on-remove"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_90, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_91, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
+          }, 8 /* PROPS */, ["before-upload", "on-change", "on-remove"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-upload ref=\"upload2\" :auto-upload=\"false\" :limit=\"1\" :multiple=\"false\"\r\n                                    accept=\"image/jpg, image/jpeg, image/png\" :on-change=\"uploadBirthCertificate\"\r\n                                    action=\"#\" :on-remove=\"onRemoveBirthCertificate\" class=\"upload-demo\" drag\r\n                                    list-type=\"picture-card\">\r\n                                    <img v-if=\"formPersonalInfo.fileListBirthCertificate?.length > 0\" :src=\"picturePreview[0]?.url\" class=\"avatar\"> \r\n\r\n                                    <div v-if=\"picturePreview?.type == ''\" class=\"el-upload__text\">Déposer la photo ici\r\n                                        (JPEG, JPG, PNG)\r\n                                    </div>\r\n                                    <div id=\"pageContainer\">\r\n                                        <div id=\"viewer\" class=\"pdfViewer\"></div>\r\n                                    </div>\r\n                                </el-upload> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_91, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_92, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
             gutter: 24,
             "class": "app-w-50"
           }, {
@@ -852,6 +866,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   props: {},
   data: function data() {
     return {
+      maxFileSize: 5 * 1024 * 1024,
+      // 5 Mo en octets
       isLoadingSaveAppointment: false,
       formError: false,
       documentPreview: {
@@ -869,9 +885,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       disabledStep4: true,
       typeDemand: "nouvelle_demande",
       titleDocumentUpload: "Extrait de naissance (PDF, JPEG, JPG, PNG)",
+      titlePhotoUpload: "Photo d'identité (JPEG, JPG, PNG)",
       typeServiceSelected: null,
       formPersonalInfo: {
-        firstname: '',
+        firstname: "",
         lastname: "",
         numero_recu: "",
         nationality: "",
@@ -934,6 +951,43 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   },
   created: function created() {},
   methods: {
+    beforeUpload: function beforeUpload(file) {
+      var isLtMaxSize = file.size <= this.maxFileSize;
+      if (!isLtMaxSize) {
+        this.$message.error("Le fichier ".concat(file.name, " est trop grand. La taille maximale est de 5 Mo."));
+      }
+      return isLtMaxSize;
+    },
+    triggerUpload: function triggerUpload() {
+      // Accéder au composant el-upload via ref
+      var uploadComponent = this.$refs.upload;
+      if (uploadComponent) {
+        // Vérifier si l'input file existe avant d'essayer de cliquer dessus
+        var inputElement = uploadComponent.$el.querySelector('input[type="file"]');
+        if (inputElement) {
+          inputElement.click();
+        } else {
+          console.error("Input file element not found");
+        }
+      } else {
+        console.error("Upload component not found");
+      }
+    },
+    triggerUpload2: function triggerUpload2() {
+      // Accéder au composant el-upload via ref
+      var uploadComponent = this.$refs.upload2;
+      if (uploadComponent) {
+        // Vérifier si l'input file existe avant d'essayer de cliquer dessus
+        var inputElement = uploadComponent.$el.querySelector('input[type="file"]');
+        if (inputElement) {
+          inputElement.click();
+        } else {
+          console.error("Input file element not found");
+        }
+      } else {
+        console.error("Upload component not found");
+      }
+    },
     sendPredemande: function sendPredemande() {
       var _this = this;
       this.formError = false;
@@ -1001,33 +1055,35 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           }, 3000);
         }
       } else {
-        var _this$formPersonalInf, _this$formPersonalInf2, _this$formPersonalInf3, _this$formPersonalInf4, _this$formPersonalInf5, _this$formPersonalInf6, _this$formPersonalInf7, _this$formPersonalInf8, _this$formPersonalInf9, _this$formPersonalInf10, _this$formPersonalInf11, _this$signalement, _this$signalement2, _this$signalement3, _this$signalement4, _this$formPersonalInf12, _this$formPersonalInf13, _this$formPersonalInf14, _this$ascendants, _this$ascendants2, _this$ascendants3, _this$ascendants4, _this$formPersonalInf15;
+        var _this$formPersonalInf, _this$formPersonalInf2, _this$formPersonalInf3, _this$formPersonalInf4, _this$formPersonalInf5, _this$formPersonalInf6, _this$formPersonalInf7, _this$formPersonalInf8, _this$formPersonalInf9, _this$formPersonalInf10, _this$signalement, _this$signalement2, _this$signalement3, _this$signalement4, _this$formPersonalInf11, _this$formPersonalInf12, _this$formPersonalInf13, _this$ascendants, _this$ascendants2, _this$ascendants3, _this$ascendants4, _this$formPersonalInf14;
         this.formError = false;
         var formData = new FormData();
-        formData.append("document1", (_this$formPersonalInf = this.formPersonalInfo) === null || _this$formPersonalInf === void 0 ? void 0 : _this$formPersonalInf.fileListPicture[0]);
-        formData.append("document2", (_this$formPersonalInf2 = this.formPersonalInfo) === null || _this$formPersonalInf2 === void 0 ? void 0 : _this$formPersonalInf2.fileListBirthCertificate[0]);
-        formData.append("gender", (_this$formPersonalInf3 = this.formPersonalInfo) === null || _this$formPersonalInf3 === void 0 ? void 0 : _this$formPersonalInf3.gender);
-        formData.append("nom", (_this$formPersonalInf4 = this.formPersonalInfo) === null || _this$formPersonalInf4 === void 0 ? void 0 : _this$formPersonalInf4.lastname);
-        formData.append("prenom", (_this$formPersonalInf5 = this.formPersonalInfo) === null || _this$formPersonalInf5 === void 0 ? void 0 : _this$formPersonalInf5.firstname);
-        formData.append("email", (_this$formPersonalInf6 = this.formPersonalInfo) === null || _this$formPersonalInf6 === void 0 ? void 0 : _this$formPersonalInf6.email);
-        formData.append("telephone", (_this$formPersonalInf7 = this.formPersonalInfo) === null || _this$formPersonalInf7 === void 0 ? void 0 : _this$formPersonalInf7.phone);
-        formData.append("nationality", (_this$formPersonalInf8 = this.formPersonalInfo) === null || _this$formPersonalInf8 === void 0 ? void 0 : _this$formPersonalInf8.nationality);
-        formData.append("nationality_state", (_this$formPersonalInf9 = this.formPersonalInfo) === null || _this$formPersonalInf9 === void 0 ? void 0 : _this$formPersonalInf9.nationality_state);
-        formData.append("profession", (_this$formPersonalInf10 = this.formPersonalInfo) === null || _this$formPersonalInf10 === void 0 ? void 0 : _this$formPersonalInf10.profession);
-        formData.append("address", (_this$formPersonalInf11 = this.formPersonalInfo) === null || _this$formPersonalInf11 === void 0 ? void 0 : _this$formPersonalInf11.address);
+        this.formPersonalInfo.fileListPicture.forEach(function (file) {
+          formData.append('document1[]', file);
+        });
+        formData.append("document2", (_this$formPersonalInf = this.formPersonalInfo) === null || _this$formPersonalInf === void 0 ? void 0 : _this$formPersonalInf.fileListBirthCertificate[0]);
+        formData.append("gender", (_this$formPersonalInf2 = this.formPersonalInfo) === null || _this$formPersonalInf2 === void 0 ? void 0 : _this$formPersonalInf2.gender);
+        formData.append("nom", (_this$formPersonalInf3 = this.formPersonalInfo) === null || _this$formPersonalInf3 === void 0 ? void 0 : _this$formPersonalInf3.lastname);
+        formData.append("prenom", (_this$formPersonalInf4 = this.formPersonalInfo) === null || _this$formPersonalInf4 === void 0 ? void 0 : _this$formPersonalInf4.firstname);
+        formData.append("email", (_this$formPersonalInf5 = this.formPersonalInfo) === null || _this$formPersonalInf5 === void 0 ? void 0 : _this$formPersonalInf5.email);
+        formData.append("telephone", (_this$formPersonalInf6 = this.formPersonalInfo) === null || _this$formPersonalInf6 === void 0 ? void 0 : _this$formPersonalInf6.phone);
+        formData.append("nationality", (_this$formPersonalInf7 = this.formPersonalInfo) === null || _this$formPersonalInf7 === void 0 ? void 0 : _this$formPersonalInf7.nationality);
+        formData.append("nationality_state", (_this$formPersonalInf8 = this.formPersonalInfo) === null || _this$formPersonalInf8 === void 0 ? void 0 : _this$formPersonalInf8.nationality_state);
+        formData.append("profession", (_this$formPersonalInf9 = this.formPersonalInfo) === null || _this$formPersonalInf9 === void 0 ? void 0 : _this$formPersonalInf9.profession);
+        formData.append("address", (_this$formPersonalInf10 = this.formPersonalInfo) === null || _this$formPersonalInf10 === void 0 ? void 0 : _this$formPersonalInf10.address);
         formData.append("height", (_this$signalement = this.signalement) === null || _this$signalement === void 0 ? void 0 : _this$signalement.height);
         formData.append("complexion", (_this$signalement2 = this.signalement) === null || _this$signalement2 === void 0 ? void 0 : _this$signalement2.complexion);
         formData.append("hair_color", (_this$signalement3 = this.signalement) === null || _this$signalement3 === void 0 ? void 0 : _this$signalement3.hair_color);
         formData.append("eye_color", (_this$signalement4 = this.signalement) === null || _this$signalement4 === void 0 ? void 0 : _this$signalement4.eye_color);
-        formData.append("date_naissance", (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.format)(new Date((_this$formPersonalInf12 = this.formPersonalInfo) === null || _this$formPersonalInf12 === void 0 ? void 0 : _this$formPersonalInf12.dateOfBirth), "yyyy-MM-dd"));
-        formData.append("lieu_de_residence", (_this$formPersonalInf13 = this.formPersonalInfo) === null || _this$formPersonalInf13 === void 0 ? void 0 : _this$formPersonalInf13.placeOfResidence);
-        formData.append("birth_address", (_this$formPersonalInf14 = this.formPersonalInfo) === null || _this$formPersonalInf14 === void 0 ? void 0 : _this$formPersonalInf14.birth_address);
+        formData.append("date_naissance", (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.format)(new Date((_this$formPersonalInf11 = this.formPersonalInfo) === null || _this$formPersonalInf11 === void 0 ? void 0 : _this$formPersonalInf11.dateOfBirth), "yyyy-MM-dd"));
+        formData.append("lieu_de_residence", (_this$formPersonalInf12 = this.formPersonalInfo) === null || _this$formPersonalInf12 === void 0 ? void 0 : _this$formPersonalInf12.placeOfResidence);
+        formData.append("birth_address", (_this$formPersonalInf13 = this.formPersonalInfo) === null || _this$formPersonalInf13 === void 0 ? void 0 : _this$formPersonalInf13.birth_address);
         formData.append("type_request", this.typeDemand);
         formData.append("father_first_name", (_this$ascendants = this.ascendants) === null || _this$ascendants === void 0 ? void 0 : _this$ascendants.father_firstname);
         formData.append("father_last_name", (_this$ascendants2 = this.ascendants) === null || _this$ascendants2 === void 0 ? void 0 : _this$ascendants2.father_lastname);
         formData.append("mother_first_name", (_this$ascendants3 = this.ascendants) === null || _this$ascendants3 === void 0 ? void 0 : _this$ascendants3.mother_firstname);
         formData.append("mother_last_name", (_this$ascendants4 = this.ascendants) === null || _this$ascendants4 === void 0 ? void 0 : _this$ascendants4.mother_lastname);
-        formData.append("numero_recu", (_this$formPersonalInf15 = this.formPersonalInfo) === null || _this$formPersonalInf15 === void 0 ? void 0 : _this$formPersonalInf15.numero_recu);
+        formData.append("numero_recu", (_this$formPersonalInf14 = this.formPersonalInfo) === null || _this$formPersonalInf14 === void 0 ? void 0 : _this$formPersonalInf14.numero_recu);
         axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/save-pre-demande", formData).then(function (responseAxios) {
           console.log("responseAxios", responseAxios);
           if (!responseAxios.data.demande) {
@@ -1081,30 +1137,31 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     uploadBirthCertificate: function uploadBirthCertificate(file, fileList) {
       this.formPersonalInfo.fileListBirthCertificate = [];
       this.formPersonalInfo.fileListBirthCertificate.push(file.raw);
-      this.picturePreview.type = 'image';
+      this.picturePreview.type = "image";
       // this.onSubmitImage();
     },
     onRemoveBirthCertificate: function onRemoveBirthCertificate(file, fileList) {
       this.formPersonalInfo.fileListBirthCertificate = [];
-      this.picturePreview.type = '';
+      this.picturePreview.type = "";
     },
     uploadPicture: function uploadPicture(file, fileList) {
-      this.formPersonalInfo.fileListPicture = [];
-      this.formPersonalInfo.fileListPicture.push(file.raw);
-      if (file.raw.type.startsWith("image/")) {
-        var _fileList$;
-        this.documentPreview.url = (_fileList$ = fileList[0]) === null || _fileList$ === void 0 ? void 0 : _fileList$.url;
-        this.documentPreview.type = "image";
-      } else if (file.raw.type === "application/pdf") {
-        this.documentPreview.type = "pdf";
-        var pdffile = file.raw;
-        var pdffile_url = URL.createObjectURL(pdffile);
-        document.getElementById("viewer").src = pdffile_url;
-      }
+      // this.formPersonalInfo.fileListPicture = [];
+      // this.formPersonalInfo.fileListPicture.push(file.raw);
+      this.formPersonalInfo.fileListPicture = fileList.map(function (f) {
+        return f.raw;
+      });
     },
     onRemovePicture: function onRemovePicture(file, fileList) {
-      this.formPersonalInfo.fileListPicture = [];
-      this.documentPreview.type = "";
+      // Met à jour fileListPicture avec la liste des fichiers restants
+      // this.formPersonalInfo.fileListPicture = fileList;
+      this.formPersonalInfo.fileListPicture = fileList.map(function (f) {
+        return f.raw;
+      });
+
+      // Si la liste des fichiers est vide, réinitialise documentPreview.type
+      if (fileList.length === 0) {
+        this.documentPreview.type = "";
+      }
     },
     /*END STEP 4*/
     /*STEP 3*/
