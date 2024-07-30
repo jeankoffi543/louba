@@ -743,9 +743,9 @@ class ClientController extends Controller
             $demande->predemande_step = 1;
             $demande->habilete_position = 0;
             $demande->created_at = now();
+            $fileUrls = [];
 
             if ($request->hasFile("document1")) {
-
                 $document1 = $request->file('document1');
                 $validFiles = true; // Indicateur pour vérifier si tous les fichiers sont valides
                 if (is_array($document1) && count($document1) > 0) {
@@ -753,13 +753,14 @@ class ClientController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $uuid = (string)Str::uuid() . '.' . $extension;
                         $file->storeAs('public/documents/', $uuid);
-                        $demande->document_url = Storage::url('documents/' . $uuid);
+
+                        $fileUrls[] = Storage::url('documents/' . $uuid);
                     }
                 } else {
                     $extension = $document1->getClientOriginalExtension();
                     $uuid = (string)Str::uuid() . '.' . $extension;
                     $document1->storeAs('public/documents/', $uuid);
-                    $demande->document_url = Storage::url('documents/' . $uuid);
+                    $fileUrls[] = Storage::url('documents/' . $uuid);
                 }
             }
             if ($request->hasFile("document2")) {
@@ -781,6 +782,7 @@ class ClientController extends Controller
                     $demande->avatar_url = Storage::url('clients/' . $uuid);
                 }
             }
+            $demande->document_url = implode(',', $fileUrls);
 
             $demande->save();
 

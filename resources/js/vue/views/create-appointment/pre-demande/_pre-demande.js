@@ -5,7 +5,6 @@ import { KEY_FORM_JSON } from "../../../core/constants";
 import axios from "axios";
 import { format } from "date-fns";
 
-
 export default {
     name: "StartRequest",
 
@@ -17,15 +16,16 @@ export default {
 
     data() {
         return {
+            maxFileSize: 5 * 1024 * 1024, // 5 Mo en octets
             isLoadingSaveAppointment: false,
             formError: false,
             documentPreview: {
-                type : "",
-                url : ""
+                type: "",
+                url: "",
             },
             picturePreview: {
-                url : "",
-                type : ""
+                url: "",
+                type: "",
             },
             activeNames: ["1", "2", "3", "4", "5"],
             disabledStep1: false,
@@ -34,9 +34,10 @@ export default {
             disabledStep4: true,
             typeDemand: "nouvelle_demande",
             titleDocumentUpload: "Extrait de naissance (PDF, JPEG, JPG, PNG)",
+            titlePhotoUpload: "Photo d'identité (JPEG, JPG, PNG)",
             typeServiceSelected: null,
             formPersonalInfo: {
-                firstname: '',
+                firstname: "",
                 lastname: "",
                 numero_recu: "",
                 nationality: "",
@@ -114,14 +115,57 @@ export default {
     created() {},
 
     methods: {
+        beforeUpload(file) {
+            const isLtMaxSize = file.size <= this.maxFileSize;
+            if (!isLtMaxSize) {
+                this.$message.error(
+                    `Le fichier ${file.name} est trop grand. La taille maximale est de 5 Mo.`
+                );
+            }
+            return isLtMaxSize;
+        },
+        triggerUpload() {
+            // Accéder au composant el-upload via ref
+            const uploadComponent = this.$refs.upload;
+
+            if (uploadComponent) {
+                // Vérifier si l'input file existe avant d'essayer de cliquer dessus
+                const inputElement =
+                    uploadComponent.$el.querySelector('input[type="file"]');
+                if (inputElement) {
+                    inputElement.click();
+                } else {
+                    console.error("Input file element not found");
+                }
+            } else {
+                console.error("Upload component not found");
+            }
+        },
+        triggerUpload2() {
+            // Accéder au composant el-upload via ref
+            const uploadComponent = this.$refs.upload2;
+
+            if (uploadComponent) {
+                // Vérifier si l'input file existe avant d'essayer de cliquer dessus
+                const inputElement =
+                    uploadComponent.$el.querySelector('input[type="file"]');
+                if (inputElement) {
+                    inputElement.click();
+                } else {
+                    console.error("Input file element not found");
+                }
+            } else {
+                console.error("Upload component not found");
+            }
+        },
         sendPredemande: function () {
             this.formError = false;
             this.isLoadingSaveAppointment = true;
             if (
                 Object.values(this.formPersonalInfo).some((item) => item === "")
             ) {
-            this.formError = true;
-            this.$swal({
+                this.formError = true;
+                this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Toutes les informations personnelles sont obligatoire",
@@ -137,8 +181,8 @@ export default {
             } else if (
                 Object.values(this.signalement).some((item) => item === "")
             ) {
-            this.formError = true;
-            this.$swal({
+                this.formError = true;
+                this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Tous les champs du signalement sont obligatoire",
@@ -153,8 +197,8 @@ export default {
             } else if (
                 Object.values(this.ascendants).some((item) => item === "")
             ) {
-            this.formError = true;
-            this.$swal({
+                this.formError = true;
+                this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Tous les champs Ascendants sont obligatoire",
@@ -170,8 +214,8 @@ export default {
                 this.formPersonalInfo.fileListBirthCertificate.length == 0 ||
                 this.formPersonalInfo.fileListPicture.length == 0
             ) {
-            this.formError = true;
-            this.$swal({
+                this.formError = true;
+                this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Les documents sont obligatoire",
@@ -184,13 +228,14 @@ export default {
                     }, 3000);
                 }
             } else {
-            this.formError = false;
+                this.formError = false;
 
                 const formData = new FormData();
-                formData.append(
-                    "document1",
-                    this.formPersonalInfo?.fileListPicture[0]
-                );
+
+                this.formPersonalInfo.fileListPicture.forEach(file => {
+                    formData.append('document1[]', file);
+                  });
+
                 formData.append(
                     "document2",
                     this.formPersonalInfo?.fileListBirthCertificate[0]
@@ -214,10 +259,7 @@ export default {
                     this.formPersonalInfo?.profession
                 );
 
-                formData.append(
-                    "address",
-                    this.formPersonalInfo?.address
-                );
+                formData.append("address", this.formPersonalInfo?.address);
 
                 formData.append("height", this.signalement?.height);
                 formData.append("complexion", this.signalement?.complexion);
@@ -240,10 +282,7 @@ export default {
                     this.formPersonalInfo?.birth_address
                 );
 
-                formData.append(
-                    "type_request",
-                    this.typeDemand
-                );
+                formData.append("type_request", this.typeDemand);
                 formData.append(
                     "father_first_name",
                     this.ascendants?.father_firstname
@@ -325,31 +364,28 @@ export default {
         uploadBirthCertificate(file, fileList) {
             this.formPersonalInfo.fileListBirthCertificate = [];
             this.formPersonalInfo.fileListBirthCertificate.push(file.raw);
-            this.picturePreview.type = 'image';
+            this.picturePreview.type = "image";
             // this.onSubmitImage();
         },
         onRemoveBirthCertificate(file, fileList) {
             this.formPersonalInfo.fileListBirthCertificate = [];
-            this.picturePreview.type = '';
+            this.picturePreview.type = "";
         },
 
         uploadPicture(file, fileList) {
-            this.formPersonalInfo.fileListPicture = [];
-            this.formPersonalInfo.fileListPicture.push(file.raw);
-
-            if (file.raw.type.startsWith("image/")) {
-                this.documentPreview.url = fileList[0]?.url;
-                this.documentPreview.type = "image";
-            } else if (file.raw.type === "application/pdf") {
-                this.documentPreview.type = "pdf";
-                var pdffile = file.raw;
-                var pdffile_url = URL.createObjectURL(pdffile);
-                document.getElementById("viewer").src = pdffile_url;
-            }
+            // this.formPersonalInfo.fileListPicture = [];
+            // this.formPersonalInfo.fileListPicture.push(file.raw);
+            this.formPersonalInfo.fileListPicture = fileList.map(f => f.raw);
         },
         onRemovePicture(file, fileList) {
-            this.formPersonalInfo.fileListPicture = [];
-            this.documentPreview.type = "";
+            // Met à jour fileListPicture avec la liste des fichiers restants
+            // this.formPersonalInfo.fileListPicture = fileList;
+            this.formPersonalInfo.fileListPicture = fileList.map(f => f.raw);
+
+            // Si la liste des fichiers est vide, réinitialise documentPreview.type
+            if (fileList.length === 0) {
+                this.documentPreview.type = "";
+            }
         },
 
         /*END STEP 4*/

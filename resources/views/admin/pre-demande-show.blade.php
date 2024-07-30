@@ -323,45 +323,69 @@
                              <hr class="line bottom-3">
                          </div>
                          <div class="container">
-                             <div class="row">
-                                 <div class="col-12">
-                                     <a href="{{ asset($demande->avatar_url) }}" target="_blank">Document 1</a>
-                                 </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{{ asset($demande->avatar_url) }}" target="_blank">Photo d'identité</a>
+                                </div>
+                            </div>
 
-                                 <div class="col-12">
-                                     <a href="{{ asset($demande->document_url) }}" target="_blank">Document 2</a>
-                                 </div>
-                             </div>
+                            <div class="row my-1">
+                                @if (count(explode(',', $demande->document_url)) > 0)
+                                    @foreach (explode(',', $demande->document_url) as $j => $document_url)
+                                        <div class="col-9">
+                                            <div class="d-flex flex-row gap-2 align-items-center">
 
-                             <div class="row my-1">
-                                 @if (count($demande->piece_jointes) > 0)
-                                     @foreach ($demande->piece_jointes as $piece_jointe)
-                                         <div class="col-3 fw-bold">
-                                             {{ $piece_jointe->libelle }} :
-                                         </div>
-                                         <div class="col-9">
-                                             <div class="d-flex flex-row gap-2 align-items-center">
+                                                <div class="d-flex flex-column">
+                                                    <a href="{{ asset($document_url) }}" target="_blank">Document
+                                                        {{ $j + 1 }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
 
-                                                 <div class="d-flex flex-column">
-                                                     @if ($piece_jointe->url !== null && count(explode(',', $piece_jointe->url)) > 0)
-                                                         @foreach (explode(',', $piece_jointe->url) as $i => $url)
-                                                             <a href="{{ asset($url) }}"
-                                                                 target="_blank">{{ $piece_jointe->libelle }}
-                                                                 {{ $i + 1 }}</a>
-                                                         @endforeach
-                                                     @endif
-                                                 </div>
-                                                 <a
-                                                     href="{{ route('piece_jointes.delete', ['id' => $piece_jointe->id]) }}"><i
-                                                         class="bi bi-trash"></i></a>
-                                             </div>
-                                         </div>
-                                     @endforeach
-                                 @endif
+                            </div>
+                        </div>
+                        <br>
+                        <br><br>
+                        <div class="pagetitle">
+                            <h1>Pièce jointe </h1>
+                            <hr class="line bottom-3">
+                        </div>
+                        <div class="container">
+                            <div class="row">
 
-                             </div>
-                         </div>
+                                <div class="row my-1">
+                                    @if (count($demande->piece_jointes) > 0)
+                                        @foreach ($demande->piece_jointes as $piece_jointe)
+                                            <div class="col-3 fw-bold">
+                                                {{ $piece_jointe->libelle }} :
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="d-flex flex-row gap-2 align-items-center">
 
+                                                    <div class="d-flex flex-column">
+                                                        @if ($piece_jointe->url !== null && count(explode(',', $piece_jointe->url)) > 0)
+                                                            @foreach (explode(',', $piece_jointe->url) as $i => $url)
+                                                                <a href="{{ asset($url) }}"
+                                                                    target="_blank">{{ $piece_jointe->libelle }}
+                                                                    {{ $i + 1 }}</a>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                    <a
+                                                        href="{{ route('piece_jointes.delete', ['id' => $piece_jointe->id]) }}"><i
+                                                            class="bi bi-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        
                      </div>
                  </div>
 
