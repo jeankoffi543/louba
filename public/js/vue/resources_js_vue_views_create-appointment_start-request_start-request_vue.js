@@ -88,7 +88,7 @@ var _hoisted_20 = {
 var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     "class": "fs-5 item-title"
-  }, "Numéro reçu", -1 /* HOISTED */);
+  }, "Référence bordereau banque", -1 /* HOISTED */);
 });
 var _hoisted_22 = {
   key: 0,

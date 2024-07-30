@@ -13,10 +13,10 @@
                     </div>
                     <div class="col-sm-12 col-md-12 mb-1">
                         <el-tag class="" style="width: auto; margin-right: 10px;" type="danger">
-                            Jour férié
+                            Jour indisponible
                         </el-tag>
                         <el-tag class="" style="width: auto;  margin-right: 10px;" type="info">
-                            jour ouvrable
+                            jour disponible
                         </el-tag>
                     </div>
                     <div class="col-sm-12 col-md-12 mb-1" style="margin-top: 1.5rem;">
@@ -297,14 +297,14 @@ export default {
         //     cellText.className = 'cell-text';
 
         //     if (day === 0 || day === 6) {
-        //         cellText.textContent = 'fermé';
+        //         cellText.textContent = 'indisponible';
         //         cellText.style.color = 'red';
         //         args.el.classList.add('closed');
         //         args.el.style.pointerEvents = 'none';
         //     } else if (eventCount > 0) {
         //         cellText.textContent = args.el.querySelector('.fc-event-title').textContent;
         //     } else {
-        //         cellText.textContent = 'ouvrable';
+        //         cellText.textContent = 'disponible';
         //     }
 
         //     cellContent.appendChild(cellText);
@@ -335,17 +335,17 @@ export default {
 
             if (this.holidays.includes(formattedDate)) {
                 console.log("Holiday detected:", formattedDate);
-                cellText.textContent = 'fermé';
+                cellText.textContent = 'indisponible';
                 cellText.style.color = 'white';
                 args.el.classList.add('holiday');
                 args.el.style.pointerEvents = 'none';
             } else if (day === 0 || day === 6 || cellDateTimestamp < todayTimestamp) {
-                cellText.textContent = 'fermé';
+                cellText.textContent = 'indisponible';
                 cellText.style.color = 'red';
                 cellText.style.textDecoration = 'none';
                 args.el.classList.add('closed');
             } else {
-                cellText.textContent = 'ouvrable';
+                cellText.textContent = 'disponible';
             }
 
             cellContent.appendChild(cellText);
@@ -368,10 +368,10 @@ export default {
                 eventTitle.textContent = args.event.title;
                 cellContent.appendChild(eventTitle);
 
-                // Ajouter le texte "fermé" en dessous du titre
+                // Ajouter le texte "indisponible" en dessous du titre
                 const closedText = document.createElement('div');
                 closedText.className = 'closed-text';
-                closedText.textContent = 'fermé';
+                closedText.textContent = 'indisponible';
                 cellContent.appendChild(closedText);
 
                 // Ajouter des styles CSS
@@ -652,16 +652,16 @@ export default {
     color: black;
     /* Couleur du titre */
     margin-bottom: 0.2rem;
-    /* Espace entre le titre et le texte "fermé" */
+    /* Espace entre le titre et le texte "indisponible" */
     text-align: center;
     /* Centre le texte horizontalement */
 }
 
 .closed-text {
     font-size: 0.9rem;
-    /* Ajustez la taille de la police pour le texte "fermé" */
+    /* Ajustez la taille de la police pour le texte "indisponible" */
     color: red;
-    /* Couleur rouge pour le texte "fermé" */
+    /* Couleur rouge pour le texte "indisponible" */
     text-align: center;
     /* Centre le texte horizontalement */
 }

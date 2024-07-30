@@ -3,7 +3,7 @@
         <div class="demo-collapse">
             <el-collapse ref="collapse" v-model="activeNames" @change="handleChange">
 
-                <el-collapse-item name="3" title="TYPE DE DEMANDE">
+                <el-collapse-item name="3" title="1- TYPE DE DEMANDE">
                     <div class="type-demande">
                         <div class="group">
                             <el-form-item>
@@ -19,12 +19,12 @@
                         </div>
                     </div>
                 </el-collapse-item>
-                <el-collapse-item name="4" title="Informations personnelle">
+                <el-collapse-item name="4" title="2- Informations personnelle">
                     <div class="information-personne container-fluid">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="group">
-                                    <h1 class="fs-5 item-title">Numéro reçu (optionnel)</h1>
+                                    <h1 class="fs-5 item-title">Référence bordereau banque  (optionnel)</h1>
                                     <el-form-item>
                                         <el-input v-model="formPersonalInfo.numero_recu" placeholder="Numéro du reçu"
                                             size="default"></el-input>
@@ -179,7 +179,7 @@
                     </div>
                 </el-collapse-item>
 
-                <el-collapse-item name="5" title="Signalement">
+                <el-collapse-item name="5" title="3- Signalement">
                     <div class="information-personne container-fluid">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
@@ -235,7 +235,7 @@
                     </div>
                 </el-collapse-item>
 
-                <el-collapse-item name="5" title="Information ascendants">
+                <el-collapse-item name="5" title="4- Information ascendants">
                     <div class="information-personne container-fluid">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
@@ -274,7 +274,7 @@
                     </div>
                 </el-collapse-item>
 
-                <el-collapse-item name="5" title="Charger des documents">
+                <el-collapse-item name="5" title="5- Charger des documents">
                     <div class="document-upload container-fluid">
                         <div class="row">
                             <div class="col-sm-12 col-md-12">
@@ -303,7 +303,7 @@
                             <div class="col-md-12 col-sm-12 mt-2">
 
                                 <div class="d-flex flex-row justify-content-start align-items-center gap-4">
-                                    <el-button type="primary" @click="triggerUpload2">Charger des fichiers</el-button>
+                                    <el-button type="primary" @click="triggerUpload2">Charger une photo</el-button>
 
                                     <el-upload ref="upload2" :auto-upload="false" :limit="1" :multiple="false"
                                         :before-upload="beforeUpload" :on-change="uploadBirthCertificate"

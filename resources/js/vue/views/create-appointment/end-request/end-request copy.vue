@@ -57,10 +57,10 @@
                             </div>
                             <div class="col-sm-12 col-md-12 mb-1">
                                 <el-tag class="" style="width: auto; margin-right: 10px;" type="danger">
-                                    Jour férié
+                                    Jour indisponible
                                 </el-tag>
                                 <el-tag class="" style="width: auto;  margin-right: 10px;" type="info">
-                                    jour ouvrable
+                                    jour disponible
                                 </el-tag>
                             </div>
                             <div class="col-sm-12 col-md-12 mb-1" style="margin-top: 1.5rem;">

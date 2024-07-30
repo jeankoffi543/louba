@@ -76,7 +76,7 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="group">
-                                            <h1 class="fs-5 item-title">Numéro reçu</h1>
+                                            <h1 class="fs-5 item-title">Référence bordereau banque</h1>
                                             <el-form-item>
                                                 <el-input v-model="formPersonalInfo.numero_recu" placeholder="Numéro du reçu"
                                                     size="default"></el-input>

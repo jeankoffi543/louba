@@ -911,7 +911,7 @@ class ClientController extends Controller
 
 
         $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('y-m-d'), 'maDemande' => $maDemande, 'code_demande' => $maDemande->code_demande, 'predemandeQrcode' => $predemandeQrcode, 'timbreQrcode' => $timbreQrcode]);
-        return $pdf->download('recu_oni_' . $code_demande . '.pdf');
+        return $pdf->download('recu_omniform_' . $code_demande . '.pdf');
     }
 
     /**
