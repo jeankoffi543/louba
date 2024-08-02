@@ -210,32 +210,30 @@ var _hoisted_53 = {
   "class": "value-item"
 };
 var _hoisted_54 = {
+  "class": "content-item"
+};
+var _hoisted_55 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+    "class": "app-opacity-5 label-item"
+  }, "Documents", -1 /* HOISTED */);
+});
+var _hoisted_56 = ["href"];
+var _hoisted_57 = {
   "class": "content-card-other-info w-100 align-items-start"
 };
-var _hoisted_55 = {
+var _hoisted_58 = {
   key: 0,
   "class": "appointment"
 };
-var _hoisted_56 = {
+var _hoisted_59 = {
   "class": "type-appointment"
 };
-var _hoisted_57 = {
+var _hoisted_60 = {
   key: 0,
   "class": "amount-appointment type-appointment"
 };
-var _hoisted_58 = {
-  "class": "date-appointment"
-};
-var _hoisted_59 = {
-  "class": "app-d-flex app-justify-content-space-between app-align-items-center gap-2"
-};
-var _hoisted_60 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "title-info"
-  }, "Reference", -1 /* HOISTED */);
-});
 var _hoisted_61 = {
-  "class": "app-m-0"
+  "class": "date-appointment"
 };
 var _hoisted_62 = {
   "class": "app-d-flex app-justify-content-space-between app-align-items-center gap-2"
@@ -243,43 +241,54 @@ var _hoisted_62 = {
 var _hoisted_63 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "title-info"
-  }, "Numéro du reçu", -1 /* HOISTED */);
+  }, "Reference", -1 /* HOISTED */);
 });
 var _hoisted_64 = {
   "class": "app-m-0"
 };
 var _hoisted_65 = {
+  "class": "app-d-flex app-justify-content-space-between app-align-items-center gap-2"
+};
+var _hoisted_66 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "title-info"
+  }, "Numéro du reçu", -1 /* HOISTED */);
+});
+var _hoisted_67 = {
+  "class": "app-m-0"
+};
+var _hoisted_68 = {
   key: 1,
   "class": "app-d-flex app-justify-content-space-between app-align-items-center"
 };
-var _hoisted_66 = {
+var _hoisted_69 = {
   "class": "description-info app-m-0"
 };
-var _hoisted_67 = {
+var _hoisted_70 = {
   "class": "value-item",
   style: {
     "font-weight": "bold"
   }
 };
-var _hoisted_68 = {
+var _hoisted_71 = {
   key: 2,
   "class": "app-d-flex app-justify-content-space-between app-align-items-center"
 };
-var _hoisted_69 = {
+var _hoisted_72 = {
   "class": "value-item",
   style: {
     "font-weight": "bold"
   }
 };
-var _hoisted_70 = {
+var _hoisted_73 = {
   "class": "app-mt-1"
 };
-var _hoisted_71 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_74 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "qr-code"
   })], -1 /* HOISTED */);
 });
-var _hoisted_72 = {
+var _hoisted_75 = {
   "class": "container-timeline"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -361,8 +370,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                         "class": ""
                       }, {
                         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          var _ctx$demandeObj$clien2, _ctx$demandeObj8;
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$clien2 = (_ctx$demandeObj8 = _ctx.demandeObj) === null || _ctx$demandeObj8 === void 0 || (_ctx$demandeObj8 = _ctx$demandeObj8.client) === null || _ctx$demandeObj8 === void 0 ? void 0 : _ctx$demandeObj8.adresse_client) !== null && _ctx$demandeObj$clien2 !== void 0 ? _ctx$demandeObj$clien2 : '-'), 1 /* TEXT */)])];
+                          var _ctx$demandeObj$birth, _ctx$demandeObj8;
+                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$birth = (_ctx$demandeObj8 = _ctx.demandeObj) === null || _ctx$demandeObj8 === void 0 ? void 0 : _ctx$demandeObj8.birth_address) !== null && _ctx$demandeObj$birth !== void 0 ? _ctx$demandeObj$birth : '-'), 1 /* TEXT */)])];
                         }),
                         _: 1 /* STABLE */
                       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_col, {
@@ -494,6 +503,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [_hoisted_52, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$profe2 = (_ctx$demandeObj22 = _ctx.demandeObj) === null || _ctx$demandeObj22 === void 0 ? void 0 : _ctx$demandeObj22.profession) !== null && _ctx$demandeObj$profe2 !== void 0 ? _ctx$demandeObj$profe2 : '-'), 1 /* TEXT */)])];
                         }),
                         _: 1 /* STABLE */
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_col, {
+                        "class": ""
+                      }, {
+                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [_hoisted_55, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.documentUrls, function (item, index) {
+                            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+                              key: index,
+                              "class": "value-item"
+                            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+                              href: item === null || item === void 0 ? void 0 : item.url,
+                              target: "_blank",
+                              "class": "app-text-decoration-underline"
+                            }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index + 1) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item === null || item === void 0 ? void 0 : item.filename), 9 /* TEXT, PROPS */, _hoisted_56)]);
+                          }), 128 /* KEYED_FRAGMENT */))])];
+                        }),
+                        _: 1 /* STABLE */
                       })];
                     }),
                     _: 1 /* STABLE */
@@ -507,7 +532,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                   var _ctx$demandeObj23, _ctx$typeDocumentObj$, _ctx$typeDocumentObj, _ctx$demandeObj24, _ctx$demandeObj$servi2, _ctx$demandeObj25, _ctx$demandeObj$date_, _ctx$demandeObj26, _ctx$demandeObj$code_, _ctx$demandeObj27, _ctx$demandeObj$numer, _ctx$demandeObj28, _ctx$demandeObj29, _ctx$demandeObj$date_2, _ctx$demandeObj30, _ctx$demandeObj31, _ctx$demandeObj$point, _ctx$demandeObj32, _ctx$demandeObj33;
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [((_ctx$demandeObj23 = _ctx.demandeObj) === null || _ctx$demandeObj23 === void 0 ? void 0 : _ctx$demandeObj23.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_56, "Rendez-vous : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$typeDocumentObj$ = (_ctx$typeDocumentObj = _ctx.typeDocumentObj) === null || _ctx$typeDocumentObj === void 0 ? void 0 : _ctx$typeDocumentObj.nom) !== null && _ctx$typeDocumentObj$ !== void 0 ? _ctx$typeDocumentObj$ : '-'), 1 /* TEXT */), ((_ctx$demandeObj24 = _ctx.demandeObj) === null || _ctx$demandeObj24 === void 0 ? void 0 : _ctx$demandeObj24.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h4", _hoisted_57, " Montant à payer : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$servi2 = (_ctx$demandeObj25 = _ctx.demandeObj) === null || _ctx$demandeObj25 === void 0 || (_ctx$demandeObj25 = _ctx$demandeObj25.service) === null || _ctx$demandeObj25 === void 0 ? void 0 : _ctx$demandeObj25.prix) !== null && _ctx$demandeObj$servi2 !== void 0 ? _ctx$demandeObj$servi2 : '-') + " GNF ", 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_58, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formateDateAppointement((_ctx$demandeObj$date_ = (_ctx$demandeObj26 = _ctx.demandeObj) === null || _ctx$demandeObj26 === void 0 ? void 0 : _ctx$demandeObj26.date_rdv_demande) !== null && _ctx$demandeObj$date_ !== void 0 ? _ctx$demandeObj$date_ : '-')), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [_hoisted_60, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$code_ = (_ctx$demandeObj27 = _ctx.demandeObj) === null || _ctx$demandeObj27 === void 0 ? void 0 : _ctx$demandeObj27.code_demande) !== null && _ctx$demandeObj$code_ !== void 0 ? _ctx$demandeObj$code_ : '-'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_64, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$numer = (_ctx$demandeObj28 = _ctx.demandeObj) === null || _ctx$demandeObj28 === void 0 ? void 0 : _ctx$demandeObj28.numero_recu) !== null && _ctx$demandeObj$numer !== void 0 ? _ctx$demandeObj$numer : '-'), 1 /* TEXT */)]), ((_ctx$demandeObj29 = _ctx.demandeObj) === null || _ctx$demandeObj29 === void 0 ? void 0 : _ctx$demandeObj29.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" il est nécessaire de prendre tous vos précautions afin d’honorer votre rendez-vous pris pour le "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_67, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$date_2 = (_ctx$demandeObj30 = _ctx.demandeObj) === null || _ctx$demandeObj30 === void 0 ? void 0 : _ctx$demandeObj30.date_rdv_demande) !== null && _ctx$demandeObj$date_2 !== void 0 ? _ctx$demandeObj$date_2 : '-'), 1 /* TEXT */)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((_ctx$demandeObj31 = _ctx.demandeObj) === null || _ctx$demandeObj31 === void 0 ? void 0 : _ctx$demandeObj31.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Point enrolement: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_69, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$point = (_ctx$demandeObj32 = _ctx.demandeObj) === null || _ctx$demandeObj32 === void 0 || (_ctx$demandeObj32 = _ctx$demandeObj32.point_enrolement) === null || _ctx$demandeObj32 === void 0 ? void 0 : _ctx$demandeObj32.nom_pe) !== null && _ctx$demandeObj$point !== void 0 ? _ctx$demandeObj$point : '-'), 1 /* TEXT */)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <ButtonApp\r\n                                    v-if=\"appointment?.demande?.paiement==null || appointment?.demande?.paiement.reference_pay == null\"\r\n                                    :loading=\"isLoading\"\r\n                                    :primary-btn=\"false\"\r\n                                    block\r\n                                    button-title=\"Payer\"\r\n                                    icon=\"el-icon-printer\"\r\n                                    @click=\"buyAppointment\"\r\n                                >\r\n                                </ButtonApp>\r\n\r\n                                <ButtonApp\r\n                                    v-if=\"appointment?.demande?.paiement!=null && appointment?.demande?.paiement?.reference_pay != null\"\r\n                                    :loading=\"isLoading\"\r\n                                    :primary-btn=\"false\"\r\n                                    block\r\n                                    button-title=\"Télécharger le reçu\"\r\n                                    icon=\"el-icon-printer\"\r\n                                    @click=\"printAppointment\"\r\n                                >\r\n                                    <template v-slot:icon>\r\n                                        <el-icon>\r\n                                            <Printer/>\r\n                                        </el-icon>\r\n                                    </template>\r\n\r\n</ButtonApp>"), ((_ctx$demandeObj33 = _ctx.demandeObj) === null || _ctx$demandeObj33 === void 0 ? void 0 : _ctx$demandeObj33.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonApp, {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [((_ctx$demandeObj23 = _ctx.demandeObj) === null || _ctx$demandeObj23 === void 0 ? void 0 : _ctx$demandeObj23.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_59, "Rendez-vous : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$typeDocumentObj$ = (_ctx$typeDocumentObj = _ctx.typeDocumentObj) === null || _ctx$typeDocumentObj === void 0 ? void 0 : _ctx$typeDocumentObj.nom) !== null && _ctx$typeDocumentObj$ !== void 0 ? _ctx$typeDocumentObj$ : '-'), 1 /* TEXT */), ((_ctx$demandeObj24 = _ctx.demandeObj) === null || _ctx$demandeObj24 === void 0 ? void 0 : _ctx$demandeObj24.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h4", _hoisted_60, " Montant à payer : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$servi2 = (_ctx$demandeObj25 = _ctx.demandeObj) === null || _ctx$demandeObj25 === void 0 || (_ctx$demandeObj25 = _ctx$demandeObj25.service) === null || _ctx$demandeObj25 === void 0 ? void 0 : _ctx$demandeObj25.prix) !== null && _ctx$demandeObj$servi2 !== void 0 ? _ctx$demandeObj$servi2 : '-') + " GNF ", 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formateDateAppointement((_ctx$demandeObj$date_ = (_ctx$demandeObj26 = _ctx.demandeObj) === null || _ctx$demandeObj26 === void 0 ? void 0 : _ctx$demandeObj26.date_rdv_demande) !== null && _ctx$demandeObj$date_ !== void 0 ? _ctx$demandeObj$date_ : '-')), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_64, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$code_ = (_ctx$demandeObj27 = _ctx.demandeObj) === null || _ctx$demandeObj27 === void 0 ? void 0 : _ctx$demandeObj27.code_demande) !== null && _ctx$demandeObj$code_ !== void 0 ? _ctx$demandeObj$code_ : '-'), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [_hoisted_66, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_67, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$numer = (_ctx$demandeObj28 = _ctx.demandeObj) === null || _ctx$demandeObj28 === void 0 ? void 0 : _ctx$demandeObj28.numero_recu) !== null && _ctx$demandeObj$numer !== void 0 ? _ctx$demandeObj$numer : '-'), 1 /* TEXT */)]), ((_ctx$demandeObj29 = _ctx.demandeObj) === null || _ctx$demandeObj29 === void 0 ? void 0 : _ctx$demandeObj29.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_69, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" il est nécessaire de prendre tous vos précautions afin d’honorer votre rendez-vous pris pour le "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_70, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$date_2 = (_ctx$demandeObj30 = _ctx.demandeObj) === null || _ctx$demandeObj30 === void 0 ? void 0 : _ctx$demandeObj30.date_rdv_demande) !== null && _ctx$demandeObj$date_2 !== void 0 ? _ctx$demandeObj$date_2 : '-'), 1 /* TEXT */)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((_ctx$demandeObj31 = _ctx.demandeObj) === null || _ctx$demandeObj31 === void 0 ? void 0 : _ctx$demandeObj31.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Point enrolement: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_72, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$demandeObj$point = (_ctx$demandeObj32 = _ctx.demandeObj) === null || _ctx$demandeObj32 === void 0 || (_ctx$demandeObj32 = _ctx$demandeObj32.point_enrolement) === null || _ctx$demandeObj32 === void 0 ? void 0 : _ctx$demandeObj32.nom_pe) !== null && _ctx$demandeObj$point !== void 0 ? _ctx$demandeObj$point : '-'), 1 /* TEXT */)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <ButtonApp\r\n                                    v-if=\"appointment?.demande?.paiement==null || appointment?.demande?.paiement.reference_pay == null\"\r\n                                    :loading=\"isLoading\"\r\n                                    :primary-btn=\"false\"\r\n                                    block\r\n                                    button-title=\"Payer\"\r\n                                    icon=\"el-icon-printer\"\r\n                                    @click=\"buyAppointment\"\r\n                                >\r\n                                </ButtonApp>\r\n\r\n                                <ButtonApp\r\n                                    v-if=\"appointment?.demande?.paiement!=null && appointment?.demande?.paiement?.reference_pay != null\"\r\n                                    :loading=\"isLoading\"\r\n                                    :primary-btn=\"false\"\r\n                                    block\r\n                                    button-title=\"Télécharger le reçu\"\r\n                                    icon=\"el-icon-printer\"\r\n                                    @click=\"printAppointment\"\r\n                                >\r\n                                    <template v-slot:icon>\r\n                                        <el-icon>\r\n                                            <Printer/>\r\n                                        </el-icon>\r\n                                    </template>\r\n\r\n</ButtonApp>"), ((_ctx$demandeObj33 = _ctx.demandeObj) === null || _ctx$demandeObj33 === void 0 ? void 0 : _ctx$demandeObj33.predemande_step) > 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ButtonApp, {
                     key: 0,
                     loading: _ctx.isLoading,
                     "primary-btn": false,
@@ -525,7 +550,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       })];
                     }),
                     _: 1 /* STABLE */
-                  }, 8 /* PROPS */, ["loading", "onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_71])];
+                  }, 8 /* PROPS */, ["loading", "onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_74])];
                 }),
                 _: 1 /* STABLE */
               })];
@@ -541,7 +566,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 xs: 24
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_timeline, null, {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_timeline, null, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                       return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.historiques, function (item, index) {
                         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_timeline_item, {
@@ -633,9 +658,22 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       console.log("this.demandeObj", this.appointment);
       return (_this$appointment$dem = (_this$appointment = this.appointment) === null || _this$appointment === void 0 ? void 0 : _this$appointment.demande) !== null && _this$appointment$dem !== void 0 ? _this$appointment$dem : null;
     },
-    dateNaiss: function dateNaiss() {
+    documentUrls: function documentUrls() {
       var _this$appointment2, _this$appointment3;
-      return ((_this$appointment2 = this.appointment) === null || _this$appointment2 === void 0 ? void 0 : _this$appointment2.demande) == null ? "-" : new Date((_this$appointment3 = this.appointment) === null || _this$appointment3 === void 0 || (_this$appointment3 = _this$appointment3.demande) === null || _this$appointment3 === void 0 || (_this$appointment3 = _this$appointment3.client) === null || _this$appointment3 === void 0 ? void 0 : _this$appointment3.date_naissance_client).toLocaleDateString(undefined, {
+      if (!((_this$appointment2 = this.appointment) !== null && _this$appointment2 !== void 0 && (_this$appointment2 = _this$appointment2.demande) !== null && _this$appointment2 !== void 0 && _this$appointment2.document_url)) {
+        return [];
+      }
+      return (_this$appointment3 = this.appointment) === null || _this$appointment3 === void 0 || (_this$appointment3 = _this$appointment3.demande) === null || _this$appointment3 === void 0 ? void 0 : _this$appointment3.document_url.split(',').map(function (url) {
+        var filename = url.split('/').pop();
+        return {
+          url: url,
+          filename: filename
+        };
+      });
+    },
+    dateNaiss: function dateNaiss() {
+      var _this$appointment4, _this$appointment5;
+      return ((_this$appointment4 = this.appointment) === null || _this$appointment4 === void 0 ? void 0 : _this$appointment4.demande) == null ? "-" : new Date((_this$appointment5 = this.appointment) === null || _this$appointment5 === void 0 || (_this$appointment5 = _this$appointment5.demande) === null || _this$appointment5 === void 0 || (_this$appointment5 = _this$appointment5.client) === null || _this$appointment5 === void 0 ? void 0 : _this$appointment5.date_naissance_client).toLocaleDateString(undefined, {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -643,36 +681,36 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       });
     },
     clientObj: function clientObj() {
-      var _this$appointment4;
-      return (_this$appointment4 = this.appointment) === null || _this$appointment4 === void 0 || (_this$appointment4 = _this$appointment4.demande) === null || _this$appointment4 === void 0 ? void 0 : _this$appointment4.client;
+      var _this$appointment6;
+      return (_this$appointment6 = this.appointment) === null || _this$appointment6 === void 0 || (_this$appointment6 = _this$appointment6.demande) === null || _this$appointment6 === void 0 ? void 0 : _this$appointment6.client;
     },
     typeDocumentObj: function typeDocumentObj() {
-      var _this$appointment5;
-      return (_this$appointment5 = this.appointment) === null || _this$appointment5 === void 0 || (_this$appointment5 = _this$appointment5.demande) === null || _this$appointment5 === void 0 ? void 0 : _this$appointment5.product;
+      var _this$appointment7;
+      return (_this$appointment7 = this.appointment) === null || _this$appointment7 === void 0 || (_this$appointment7 = _this$appointment7.demande) === null || _this$appointment7 === void 0 ? void 0 : _this$appointment7.product;
     },
     paiementObj: function paiementObj() {
-      var _this$appointment6;
-      return (_this$appointment6 = this.appointment) === null || _this$appointment6 === void 0 || (_this$appointment6 = _this$appointment6.demande) === null || _this$appointment6 === void 0 ? void 0 : _this$appointment6.paiement;
+      var _this$appointment8;
+      return (_this$appointment8 = this.appointment) === null || _this$appointment8 === void 0 || (_this$appointment8 = _this$appointment8.demande) === null || _this$appointment8 === void 0 ? void 0 : _this$appointment8.paiement;
     },
     timelineItem: function timelineItem() {
-      var _this$demandeObj, _this$appointment7, _this$appointment8;
+      var _this$demandeObj, _this$appointment9, _this$appointment10;
       var timeList = [];
       timeList.unshift({
         date: this.formateDateAppointement((_this$demandeObj = this.demandeObj) === null || _this$demandeObj === void 0 ? void 0 : _this$demandeObj.created_at),
         action: "Enregistrement de la demande"
       });
-      if (((_this$appointment7 = this.appointment) === null || _this$appointment7 === void 0 || (_this$appointment7 = _this$appointment7.demande) === null || _this$appointment7 === void 0 ? void 0 : _this$appointment7.paiement) != null && ((_this$appointment8 = this.appointment) === null || _this$appointment8 === void 0 || (_this$appointment8 = _this$appointment8.demande) === null || _this$appointment8 === void 0 || (_this$appointment8 = _this$appointment8.paiement) === null || _this$appointment8 === void 0 ? void 0 : _this$appointment8.reference_pay) != null) {
-        var _this$appointment9;
+      if (((_this$appointment9 = this.appointment) === null || _this$appointment9 === void 0 || (_this$appointment9 = _this$appointment9.demande) === null || _this$appointment9 === void 0 ? void 0 : _this$appointment9.paiement) != null && ((_this$appointment10 = this.appointment) === null || _this$appointment10 === void 0 || (_this$appointment10 = _this$appointment10.demande) === null || _this$appointment10 === void 0 || (_this$appointment10 = _this$appointment10.paiement) === null || _this$appointment10 === void 0 ? void 0 : _this$appointment10.reference_pay) != null) {
+        var _this$appointment11;
         timeList.unshift({
-          date: this.formateDateAppointement((_this$appointment9 = this.appointment) === null || _this$appointment9 === void 0 || (_this$appointment9 = _this$appointment9.demande) === null || _this$appointment9 === void 0 || (_this$appointment9 = _this$appointment9.paiement) === null || _this$appointment9 === void 0 ? void 0 : _this$appointment9.date_pay),
+          date: this.formateDateAppointement((_this$appointment11 = this.appointment) === null || _this$appointment11 === void 0 || (_this$appointment11 = _this$appointment11.demande) === null || _this$appointment11 === void 0 || (_this$appointment11 = _this$appointment11.paiement) === null || _this$appointment11 === void 0 ? void 0 : _this$appointment11.date_pay),
           action: "Paiement de la demande"
         });
       }
       return timeList;
     },
     historiques: function historiques() {
-      var _this$appointment10;
-      return (_this$appointment10 = this.appointment) === null || _this$appointment10 === void 0 ? void 0 : _this$appointment10.historiques;
+      var _this$appointment12;
+      return (_this$appointment12 = this.appointment) === null || _this$appointment12 === void 0 ? void 0 : _this$appointment12.historiques;
     } // formattedTimestamp(date) {
     //     // return format(date, 'dd MMMM yyyy HH:mm');
     //     return "dd MMMM yyyy HH:mm";
@@ -687,7 +725,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   created: function created() {},
   mounted: function mounted() {},
   beforeMount: function beforeMount() {
-    this.documentId = this.$route.params.documentId;
+    var _this$$route;
+    this.documentId = (_this$$route = this.$route) === null || _this$$route === void 0 || (_this$$route = _this$$route.params) === null || _this$$route === void 0 ? void 0 : _this$$route.documentId;
     this.fetchData();
   },
   methods: {

@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import AuthGaurd from "../core/helpers/AuthGaurd";
 import * as utils from "../core/utils";
 import AppointmentLayout from "../layouts/AppointmentLayout.vue";
@@ -199,7 +199,6 @@ const routes = [
     //                             )
     //                 },
 
-
     //                 {
     //                     path: "cni-vip-service",
     //                     name: "cni-vip-service",
@@ -359,107 +358,138 @@ const routes = [
     {
         path: "/personal-space",
         component: DashboardLayout,
-        meta: {breadcrumb: "Accueil"},
-        redirect: {name: "my-appointment"},
+        meta: { breadcrumb: "Accueil" },
+        redirect: { name: "my-appointment" },
         children: [
             {
                 path: "my-appointments",
                 name: "my-appointment",
-                meta: {breadcrumb: "Mes rendez-vous"},
-                redirect: {name: "all-documents"},
+                meta: { breadcrumb: "Mes rendez-vous" },
+                redirect: { name: "all-documents" },
                 component: IndexMyAppointment,
                 children: [
                     {
                         path: "documents",
                         name: "all-documents",
                         meta: {
-                            breadcrumb: "Documents"
+                            breadcrumb: "Documents",
                         },
                         component: () =>
-                            import("../views/my-appointments/list-document/list-document.vue")
+                            import(
+                                "../views/my-appointments/list-document/list-document.vue"
+                            ),
                     },
 
                     {
                         path: "download",
                         name: "downloadable",
                         meta: {
-                            breadcrumb: "Téléchargement"
+                            breadcrumb: "Téléchargement",
                         },
                         component: () =>
                             import(
                                 "../views/my-appointments/downloadable-documents/downloadable-documents.vue"
-                                )
+                            ),
                     },
                     {
                         path: "report/:documentId",
                         name: "report-appointment",
                         meta: {
-                            breadcrumb: "Reporter un rendez-vous"
+                            breadcrumb: "Reporter un rendez-vous",
                         },
                         component: () =>
                             import(
                                 "../views/my-appointments/report-appointement/report-appointement.vue"
-                                )
+                            ),
                     },
                     {
                         path: "pay/:documentId?",
                         name: "pay-appointment",
                         meta: {
-                            breadcrumb: "Paiement"
+                            breadcrumb: "Paiement",
                         },
                         component: () =>
                             import(
                                 "../views/my-appointments/pay-appointment/pay-appointment.vue"
-                                )
+                            ),
                     },
                     {
                         path: "details/:documentId",
                         name: "details-appointment",
                         meta: {
-                            breadcrumb: "Details du rendez-vous"
+                            breadcrumb: "Details du rendez-vous",
                         },
                         component: () =>
                             import(
                                 "../views/my-appointments/details-appointment/details-appointment.vue"
-                                )
-                    }
-                ]
+                            ),
+                    },
+                    {
+                        path: "pre-demande/:documentId",
+                        name: "predemande-edit",
+                        meta: {
+                            breadcrumb: "Modifier une pre-demande",
+                        },
+                        component: () =>
+                            import(
+                                "../views/create-appointment/pre-demande/pre-demande.vue"
+                            ),
+                    },
+                ],
             },
             {
                 path: "appointment",
                 name: "index-page-appointment",
                 before: AuthGaurd,
-                meta: {breadcrumb: "Prendre un rendez-vous"},
-                component: () => import("../views/create-appointment/new-appointment/new-appointment.vue"),
+                meta: { breadcrumb: "Prendre un rendez-vous" },
+                component: () =>
+                    import(
+                        "../views/create-appointment/new-appointment/new-appointment.vue"
+                    ),
                 children: [
                     {
                         meta: {
-                            breadcrumb: "Pre demande"
+                            breadcrumb: "Pre demande",
                         },
                         path: "pre-demande",
                         name: "pre-demande",
                         component: () =>
                             import(
                                 "../views/create-appointment/pre-demande/pre-demande.vue"
-                                )
+                            ),
                     },
+           
+                    {
+                        meta: {
+                            breadcrumb: "Pre demande",
+                        },
+                        path: "pre-demande/authorisation/:documentId",
+                        name: "unauthorised-pre-demande",
+                        component: () =>
+                            import(
+                                "../views/create-appointment/not-found/not-found.vue"
+                            ),
+                    },
+           
                     {
                         path: "start/:documentId",
                         name: "appointment-start",
                         component: () =>
                             import(
                                 "../views/create-appointment/start-request/start-request.vue"
-                                )
+                            ),
                     },
-                  
+
                     {
                         path: "satut-doc",
                         name: "satutdocument",
                         meta: {
-                            breadcrumb: "Statut-document"
+                            breadcrumb: "Statut-document",
                         },
                         component: () =>
-                            import("../views/create-appointment/statut-doc/statut-doc.vue")
+                            import(
+                                "../views/create-appointment/statut-doc/statut-doc.vue"
+                            ),
                     },
                     {
                         path: "end",
@@ -467,7 +497,7 @@ const routes = [
                         component: () =>
                             import(
                                 "../views/create-appointment/end-request/end-request.vue"
-                                )
+                            ),
                     },
                     {
                         path: "object",
@@ -475,7 +505,7 @@ const routes = [
                         component: () =>
                             import(
                                 "../views/create-appointment/object-appointment/object-appointment.vue"
-                                )
+                            ),
                     },
                     {
                         path: "type-rdv",
@@ -483,7 +513,7 @@ const routes = [
                         component: () =>
                             import(
                                 "../views/create-appointment/type-rdv-appointment/type-rdv-appointment.vue"
-                                )
+                            ),
                     },
                     {
                         path: "element-request",
@@ -491,23 +521,24 @@ const routes = [
                         component: () =>
                             import(
                                 "../views/create-appointment/element-request/element-request.vue"
-                                )
-
+                            ),
                     },
                     {
                         path: "form-request",
                         name: "appointment-step-three",
                         component: () =>
-                            import("../views/create-appointment/form-demande/form-demande.vue"),
+                            import(
+                                "../views/create-appointment/form-demande/form-demande.vue"
+                            ),
                         meta: {
-                            titleSection: "Demande de passeport"
-                        }
+                            titleSection: "Demande de passeport",
+                        },
                     },
                     {
                         path: "other-info-request",
                         redirect: {
-                            name: "appointment-step-three"
-                        }
+                            name: "appointment-step-three",
+                        },
                         // name: "appointment-step-foor",
                         // component: () =>
                         //     import(
@@ -524,10 +555,10 @@ const routes = [
                         component: () =>
                             import(
                                 "../views/create-appointment/site-rdv-appointment/site-rdv-appointment.vue"
-                                ),
+                            ),
                         meta: {
-                            titleSection: ""
-                        }
+                            titleSection: "",
+                        },
                     },
                     {
                         path: "choice-date",
@@ -535,46 +566,45 @@ const routes = [
                         component: () =>
                             import(
                                 "../views/create-appointment/choice-date-appointment/choice-date-appointment.vue"
-                                ),
+                            ),
                         meta: {
-                            titleSection: "Demande de passeport"
-                        }
-                    }
-                ]
+                            titleSection: "Demande de passeport",
+                        },
+                    },
+                ],
             },
-        ]
+        ],
     },
 
     {
         path: "/auth",
         component: SecurityLayout,
-        redirect: {name: "login"},
+        redirect: { name: "login" },
         children: [
             {
                 path: "login",
                 name: "login",
-                component: SignIn
+                component: SignIn,
             },
             {
                 path: "register",
                 name: "register",
-                component: RegisterPage
+                component: RegisterPage,
             },
             {
                 path: "fotget-password",
                 name: "resetPassword",
-                component: FotgetPassword
-            }
-        ]
+                component: FotgetPassword,
+            },
+        ],
     },
 
     {
         path: "/:pathMatch(.*)*",
         name: "NotFound",
-        // component: () => import("../views/customer-portal/home-customer.vue")
-        component: SignIn
-
-    }
+        component: () => import("../views/create-appointment/not-found/not-found.vue")
+        // component: SignIn,
+    },
 ];
 
 const router = createRouter({
@@ -584,8 +614,8 @@ const router = createRouter({
     linkExactActiveClass: "router-link-exact-active",
     // eslint-disable-next-line no-unused-vars
     scrollBehavior(to, from, savedPosition) {
-        return {top: 0};
-    }
+        return { top: 0 };
+    },
 });
 
 router.beforeEach((to, from) => {
@@ -593,7 +623,7 @@ router.beforeEach((to, from) => {
         if (utils.hasToken()) {
             return true;
         }
-        return {name: "login"};
+        return { name: "login" };
     }
     return true;
 });

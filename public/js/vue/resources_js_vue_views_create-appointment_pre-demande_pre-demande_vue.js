@@ -765,6 +765,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             action: "#",
             accept: "application/pdf, image/jpg, image/jpeg, image/png",
             "class": "upload-demo",
+            "file-list": _ctx.fileList,
             "list-type": 'text'
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -772,7 +773,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [((_ctx$documentPreview = _ctx.documentPreview) === null || _ctx$documentPreview === void 0 ? void 0 : _ctx$documentPreview.type) === '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.titleDocumentUpload), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
             _: 1 /* STABLE */
-          }, 8 /* PROPS */, ["before-upload", "on-change", "on-remove"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_88, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_89, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
+          }, 8 /* PROPS */, ["before-upload", "on-change", "on-remove", "file-list"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_88, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_89, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
             type: "primary",
             onClick: _ctx.triggerUpload2
           }, {
@@ -789,6 +790,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "on-change": _ctx.uploadBirthCertificate,
             "on-remove": _ctx.onRemoveBirthCertificate,
             action: "#",
+            "file-list": _ctx.fileList2,
             accept: "image/jpg, image/jpeg, image/png",
             "class": "upload-demo",
             "list-type": 'text'
@@ -798,7 +800,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [((_ctx$picturePreview = _ctx.picturePreview) === null || _ctx$picturePreview === void 0 ? void 0 : _ctx$picturePreview.type) === '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_90, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.titlePhotoUpload), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
             _: 1 /* STABLE */
-          }, 8 /* PROPS */, ["before-upload", "on-change", "on-remove"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-upload ref=\"upload2\" :auto-upload=\"false\" :limit=\"1\" :multiple=\"false\"\r\n                                    accept=\"image/jpg, image/jpeg, image/png\" :on-change=\"uploadBirthCertificate\"\r\n                                    action=\"#\" :on-remove=\"onRemoveBirthCertificate\" class=\"upload-demo\" drag\r\n                                    list-type=\"picture-card\">\r\n                                    <img v-if=\"formPersonalInfo.fileListBirthCertificate?.length > 0\" :src=\"picturePreview[0]?.url\" class=\"avatar\"> \r\n\r\n                                    <div v-if=\"picturePreview?.type == ''\" class=\"el-upload__text\">Déposer la photo ici\r\n                                        (JPEG, JPG, PNG)\r\n                                    </div>\r\n                                    <div id=\"pageContainer\">\r\n                                        <div id=\"viewer\" class=\"pdfViewer\"></div>\r\n                                    </div>\r\n                                </el-upload> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_91, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_92, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
+          }, 8 /* PROPS */, ["before-upload", "on-change", "on-remove", "file-list"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-upload ref=\"upload2\" :auto-upload=\"false\" :limit=\"1\" :multiple=\"false\"\r\n                                    accept=\"image/jpg, image/jpeg, image/png\" :on-change=\"uploadBirthCertificate\"\r\n                                    action=\"#\" :on-remove=\"onRemoveBirthCertificate\" class=\"upload-demo\" drag\r\n                                    list-type=\"picture-card\">\r\n                                    <img v-if=\"formPersonalInfo.fileListBirthCertificate?.length > 0\" :src=\"picturePreview[0]?.url\" class=\"avatar\"> \r\n\r\n                                    <div v-if=\"picturePreview?.type == ''\" class=\"el-upload__text\">Déposer la photo ici\r\n                                        (JPEG, JPG, PNG)\r\n                                    </div>\r\n                                    <div id=\"pageContainer\">\r\n                                        <div id=\"viewer\" class=\"pdfViewer\"></div>\r\n                                    </div>\r\n                                </el-upload> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_91, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_92, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_row, {
             gutter: 24,
             "class": "app-w-50"
           }, {
@@ -843,9 +845,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _components_shared_ButtonApp_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/shared/ButtonApp.vue */ "./resources/js/vue/components/shared/ButtonApp.vue");
 /* harmony import */ var _core_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core/constants */ "./resources/js/vue/core/constants.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -866,6 +874,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   props: {},
   data: function data() {
     return {
+      fileList: [],
+      fileList2: [],
+      documentId: String,
       maxFileSize: 5 * 1024 * 1024,
       // 5 Mo en octets
       isLoadingSaveAppointment: false,
@@ -948,9 +959,176 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   beforeMount: function beforeMount() {
     this.fetchDataProducts();
     this.fetchDataSerives();
+    this.documentId = this.$route.params.documentId;
+    this.fetchPreDemandData();
   },
   created: function created() {},
   methods: {
+    urlToFile: function urlToFile(url) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var response, blob, fileName;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_3__["default"].get(url, {
+                responseType: "blob"
+              });
+            case 2:
+              response = _context.sent;
+              blob = response.data;
+              fileName = url.split("/").pop();
+              return _context.abrupt("return", new File([blob], fileName, {
+                type: blob.type
+              }));
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }))();
+    },
+    fetchPreDemandData: function fetchPreDemandData() {
+      var _this = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("api/get-one-appointment/" + _this.documentId).then( /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(response) {
+                  var _response$data, _demande$client$preno, _demande$client, _demande$client$nom_c, _demande$client2, _demande$numero_recu, _demande$nationality, _demande$nationality_, _demande$profession, _demande$address, _demande$client$email, _demande$client3, _demande$client4, _demande$client$telep, _demande$client5, _demande$client$date_, _demande$client6, _demande$birth_addres, _demande$height, _demande$complexion, _demande$hair_color, _demande$eye_color, _demande$father_first, _demande$father_last_, _demande$mother_first, _demande$mother_last_;
+                  var demande, type_request, urls, _iterator, _step, url, file, urls2, _iterator2, _step2, url2, file2;
+                  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                    while (1) switch (_context2.prev = _context2.next) {
+                      case 0:
+                        demande = (_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.demande;
+                        if (!(demande && demande.status_demande && demande.status_demande != "REJECTED")) {
+                          _context2.next = 4;
+                          break;
+                        }
+                        _this.$router.push("/unauthorised-pre-demande");
+                        return _context2.abrupt("return");
+                      case 4:
+                        type_request = "";
+                        console.log(response.data);
+                        if ((demande === null || demande === void 0 ? void 0 : demande.type_request) === "Extrait de naissance") {
+                          type_request = "nouvelle_demande";
+                        } else if ((demande === null || demande === void 0 ? void 0 : demande.type_request) === "Déclaration de perte") {
+                          type_request = "duplicata";
+                        } else if ((demande === null || demande === void 0 ? void 0 : demande.type_request) === "Copie précédent passeport") {
+                          type_request = "renouvelement";
+                        } else {
+                          type_request = "nouvelle_demande";
+                        }
+                        _this.typeDemand = type_request;
+                        _this.formPersonalInfo.firstname = (_demande$client$preno = demande === null || demande === void 0 || (_demande$client = demande.client) === null || _demande$client === void 0 ? void 0 : _demande$client.prenom_client) !== null && _demande$client$preno !== void 0 ? _demande$client$preno : "";
+                        _this.formPersonalInfo.lastname = (_demande$client$nom_c = demande === null || demande === void 0 || (_demande$client2 = demande.client) === null || _demande$client2 === void 0 ? void 0 : _demande$client2.nom_client) !== null && _demande$client$nom_c !== void 0 ? _demande$client$nom_c : "";
+                        _this.formPersonalInfo.numero_recu = (_demande$numero_recu = demande === null || demande === void 0 ? void 0 : demande.numero_recu) !== null && _demande$numero_recu !== void 0 ? _demande$numero_recu : "";
+                        _this.formPersonalInfo.nationality = (_demande$nationality = demande === null || demande === void 0 ? void 0 : demande.nationality) !== null && _demande$nationality !== void 0 ? _demande$nationality : "";
+                        _this.formPersonalInfo.nationality_state = (_demande$nationality_ = demande === null || demande === void 0 ? void 0 : demande.nationality_state) !== null && _demande$nationality_ !== void 0 ? _demande$nationality_ : "birth";
+                        _this.formPersonalInfo.profession = (_demande$profession = demande === null || demande === void 0 ? void 0 : demande.profession) !== null && _demande$profession !== void 0 ? _demande$profession : "";
+                        _this.formPersonalInfo.address = (_demande$address = demande === null || demande === void 0 ? void 0 : demande.address) !== null && _demande$address !== void 0 ? _demande$address : "";
+                        _this.formPersonalInfo.email = (_demande$client$email = demande === null || demande === void 0 || (_demande$client3 = demande.client) === null || _demande$client3 === void 0 ? void 0 : _demande$client3.email_client) !== null && _demande$client$email !== void 0 ? _demande$client$email : "";
+                        _this.formPersonalInfo.gender = (demande === null || demande === void 0 || (_demande$client4 = demande.client) === null || _demande$client4 === void 0 ? void 0 : _demande$client4.genre_client) === "Homme" ? "H" : "F";
+                        _this.formPersonalInfo.phone = (_demande$client$telep = demande === null || demande === void 0 || (_demande$client5 = demande.client) === null || _demande$client5 === void 0 ? void 0 : _demande$client5.telephone_client) !== null && _demande$client$telep !== void 0 ? _demande$client$telep : "";
+                        _this.formPersonalInfo.dateOfBirth = (_demande$client$date_ = demande === null || demande === void 0 || (_demande$client6 = demande.client) === null || _demande$client6 === void 0 ? void 0 : _demande$client6.date_naissance_client) !== null && _demande$client$date_ !== void 0 ? _demande$client$date_ : "";
+                        _this.formPersonalInfo.birth_address = (_demande$birth_addres = demande === null || demande === void 0 ? void 0 : demande.birth_address) !== null && _demande$birth_addres !== void 0 ? _demande$birth_addres : "";
+                        _this.signalement.height = (_demande$height = demande === null || demande === void 0 ? void 0 : demande.height) !== null && _demande$height !== void 0 ? _demande$height : "";
+                        _this.signalement.complexion = (_demande$complexion = demande === null || demande === void 0 ? void 0 : demande.complexion) !== null && _demande$complexion !== void 0 ? _demande$complexion : "";
+                        _this.signalement.hair_color = (_demande$hair_color = demande === null || demande === void 0 ? void 0 : demande.hair_color) !== null && _demande$hair_color !== void 0 ? _demande$hair_color : "";
+                        _this.signalement.eye_color = (_demande$eye_color = demande === null || demande === void 0 ? void 0 : demande.eye_color) !== null && _demande$eye_color !== void 0 ? _demande$eye_color : "";
+                        _this.ascendants.father_firstname = (_demande$father_first = demande === null || demande === void 0 ? void 0 : demande.father_first_name) !== null && _demande$father_first !== void 0 ? _demande$father_first : "";
+                        _this.ascendants.father_lastname = (_demande$father_last_ = demande === null || demande === void 0 ? void 0 : demande.father_last_name) !== null && _demande$father_last_ !== void 0 ? _demande$father_last_ : "";
+                        _this.ascendants.mother_firstname = (_demande$mother_first = demande === null || demande === void 0 ? void 0 : demande.mother_first_name) !== null && _demande$mother_first !== void 0 ? _demande$mother_first : "";
+                        _this.ascendants.mother_lastname = (_demande$mother_last_ = demande === null || demande === void 0 ? void 0 : demande.mother_last_name) !== null && _demande$mother_last_ !== void 0 ? _demande$mother_last_ : "";
+                        if (!demande.document_url) {
+                          _context2.next = 50;
+                          break;
+                        }
+                        urls = demande.document_url.split(",");
+                        _iterator = _createForOfIteratorHelper(urls);
+                        _context2.prev = 31;
+                        _iterator.s();
+                      case 33:
+                        if ((_step = _iterator.n()).done) {
+                          _context2.next = 42;
+                          break;
+                        }
+                        url = _step.value;
+                        _context2.next = 37;
+                        return _this.urlToFile(url);
+                      case 37:
+                        file = _context2.sent;
+                        _this.fileList.push(file);
+                        _this.formPersonalInfo.fileListPicture.push(file);
+                      case 40:
+                        _context2.next = 33;
+                        break;
+                      case 42:
+                        _context2.next = 47;
+                        break;
+                      case 44:
+                        _context2.prev = 44;
+                        _context2.t0 = _context2["catch"](31);
+                        _iterator.e(_context2.t0);
+                      case 47:
+                        _context2.prev = 47;
+                        _iterator.f();
+                        return _context2.finish(47);
+                      case 50:
+                        if (!demande.avatar_url) {
+                          _context2.next = 72;
+                          break;
+                        }
+                        urls2 = demande.avatar_url.split(",");
+                        _iterator2 = _createForOfIteratorHelper(urls2);
+                        _context2.prev = 53;
+                        _iterator2.s();
+                      case 55:
+                        if ((_step2 = _iterator2.n()).done) {
+                          _context2.next = 64;
+                          break;
+                        }
+                        url2 = _step2.value;
+                        _context2.next = 59;
+                        return _this.urlToFile(url2);
+                      case 59:
+                        file2 = _context2.sent;
+                        _this.fileList2.push(file2);
+                        _this.formPersonalInfo.fileListBirthCertificate.push(file2);
+                      case 62:
+                        _context2.next = 55;
+                        break;
+                      case 64:
+                        _context2.next = 69;
+                        break;
+                      case 66:
+                        _context2.prev = 66;
+                        _context2.t1 = _context2["catch"](53);
+                        _iterator2.e(_context2.t1);
+                      case 69:
+                        _context2.prev = 69;
+                        _iterator2.f();
+                        return _context2.finish(69);
+                      case 72:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }, _callee2, null, [[31, 44, 47, 50], [53, 66, 69, 72]]);
+                }));
+                return function (_x) {
+                  return _ref.apply(this, arguments);
+                };
+              }())["catch"](function (error) {
+                console.error("Erreur lors de la récupération du numéro de reçu:", error);
+              });
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3);
+      }))();
+    },
     beforeUpload: function beforeUpload(file) {
       var isLtMaxSize = file.size <= this.maxFileSize;
       if (!isLtMaxSize) {
@@ -989,7 +1167,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }
     },
     sendPredemande: function sendPredemande() {
-      var _this = this;
+      var _this2 = this;
       this.formError = false;
       this.isLoadingSaveAppointment = true;
       if (Object.values(this.formPersonalInfo).some(function (item) {
@@ -1005,7 +1183,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         });
         if (this.isLoadingSaveAppointment) {
           setTimeout(function () {
-            _this.isLoadingSaveAppointment = false;
+            _this2.isLoadingSaveAppointment = false;
           }, 3000);
         }
       } else if (Object.values(this.signalement).some(function (item) {
@@ -1021,7 +1199,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         });
         if (this.isLoadingSaveAppointment) {
           setTimeout(function () {
-            _this.isLoadingSaveAppointment = false;
+            _this2.isLoadingSaveAppointment = false;
           }, 3000);
         }
       } else if (Object.values(this.ascendants).some(function (item) {
@@ -1037,7 +1215,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         });
         if (this.isLoadingSaveAppointment) {
           setTimeout(function () {
-            _this.isLoadingSaveAppointment = false;
+            _this2.isLoadingSaveAppointment = false;
           }, 3000);
         }
       } else if (this.formPersonalInfo.fileListBirthCertificate.length == 0 || this.formPersonalInfo.fileListPicture.length == 0) {
@@ -1051,15 +1229,16 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         });
         if (this.isLoadingSaveAppointment) {
           setTimeout(function () {
-            _this.isLoadingSaveAppointment = false;
+            _this2.isLoadingSaveAppointment = false;
           }, 3000);
         }
       } else {
-        var _this$formPersonalInf, _this$formPersonalInf2, _this$formPersonalInf3, _this$formPersonalInf4, _this$formPersonalInf5, _this$formPersonalInf6, _this$formPersonalInf7, _this$formPersonalInf8, _this$formPersonalInf9, _this$formPersonalInf10, _this$signalement, _this$signalement2, _this$signalement3, _this$signalement4, _this$formPersonalInf11, _this$formPersonalInf12, _this$formPersonalInf13, _this$ascendants, _this$ascendants2, _this$ascendants3, _this$ascendants4, _this$formPersonalInf14;
+        var _this$documentId, _this$formPersonalInf, _this$formPersonalInf2, _this$formPersonalInf3, _this$formPersonalInf4, _this$formPersonalInf5, _this$formPersonalInf6, _this$formPersonalInf7, _this$formPersonalInf8, _this$formPersonalInf9, _this$formPersonalInf10, _this$signalement, _this$signalement2, _this$signalement3, _this$signalement4, _this$formPersonalInf11, _this$formPersonalInf12, _this$formPersonalInf13, _this$ascendants, _this$ascendants2, _this$ascendants3, _this$ascendants4, _this$formPersonalInf14;
         this.formError = false;
         var formData = new FormData();
+        formData.append("demande_id", (_this$documentId = this.documentId) !== null && _this$documentId !== void 0 ? _this$documentId : null);
         this.formPersonalInfo.fileListPicture.forEach(function (file) {
-          formData.append('document1[]', file);
+          formData.append("document1[]", file);
         });
         formData.append("document2", (_this$formPersonalInf = this.formPersonalInfo) === null || _this$formPersonalInf === void 0 ? void 0 : _this$formPersonalInf.fileListBirthCertificate[0]);
         formData.append("gender", (_this$formPersonalInf2 = this.formPersonalInfo) === null || _this$formPersonalInf2 === void 0 ? void 0 : _this$formPersonalInf2.gender);
@@ -1075,7 +1254,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         formData.append("complexion", (_this$signalement2 = this.signalement) === null || _this$signalement2 === void 0 ? void 0 : _this$signalement2.complexion);
         formData.append("hair_color", (_this$signalement3 = this.signalement) === null || _this$signalement3 === void 0 ? void 0 : _this$signalement3.hair_color);
         formData.append("eye_color", (_this$signalement4 = this.signalement) === null || _this$signalement4 === void 0 ? void 0 : _this$signalement4.eye_color);
-        formData.append("date_naissance", (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.format)(new Date((_this$formPersonalInf11 = this.formPersonalInfo) === null || _this$formPersonalInf11 === void 0 ? void 0 : _this$formPersonalInf11.dateOfBirth), "yyyy-MM-dd"));
+        formData.append("date_naissance", (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.format)(new Date((_this$formPersonalInf11 = this.formPersonalInfo) === null || _this$formPersonalInf11 === void 0 ? void 0 : _this$formPersonalInf11.dateOfBirth), "yyyy-MM-dd"));
         formData.append("lieu_de_residence", (_this$formPersonalInf12 = this.formPersonalInfo) === null || _this$formPersonalInf12 === void 0 ? void 0 : _this$formPersonalInf12.placeOfResidence);
         formData.append("birth_address", (_this$formPersonalInf13 = this.formPersonalInfo) === null || _this$formPersonalInf13 === void 0 ? void 0 : _this$formPersonalInf13.birth_address);
         formData.append("type_request", this.typeDemand);
@@ -1084,11 +1263,11 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         formData.append("mother_first_name", (_this$ascendants3 = this.ascendants) === null || _this$ascendants3 === void 0 ? void 0 : _this$ascendants3.mother_firstname);
         formData.append("mother_last_name", (_this$ascendants4 = this.ascendants) === null || _this$ascendants4 === void 0 ? void 0 : _this$ascendants4.mother_lastname);
         formData.append("numero_recu", (_this$formPersonalInf14 = this.formPersonalInfo) === null || _this$formPersonalInf14 === void 0 ? void 0 : _this$formPersonalInf14.numero_recu);
-        axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/save-pre-demande", formData).then(function (responseAxios) {
+        axios__WEBPACK_IMPORTED_MODULE_3__["default"].post("/api/save-pre-demande", formData).then(function (responseAxios) {
           console.log("responseAxios", responseAxios);
           if (!responseAxios.data.demande) {
             var _responseAxios$data$m, _responseAxios$data;
-            _this.$swal({
+            _this2.$swal({
               position: "center",
               icon: "warning",
               title: (_responseAxios$data$m = (_responseAxios$data = responseAxios.data) === null || _responseAxios$data === void 0 ? void 0 : _responseAxios$data.message) !== null && _responseAxios$data$m !== void 0 ? _responseAxios$data$m : "",
@@ -1099,7 +1278,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           }
           if (responseAxios.data.status == 200) {
             var _responseAxios$data$m2, _responseAxios$data2;
-            _this.$swal({
+            _this2.$swal({
               position: "center",
               icon: "success",
               title: (_responseAxios$data$m2 = (_responseAxios$data2 = responseAxios.data) === null || _responseAxios$data2 === void 0 ? void 0 : _responseAxios$data2.message) !== null && _responseAxios$data$m2 !== void 0 ? _responseAxios$data$m2 : "Pré-demande enregistré",
@@ -1108,7 +1287,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               timer: 4500
             }).then(function (result) {
               var _responseAxios$data$d;
-              _this.$router.push({
+              _this2.$router.push({
                 name: "all-documents",
                 params: {
                   documentId: (_responseAxios$data$d = responseAxios.data.demande) === null || _responseAxios$data$d === void 0 ? void 0 : _responseAxios$data$d.id
@@ -1117,7 +1296,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
             });
           }
         })["catch"](function (err) {
-          _this.$swal({
+          _this2.$swal({
             position: "center",
             icon: "warning",
             title: "Echèc de l'enregistrement",
@@ -1146,17 +1325,15 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     },
     uploadPicture: function uploadPicture(file, fileList) {
       // this.formPersonalInfo.fileListPicture = [];
-      // this.formPersonalInfo.fileListPicture.push(file.raw);
-      this.formPersonalInfo.fileListPicture = fileList.map(function (f) {
-        return f.raw;
-      });
+      this.formPersonalInfo.fileListPicture.push(file.raw);
+      console.log("fileList", fileList);
+      // this.formPersonalInfo.fileListPicture = fileList.map((f) => f.raw);
     },
     onRemovePicture: function onRemovePicture(file, fileList) {
+      console.log("fileList removed", fileList);
       // Met à jour fileListPicture avec la liste des fichiers restants
       // this.formPersonalInfo.fileListPicture = fileList;
-      this.formPersonalInfo.fileListPicture = fileList.map(function (f) {
-        return f.raw;
-      });
+      this.formPersonalInfo.fileListPicture = fileList;
 
       // Si la liste des fichiers est vide, réinitialise documentPreview.type
       if (fileList.length === 0) {

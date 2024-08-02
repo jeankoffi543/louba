@@ -2,7 +2,6 @@
     <div class="start-request">
         <div class="demo-collapse">
             <el-collapse ref="collapse" v-model="activeNames" @change="handleChange">
-
                 <el-collapse-item name="3" title="1- TYPE DE DEMANDE">
                     <div class="type-demande">
                         <div class="group">
@@ -292,7 +291,8 @@
                                     <el-upload ref="upload" :auto-upload="false" :limit="5" :multiple="true"
                                         :before-upload="beforeUpload" :on-change="uploadPicture"
                                         :on-remove="onRemovePicture" action="#"
-                                        accept="application/pdf, image/jpg, image/jpeg, image/png" class="upload-demo"
+                                        accept="application/pdf, image/jpg, image/jpeg, image/png" class="upload-demo"  :file-list="fileList"
+
                                         :list-type="'text'">
                                         <div v-if="documentPreview?.type === ''" class="el-upload__text">{{
                                             titleDocumentUpload }}</div>
@@ -307,7 +307,7 @@
 
                                     <el-upload ref="upload2" :auto-upload="false" :limit="1" :multiple="false"
                                         :before-upload="beforeUpload" :on-change="uploadBirthCertificate"
-                                        :on-remove="onRemoveBirthCertificate" action="#"
+                                        :on-remove="onRemoveBirthCertificate" action="#" :file-list="fileList2"
                                         accept="image/jpg, image/jpeg, image/png" class="upload-demo"
                                         :list-type="'text'">
                                         <div v-if="picturePreview?.type === ''" class="el-upload__text">{{

@@ -194,7 +194,7 @@
             <ul class="arrow-list job bottom-2" style="display:none">
                 <li><a href="#">Adresse: Kaloum </a></li>
                 <li><a href="#">Tel: 620-111-222 </a></li>
-                <li><a href="#">Email: contact@radiangn.com</a></li>
+                <li><a href="#">Email: contact@Omniform.com</a></li>
             </ul><!-- End square-list -->
 
 

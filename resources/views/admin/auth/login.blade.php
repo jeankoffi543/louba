@@ -93,7 +93,7 @@
               </div>
 
               <div class="credits" style="text-align:center">
-                <a href="mailto:contact@radiangn.gn">Contact administrateur contact@radiangn.com</a><br>
+                <a href="mailto:contact@Omniform.gn">Contact administrateur contact@Omniform.com</a><br>
                 <a href="/">Retour vers le site</a><br>
               </div>
 

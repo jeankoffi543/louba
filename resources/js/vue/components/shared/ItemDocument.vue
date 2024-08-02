@@ -38,14 +38,23 @@
                                 </el-col>-->
 
                 <el-col :sm="12" :xs="24" class="print-appointment">
-                    <el-button class="" @click.stop="detailsAppointment">
+                    <el-button v-if="dataItem?.predemande_step == 1 && dataItem?.status_demande == 'REJECTED'" class="" @click.stop="editPredemande">
+                        Modifier
+                    </el-button>
+
+                    <el-button v-else class="" @click.stop="detailsAppointment">
                         Détails
                     </el-button>
                 </el-col>
 
-                <el-col v-if="dataItem?.predemande_step == 1" :sm="12" :xs="24" class="reject-appointment">
+                <el-col v-if="dataItem?.predemande_step == 1 && dataItem?.status_demande == 'REJECTED'" :sm="12" :xs="24" class="reject-appointment">
+                    <el-button class="text-danger"> Rejetée</el-button>
+                </el-col>
+
+                <el-col v-else-if="dataItem?.predemande_step == 1" :sm="12" :xs="24" class="reject-appointment">
                     <el-button class="text-danger"> Veuillez patienter... </el-button>
                 </el-col>
+                
 
                 <el-col v-else-if="dataItem?.predemande_step == 2" :sm="12" :xs="24" class="reject-appointment">
                     <el-button class="" @click="takeRdv"> Prendre rendez-vous</el-button>
@@ -134,6 +143,13 @@ export default {
         detailsAppointment() {
             this.$router.push({
                 name: "details-appointment", params: {
+                    documentId: this.dataItem?.id
+                }
+            })
+        },
+        editPredemande() {
+            this.$router.push({
+                name: "predemande-edit", params: {
                     documentId: this.dataItem?.id
                 }
             })

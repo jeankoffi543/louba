@@ -679,7 +679,16 @@ class ClientController extends Controller
             DB::beginTransaction();
             $userConnected = auth('apiJwt')->user();
 
-            $demande = new Demande();
+            if ($request->demande_id == null || $request->demande_id == "null" || $request->demande_id == "undefined") {
+                $demande = new Demande();
+            } else {
+                $demande = Demande::find($request->demande_id);
+                if ($demande  && $demande->status_demande != "REJECTED") {
+                    $data["demande"] = null;
+                    $data["message"] = "Echèc de l'enregistré";
+                    return response()->json($data, 500);
+                }
+            }
 
             $type_demande = "Nouvelle demande";
             if ($request->type_request == "renouvelement") {
@@ -742,6 +751,7 @@ class ClientController extends Controller
             $demande->type_request = $type_demande;
             $demande->predemande_step = 1;
             $demande->habilete_position = 0;
+            $demande->status_demande = "NEW";
             $demande->created_at = now();
             $fileUrls = [];
 
@@ -750,17 +760,23 @@ class ClientController extends Controller
                 $validFiles = true; // Indicateur pour vérifier si tous les fichiers sont valides
                 if (is_array($document1) && count($document1) > 0) {
                     foreach ($document1 as $key => $file) {
-                        $extension = $file->getClientOriginalExtension();
-                        $uuid = (string)Str::uuid() . '.' . $extension;
-                        $file->storeAs('public/documents/', $uuid);
+                        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                        $time = time();
+                        $fileName = $originalName . '-' . $time . '.' . $file->getClientOriginalExtension();
+                        // $extension = $file->getClientOriginalExtension();
+                        // $uuid = (string)Str::uuid() . '.' . $extension;
+                        $file->storeAs('public/documents/', $fileName);
 
-                        $fileUrls[] = Storage::url('documents/' . $uuid);
+                        $fileUrls[] = Storage::url('documents/' . $fileName);
                     }
                 } else {
-                    $extension = $document1->getClientOriginalExtension();
-                    $uuid = (string)Str::uuid() . '.' . $extension;
-                    $document1->storeAs('public/documents/', $uuid);
-                    $fileUrls[] = Storage::url('documents/' . $uuid);
+                    $originalName = pathinfo($document1->getClientOriginalName(), PATHINFO_FILENAME);
+                        $time = time();
+                        $fileName = $originalName . '-' . $time . '.' . $document1->getClientOriginalExtension();
+                    // $extension = $document1->getClientOriginalExtension();
+                    // $uuid = (string)Str::uuid() . '.' . $extension;
+                    $document1->storeAs('public/documents/', $fileName);
+                    $fileUrls[] = Storage::url('documents/' . $fileName);
                 }
             }
             if ($request->hasFile("document2")) {
@@ -768,21 +784,33 @@ class ClientController extends Controller
                 $document2 = $request->file('document2');
                 if (is_array($document2) && count($document2) > 0) {
                     foreach ($document2 as $key => $file) {
-                        $extension = $file->getClientOriginalExtension();
-                        $uuid = (string)Str::uuid() . '.' . $extension;
+                        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                        $time = time();
+                        $fileName = $originalName . '-' . $time . '.' . $file->getClientOriginalExtension();
+                        // $extension = $file->getClientOriginalExtension();
+                        // $uuid = (string)Str::uuid() . '.' . $extension;
                         /** @var UploadedFile $file */
-                        $file->storeAs('public/clients/', $uuid);
-                        $demande->avatar_url = Storage::url('clients/' . $uuid);
+                        $file->storeAs('public/clients/', $fileName);
+                        $demande->avatar_url = Storage::url('clients/' . $fileName);
                     }
                 } else {
-                    $extension = $document2->getClientOriginalExtension();
-                    $uuid = (string)Str::uuid() . '.' . $extension;
+                    $originalName = pathinfo($document2->getClientOriginalName(), PATHINFO_FILENAME);
+                    $time = time();
+                    $fileName = $originalName . '-' . $time . '.' . $document2->getClientOriginalExtension();
+                    // $extension = $document2->getClientOriginalExtension();
+                    // $uuid = (string)Str::uuid() . '.' . $extension;
                     /** @var UploadedFile $file */
-                    $document2->storeAs('public/clients/', $uuid);
-                    $demande->avatar_url = Storage::url('clients/' . $uuid);
+                    $document2->storeAs('public/clients/', $fileName);
+                    $demande->avatar_url = Storage::url('clients/' . $fileName);
                 }
             }
+
             $demande->document_url = implode(',', $fileUrls);
+
+            // $data["status"] = 500;
+            // $data["message"] = implode(',', $fileUrls);
+            // $data["demande"] = $demande;
+            // return response()->json($data);
 
             $demande->save();
 
@@ -862,7 +890,7 @@ class ClientController extends Controller
     public static function get_one_appointment_client(Request $request)
     {
 
-        $maDemande = Demande::where('id', $request->id)->with(['client', 'product', 'service', 'point_enrolement'])->first();
+        $maDemande = Demande::where('id', $request->id)->with(['client', 'product', 'service', 'point_enrolement', 'piece_jointes'])->first();
         $maDemande['paiement'] = Paiement::where('id_demande', $request->id)->first();
 
         $historiques = Historique::where('demande_id', $request->id)->orderBy('created_at', 'desc')->with('client')->with('user')->with('commentaires')->get();

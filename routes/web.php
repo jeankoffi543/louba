@@ -10,6 +10,7 @@ use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\Front\ContenuSiteWebController;
 use App\Http\Controllers\HabileteController;
 use App\Http\Controllers\HolyDayController;
+use App\Http\Controllers\PageLockController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PermissionController;
@@ -126,10 +127,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [SlideController::class, 'store'])->name('slider.store');
 
         Route::get('/edit/{slider}', [SlideController::class, 'edit'])->name('slider.edit');
-        
+
         Route::put('/edit/{slider}', [SlideController::class, 'update'])->name('slider.update');
 
-        Route::get('/delete/{slider}', [SlideController::class, 'delete'])->name('slider.delete');   
+        Route::get('/delete/{slider}', [SlideController::class, 'delete'])->name('slider.delete');
     });
 
     Route::prefix('partners')->group(function () {
@@ -180,12 +181,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{service}', [ServiceController::class, 'delete'])->name('services.delete');
     });
 
-    Route::prefix('about')->group(function(){
-        Route::get('/', [ContenuSiteWebController::class,'aboutUs'])->name('aboutUs');
-        Route::get('/create', [ContenuSiteWebController::class,'aboutUs_create'])->name('about-us.create');
-        Route::get('/edit/{aboutUs}', [ContenuSiteWebController::class,'aboutUs_edit'])->name('about-us.edit');
-        Route::put('/edit/{aboutUs}', [ContenuSiteWebController::class,'aboutUs_update'])->name('about-us.update');
-        Route::post('/store', [ContenuSiteWebController::class,'aboutUs_store'])->name('about-us.store');
+    Route::prefix('about')->group(function () {
+        Route::get('/', [ContenuSiteWebController::class, 'aboutUs'])->name('aboutUs');
+        Route::get('/create', [ContenuSiteWebController::class, 'aboutUs_create'])->name('about-us.create');
+        Route::get('/edit/{aboutUs}', [ContenuSiteWebController::class, 'aboutUs_edit'])->name('about-us.edit');
+        Route::put('/edit/{aboutUs}', [ContenuSiteWebController::class, 'aboutUs_update'])->name('about-us.update');
+        Route::post('/store', [ContenuSiteWebController::class, 'aboutUs_store'])->name('about-us.store');
     });
 
     Route::prefix('circuit')->middleware('CheckHabiletesPermissions')->group(function () {
@@ -206,6 +207,18 @@ Route::middleware('auth')->group(function () {
     Route::prefix('permissions')->middleware('CheckHabiletesPermissions')->group(function () {
         Route::get('/{id}', [PermissionController::class, 'index'])->name('permissions');
         Route::post('/', [PermissionController::class, 'habiletePermissions'])->name('permissions.habiletes.permissions');
+    });
+
+    Route::post('/lock-page', [PageLockController::class, 'lockPage'])->name('lock-page');
+    Route::post('/unlock-page', [PageLockController::class, 'unlockPage'])->name('unlock-page');
+    Route::get('/is-page-locked', [PageLockController::class, 'isPageLocked'])->name('is-page-locked');
+
+    Route::prefix('piece_jointes')->middleware('CheckHabiletesPermissions:possibilite-ajouter-document')->group(function () {
+        Route::get('/', [PieceJointeController::class, 'index'])->name('piece_jointes');
+        Route::post('/', [PieceJointeController::class, 'store'])->name('piece_jointes.store');
+        Route::put('/{id}', [PieceJointeController::class, 'update'])->name('piece_jointes.update');
+        Route::get('/{id}', [PieceJointeController::class, 'destroy'])->name('piece_jointes.delete');
+        Route::get('/add/{id}', [PieceJointeController::class, 'add'])->name('piece_jointes.add');
     });
 });
 
@@ -286,11 +299,3 @@ Route::post('suivreMesDocuments', [demandeController::class, 'suivreMesDocuments
 
 
 Route::get('tableau-chart', [TableauController::class, 'get4adminChart'])->name('tableau_chart');
-
-Route::prefix('piece_jointes')->middleware('CheckHabiletesPermissions:possibilite-ajouter-document')->group(function () {
-    Route::get('/', [PieceJointeController::class, 'index'])->name('piece_jointes');
-    Route::post('/', [PieceJointeController::class, 'store'])->name('piece_jointes.store');
-    Route::put('/{id}', [PieceJointeController::class, 'update'])->name('piece_jointes.update');
-    Route::get('/{id}', [PieceJointeController::class, 'destroy'])->name('piece_jointes.delete');
-    Route::get('/add/{id}', [PieceJointeController::class, 'add'])->name('piece_jointes.add');
-});
