@@ -12,13 +12,13 @@
                             <el-avatar :size="60" :src="demandeObj?.avatar_url"></el-avatar>
                             <h4 class="app-m-0 name-user text-center">{{ demandeObj?.client?.nom_client }} {{
                                 demandeObj?.client?.prenom_client
-                            }}</h4>
+                                }}</h4>
                             <span class="app-opacity-5">{{ demandeObj?.client?.email_client }}</span>
                             <span class="app-opacity-5">
                                 <a :href="'tel:' + demandeObj?.client?.telephone_client">{{
                                     demandeObj?.client?.telephone_client }}</a>
                             </span>
-                          
+
                         </div>
                         <div class="content-card-other-info-user app-mb-1">
                             <el-row :gutter="24" class="container-item">
@@ -37,7 +37,7 @@
                                 <el-col :sm="8" :xs="24" class="">
                                     <div class="content-item">
                                         <h5 class="app-opacity-5 label-item">Lieu de naissance</h5>
-                                        <span class="value-item">{{ demandeObj?.client?.adresse_client ?? '-' }}</span>
+                                        <span class="value-item">{{ demandeObj?.birth_address ?? '-' }}</span>
                                     </div>
                                 </el-col>
                                 <el-col :sm="8" :xs="24" class="">
@@ -134,6 +134,16 @@
                                     </div>
                                 </el-col>
 
+                                <el-col  class="">
+                                    <div class="content-item">
+                                        <h5 class="app-opacity-5 label-item">Documents</h5>
+                                        <span v-for="(item, index) in documentUrls" :key="index" class="value-item">
+                                            <a :href="item?.url" target="_blank"
+                                                class="app-text-decoration-underline">{{ index + 1 }} - {{item?.filename}}</a>
+                                        </span>
+                                    </div>
+                                </el-col>
+
                             </el-row>
                         </div>
                     </el-col>
@@ -142,7 +152,7 @@
                             <div class="appointment" v-if="demandeObj?.predemande_step > 2">
                                 <h5 class="type-appointment">Rendez-vous : {{
                                     typeDocumentObj?.nom ?? '-'
-                                }}</h5>
+                                    }}</h5>
                                 <h4 class="amount-appointment type-appointment" v-if="demandeObj?.predemande_step > 2">
                                     Montant à payer : {{ demandeObj?.service?.prix ?? '-' }} GNF
                                 </h4>

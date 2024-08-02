@@ -16,6 +16,9 @@ export default {
 
     data() {
         return {
+            fileList: [],
+            fileList2: [],
+            documentId: String,
             maxFileSize: 5 * 1024 * 1024, // 5 Mo en octets
             isLoadingSaveAppointment: false,
             formError: false,
@@ -111,10 +114,110 @@ export default {
     beforeMount() {
         this.fetchDataProducts();
         this.fetchDataSerives();
+        this.documentId = this.$route.params.documentId;
+        this.fetchPreDemandData();
     },
     created() {},
 
     methods: {
+        async urlToFile(url) {
+            const response = await axios.get(url, { responseType: "blob" });
+            const blob = response.data;
+            const fileName = url.split("/").pop();
+            return new File([blob], fileName, { type: blob.type });
+        },
+        async fetchPreDemandData() {
+            axios
+                .get("api/get-one-appointment/" + this.documentId)
+                .then(async (response) => {
+                    const demande = response.data?.demande;
+                    if (
+                        demande &&
+                        demande.status_demande &&
+                        demande.status_demande != "REJECTED"
+                    ) {
+                        this.$router.push("/unauthorised-pre-demande");
+                        return;
+                    }
+                    let type_request = "";
+                    console.log(response.data);
+                    if (demande?.type_request === "Extrait de naissance") {
+                        type_request = "nouvelle_demande";
+                    } else if (
+                        demande?.type_request === "Déclaration de perte"
+                    ) {
+                        type_request = "duplicata";
+                    } else if (
+                        demande?.type_request === "Copie précédent passeport"
+                    ) {
+                        type_request = "renouvelement";
+                    } else {
+                        type_request = "nouvelle_demande";
+                    }
+                    this.typeDemand = type_request;
+                    this.formPersonalInfo.firstname =
+                        demande?.client?.prenom_client ?? "";
+                    this.formPersonalInfo.lastname =
+                        demande?.client?.nom_client ?? "";
+                    this.formPersonalInfo.numero_recu =
+                        demande?.numero_recu ?? "";
+                    this.formPersonalInfo.nationality =
+                        demande?.nationality ?? "";
+                    this.formPersonalInfo.nationality_state =
+                        demande?.nationality_state ?? "birth";
+                    this.formPersonalInfo.profession =
+                        demande?.profession ?? "";
+                    this.formPersonalInfo.address = demande?.address ?? "";
+                    this.formPersonalInfo.email =
+                        demande?.client?.email_client ?? "";
+                    this.formPersonalInfo.gender =
+                        demande?.client?.genre_client === "Homme" ? "H" : "F";
+                    this.formPersonalInfo.phone =
+                        demande?.client?.telephone_client ?? "";
+                    this.formPersonalInfo.dateOfBirth =
+                        demande?.client?.date_naissance_client ?? "";
+                    this.formPersonalInfo.birth_address =
+                        demande?.birth_address ?? "";
+                    this.signalement.height = demande?.height ?? "";
+                    this.signalement.complexion = demande?.complexion ?? "";
+                    this.signalement.hair_color = demande?.hair_color ?? "";
+                    this.signalement.eye_color = demande?.eye_color ?? "";
+                    this.ascendants.father_firstname =
+                        demande?.father_first_name ?? "";
+                    this.ascendants.father_lastname =
+                        demande?.father_last_name ?? "";
+                    this.ascendants.mother_firstname =
+                        demande?.mother_first_name ?? "";
+                    this.ascendants.mother_lastname =
+                        demande?.mother_last_name ?? "";
+
+                    if (demande.document_url) {
+                        const urls = demande.document_url.split(",");
+                        for (const url of urls) {
+                            const file = await this.urlToFile(url);
+                            this.fileList.push(file);
+                            this.formPersonalInfo.fileListPicture.push(file);
+                        }
+
+                    }
+
+                    if (demande.avatar_url) {
+                        const urls2 = demande.avatar_url.split(",");
+                        for (const url2 of urls2) {
+                            const file2 = await this.urlToFile(url2);
+                            this.fileList2.push(file2);
+                            this.formPersonalInfo.fileListBirthCertificate.push(file2)
+                        }
+                  
+                    }
+                })
+                .catch((error) => {
+                    console.error(
+                        "Erreur lors de la récupération du numéro de reçu:",
+                        error
+                    );
+                });
+        },
         beforeUpload(file) {
             const isLtMaxSize = file.size <= this.maxFileSize;
             if (!isLtMaxSize) {
@@ -232,9 +335,11 @@ export default {
 
                 const formData = new FormData();
 
-                this.formPersonalInfo.fileListPicture.forEach(file => {
-                    formData.append('document1[]', file);
-                  });
+                formData.append("demande_id", this.documentId ?? null);
+
+                this.formPersonalInfo.fileListPicture.forEach((file) => {
+                    formData.append("document1[]", file);
+                });
 
                 formData.append(
                     "document2",
@@ -374,13 +479,15 @@ export default {
 
         uploadPicture(file, fileList) {
             // this.formPersonalInfo.fileListPicture = [];
-            // this.formPersonalInfo.fileListPicture.push(file.raw);
-            this.formPersonalInfo.fileListPicture = fileList.map(f => f.raw);
+            this.formPersonalInfo.fileListPicture.push(file.raw);
+            console.log("fileList", fileList);
+            // this.formPersonalInfo.fileListPicture = fileList.map((f) => f.raw);
         },
         onRemovePicture(file, fileList) {
+            console.log("fileList removed", fileList);
             // Met à jour fileListPicture avec la liste des fichiers restants
             // this.formPersonalInfo.fileListPicture = fileList;
-            this.formPersonalInfo.fileListPicture = fileList.map(f => f.raw);
+            this.formPersonalInfo.fileListPicture = fileList;
 
             // Si la liste des fichiers est vide, réinitialise documentPreview.type
             if (fileList.length === 0) {

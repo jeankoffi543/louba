@@ -222,8 +222,8 @@
                 <a class="s-10">
                     <i class="icon-phone"></i> +224620000001
                 </a>
-                <a class="s-10" href='mailto:contact@radiangn'>
-                    <i class="icon-envelope-alt"></i> contact@radiangn
+                <a class="s-10" href='mailto:contact@Omniform'>
+                    <i class="icon-envelope-alt"></i> contact@Omniform
                 </a>
             </div>
         </div>

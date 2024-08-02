@@ -6,7 +6,7 @@
                     <div class="contact-item">
                     <span>
                       <i class="bi bi-envelope"></i>
-                      <a class="mr-1" href="">contact@radiangn.com</a>
+                      <a class="mr-1" href="">contact@Omniform.com</a>
                     </span>
                         <span>
                           <i class="bi bi-phone"></i>

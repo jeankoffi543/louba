@@ -163,7 +163,7 @@
                                         CinetPay.setConfig({
                                             apikey: '796105011638c90b6458524.35019820',//   YOUR APIKEY
                                             site_id: '204022',//YOUR_SITE_ID
-                                            notify_url: 'http://radiangn.poc-demo.com/cinetpayNotify',
+                                            notify_url: 'http://Omniform.poc-demo.com/cinetpayNotify',
                                             mode: 'PRODUCTION'
                                         });
                                         CinetPay.getCheckout({

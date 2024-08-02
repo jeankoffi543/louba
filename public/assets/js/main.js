@@ -430,7 +430,7 @@ function validateSMS(event) {
     return true;
 }
 
-function countUser(event, id, _token) {
+function countUser(event, id, _token) { 
     var value = event.target.value;
     var button = document.getElementById("envoyerMsg");
     var buttonMail = document.getElementById("envoyerMail2");

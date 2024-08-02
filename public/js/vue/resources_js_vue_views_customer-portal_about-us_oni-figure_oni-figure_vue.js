@@ -99,7 +99,7 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   "class": "w-100 oni-font mt-4 p-4"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"overlay shadow\" data-v-72d29f66></div><div class=\"text-center p-3 text-light\" data-aos=\"fade-down-right\" data-v-72d29f66><h1 class=\"fw-bold oni-color-primary fs-1\" data-v-72d29f66> RADIANGN <br data-v-72d29f66> en chiffres </h1><img src=\"/assets/vue/imgs/others/divider-red.png\" data-v-72d29f66></div><div class=\"container\" data-v-72d29f66><div class=\"row d-flex justify-content-center\" data-v-72d29f66><p class=\"col-sm-12 col-md-4 col-lg-4 text-center\" data-aos=\"zoom-out-up\" data-v-72d29f66><span class=\"fs-1 fw-bold oni-color-secondary\" data-v-72d29f66>500</span> <br data-v-72d29f66><span class=\"fs-4 oni-color-primary fw-bold\" data-v-72d29f66>PRODUITS / JOUR</span></p><p class=\"col-sm-12 col-md-4 col-lg-4 text-center\" data-aos=\"fade-up\" data-v-72d29f66><span class=\"fs-1 fw-bold oni-color-secondary\" data-v-72d29f66>27</span> <br data-v-72d29f66><span class=\"fs-4 oni-color-primary fw-bold\" data-v-72d29f66>POINTS D&#39;ENRÔLEMENTS</span></p><p class=\"col-sm-12 col-md-4 col-lg-4 text-center\" data-aos=\"zoom-out\" data-v-72d29f66><span class=\"fs-1 fw-bold oni-color-secondary\" data-v-72d29f66>1.5M</span> <br data-v-72d29f66><span class=\"fs-4 oni-color-primary fw-bold\" data-v-72d29f66> PASSEPORTS PRODUITS</span></p></div></div>", 3);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"overlay shadow\" data-v-72d29f66></div><div class=\"text-center p-3 text-light\" data-aos=\"fade-down-right\" data-v-72d29f66><h1 class=\"fw-bold oni-color-primary fs-1\" data-v-72d29f66> Omniform <br data-v-72d29f66> en chiffres </h1><img src=\"/assets/vue/imgs/others/divider-red.png\" data-v-72d29f66></div><div class=\"container\" data-v-72d29f66><div class=\"row d-flex justify-content-center\" data-v-72d29f66><p class=\"col-sm-12 col-md-4 col-lg-4 text-center\" data-aos=\"zoom-out-up\" data-v-72d29f66><span class=\"fs-1 fw-bold oni-color-secondary\" data-v-72d29f66>500</span> <br data-v-72d29f66><span class=\"fs-4 oni-color-primary fw-bold\" data-v-72d29f66>PRODUITS / JOUR</span></p><p class=\"col-sm-12 col-md-4 col-lg-4 text-center\" data-aos=\"fade-up\" data-v-72d29f66><span class=\"fs-1 fw-bold oni-color-secondary\" data-v-72d29f66>27</span> <br data-v-72d29f66><span class=\"fs-4 oni-color-primary fw-bold\" data-v-72d29f66>POINTS D&#39;ENRÔLEMENTS</span></p><p class=\"col-sm-12 col-md-4 col-lg-4 text-center\" data-aos=\"zoom-out\" data-v-72d29f66><span class=\"fs-1 fw-bold oni-color-secondary\" data-v-72d29f66>1.5M</span> <br data-v-72d29f66><span class=\"fs-4 oni-color-primary fw-bold\" data-v-72d29f66> PASSEPORTS PRODUITS</span></p></div></div>", 3);
 var _hoisted_5 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [].concat(_hoisted_5));
@@ -322,7 +322,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   props: {},
   data: function data() {
     return {
-      title: "RADIANGN EN CHIFFRES"
+      title: "Omniform EN CHIFFRES"
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)({

@@ -51,6 +51,39 @@
                                  $demande->production_disponible !== '1' &&
                                  $demande->production_disponible !== 'true')
                              @if ($isOwner)
+
+                                 <form action="#">
+                                     <input type="hidden" value="{{ csrf_token() }}" id="csrfToken">
+                                 </form>
+                                 <!-- Votre contenu existant -->
+
+                                 <!-- Modal Transparent pour verrouiller la page -->
+                                 <div class="modal fade" id="lockModal" tabindex="-1" aria-labelledby="lockModalLabel"
+                                     aria-hidden="true">
+                                     <div class="modal-dialog modal-dialog-centered">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <h5 class="modal-title" id="lockModalLabel">Page en cours de modification
+                                                 </h5>
+                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                             </div>
+                                             <div class="modal-body">
+                                                 Cette page est actuellement en cours de modification par un autre
+                                                 administrateur : {{ optional(optional($isPageLock)->user)->nom }}. Merci de
+                                                 patienter...
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <!-- Pour rendre le modal transparent -->
+                                     <style>
+                                         .modal-backdrop.show {
+                                             opacity: 0.5;
+                                             /* Ajustez l'opacité pour le fond transparent */
+                                         }
+                                     </style>
+                                 </div>
+
                                  @if ($workflowStatus !== 'END_OF_WORKFLOW' && $demande->status_demande !== 'SUSPENDED')
                                      @kcan('gestion-demandes')
                                          <button class="btn btn-primary" data-bs-toggle="modal"
@@ -112,7 +145,7 @@
 
                                  @kcan('possibilite-d-envoyer-sms')
                                      <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#envoyerSMS">
-                                        Envoyer SMS
+                                         Envoyer SMS
                                      </button>
                                  @endkcan
 
@@ -494,8 +527,8 @@
                                              <div class="d-flex flex-row gap-2 align-items-center">
 
                                                  <div class="d-flex flex-column">
-                                                     <a href="{{ asset($document_url) }}" target="_blank">Document
-                                                         {{ $j + 1 }}</a>
+                                                     <a href="{{ asset($document_url) }}"
+                                                         target="_blank">{{ last(explode('/', $document_url)) }}</a>
                                                  </div>
                                              </div>
                                          </div>
@@ -974,12 +1007,8 @@
                                          <label for="#changer_date">Choisir une date </label>
                                      </div>
                                      <div class="col-12 col-lg-6 text-wrap gap-2">
-                                        <input 
-                                        id="changer_date" 
-                                        class="form-control" 
-                                        type="date" 
-                                        name="date_rdv_demande" 
-                                        min="<?php echo date('Y-m-d'); ?>">
+                                         <input id="changer_date" class="form-control" type="date"
+                                             name="date_rdv_demande" min="<?php echo date('Y-m-d'); ?>">
                                      </div>
                                  </div>
 
@@ -1016,3 +1045,106 @@
 
 
  @stop
+
+ <script>
+     window.addEventListener('beforeunload', (event) => {
+         const csrfToken = document.getElementById('csrfToken').value
+         const pageIdentifier = '{{ $demande->id }}';
+         const unlockPageUrl = '{{ route('unlock-page') }}';
+
+         async function unlockPage() {
+             await fetch(unlockPageUrl, {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                     'X-CSRF-TOKEN': csrfToken
+                 },
+                 body: JSON.stringify({
+                     page_identifier: pageIdentifier
+                 })
+             });
+         }
+         // Effectuer une requête pour déverrouiller la page
+         unlockPage();
+     });
+
+     document.addEventListener("DOMContentLoaded", function() {
+
+         const pageIdentifier = '{{ $demande->id }}';
+         const lockPageUrl = '{{ route('lock-page') }}';
+         const unlockPageUrl = '{{ route('unlock-page') }}';
+         const csrfToken = document.getElementById('csrfToken').value
+
+         async function lockPage() {
+             await fetch(lockPageUrl, {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                     'X-CSRF-TOKEN': csrfToken
+                 },
+                 body: JSON.stringify({
+                     page_identifier: pageIdentifier
+                 })
+             });
+         }
+
+         async function unlockPage() {
+             await fetch(unlockPageUrl, {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                     'X-CSRF-TOKEN': csrfToken
+                 },
+                 body: JSON.stringify({
+                     page_identifier: pageIdentifier
+                 })
+             });
+         }
+
+         const isPageLock = @json($isPageLock);
+         const authUser = @json(auth()->user());
+
+         if (isPageLock?.page_identifier == pageIdentifier) {
+             if (authUser?.id != isPageLock?.user_id) {
+
+                 var lockModal = new bootstrap.Modal(document.getElementById('lockModal'), {
+                     backdrop: 'static',
+                     keyboard: false
+                 });
+                 lockModal.show();
+             }
+         } else {
+             if (pageIdentifier && lockPageUrl && csrfToken) {
+                 // Appeler la fonction pour verrouiller la page lors du chargement
+                 lockPage();
+             }
+
+         }
+
+         let inactivityTimeout;
+
+         function startInactivityTimer() {
+             // Définir le délai d'inactivité (en millisecondes)
+             const inactivityDelay = 15 * 60 * 1000; // 15 minutes
+
+             clearTimeout(inactivityTimeout);
+             inactivityTimeout = setTimeout(() => {
+                 unlockPage(); // Déverrouiller la page après le délai d'inactivité
+             }, inactivityDelay);
+         }
+
+         // Écouter les événements d'activité pour réinitialiser le timer
+         window.addEventListener('mousemove', startInactivityTimer);
+         window.addEventListener('keydown', startInactivityTimer);
+         window.addEventListener('click', startInactivityTimer);
+
+         // Démarrer le timer au chargement de la page
+         startInactivityTimer();
+
+
+         document.getElementById('lockModal').addEventListener('hidden.bs.modal', function (event) {
+        // Rediriger vers la page précédente
+        window.history.back();
+    });
+     });
+ </script>

@@ -336,8 +336,7 @@
                                             <div class="d-flex flex-row gap-2 align-items-center">
 
                                                 <div class="d-flex flex-column">
-                                                    <a href="{{ asset($document_url) }}" target="_blank">Document
-                                                        {{ $j + 1 }}</a>
+                                                    <a href="{{ asset($document_url) }}" target="_blank">{{ last(explode('/', $document_url))}}</a>
                                                 </div>
                                             </div>
                                         </div>

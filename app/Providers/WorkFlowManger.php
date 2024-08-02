@@ -12,6 +12,7 @@ use App\Models\Demande;
 use App\Models\Habilete;
 use App\Models\Historique;
 use App\Models\IndexTraitement;
+use App\Models\PageLock;
 use App\Models\Traitement;
 use App\Models\User;
 use DateTime;
@@ -252,6 +253,8 @@ class WorkFlowManger
       $isTransmitted = (!$currentUserIndexTraitement && $currentUserAdminAction) ? true : false;
       $isOwner = in_array($user->habilete_id, $outputArray[$demande->habilete_position]);
 
+      $isPageLock = PageLock::where('page_identifier', $demande->id)->with('user')->first();
+
       return [
          'demande' => $demande,
          'circuit' => $habiletes_array,
@@ -259,6 +262,7 @@ class WorkFlowManger
          'isTransmitted' => $isTransmitted,
          'isOwner' => $isOwner,
          'historiques' => $historiques,
+         'isPageLock' => $isPageLock
       ];
    }
 

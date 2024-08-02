@@ -6,9 +6,11 @@ use App\Models\Demande;
 use App\Models\Habilete;
 use App\Facades\Manager as WorkFlow;
 use App\Helpers\SendSmS;
+use App\Mail\GlobalSenderMail;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class DemandeController extends Controller
@@ -122,12 +124,16 @@ class DemandeController extends Controller
                         'fichier' => $namefile1,
                     ]);
 
-                $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
+                $demande = Demande::where('recepice_number', $data[0])->with(['client', 'point_enrolement'])->first();
                 if ($demande) {
-                    $demande = Demande::where('numero_document', $data[0])->with(['client', 'point_enrolement'])->first();
-                    $message_sms = "Votre document du n° [" . $data[0] . "] est disponible, passez le recuperer au point d enrollement " . $demande->point_enrolement->nom_pe;
+                    // $demande = Demande::where('recepice_number', $data[0])->with(['client', 'point_enrolement'])->first();
+                    $message_sms = "Votre Recepissé n° [" . $data[0] . "] est disponible, passez le recuperer au point d enrollement " . $demande->point_enrolement->nom_pe;
                     $sms = new SendSmS();
                     $sms->send(optional($demande->client)->telephone_client, $message_sms);
+
+                    $subject = "RETRAIT DE DOCUMENT";
+                    Mail::to(optional($demande->client)->email_client)->send(new GlobalSenderMail($message_sms, $subject, []));
+
                     $nbredoc_importer++;
                 }
                 $nbredoc_total++;

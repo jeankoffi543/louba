@@ -92,12 +92,21 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    takeRdv: function takeRdv() {
+    editPredemande: function editPredemande() {
       var _this$dataItem5;
+      this.$router.push({
+        name: "predemande-edit",
+        params: {
+          documentId: (_this$dataItem5 = this.dataItem) === null || _this$dataItem5 === void 0 ? void 0 : _this$dataItem5.id
+        }
+      });
+    },
+    takeRdv: function takeRdv() {
+      var _this$dataItem6;
       this.$router.push({
         name: "appointment-start",
         params: {
-          documentId: (_this$dataItem5 = this.dataItem) === null || _this$dataItem5 === void 0 ? void 0 : _this$dataItem5.id
+          documentId: (_this$dataItem6 = this.dataItem) === null || _this$dataItem6 === void 0 ? void 0 : _this$dataItem6.id
         }
       });
     }
@@ -116,8 +125,8 @@ __webpack_require__.r(__webpack_exports__);
       return this.indexBuild % 2 === 0;
     },
     dateRdv: function dateRdv() {
-      var _this$dataItem6, _this$dataItem7;
-      var d = (_this$dataItem6 = this.dataItem) !== null && _this$dataItem6 !== void 0 && _this$dataItem6.date_rdv_demande ? new Date((_this$dataItem7 = this.dataItem) === null || _this$dataItem7 === void 0 ? void 0 : _this$dataItem7.date_rdv_demande).toLocaleDateString(undefined, {
+      var _this$dataItem7, _this$dataItem8;
+      var d = (_this$dataItem7 = this.dataItem) !== null && _this$dataItem7 !== void 0 && _this$dataItem7.date_rdv_demande ? new Date((_this$dataItem8 = this.dataItem) === null || _this$dataItem8 === void 0 ? void 0 : _this$dataItem8.date_rdv_demande).toLocaleDateString(undefined, {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -254,14 +263,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "app-ml-0 app-mr-0 app-justify-content-space-between"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          var _$props$dataItem6, _$props$dataItem7;
+          var _$props$dataItem8, _$props$dataItem9, _$props$dataItem10, _$props$dataItem11;
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <el-col v-if=\"dataItem?.paiement?.reference_pay == null\" :sm=\"24\" :xs=\"24\" class=\"print-appointment\">\r\n                                    <el-button class=\"\" @click.stop=\"buyMaDemande\">\r\n                                        Payer\r\n                                    </el-button>\r\n                                </el-col>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_col, {
             sm: 12,
             xs: 24,
             "class": "print-appointment"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
+              var _$props$dataItem6, _$props$dataItem7;
+              return [((_$props$dataItem6 = $props.dataItem) === null || _$props$dataItem6 === void 0 ? void 0 : _$props$dataItem6.predemande_step) == 1 && ((_$props$dataItem7 = $props.dataItem) === null || _$props$dataItem7 === void 0 ? void 0 : _$props$dataItem7.status_demande) == 'REJECTED' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_button, {
+                key: 0,
+                "class": "",
+                onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.editPredemande, ["stop"])
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Modifier ")];
+                }),
+                _: 1 /* STABLE */
+              }, 8 /* PROPS */, ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_button, {
+                key: 1,
                 "class": "",
                 onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.detailsAppointment, ["stop"])
               }, {
@@ -269,11 +289,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Détails ")];
                 }),
                 _: 1 /* STABLE */
-              }, 8 /* PROPS */, ["onClick"])];
+              }, 8 /* PROPS */, ["onClick"]))];
             }),
             _: 1 /* STABLE */
-          }), ((_$props$dataItem6 = $props.dataItem) === null || _$props$dataItem6 === void 0 ? void 0 : _$props$dataItem6.predemande_step) == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_col, {
+          }), ((_$props$dataItem8 = $props.dataItem) === null || _$props$dataItem8 === void 0 ? void 0 : _$props$dataItem8.predemande_step) == 1 && ((_$props$dataItem9 = $props.dataItem) === null || _$props$dataItem9 === void 0 ? void 0 : _$props$dataItem9.status_demande) == 'REJECTED' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_col, {
             key: 0,
+            sm: 12,
+            xs: 24,
+            "class": "reject-appointment"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
+                "class": "text-danger"
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Rejetée")];
+                }),
+                _: 1 /* STABLE */
+              })];
+            }),
+            _: 1 /* STABLE */
+          })) : ((_$props$dataItem10 = $props.dataItem) === null || _$props$dataItem10 === void 0 ? void 0 : _$props$dataItem10.predemande_step) == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_col, {
+            key: 1,
             sm: 12,
             xs: 24,
             "class": "reject-appointment"
@@ -289,8 +326,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               })];
             }),
             _: 1 /* STABLE */
-          })) : ((_$props$dataItem7 = $props.dataItem) === null || _$props$dataItem7 === void 0 ? void 0 : _$props$dataItem7.predemande_step) == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_col, {
-            key: 1,
+          })) : ((_$props$dataItem11 = $props.dataItem) === null || _$props$dataItem11 === void 0 ? void 0 : _$props$dataItem11.predemande_step) == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_col, {
+            key: 2,
             sm: 12,
             xs: 24,
             "class": "reject-appointment"
@@ -308,7 +345,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }),
             _: 1 /* STABLE */
           })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_col, {
-            key: 2,
+            key: 3,
             sm: 12,
             xs: 24,
             "class": "reject-appointment"

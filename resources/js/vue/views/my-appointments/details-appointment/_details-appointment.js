@@ -40,6 +40,16 @@ export default {
             console.log("this.demandeObj", this.appointment);
             return this.appointment?.demande ?? null;
         },
+        documentUrls() {
+            if (!this.appointment?.demande?.document_url) {
+                return [];
+              }
+        
+              return this.appointment?.demande?.document_url.split(',').map(url => {
+                const filename = url.split('/').pop();
+                return { url, filename };
+              });
+          },
         dateNaiss() {
             return this.appointment?.demande == null ? "-": new Date(this.appointment?.demande?.client?.date_naissance_client).toLocaleDateString(undefined, {
                 weekday: "long",
@@ -99,7 +109,7 @@ export default {
     },
 
     beforeMount() {
-        this.documentId = this.$route.params.documentId;
+        this.documentId = this.$route?.params?.documentId;
         this.fetchData()
     },
 
