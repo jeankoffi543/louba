@@ -138,7 +138,7 @@
                 {{ \Carbon\Carbon::parse($maDemande->client->date_naissance_client)->format('d-m-Y') }}
             </span>
 
-            A: {{ $maDemande->client->adresse_client }}
+            A: {{ $maDemande->client->birth_address }}
         </p>
 
         <p>
