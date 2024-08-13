@@ -127,7 +127,7 @@ export default {
             return nationnality
         },
         formateDateAppointement(date) {
-            return new Date(date).toLocaleDateString(undefined, {
+            return new Date(date).toLocaleDateString('fr-FR', {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
@@ -136,7 +136,7 @@ export default {
         },
         
         formateDateAppointement2(date) {
-            return new Date(date).toLocaleDateString(undefined, {
+            return new Date(date).toLocaleDateString('fr-FR', {
                 weekday: "long",
                 day: "numeric",
                 month: "long",

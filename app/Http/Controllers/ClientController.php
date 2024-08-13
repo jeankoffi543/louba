@@ -617,9 +617,16 @@ class ClientController extends Controller
             } catch (GuzzleException $e) {
                 // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
             }
-            // send mail in client
-            $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('d-m-Y'), 'maDemande' => $demande, 'code_demande' => $demande->code_demande,]);
 
+            $predemandeQrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($demande->code_demande));
+            $timbreQrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($demande->numero_recu));
+
+            
+            // send mail in client
+            // $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('d-m-Y'), 'maDemande' => $demande, 'code_demande' => $demande->code_demande,]);
+
+            $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('y-m-d'), 'maDemande' => $demande, 'code_demande' => $demande->code_demande, 'predemandeQrcode' => $predemandeQrcode, 'timbreQrcode' => $timbreQrcode]);
+            
             $demandeSave = Demande::with(['client', 'sender', 'product', 'point_enrolement'])->where("id", "=", $demande->id)->first();
 
             $dataAttachment = [

@@ -179,8 +179,9 @@
                                 <p class="description-info app-m-0">
                                     il est nécessaire de prendre tous vos précautions afin d’honorer
                                     votre rendez-vous pris pour le <span class="value-item"
-                                        style="font-weight: bold;">{{
-                                            demandeObj?.date_rdv_demande ?? '-' }}</span>
+                                        style="font-weight: bold;">
+                                    {{ formateDateAppointement(demandeObj?.date_rdv_demande ?? '-') }}
+                                    </span>
                                 </p>
                             </div>
 

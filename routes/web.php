@@ -100,7 +100,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('productionDocument')->group(function () {
-        Route::post('/', [DemandeController::class, 'postFichierProduction'])->name('productionDocument_postFichierProduction');
+        Route::post('/', [DemandeController::class, 'postFichierProduction'])->name('productionDocument_postFichierProduction')->middleware('CheckHabiletesPermissions:production-de-document');
         Route::get('/', [DemandeController::class, 'getFichierProduction']);
         Route::get('/liste', [DemandeController::class, 'getFichierProductionListe'])->middleware('CheckHabiletesPermissions:consulter-liste-de-production');
     });

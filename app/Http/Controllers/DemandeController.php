@@ -42,11 +42,13 @@ class DemandeController extends Controller
     {
         $data = $request->all();
         $rules = [
-            'document1' => 'required|mimes:csv',
+            'document1' => 'required|mimes:csv,txt',
         ];
-
         $validator = Validator::make($data, $rules);
-        if ($validator->fails()) return redirect('/404');
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error_message', 'Veuillez importer un fichier valide.');
+        }
 
         $file1 = $request->file('document1');
 
@@ -152,7 +154,7 @@ class DemandeController extends Controller
 
         flash('Importation reussi avec succes');
 
-        return redirect()->back();
+        return redirect()->back()->with('success_message', 'Document(s) importé(s) avec succès');
     }
 
 
@@ -488,11 +490,11 @@ class DemandeController extends Controller
     {
         $authUser = auth()->user();
 
-        if(request('status') === "REJECTED"){
+        if (request('status') === "REJECTED") {
             return view('admin.pre-demande', [
                 'demandes' => WorkFlow::getDemandeByHabilete($authUser, 'PRE-DEMANDE_' . request('status')),
             ]);
-        }else if(request('status') === "TRANSMITTED"){
+        } else if (request('status') === "TRANSMITTED") {
             return view('admin.pre-demande', [
                 'demandes' => WorkFlow::getDemandeByHabilete($authUser, 'PRE-DEMANDE_' . request('status')),
             ]);
