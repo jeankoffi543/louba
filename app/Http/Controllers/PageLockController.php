@@ -31,7 +31,7 @@ class PageLockController extends Controller
             ->where('user_id', $userId)
             ->delete();
 
-        return response()->json(['status' => 'unlocked']);
+        return response()->json(['status' => 'unlocked']); 
     }
 
     public function isPageLocked(Request $request)

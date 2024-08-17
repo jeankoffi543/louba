@@ -7,6 +7,7 @@ use App\Models\Habilete;
 use App\Facades\Manager as WorkFlow;
 use App\Helpers\SendSmS;
 use App\Mail\GlobalSenderMail;
+use App\Models\PageLock;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
