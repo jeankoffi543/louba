@@ -1126,6 +1126,7 @@
          function startInactivityTimer() {
              // Définir le délai d'inactivité (en millisecondes)
              const inactivityDelay = 15 * 60 * 1000; // 15 minutes
+            //  const inactivityDelay = 6000; // 6 secondes
 
              clearTimeout(inactivityTimeout);
              inactivityTimeout = setTimeout(() => {
@@ -1138,8 +1139,8 @@
          window.addEventListener('keydown', startInactivityTimer);
          window.addEventListener('click', startInactivityTimer);
 
-         // Démarrer le timer au chargement de la page
-         startInactivityTimer();
+         // Démarrer en cas d'inactivité sur une durée de  minutes
+        //  startInactivityTimer();
 
 
          document.getElementById('lockModal').addEventListener('hidden.bs.modal', function (event) {
