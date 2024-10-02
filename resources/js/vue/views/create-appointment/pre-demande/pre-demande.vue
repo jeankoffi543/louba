@@ -13,21 +13,43 @@
                                     <el-radio border label="duplicata" model-value="duplicata">Duplicata</el-radio>
                                     <el-radio border label="renouvelement" model-value="renouvelement">Renouvelement
                                     </el-radio>
+                                    <el-radio border label="mineur" model-value="mineur">Mineur
+                                    </el-radio>
+                                    <el-radio border label="binationnaux" model-value="binationnaux">binationnaux
+                                    </el-radio>
                                 </el-radio-group>
                             </el-form-item>
                         </div>
                     </div>
                 </el-collapse-item>
+
                 <el-collapse-item name="4" title="2- Informations personnelle">
                     <div class="information-personne container-fluid">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="group">
-                                    <h1 class="fs-5 item-title">Référence bordereau banque  (optionnel)</h1>
+                                    <h1 class="fs-5 item-title">Référence bordereau banque <strong
+                                            style="color: red;">*</strong></h1>
                                     <el-form-item>
                                         <el-input v-model="formPersonalInfo.numero_recu" placeholder="Numéro du reçu"
                                             size="default"></el-input>
                                     </el-form-item>
+                                    <span v-if="(!formPersonalInfo.numero_recu) && formError" class="error-message">Ce
+                                        champs est obligatoire</span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="group">
+                                    <h1 class="fs-5 item-title">Numéro d'identification unique <strong
+                                            style="color: red;">*</strong></h1>
+                                    <el-form-item>
+                                        <el-input v-model="formPersonalInfo.numero_indentification_unique"
+                                            placeholder="Numéro d'identification unique" size="default"></el-input>
+                                    </el-form-item>
+                                    <span v-if="(!formPersonalInfo.numero_indentification_unique) && formError"
+                                        class="error-message">Ce champs est obligatoire</span>
                                 </div>
                             </div>
                         </div>
@@ -247,8 +269,13 @@
                                     <el-form-item>
                                         <el-input v-model="ascendants.father_lastname" placeholder="Nom"></el-input>
                                     </el-form-item>
+
+                                    <el-form-item>
+                                        <el-input v-model="ascendants.father_nationality"
+                                            placeholder="Nationnalité"></el-input>
+                                    </el-form-item>
                                     <span
-                                        v-if="(!ascendants.father_firstname || !ascendants.father_lastname) && formError"
+                                        v-if="(!ascendants.father_firstname || !ascendants.father_lastname || !ascendants.father_nationality) && formError"
                                         class="error-message">Ces champs sont obligatoire</span>
                                 </div>
                             </div>
@@ -263,8 +290,13 @@
                                     <el-form-item>
                                         <el-input v-model="ascendants.mother_lastname" placeholder="Nom"></el-input>
                                     </el-form-item>
+
+                                    <el-form-item>
+                                        <el-input v-model="ascendants.mother_nationality"
+                                            placeholder="Nationnalité"></el-input>
+                                    </el-form-item>
                                     <span
-                                        v-if="(!ascendants.mother_lastname || !ascendants.mother_firstname) && formError"
+                                        v-if="(!ascendants.mother_lastname || !ascendants.mother_firstname || !ascendants.mother_nationality) && formError"
                                         class="error-message">Ces champs sont obligatoire</span>
                                 </div>
                             </div>
@@ -291,9 +323,8 @@
                                     <el-upload ref="upload" :auto-upload="false" :limit="5" :multiple="true"
                                         :before-upload="beforeUpload" :on-change="uploadPicture"
                                         :on-remove="onRemovePicture" action="#"
-                                        accept="application/pdf, image/jpg, image/jpeg, image/png" class="upload-demo"  :file-list="fileList"
-
-                                        :list-type="'text'">
+                                        accept="application/pdf, image/jpg, image/jpeg, image/png" class="upload-demo"
+                                        :file-list="fileList" :list-type="'text'">
                                         <div v-if="documentPreview?.type === ''" class="el-upload__text">{{
                                             titleDocumentUpload }}</div>
                                     </el-upload>
@@ -335,7 +366,14 @@
                         <div class="row">
                             <div class="app-w-100 app-d-flex app-d-flex app-justify-content-center">
                                 <el-row :gutter="24" class="app-w-50">
-                                    <el-col :sm="24" :xs="24" class="mt-3">
+
+                                    <el-col :sm="12" :xs="24" class="mt-3">
+                                        <ButtonApp style="width: fit-content;" v-loading="isLoadingSaveBrouillon"
+                                            button-title="Enregistrer le brouillon" class="space"
+                                            @click="sendPredemandeBrouillon"></ButtonApp>
+                                    </el-col>
+
+                                    <el-col :sm="12" :xs="12" class="mt-3">
                                         <ButtonApp v-loading="isLoadingSaveAppointment" button-title="Valider"
                                             class="space" @click="sendPredemande"></ButtonApp>
                                     </el-col>

@@ -14,6 +14,7 @@ export default {
 
     data() {
         return {
+            preDemande: null,
             formError: false,
             activeNames: ["1", "2", "3", "4", "5"],
             disabledStep1: false,
@@ -99,6 +100,11 @@ export default {
         },
     },
 
+    mounted() {
+        const id = this.$route.params.documentId; // This will give you the value "1"
+        this.fetchPreDemandData(id); // Now you can use this id in a request
+    },
+
     beforeMount() {
         this.fetchDataProducts();
         this.fetchDataSerives();
@@ -109,19 +115,29 @@ export default {
     },
 
     methods: {
+        async fetchPreDemandData(id) {
+            axios
+                .get("api/get-one-appointment-2/" + id)
+                .then(async (response) => {
+                    const demande = response.data?.demande;
+                    this.preDemande = demande;
+                });
+        },
         changeEnrolment: function (item) {
-            const pointEnrol = this.enrolmentsPoint?.find((enrolment) => enrolment.id_pe == item);
+            const pointEnrol = this.enrolmentsPoint?.find(
+                (enrolment) => enrolment.id_pe == item
+            );
             this.pointEnrolementServices = pointEnrol?.services;
         },
         onSwitchPage: function () {
             this.formError = false;
             if (
-                !this.formPersonalInfo.serviceId  ||
+                !this.formPersonalInfo.serviceId ||
                 this.formPersonalInfo.serviceId == null ||
                 this.formPersonalInfo.serviceId == ""
             ) {
-            this.formError = true;
-            this.$swal({
+                this.formError = true;
+                this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Le type de service est obligatoire",
@@ -137,8 +153,8 @@ export default {
                 this.formPersonalInfo.siteAppointmentId === null ||
                 this.formPersonalInfo.siteAppointmentId == ""
             ) {
-            this.formError = true;
-            this.$swal({
+                this.formError = true;
+                this.$swal({
                     position: "center",
                     icon: "warning",
                     title: "Le numéro du récu est obligatoire",
@@ -147,8 +163,8 @@ export default {
                 });
                 return;
             } else {
-            this.formError = false;
-            const payload = {
+                this.formError = false;
+                const payload = {
                     key: [KEY_FORM_JSON.FORM_INFO_USER],
                     data: {
                         ...this.formPersonalInfo,
@@ -201,6 +217,12 @@ export default {
                 this.titleDocumentUpload = "Déclaration de perte";
             } else if (this.typeDemand === "renouvelement") {
                 this.titleDocumentUpload = "Copie précédent passeport";
+            } else if (this.typeDemand === "mineur") {
+                this.titleDocumentUpload =
+                    "Copie extrait de naissance et copie extrait de naissance du parent";
+            } else if (this.typeDemand === "binationnaux") {
+                this.titleDocumentUpload =
+                    "Copie extrait de naissance et pièce d'identité du parent étranger";
             }
 
             this.onNextStep(nameNextStep);

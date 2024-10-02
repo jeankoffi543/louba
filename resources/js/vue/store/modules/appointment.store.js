@@ -66,6 +66,7 @@ const state = {
     serviceSelected: null,
     statusResponse: null,
     appointments: {message: null, demandes: []},
+    appointmentsBrouillon: {message: null, demandes: []},
     appointment: null,
     initPayData: null,
 };
@@ -87,6 +88,7 @@ const getters = {
     GET_SERVICE_SELECTED: (state) => state.serviceSelected,
     GET_STATUS_RESPONSE: (state) => state.statusResponse,
     GET_APPOINTMENT: (state) => state.appointments.demandes,
+    GET_APPOINTMENT_BROUILLON: (state) => state.appointmentsBrouillon.demandes,
     GET_ONE_APPOINTMENT: (state) => state.appointment,
     GET_MESSAGE_APPOINTMENT: (state) => state.appointments.message,
     GET_INIT_RESPONSE_PAYMENT: (state) => state.initPayData,
@@ -112,6 +114,10 @@ const mutations = {
     },
     SET_APPOINTMENT(state, payload) {
         state.appointments = payload;
+    },
+    
+    SET_APPOINTMENT_BROUILLON(state, payload) {
+        state.appointmentsBrouillon = payload;
     },
     SET_ONE_APPOINTMENT(state, payload) {
         state.appointment = payload;
@@ -165,6 +171,20 @@ const actions = {
             commit("SET_LOADING", false);
         });
     },
+
+    FETCH_APPOINTMENT_BROUILLON({state, commit}, payload) {
+        commit("SET_LOADING", true);
+        axios.get(`/api/get-appointment-brouillon`, payload).then(responseAxios => {
+            console.log("responseAxios.data", responseAxios.data)
+            commit("SET_APPOINTMENT_BROUILLON", responseAxios.data);
+        }).catch((err) => {
+            commit("SET_APPOINTMENT_BROUILLON", {message: "Aucune demande", demandes: []});
+            console.log("err", err);
+        }).finally(() => {
+            commit("SET_LOADING", false);
+        });
+    },
+
 
     FETCH_ONE_APPOINTMENT({state, commit}, payload) {
         commit("SET_LOADING", true);

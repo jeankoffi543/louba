@@ -54,6 +54,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     return {
       today: new Date().toISOString().split('T')[0],
       // Obtient la date d'aujourd'hui en format YYYY-MM-DD
+      placeDisponible: null,
       date_rdv_demande: null,
       disabledSave: true,
       pointEnrolement: null,
@@ -126,9 +127,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         url = "api/get-one-appointment-by-id/" + ((_this$formDataRequest2 = this.formDataRequest) === null || _this$formDataRequest2 === void 0 || (_this$formDataRequest2 = _this$formDataRequest2.user) === null || _this$formDataRequest2 === void 0 ? void 0 : _this$formDataRequest2.siteAppointmentId) + "?today=" + today;
       }
       axios__WEBPACK_IMPORTED_MODULE_8__["default"].get(url).then(function (response) {
-        var _response$data;
+        var _response$data, _response$data2, _response$data3;
         _this.pointEnrolement = response.data;
-        if ((response === null || response === void 0 ? void 0 : response.data.countToday) == (response === null || response === void 0 || (_response$data = response.data) === null || _response$data === void 0 || (_response$data = _response$data.pointEnrolement) === null || _response$data === void 0 ? void 0 : _response$data.capacite_maximale_jour_pe) || !today) {
+        _this.placeDisponible = ((_response$data = response.data) === null || _response$data === void 0 || (_response$data = _response$data.pointEnrolement) === null || _response$data === void 0 ? void 0 : _response$data.capacite_maximale_jour_pe) - ((_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.countToday);
+        if ((response === null || response === void 0 ? void 0 : response.data.countToday) == (response === null || response === void 0 || (_response$data3 = response.data) === null || _response$data3 === void 0 || (_response$data3 = _response$data3.pointEnrolement) === null || _response$data3 === void 0 ? void 0 : _response$data3.capacite_maximale_jour_pe) || !today) {
           _this.disabledSave = true;
         } else {
           _this.disabledSave = false;
@@ -563,7 +565,7 @@ var _hoisted_14 = {
   key: 0,
   "class": "text-info"
 };
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Capacité journalière", -1 /* HOISTED */);
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Place disponible", -1 /* HOISTED */);
 var _hoisted_16 = {
   "class": "d-flex flex-row justify-content-start"
 };
@@ -571,23 +573,20 @@ var _hoisted_17 = {
   "class": "text-info"
 };
 var _hoisted_18 = {
-  "class": "text-info"
-};
-var _hoisted_19 = {
   key: 0,
   "class": "text-info"
 };
-var _hoisted_20 = {
+var _hoisted_19 = {
   "class": "row mt-2"
 };
-var _hoisted_21 = {
+var _hoisted_20 = {
   "class": "col-6"
 };
-var _hoisted_22 = {
+var _hoisted_21 = {
   "class": "d-flex flex-row justify-content-start gap-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$data$pointEnrolemen, _$data$pointEnrolemen2, _$data$pointEnrolemen3, _$data$pointEnrolemen4, _$data$pointEnrolemen5;
+  var _$data$pointEnrolemen, _$data$pointEnrolemen2, _$data$placeDisponibl, _$data$pointEnrolemen3;
   var _component_FullCalendar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FullCalendar");
   var _component_el_tag = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-tag");
   var _component_ButtonApp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ButtonApp");
@@ -621,7 +620,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" jour disponible ")];
     }),
     _: 1 /* STABLE */
-  })]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$pointEnrolemen = $data.pointEnrolement) === null || _$data$pointEnrolemen === void 0 || (_$data$pointEnrolemen = _$data$pointEnrolemen.pointEnrolement) === null || _$data$pointEnrolemen === void 0 ? void 0 : _$data$pointEnrolemen.nom_pe), 1 /* TEXT */), !((_$data$pointEnrolemen2 = $data.pointEnrolement) !== null && _$data$pointEnrolemen2 !== void 0 && (_$data$pointEnrolemen2 = _$data$pointEnrolemen2.pointEnrolement) !== null && _$data$pointEnrolemen2 !== void 0 && _$data$pointEnrolemen2.nom_pe) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, "chargement... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$pointEnrolemen3 = $data.pointEnrolement) === null || _$data$pointEnrolemen3 === void 0 ? void 0 : _$data$pointEnrolemen3.countToday), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" / "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$pointEnrolemen4 = $data.pointEnrolement) === null || _$data$pointEnrolemen4 === void 0 || (_$data$pointEnrolemen4 = _$data$pointEnrolemen4.pointEnrolement) === null || _$data$pointEnrolemen4 === void 0 ? void 0 : _$data$pointEnrolemen4.capacite_maximale_jour_pe), 1 /* TEXT */), !((_$data$pointEnrolemen5 = $data.pointEnrolement) !== null && _$data$pointEnrolemen5 !== void 0 && (_$data$pointEnrolemen5 = _$data$pointEnrolemen5.pointEnrolement) !== null && _$data$pointEnrolemen5 !== void 0 && _$data$pointEnrolemen5.capacite_maximale_jour_pe) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_19, "chargement... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
+  })]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$pointEnrolemen = $data.pointEnrolement) === null || _$data$pointEnrolemen === void 0 || (_$data$pointEnrolemen = _$data$pointEnrolemen.pointEnrolement) === null || _$data$pointEnrolemen === void 0 ? void 0 : _$data$pointEnrolemen.nom_pe), 1 /* TEXT */), !((_$data$pointEnrolemen2 = $data.pointEnrolement) !== null && _$data$pointEnrolemen2 !== void 0 && (_$data$pointEnrolemen2 = _$data$pointEnrolemen2.pointEnrolement) !== null && _$data$pointEnrolemen2 !== void 0 && _$data$pointEnrolemen2.nom_pe) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, "chargement... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"text-info\"> {{ pointEnrolement?.countToday }} </span> /\r\n                                <span class=\"text-info\">{{ pointEnrolement?.pointEnrolement?.capacite_maximale_jour_pe\r\n                                    }} </span> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$placeDisponibl = $data.placeDisponible) !== null && _$data$placeDisponibl !== void 0 ? _$data$placeDisponibl : '-'), 1 /* TEXT */), !((_$data$pointEnrolemen3 = $data.pointEnrolement) !== null && _$data$pointEnrolemen3 !== void 0 && (_$data$pointEnrolemen3 = _$data$pointEnrolemen3.pointEnrolement) !== null && _$data$pointEnrolemen3 !== void 0 && _$data$pointEnrolemen3.capacite_maximale_jour_pe) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_18, "chargement... ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ButtonApp, {
     "primary-btn": false,
     "button-title": "Retour",
     "class": "space1",

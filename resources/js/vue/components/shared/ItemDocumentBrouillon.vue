@@ -9,23 +9,14 @@
                 <div class="name-document">
                     <h3 class="">{{ dataItem?.client?.prenom_client }} {{ dataItem?.client?.nom_client }} </h3>
                 </div>
-                <el-row :gutter="24" class="app-m-0 app-justify-content-space-between">
-                    <el-col :sm="24" :xs="24">
-                        <span class="user-name point-enrolment flew flex-row">
-                            <small>Point d'enrôlement : </small>
-                            {{ dataItem?.point_enrolement?.nom_pe }}
-                        </span>
-                    </el-col>
-
-                </el-row>
+                
                 <el-row :gutter="24" class="app-m-0 app-justify-content-space-between" style="margin-bottom: 8px">
                     <el-col :sm="12" :xs="24" class="date-appointment">
                         <el-button class="button-primary" type="success">N° dossier : {{ dataItem?.code_demande }}
                         </el-button>
                     </el-col>
                     <el-col :sm="12" :xs="24" class="status-appointment">
-                        <el-button class="button-primary app-d-flex app-justify-content-flex-end" type="success">{{
-                            status(dataItem) }}
+                        <el-button class="button-primary app-d-flex app-justify-content-flex-end" type="success">Brouillon
                         </el-button>
                     </el-col>
                 </el-row>
@@ -37,40 +28,19 @@
                                     </el-button>
                                 </el-col>-->
 
-                <el-col :sm="12" :xs="24" class="print-appointment">
-                    <el-button v-if="dataItem?.predemande_step == 1 && dataItem?.status_demande == 'REJECTED'" class="" @click.stop="editPredemande">
+                <el-col :sm="24" :xs="24" class="print-appointment">
+                    <el-button  class="" @click.stop="editPredemande">
                         Modifier
                     </el-button>
-
-                    <el-button v-else class="" @click.stop="detailsAppointment">
-                        Détails
-                    </el-button>
+                    
                 </el-col>
-
-                <el-col v-if="dataItem?.predemande_step == 1 && dataItem?.status_demande == 'REJECTED'" :sm="12" :xs="24" class="reject-appointment">
-                    <el-button class="text-danger"> Rejetée</el-button>
-                </el-col>
-
-                <el-col v-else-if="dataItem?.predemande_step == 1" :sm="12" :xs="24" class="reject-appointment">
-                    <el-button class="text-danger"> Veuillez patienter... </el-button>
-                </el-col>
-                
-
-                <el-col v-else-if="dataItem?.predemande_step == 2" :sm="12" :xs="24" class="reject-appointment">
-                    <el-button class="" @click="takeRdv"> Prendre rendez-vous</el-button>
-                </el-col>
-
-                <el-col v-else :sm="12" :xs="24" class="reject-appointment">
-                    <el-button class="" @click.stop="getRecu"> Télécharger le reçu</el-button>
-                </el-col>
-
             </el-row>
         </el-card>
     </div>
 </template>
 <script>
 export default {
-    name: "ItemDocument",
+    name: "ItemDocumentBrouillon",
     props: {
         indexBuild: {
             type: Number,
@@ -151,7 +121,7 @@ export default {
             this.$router.push({
                 name: "predemande-edit", params: {
                     documentId: this.dataItem?.id,
-                    demandeType: "original"
+                    demandeType: "brouillon"
                 }
             })
         },

@@ -381,6 +381,18 @@ const routes = [
                     },
 
                     {
+                        path: "brouillon",
+                        name: "mon-brouillon",
+                        meta: {
+                            breadcrumb: "Brouillon",
+                        },
+                        component: () =>
+                            import(
+                                "../views/my-appointments/list-brouillon/list-brouillon.vue"
+                            ),
+                    },
+
+                    {
                         path: "download",
                         name: "downloadable",
                         meta: {
@@ -425,7 +437,7 @@ const routes = [
                             ),
                     },
                     {
-                        path: "pre-demande/:documentId",
+                        path: "pre-demande/:documentId/:demandeType",
                         name: "predemande-edit",
                         meta: {
                             breadcrumb: "Modifier une pre-demande",
@@ -458,7 +470,7 @@ const routes = [
                                 "../views/create-appointment/pre-demande/pre-demande.vue"
                             ),
                     },
-           
+
                     {
                         meta: {
                             breadcrumb: "Pre demande",
@@ -470,7 +482,7 @@ const routes = [
                                 "../views/create-appointment/not-found/not-found.vue"
                             ),
                     },
-           
+
                     {
                         path: "start/:documentId",
                         name: "appointment-start",
@@ -602,7 +614,8 @@ const routes = [
     {
         path: "/:pathMatch(.*)*",
         name: "NotFound",
-        component: () => import("../views/create-appointment/not-found/not-found.vue")
+        component: () =>
+            import("../views/create-appointment/not-found/not-found.vue"),
         // component: SignIn,
     },
 ];

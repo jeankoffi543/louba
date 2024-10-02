@@ -13,6 +13,9 @@
                 
                 <el-menu-item index="1-1" @click="$router.push({ name: 'all-documents' })">Mes rendez-vous
                 </el-menu-item>
+
+                <el-menu-item index="1-2" @click="$router.push({ name: 'mon-brouillon' })">Mon brouillon
+                </el-menu-item>
                 <!-- <el-menu-item index="1-2" @click="$router.push({ name: 'appointment-start' })">Prendre rendez-vous
                 </el-menu-item> -->
 

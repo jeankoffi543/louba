@@ -39,11 +39,13 @@
                             <span class="text-info" v-if="!pointEnrolement?.pointEnrolement?.nom_pe">chargement...
                             </span>
 
-                            <b>Capacité journalière</b>
+                            <b>Place disponible</b>
                             <div class="d-flex flex-row justify-content-start">
-                                <span class="text-info"> {{ pointEnrolement?.countToday }} </span> /
+                                <!-- <span class="text-info"> {{ pointEnrolement?.countToday }} </span> /
                                 <span class="text-info">{{ pointEnrolement?.pointEnrolement?.capacite_maximale_jour_pe
-                                    }} </span>
+                                    }} </span> -->
+                                <span class="text-info"> {{ placeDisponible ?? '-' }} </span> 
+
                                 <span class="text-info"
                                     v-if="!pointEnrolement?.pointEnrolement?.capacite_maximale_jour_pe">chargement...
                                 </span>
@@ -105,6 +107,7 @@ export default {
     data() {
         return {
             today: new Date().toISOString().split('T')[0], // Obtient la date d'aujourd'hui en format YYYY-MM-DD
+            placeDisponible: null,
             date_rdv_demande: null,
             disabledSave: true,
             pointEnrolement: null,
@@ -187,6 +190,7 @@ export default {
             }
             axios.get(url).then((response) => {
                 this.pointEnrolement = response.data
+                this.placeDisponible = response.data?.pointEnrolement?.capacite_maximale_jour_pe - response.data?.countToday
                 if (response?.data.countToday == response?.data?.pointEnrolement?.capacite_maximale_jour_pe || !today) {
                     this.disabledSave = true
                 } else {

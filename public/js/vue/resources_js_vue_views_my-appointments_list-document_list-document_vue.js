@@ -97,7 +97,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: "predemande-edit",
         params: {
-          documentId: (_this$dataItem5 = this.dataItem) === null || _this$dataItem5 === void 0 ? void 0 : _this$dataItem5.id
+          documentId: (_this$dataItem5 = this.dataItem) === null || _this$dataItem5 === void 0 ? void 0 : _this$dataItem5.id,
+          demandeType: "original"
         }
       });
     },

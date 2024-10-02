@@ -1,6 +1,9 @@
 <template>
     <div class="start-request">
         <div class="demo-collapse">
+            <strong>
+                Pre-demande N°: {{ preDemande?.numero_pre_demande ?? "-" }}
+            </strong>
             <el-collapse ref="collapse" v-model="activeNames" @change="handleChange">
 
                 <div class="col-sm-12 col-md-12">

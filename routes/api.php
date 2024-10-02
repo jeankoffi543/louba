@@ -52,14 +52,18 @@ Route::controller(ClientController::class)->group(function () {
      */
     Route::middleware('auth.api:apiJwt')->group(function () {
         Route::get('get-appointment', 'get_appointment_client');
+        Route::get('get-appointment-brouillon', 'get_appointment_client_brouillon');
         Route::get('get-user-info', 'user_info');
         Route::post('save-appointment', 'save_appointment_client');
         Route::post('save-pre-demande', 'save_predemande_client');
+        Route::post('save-pre-demande-brouillon', 'save_predemande_brouillon');
         Route::get('get-one-appointment/{id}', 'get_one_appointment_client');
+        Route::get('get-one-appointment-brouillon/{id}', 'get_one_appointment_client_brouillon');
         Route::get('get-one-appointment-by-id/{id}', 'get_one_appointment_by_id');
         Route::get('init-pay-demande/{id}', 'init_pay_demande');
         Route::put('update-password', 'update_password_client');
         Route::get('get-ferry-current-day', 'getCurrentPublicHoliday');
     });
+    Route::get('get-one-appointment-2/{id}', 'get_one_appointment_client');
 
 });

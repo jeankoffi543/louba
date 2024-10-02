@@ -32,6 +32,7 @@ use App\Models\AdminAction;
 use App\Models\Historique;
 use App\Models\IndexTraitement;
 use App\Models\PointEnrolement;
+use App\Models\PreDemandeBrouillon;
 use App\Models\PublicHoliday;
 use App\Models\Service;
 use DateTime;
@@ -221,6 +222,30 @@ class ClientController extends Controller
             return response()->json($data, 500);
         }
     }
+
+    public function get_appointment_client_brouillon(Request $request)
+    {
+
+        try {
+            $clientId = auth('apiJwt')->user()->id;
+            $demandes = PreDemandeBrouillon::where('id_sender', $clientId)->with(["point_enrolement", "product", "client", 'sender', "service"])->get()->toArray();;
+
+            for ($i = 0; $i < count($demandes); $i++) {
+
+                $demandes[$i]["paiement"] = Paiement::where('id_demande', '=', $demandes[$i]["id"])->first();
+            }
+
+            $data['message'] = "ok";
+            $data['demandes'] = $demandes;
+            return response()->json($data);
+        } catch (Exception $ex) {
+            $data['message'] = "Aucune demande";
+            $data['description'] = $ex->getMessage();
+            $data['demandes'] = [];
+            return response()->json($data, 500);
+        }
+    }
+
 
     /**
      * @param Request $request
@@ -621,12 +646,12 @@ class ClientController extends Controller
             $predemandeQrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($demande->code_demande));
             $timbreQrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($demande->numero_recu));
 
-            
+
             // send mail in client
             // $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('d-m-Y'), 'maDemande' => $demande, 'code_demande' => $demande->code_demande,]);
 
             $pdf = PDF::loadView('client.attestationAppointmentPdf', ['title' => 'Recu', 'date' => date('y-m-d'), 'maDemande' => $demande, 'code_demande' => $demande->code_demande, 'predemandeQrcode' => $predemandeQrcode, 'timbreQrcode' => $timbreQrcode]);
-            
+
             $demandeSave = Demande::with(['client', 'sender', 'product', 'point_enrolement'])->where("id", "=", $demande->id)->first();
 
             $dataAttachment = [
@@ -686,7 +711,7 @@ class ClientController extends Controller
             DB::beginTransaction();
             $userConnected = auth('apiJwt')->user();
 
-            if ($request->demande_id == null || $request->demande_id == "null" || $request->demande_id == "undefined") {
+            if ($request->demande_id == null || $request->demande_id == "null" || $request->demande_id == "undefined" || $request->demande_id == "brouillon") {
                 $demande = new Demande();
             } else {
                 $demande = Demande::find($request->demande_id);
@@ -702,6 +727,10 @@ class ClientController extends Controller
                 $type_demande = "Renouvelement";
             } elseif ($request->type_request == "duplicata") {
                 $type_demande = "Duplicata";
+            } elseif ($request->type_request == "mineur") {
+                $type_demande = "Mineur";
+            } elseif ($request->type_request == "binationnaux") {
+                $type_demande = "binationnaux";
             } else {
                 $type_demande = "Nouvelle demande";
             }
@@ -736,7 +765,10 @@ class ClientController extends Controller
 
             $code_oni = "GN" . $client->id . substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10 / strlen($x)))), 1, 10);
             $demande->id_sender = $userConnected->id;
+            //date now
+            $demande->numero_pre_demande = uniqid() .  now();
             $demande->nationality = $request->nationality;
+            $demande->numero_indentification_unique = $request->numero_indentification_unique;
             $demande->nationality_state = $request->nationality_state;
             $demande->profession = $request->profession;
             $demande->height = $request->height;
@@ -745,7 +777,9 @@ class ClientController extends Controller
             $demande->eye_color = $request->eye_color;
             $demande->father_first_name = $request->father_first_name;
             $demande->father_last_name = $request->father_last_name;
+            $demande->father_nationality = $request->father_nationality;
             $demande->mother_first_name = $request->mother_first_name;
+            $demande->mother_nationality = $request->mother_nationality;
             $demande->mother_last_name = $request->mother_last_name;
             $demande->numero_recu = $request->numero_recu;
             $demande->address = $request->address;
@@ -778,8 +812,8 @@ class ClientController extends Controller
                     }
                 } else {
                     $originalName = pathinfo($document1->getClientOriginalName(), PATHINFO_FILENAME);
-                        $time = time();
-                        $fileName = $originalName . '-' . $time . '.' . $document1->getClientOriginalExtension();
+                    $time = time();
+                    $fileName = $originalName . '-' . $time . '.' . $document1->getClientOriginalExtension();
                     // $extension = $document1->getClientOriginalExtension();
                     // $uuid = (string)Str::uuid() . '.' . $extension;
                     $document1->storeAs('public/documents/', $fileName);
@@ -859,6 +893,207 @@ class ClientController extends Controller
             $data["status"] = 200;
             $data["message"] = "Pré-demande enregistrée";
             $data["demande"] = $demande;
+            
+            //delete brouillon
+            if($request->brouillonId != null && $request->brouillonId != "null" && $request->brouillonId != "undefined")
+            {
+                $brouillon = PreDemandeBrouillon::find($request->brouillonId);
+                $brouillon->delete();
+            }
+
+            return response()->json($data);
+        } catch (Exception $ex) {
+            DB::rollBack();
+            $data["demande"] = null;
+            $data["message"] = "Echèc de l'enregistré";
+            $data["details"] = $ex->getMessage();
+            return response()->json($data, 500);
+        }
+    }
+
+    public function save_predemande_brouillon(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $userConnected = auth('apiJwt')->user();
+            if ($request->demande_id == null || $request->demande_id == "null" || $request->demande_id == "undefined") {
+                $demande = new PreDemandeBrouillon();
+            } else {
+                $demande = PreDemandeBrouillon::find($request->demande_id);
+            }
+
+
+            $type_demande = "Nouvelle demande";
+            if ($request->type_request == "renouvelement") {
+                $type_demande = "Renouvelement";
+            } elseif ($request->type_request == "duplicata") {
+                $type_demande = "Duplicata";
+            } elseif ($request->type_request == "mineur") {
+                $type_demande = "Mineur";
+            } elseif ($request->type_request == "binationnaux") {
+                $type_demande = "binationnaux";
+            } else {
+                $type_demande = "Nouvelle demande";
+            }
+
+            //$demande->id_client = $client->id;
+            $client = Client::all()
+                ->where('telephone_client', '=', $request->telephone)
+                ->where('email_client', '=', $request->email)->first();
+
+            if (!$client) {
+                $newClient = new Client();
+                $newClient->nom_client = $request->nom;
+                $newClient->prenom_client = $request->prenom;
+                $newClient->email_client = $request->email;
+                $newClient->genre_client = $request->gender == "H" ? "Homme" : "Femme";
+                $newClient->telephone_client = $request->telephone;
+                $newClient->adresse_client = $request->lieu_de_residence;
+                $newClient->date_naissance_client = Carbon::createFromFormat('Y-m-d', $request->date_naissance)->toDateTime();
+                $newClient->password = bcrypt($request->telephone);
+                $newClient->created_at = now();
+                $newClient->save();
+                $message_sms = "Votre access OMNIFORM est \n identifiant:" . $request->email . "\n Mot de passe: " . $request->telephone;
+                try {
+                    $newSms = new SendSmS();
+                    $newSms->send($request->telephone, $message_sms);
+                } catch (GuzzleException $e) {
+                    // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
+                }
+
+                $client = $newClient;
+            }
+
+            $code_oni = "GN" . $client->id . substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10 / strlen($x)))), 1, 10);
+            $demande->id_sender = $userConnected->id;
+            //date now
+            $demande->numero_pre_demande = uniqid() .  now();
+            $demande->nationality = $request->nationality;
+            $demande->numero_indentification_unique = $request->numero_indentification_unique;
+            $demande->nationality_state = $request->nationality_state;
+            $demande->profession = $request->profession;
+            $demande->height = $request->height;
+            $demande->complexion = $request->complexion;
+            $demande->hair_color = $request->hair_color;
+            $demande->eye_color = $request->eye_color;
+            $demande->father_first_name = $request->father_first_name;
+            $demande->father_last_name = $request->father_last_name;
+            $demande->father_nationality = $request->father_nationality;
+            $demande->mother_first_name = $request->mother_first_name;
+            $demande->mother_nationality = $request->mother_nationality;
+            $demande->mother_last_name = $request->mother_last_name;
+            $demande->numero_recu = $request->numero_recu;
+            $demande->address = $request->address;
+            $demande->birth_address = $request->birth_address;
+            $demande->id_client = $client->id;
+            $demande->id_product = null;
+            $demande->id_service = null;
+            $demande->id_point_enrolement = null;
+            $demande->code_demande = $code_oni;
+            $demande->type_request = $type_demande;
+            $demande->predemande_step = 1;
+            $demande->habilete_position = 0;
+            $demande->status_demande = "NEW";
+            $demande->created_at = now();
+            $fileUrls = [];
+
+            if ($request->hasFile("document1")) {
+                $document1 = $request->file('document1');
+                $validFiles = true; // Indicateur pour vérifier si tous les fichiers sont valides
+                if (is_array($document1) && count($document1) > 0) {
+                    foreach ($document1 as $key => $file) {
+                        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                        $time = time();
+                        $fileName = $originalName . '-' . $time . '.' . $file->getClientOriginalExtension();
+                        // $extension = $file->getClientOriginalExtension();
+                        // $uuid = (string)Str::uuid() . '.' . $extension;
+                        $file->storeAs('public/documents/', $fileName);
+
+                        $fileUrls[] = Storage::url('documents/' . $fileName);
+                    }
+                } else {
+                    $originalName = pathinfo($document1->getClientOriginalName(), PATHINFO_FILENAME);
+                    $time = time();
+                    $fileName = $originalName . '-' . $time . '.' . $document1->getClientOriginalExtension();
+                    // $extension = $document1->getClientOriginalExtension();
+                    // $uuid = (string)Str::uuid() . '.' . $extension;
+                    $document1->storeAs('public/documents/', $fileName);
+                    $fileUrls[] = Storage::url('documents/' . $fileName);
+                }
+            }
+            if ($request->hasFile("document2")) {
+
+                $document2 = $request->file('document2');
+                if (is_array($document2) && count($document2) > 0) {
+                    foreach ($document2 as $key => $file) {
+                        $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                        $time = time();
+                        $fileName = $originalName . '-' . $time . '.' . $file->getClientOriginalExtension();
+                        // $extension = $file->getClientOriginalExtension();
+                        // $uuid = (string)Str::uuid() . '.' . $extension;
+                        /** @var UploadedFile $file */
+                        $file->storeAs('public/clients/', $fileName);
+                        $demande->avatar_url = Storage::url('clients/' . $fileName);
+                    }
+                } else {
+                    $originalName = pathinfo($document2->getClientOriginalName(), PATHINFO_FILENAME);
+                    $time = time();
+                    $fileName = $originalName . '-' . $time . '.' . $document2->getClientOriginalExtension();
+                    // $extension = $document2->getClientOriginalExtension();
+                    // $uuid = (string)Str::uuid() . '.' . $extension;
+                    /** @var UploadedFile $file */
+                    $document2->storeAs('public/clients/', $fileName);
+                    $demande->avatar_url = Storage::url('clients/' . $fileName);
+                }
+            }
+
+            $demande->document_url = implode(',', $fileUrls);
+
+            // $data["status"] = 500;
+            // $data["message"] = implode(',', $fileUrls);
+            // $data["demande"] = $demande;
+            // return response()->json($data);
+
+            $demande->save();
+
+            $newSms = new SendSmS();
+            $message_sms = "Votre pré-demande a été enregistée. Merci de votre confiance";
+            try {
+                $newSms->send($request->telephone, $message_sms);
+            } catch (GuzzleException $e) {
+                // throw new ErrorException("Erreur d'envoi du message , ressayez ultérieurement.");
+            }
+
+            $demandeSave = Demande::with(['client', 'sender',])->where("id", "=", $demande->id)->first();
+
+            $dataAttachment = [
+                'title' => 'Pré-demande: ' . $demandeSave->code_demande,
+                'body' => "Votre demande a été enregistré. $message_sms"
+            ];
+
+            $attachment = [
+                'name' => '',
+                'data' => ""
+            ];
+
+            try {
+                $detail = [
+                    'username' => $userConnected->nom_client,
+                ];
+
+                $subject = "Email de confirmation de la pré-demande ";
+                Mail::to($userConnected->email_client)->send(new PreRendezVousDemandeMail($subject, $detail, []));
+            } catch (Exception $ex) {
+                // DB::rollBack();
+                // $data["demande"] = null;
+                // $data["message"] = "Echèc de l'enregistré l'envoi de votre recu a échoué";
+                // $data["details"] = $ex->getMessage();
+                // return response()->json($data);
+            }
+            DB::commit();
+            $data["status"] = 200;
+            $data["message"] = "Brouillon enregistrée";
+            $data["demande"] = $demande;
 
 
             return response()->json($data);
@@ -870,6 +1105,7 @@ class ClientController extends Controller
             return response()->json($data, 500);
         }
     }
+
 
     /**
      * @param $code_demande
@@ -909,6 +1145,28 @@ class ClientController extends Controller
 
         return response()->json($data);
     }
+
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public static function get_one_appointment_client_brouillon(Request $request)
+    {
+
+        $maDemande = PreDemandeBrouillon::where('id', $request->id)->with(['client', 'product', 'service', 'point_enrolement', 'piece_jointes'])->first();
+        $maDemande['paiement'] = Paiement::where('id_demande', $request->id)->first();
+
+        $historiques = Historique::where('demande_id', $request->id)->orderBy('created_at', 'desc')->with('client')->with('user')->with('commentaires')->get();
+
+
+        $data['demande'] = $maDemande;
+        $data['historiques'] = $historiques;
+        $data['message'] = "ok";
+
+        return response()->json($data);
+    }
+
 
     public static function get_one_appointment_by_id($id)
     {
